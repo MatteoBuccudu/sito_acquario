@@ -1,0 +1,130 @@
+<div class="w-full min-h-screen py-24 bg-base-100">
+  <div class="container mx-auto px-6 max-w-7xl">
+    
+    <!-- Intestazione Editoriale -->
+    <div class="text-center mb-16 space-y-6" data-controller="scroll-reveal">
+      <h1 class="text-5xl md:text-6xl font-serif text-white tracking-tight">Farmacia del Sommerso.</h1>
+      <p class="text-lg text-slate-400 font-light max-w-2xl mx-auto leading-relaxed">
+        Formulazioni purissime, strumenti chirurgici e kit avanzati.<br/>
+        Tutto il necessario per mantenere la perfezione.
+      </p>
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-12">
+      
+      <!-- Sidebar Filtri Elegante con DaisyUI -->
+      <div class="w-full lg:w-1/4 flex-shrink-0 opacity-0 translate-y-10 transition-all duration-1000 delay-100" data-controller="scroll-reveal">
+        <div class="sticky top-28 space-y-8">
+          <h3 class="text-xs tracking-[0.2em] font-bold text-white uppercase text-opacity-50 border-b border-white/10 pb-4">
+            Collezioni
+          </h3>
+          
+          <!-- DaisyUI Menu per categorie -->
+          <ul class="menu bg-base-200/50 rounded-none p-4 gap-2">
+            <% @categories.each do |cat| %>
+              <li>
+                <%= link_to cat, shop_index_path(category: cat),
+                            class: "#{@current_category == cat ? "bg-primary text-white" : "text-slate-400 hover:text-white"}",
+                            data: { turbo_frame: "shop_catalog" } %>
+              </li>
+            <% end %>
+          </ul>
+
+          <!-- Info Box con DaisyUI -->
+          <div class="alert bg-base-200/50 border-white/10 rounded-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span class="text-slate-400 text-sm">Consegna gratuita per ordini superiori a €150</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Griglia Prodotti (Turbo Frame) -->
+      <%= turbo_frame_tag "shop_catalog", class: "flex-1" do %>
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
+          <% @products.each_with_index do |product, index| %>
+            
+            <!-- Card Prodotto con DaisyUI -->
+            <div data-controller="scroll-reveal" class="opacity-0 translate-y-10 transition-all duration-1000 ease-out" style="transition-delay: <%= index * 100 %>ms">
+              <div class="card bg-base-100 border border-white/5 rounded-none group hover:border-primary/30 transition-colors duration-500">
+                
+                <figure class="relative h-64 overflow-hidden bg-base-200">
+                  <img src="<%= product[:image] %>" alt="<%= product[:name] %>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out mix-blend-luminosity hover:mix-blend-normal" />
+                  
+                  <!-- Badge Categoria con DaisyUI -->
+                  <div class="absolute top-4 left-4">
+                    <div class="badge badge-primary badge-outline font-serif text-xs uppercase tracking-widest">
+                      <%= product[:category] %>
+                    </div>
+                  </div>
+
+                  <!-- Badge Sconto (esempio) -->
+                  <% if product[:price] > 50 %>
+                  <div class="absolute top-4 right-4">
+                    <div class="badge badge-error text-xs uppercase tracking-widest">
+                      -<%= rand(10..25) %>%
+                    </div>
+                  </div>
+                  <% end %>
+
+                  <!-- DaisyUI Swap per i Preferiti -->
+                  <div class="absolute bottom-3 right-3 z-10">
+                    <label class="swap swap-flip btn btn-circle btn-sm btn-ghost bg-base-100/50 backdrop-blur-md border border-white/10 hover:bg-white/10">
+                      <input type="checkbox" />
+                      <svg class="swap-off fill-transparent stroke-white w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+                      <svg class="swap-on fill-error stroke-error w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+                    </label>
+                  </div>
+                </figure>
+
+                <div class="card-body p-6">
+                  <h2 class="text-xl font-serif text-white mb-2 group-hover:text-primary transition-colors duration-300">
+                    <%= product[:name] %>
+                  </h2>
+                  
+                  <!-- Rating con DaisyUI -->
+                  <div class="rating rating-sm mb-3">
+                    <input type="radio" name="rating-shop-<%= index %>" class="mask mask-star-2 bg-primary" disabled />
+                    <input type="radio" name="rating-shop-<%= index %>" class="mask mask-star-2 bg-primary" checked="checked" disabled />
+                    <input type="radio" name="rating-shop-<%= index %>" class="mask mask-star-2 bg-primary" checked="checked" disabled />
+                    <input type="radio" name="rating-shop-<%= index %>" class="mask mask-star-2 bg-primary" checked="checked" disabled />
+                    <input type="radio" name="rating-shop-<%= index %>" class="mask mask-star-2 bg-primary" checked="checked" disabled />
+                  </div>
+                  
+                  <p class="text-slate-500 font-light text-sm line-clamp-2 leading-relaxed flex-grow">
+                    <%= product[:desc] %>
+                  </p>
+                  
+                  <div class="flex items-end justify-between mt-6 pt-6 border-t border-white/5">
+                    <div class="flex flex-col">
+                      <span class="text-xs text-slate-500 uppercase tracking-widest mb-1">Prezzo</span>
+                      <div class="flex items-center gap-2">
+                        <% if product[:price] > 50 %>
+                          <span class="text-sm text-slate-500 line-through">€<%= sprintf("%.2f", product[:price] * 1.2) %></span>
+                        <% end %>
+                        <span class="text-lg font-medium text-white">€<%= sprintf("%.2f", product[:price]) %></span>
+                      </div>
+                    </div>
+                    <!-- Pulsante con DaisyUI -->
+                    <button class="btn btn-primary btn-sm text-xs uppercase tracking-widest px-6 rounded-none">
+                      Acquista
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            
+          <% end %>
+        </div>
+        
+        <% if @products.empty? %>
+          <div class="flex flex-col items-center justify-center py-20 text-slate-500 border border-white/5 bg-base-200" data-controller="scroll-reveal">
+            <p class="font-serif text-xl italic">Nessun rimedio disponibile in questa collezione.</p>
+          </div>
+        <% end %>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+

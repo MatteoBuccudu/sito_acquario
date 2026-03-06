@@ -1,0 +1,70 @@
+<div class="w-full min-h-screen bg-base-100 pb-24">
+  
+  <!-- Hero Section Articolo -->
+  <div class="relative w-full h-[60vh] md:h-[70vh] min-h-[500px]" data-controller="scroll-reveal">
+    <div class="absolute inset-0 z-0">
+      <img src="<%= @article[:image] %>" alt="<%= @article[:title] %>" class="w-full h-full object-cover filter grayscale-[20%]" />
+      <div class="absolute inset-0 bg-base-100/60 mix-blend-multiply"></div>
+      <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-base-100 to-transparent"></div>
+    </div>
+    
+    <div class="absolute inset-0 z-10 flex flex-col justify-end container mx-auto px-6 max-w-4xl pb-16">
+      <div class="flex items-center space-x-4 text-xs font-medium uppercase tracking-widest text-slate-400 mb-6">
+        <span class="text-primary"><%= @article[:category] %></span>
+        <span>&bull;</span>
+        <span><%= @article[:date] %></span>
+      </div>
+      
+      <h1 class="text-5xl md:text-6xl lg:text-7xl font-serif text-white leading-[1.1] tracking-tight mb-6">
+        <%= @article[:title] %>
+      </h1>
+      
+      <div class="flex items-center justify-between border-t border-white/10 pt-6">
+        <div class="flex items-center space-x-4">
+          <div class="w-10 h-10 rounded-full bg-base-300 border border-white/20 flex items-center justify-center text-primary font-serif italic">
+            S
+          </div>
+          <div>
+            <p class="text-sm text-white font-medium uppercase tracking-widest">Sergio</p>
+            <p class="text-xs text-slate-500 uppercase tracking-widest">Il Dottore dell'Acqua</p>
+          </div>
+        </div>
+        <div class="text-slate-500 flex space-x-4">
+          <button class="hover:text-white transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></button>
+          <button class="hover:text-white transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenuto Articolo -->
+  <div class="container mx-auto px-6 max-w-3xl mt-12 opacity-0 translate-y-10 transition-all duration-1000 delay-200" data-controller="scroll-reveal">
+    
+    <div class="prose prose-lg prose-invert max-w-none 
+                prose-headings:font-serif prose-headings:font-normal prose-headings:text-white prose-headings:tracking-tight
+                prose-p:text-slate-300 prose-p:font-light prose-p:leading-relaxed
+                prose-a:text-primary prose-a:no-underline hover:prose-a:text-white hover:prose-a:underline
+                prose-strong:text-white prose-strong:font-medium
+                prose-blockquote:border-l-primary prose-blockquote:bg-base-200/50 prose-blockquote:py-2 prose-blockquote:pl-6 prose-blockquote:my-10 prose-blockquote:italic prose-blockquote:text-slate-400
+                prose-img:rounded-none prose-img:shadow-2xl">
+      
+      <!-- Prima lettera Capitalized 'Dropcap' style finto via CSS/HTML tag -->
+      <p class="lead text-2xl font-light text-slate-300 italic mb-10 border-l border-white/10 pl-6">
+        <%= @article[:excerpt] %>
+      </p>
+
+      <%= raw @article[:content] %>
+
+    </div>
+
+    <!-- Navigazione Fondo Pagina -->
+    <div class="mt-20 pt-10 border-t border-white/10 flex justify-between items-center" data-controller="scroll-reveal">
+      <%= link_to "← Torna al Diario", blog_index_path, class: "text-sm text-slate-400 uppercase tracking-widest hover:text-white transition-colors" %>
+      <div class="flex space-x-2">
+        <span class="badge badge-outline border-white/20 text-slate-400 rounded-none">Acquariologia</span>
+        <span class="badge badge-outline border-white/20 text-slate-400 rounded-none">Chimica</span>
+      </div>
+    </div>
+
+  </div>
+</div>

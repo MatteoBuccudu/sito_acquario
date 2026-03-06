@@ -1,0 +1,95 @@
+
+<div class="w-full min-h-screen py-24 bg-base-100">
+  <div class="container mx-auto px-6 max-w-5xl">
+    
+    <!-- Breadcrumb con DaisyUI -->
+    <div class="breadcrumbs text-sm mb-12 opacity-0 translate-y-10 transition-all duration-1000" data-controller="scroll-reveal">
+      <ul>
+        <li><%= link_to "Home", root_path, class: "text-slate-500 hover:text-primary" %></li>
+        <li class="text-primary">Blog</li>
+      </ul>
+    </div>
+    
+    <!-- Hero Editoriale del Blog -->
+    <div class="mb-20 text-center" data-controller="scroll-reveal">
+      <h3 class="text-xs tracking-[0.2em] font-bold text-primary uppercase mb-4">Gazzetta del Sommerso</h3>
+      <h1 class="text-5xl md:text-6xl font-serif text-white mb-6 tracking-tight">Il Diario del Dottore.</h1>
+      <p class="text-lg text-slate-400 font-light max-w-2xl mx-auto leading-relaxed">
+        Tecniche, scoperte scientifiche e riflessioni sulla vita sotto il pelo dell'acqua.
+      </p>
+    </div>
+
+    <!-- Filtri con DaisyUI -->
+    <div class="flex flex-wrap gap-2 mb-12 justify-center" data-controller="scroll-reveal">
+      <button class="badge badge-lg badge-primary p-4">Tutti gli Articoli</button>
+      <button class="badge badge-lg badge-outline p-4 text-slate-400 hover:text-white hover:badge-primary">Acquariologia</button>
+      <button class="badge badge-lg badge-outline p-4 text-slate-400 hover:text-white hover:badge-primary">Chimica</button>
+      <button class="badge badge-lg badge-outline p-4 text-slate-400 hover:text-white hover:badge-primary">Design</button>
+      <button class="badge badge-lg badge-outline p-4 text-slate-400 hover:text-white hover:badge-primary">Manutenzione</button>
+    </div>
+
+    <!-- Lista Articoli -->
+    <div class="space-y-16">
+      <% @articles.each_with_index do |article, index| %>
+        <article class="group flex flex-col md:flex-row gap-8 lg:gap-12 items-center opacity-0 translate-y-10 transition-all duration-1000" data-controller="scroll-reveal">
+          
+          <!-- Immagine con proporzioni cinematografiche -->
+          <div class="w-full md:w-1/2 overflow-hidden bg-base-200 aspect-[4/3] relative">
+            <%= link_to blog_path(article[:id]), data: { turbo_frame: "_top" }, class: "block w-full h-full" do %>
+              <div class="absolute inset-0 bg-base-100/10 z-10 group-hover:bg-transparent transition-colors duration-500"></div>
+              <img src="<%= article[:image] %>" alt="<%= article[:title] %>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out filter grayscale-[30%] group-hover:grayscale-0" />
+            <% end %>
+          </div>
+
+          <!-- Contenuto Articolo -->
+          <div class="w-full md:w-1/2 flex flex-col justify-center space-y-6">
+            <div class="flex items-center space-x-4 text-xs font-medium uppercase tracking-widest text-slate-500">
+              <span class="text-primary"><%= article[:category] %></span>
+              <span>&bull;</span>
+              <span><%= article[:date] %></span>
+            </div>
+            
+            <%= link_to blog_path(article[:id]), data: { turbo_frame: "_top" }, class: "block" do %>
+              <h2 class="text-3xl font-serif text-white hover:text-primary transition-colors duration-300 leading-tight">
+                <%= article[:title] %>
+              </h2>
+            <% end %>
+            
+            <p class="text-slate-400 font-light leading-relaxed line-clamp-3">
+              <%= article[:excerpt] %>
+            </p>
+
+            <div class="flex items-center justify-between pt-4 border-t border-white/10">
+              <%= link_to blog_path(article[:id]), class: "text-xs uppercase tracking-widest text-white hover:text-primary transition-colors flex items-center gap-2" do %>
+                <span>Leggi tutto</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+              <% end %>
+              <!-- Social Share -->
+              <div class="flex gap-2">
+                <button class="btn btn-circle btn-ghost btn-xs text-slate-500 hover:text-primary">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </article>
+      <% end %>
+    </div>
+
+    <!-- Pagination con DaisyUI -->
+    <div class="flex justify-center mt-20" data-controller="scroll-reveal">
+      <div class="join">
+        <button class="join-item btn btn-ghost text-slate-400">«</button>
+        <button class="join-item btn btn-ghost text-slate-400">1</button>
+        <button class="join-item btn btn-primary">2</button>
+        <button class="join-item btn btn-ghost text-slate-400">3</button>
+        <button class="join-item btn btn-ghost text-slate-400">4</button>
+        <button class="join-item btn btn-ghost text-slate-400">»</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+

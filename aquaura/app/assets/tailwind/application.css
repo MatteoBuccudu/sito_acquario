@@ -1,1 +1,27 @@
 @import "tailwindcss";
+@plugin "daisyui";
+@plugin "@tailwindcss/typography";
+
+@theme {
+    --color-ocean-900: #0B132B;
+    --color-ocean-800: #111D44;
+    --color-ocean-700: #14255A;
+}
+
+:root {
+    /* Override DaisyUI dark theme variables to create the custom Aquaura Ocean Theme */
+    --b1: 222 47% 11%;
+    /* base-100: #0f172a (tailwind slate-900) */
+    --b2: 240 83% 4%;
+    /* base-200: #020617 (tailwind slate-950) */
+    --b3: 215 32% 17%;
+    /* base-300: #1e293b */
+    --p: 199 89% 48%;
+    /* primary: #0ea5e9 */
+    --s: 173 80% 40%;
+    /* secondary: #14b8a6 */
+    --a: 38 92% 50%;
+    /* accent: #f59e0b */
+    --n: 215 32% 17%;
+    /* neutral: #1e293b */
+}

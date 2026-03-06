@@ -1,0 +1,194 @@
+<div class="w-full min-h-screen py-24 bg-base-100">
+  <div class="container mx-auto px-6 max-w-7xl">
+    
+    <!-- User Welcome con Avatar -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-8 border-b border-white/10" data-controller="scroll-reveal">
+      <div class="flex items-center gap-6">
+        <!-- Avatar con status -->
+        <div class="avatar online">
+          <div class="w-20 h-20 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="Utente" />
+          </div>
+        </div>
+        <div>
+          <h3 class="text-xs tracking-[0.2em] font-bold text-primary uppercase mb-2">Pannello di Controllo</h3>
+          <h1 class="text-4xl font-serif text-white tracking-tight">Reef Tank 300L <span class="text-slate-500 italic font-light">SPS Dominant</span></h1>
+          <div class="flex items-center gap-2 mt-2">
+            <span class="badge badge-primary badge-sm">Premium</span>
+            <span class="text-slate-500 text-sm">Cliente dal 2023</span>
+          </div>
+        </div>
+      </div>
+      <!-- DaisyUI Modal Trigger -->
+      <label for="my_modal_6" class="btn btn-outline btn-sm rounded-none text-xs uppercase tracking-widest px-6 mt-6 md:mt-0 hover:bg-white hover:text-black hover:border-white transition-all duration-300">
+        Nuovo Log Valori
+      </label>
+    </div>
+
+    <!-- Countdown & Sintesi (Prime Statistiche) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+      
+      <!-- Box Countdown Manutenzione -->
+      <div class="lg:col-span-8 card bg-base-200 border border-white/5 rounded-none shadow-2xl p-8 md:p-12 relative overflow-hidden group" data-controller="scroll-reveal">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent z-0"></div>
+        
+        <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8 w-full">
+          <div>
+            <h2 class="text-slate-400 text-sm tracking-widest uppercase mb-2">Prossima Manutenzione</h2>
+            <p class="text-2xl font-serif text-white">Cambio Parziale 20% + Integrazione</p>
+            <p class="text-slate-500 text-sm mt-2">Prenotato per il 15 Gennaio 2025</p>
+          </div>
+          
+          <!-- DaisyUI Countdown -->
+          <div class="flex gap-2 sm:gap-4 text-center font-mono" data-controller="countdown" data-countdown-target-date-value="<%= 3.days.from_now.iso8601 %>">
+            <div class="flex flex-col p-2 sm:p-3 bg-base-300 rounded-none border border-white/5 shadow-inner">
+              <span class="countdown font-serif text-2xl sm:text-4xl text-primary">
+                <span data-countdown-target="days" style="--value:0;"></span>
+              </span>
+              <span class="text-[8px] sm:text-[10px] uppercase tracking-widest text-slate-500 mt-1">Giorni</span>
+            </div> 
+            <div class="flex flex-col p-2 sm:p-3 bg-base-300 rounded-none border border-white/5 shadow-inner">
+              <span class="countdown font-serif text-2xl sm:text-4xl text-white">
+                <span data-countdown-target="hours" style="--value:0;"></span>
+              </span>
+              <span class="text-[8px] sm:text-[10px] uppercase tracking-widest text-slate-500 mt-1">Ore</span>
+            </div> 
+            <div class="flex flex-col p-2 sm:p-3 bg-base-300 rounded-none border border-white/5 shadow-inner">
+              <span class="countdown font-serif text-2xl sm:text-4xl text-white">
+                <span data-countdown-target="minutes" style="--value:0;"></span>
+              </span>
+              <span class="text-[8px] sm:text-[10px] uppercase tracking-widest text-slate-500 mt-1">Min</span>
+            </div> 
+          </div>
+        </div>
+      </div>
+
+      <!-- Qualità Acqua (Radial Progress) -->
+      <div class="lg:col-span-4 card bg-base-200 border border-white/5 rounded-none shadow-xl flex items-center justify-center p-8 opacity-0 translate-y-10 transition-all duration-1000 delay-100" data-controller="scroll-reveal">
+        <div class="text-center">
+          <h3 class="text-sm tracking-widest uppercase text-slate-400 font-semibold mb-6">Salute Ecosistema</h3>
+          <div class="radial-progress text-white font-serif text-3xl tracking-tighter" style="--value:<%= @water_quality_score %>; --size:10rem; --thickness: 0.25rem;" role="progressbar">
+             <%= @water_quality_score %><span class="text-lg text-slate-500 ml-1">%</span>
+          </div>
+          <div class="mt-4">
+            <span class="badge badge-success badge-outline">Ottimo Stato</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Tabella Parametri con DaisyUI -->
+    <div class="card bg-base-200 border border-white/5 rounded-none shadow-xl w-full p-0 mb-12 opacity-0 translate-y-10 transition-all duration-1000 delay-200" data-controller="scroll-reveal">
+      <div class="p-6 border-b border-white/5">
+        <h2 class="text-xl font-serif text-white tracking-wide">Ultimi Parametri Registrati</h2>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="table">
+          <thead>
+            <tr class="text-slate-400">
+              <th class="bg-base-200">Data</th>
+              <th class="bg-base-200">pH</th>
+              <th class="bg-base-200">KH</th>
+              <th class="bg-base-200">NO3</th>
+              <th class="bg-base-200">PO4</th>
+              <th class="bg-base-200">Temp</th>
+              <th class="bg-base-200">Stato</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="hover:bg-base-300">
+              <td class="text-white">12 Gen 2025</td>
+              <td class="text-white">8.2</td>
+              <td class="text-white">8 dKH</td>
+              <td class="text-white">5 ppm</td>
+              <td class="text-white">0.02 ppm</td>
+              <td class="text-white">26°C</td>
+              <td><span class="badge badge-success badge-sm">Normale</span></td>
+            </tr>
+            <tr class="hover:bg-base-300">
+              <td class="text-white">10 Gen 2025</td>
+              <td class="text-white">8.1</td>
+              <td class="text-white">7.5 dKH</td>
+              <td class="text-white">8 ppm</td>
+              <td class="text-white">0.04 ppm</td>
+              <td class="text-white">25.8°C</td>
+              <td><span class="badge badge-warning badge-sm">Attento</span></td>
+            </tr>
+            <tr class="hover:bg-base-300">
+              <td class="text-white">8 Gen 2025</td>
+              <td class="text-white">8.3</td>
+              <td class="text-white">8.2 dKH</td>
+              <td class="text-white">3 ppm</td>
+              <td class="text-white">0.01 ppm</td>
+              <td class="text-white">26.2°C</td>
+              <td><span class="badge badge-success badge-sm">Normale</span></td>
+            </tr>
+            <tr class="hover:bg-base-300">
+              <td class="text-white">5 Gen 2025</td>
+              <td class="text-white">8.0</td>
+              <td class="text-white">7 dKH</td>
+              <td class="text-white">12 ppm</td>
+              <td class="text-white">0.08 ppm</td>
+              <td class="text-white">26°C</td>
+              <td><span class="badge badge-error badge-sm">Allarme</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Grafico Andamento (Chart.js via Stimulus) -->
+    <div class="card bg-base-200 border border-white/5 rounded-none shadow-xl w-full p-8 opacity-0 translate-y-10 transition-all duration-1000 delay-300" data-controller="scroll-reveal">
+      <div class="flex justify-between items-center mb-8 border-b border-white/5 pb-4">
+         <h2 class="text-xl font-serif text-white tracking-wide">Andamento Storico</h2>
+         <span class="text-xs text-primary uppercase tracking-widest border border-primary/30 px-3 py-1">Ultimi 7 Giorni</span>
+      </div>
+        
+      <div class="w-full h-96 relative">
+        <canvas 
+          data-controller="chart" 
+          data-chart-labels-value="<%= @water_parameters[:labels].to_json %>"
+          data-chart-ph-value="<%= @water_parameters[:ph].to_json %>"
+          data-chart-no3-value="<%= @water_parameters[:no3].to_json %>"
+        ></canvas>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- DaisyUI Modal per nuovo log -->
+<input type="checkbox" id="my_modal_6" class="modal-toggle" />
+<div class="modal" role="dialog">
+  <div class="modal-box bg-base-200 border border-white/10 rounded-none">
+    <h3 class="font-bold text-lg text-white">Registra Nuovi Valori</h3>
+    <p class="py-4 text-slate-400">Inserisci i parametri rilevati dall'ultimo test.</p>
+    
+    <div class="grid grid-cols-2 gap-4">
+      <div class="form-control">
+        <label class="label"><span class="label-text text-slate-400">pH</span></label>
+        <input type="number" step="0.1" placeholder="8.2" class="input input-bordered bg-base-300 border-white/10 rounded-none" />
+      </div>
+      <div class="form-control">
+        <label class="label"><span class="label-text text-slate-400">KH (dKH)</span></label>
+        <input type="number" step="0.1" placeholder="8" class="input input-bordered bg-base-300 border-white/10 rounded-none" />
+      </div>
+      <div class="form-control">
+        <label class="label"><span class="label-text text-slate-400">NO3 (ppm)</span></label>
+        <input type="number" step="0.1" placeholder="5" class="input input-bordered bg-base-300 border-white/10 rounded-none" />
+      </div>
+      <div class="form-control">
+        <label class="label"><span class="label-text text-slate-400">PO4 (ppm)</span></label>
+        <input type="number" step="0.01" placeholder="0.02" class="input input-bordered bg-base-300 border-white/10 rounded-none" />
+      </div>
+    </div>
+    
+    <div class="modal-action">
+      <label for="my_modal_6" class="btn btn-ghost text-slate-400">Annulla</label>
+      <label for="my_modal_6" class="btn btn-primary">Salva</label>
+    </div>
+  </div>
+  <label class="modal-backdrop" for="my_modal_6">Close</label>
+</div>
+
