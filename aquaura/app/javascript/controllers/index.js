@@ -22,5 +22,14 @@ application.register("hamburger", HamburgerController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import MaskRevealController from "./mask_reveal_controller"
+application.register("mask-reveal", MaskRevealController)
+
+import ParallaxController from "./parallax_controller"
+application.register("parallax", ParallaxController)
+
 import ScrollRevealController from "./scroll_reveal_controller"
 application.register("scroll-reveal", ScrollRevealController)
+
+import SmoothScrollController from "./smooth_scroll_controller"
+application.register("smooth-scroll", SmoothScrollController)

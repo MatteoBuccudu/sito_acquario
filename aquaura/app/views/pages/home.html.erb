@@ -1,290 +1,130 @@
-<!-- Home Page Design: Premium, Minimale, Editoriale - Nessun effetto AI pacchiano -->
-<div class="w-full font-sans bg-base-100 selection:bg-primary selection:text-white pb-32">
+<!-- D2C Life Science Aesthetic Home Page -->
+<div class="w-full font-sans bg-[#0c0c0c] selection:bg-slate-800 selection:text-white pb-32 overflow-hidden text-[#e6e6e6]">
   
-  <!-- Hero Section Editoriale a Piena Pagina -->
-  <section class="relative w-full h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden">
-    
-    <!-- Immagine di Sfondo in Alta Risoluzione senza distrazioni AI -->
-    <div class="absolute inset-0 z-0 select-none">
-      <img src="https://images.unsplash.com/photo-1522069213448-443a614da9b6?auto=format&fit=crop&q=80&w=2000&h=1200" alt="Aquascape Masterpiece" class="w-full h-full object-cover scale-[1.03] origin-center" />
-      
-      <!-- Overlay scuri sottili per contrasto testo e transizione alla pagina -->
-      <div class="absolute inset-0 bg-base-100/50"></div>
-      <div class="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-base-100 to-transparent"></div>
-    </div>
+  <!-- Preloader Sipario (Simulato via CSS) -->
+  <div class="fixed inset-0 z-50 bg-[#0c0c0c] pointer-events-none animate-fade-out-up" style="animation-delay: 1.5s; animation-fill-mode: forwards;"></div>
 
-    <!-- Contenuto Typography-First -->
-    <div class="container mx-auto px-6 md:px-12 relative z-10 flex flex-col items-center text-center mt-8 opacity-0 translate-y-10 transition-all duration-1000 ease-out" data-controller="scroll-reveal">
-      
-      <span class="text-white/60 tracking-[0.4em] text-xs font-medium uppercase mb-8">
-        Studio di Acquariologia
-      </span>
-      
-      <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-6 leading-[1.1] tracking-tight">
-        L'Arte dell'Acqua<br />
-        <span class="italic font-light text-slate-300">
-          <span class="text-rotate">
-            <span>nel tuo Spazio.</span>
-            <span>nel tuo Studio.</span>
-            <span>nel tuo Salotto.</span>
-            <span>nel tuo Ufficio.</span>
-            <span>nella tua Vita.</span>
-          </span>
-        </span>
-      </h1>
-      
-      <p class="text-lg text-slate-400 font-light max-w-xl mx-auto leading-relaxed mb-12">
-        Progettazione, allestimento e cura di ecosistemi acquatici di lusso.<br/>
-        La perfezione della natura, senza compromessi.
-      </p>
-      
-      <!-- Pulsanti con DaisyUI join e animazioni -->
-      <div class="join flex flex-col sm:flex-row gap-6 w-full max-w-md mx-auto sm:max-w-none sm:w-auto">
-        <%= link_to "Prenota una Consulenza", servizi_path, class: "join-item px-8 py-4 bg-white text-base-100 text-sm font-semibold uppercase tracking-widest text-center transition-transform hover:scale-[1.02] duration-300" %>
-        <%= link_to "Esplora il Portfolio", galleria_path, class: "join-item px-8 py-4 bg-transparent border border-white/30 text-white text-sm font-semibold uppercase tracking-widest text-center hover:bg-white/10 hover:border-white transition-colors duration-300" %>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Sezione Manifesto (Layout Asimmetrico Stile Apple/Firma) -->
-  <section class="w-full py-20 md:py-32 overflow-hidden">
-    <div class="container mx-auto px-6 md:px-12 max-w-7xl">
-      <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24 opacity-0 translate-y-10 transition-all duration-1000 ease-out" data-controller="scroll-reveal">
+  <!-- Hero Section DaisyUI -->
+  <div class="hero min-h-screen relative" style="background-image: url('https://images.unsplash.com/photo-1522069213448-443a614da9b6?auto=format&fit=crop&q=80&w=2000&h=1200');" data-controller="parallax" data-parallax-speed-value="0.1">
+    <div class="hero-overlay bg-base-300 bg-opacity-80 mix-blend-multiply"></div>
+    <div class="hero-content text-center text-neutral-content z-10" data-controller="scroll-reveal" class="opacity-0 translate-y-10 transition-all duration-1000">
+      <div class="max-w-4xl">
+        <h3 class="mb-5 text-sm font-bold uppercase tracking-[0.3em] text-primary">Aquaura &mdash; Studio di Acquariologia</h3>
         
-        <!-- Immagine Asimmetrica -->
-        <div class="w-full lg:w-5/12 relative">
-          <!-- Bordo Decorativo Distaccato -->
-          <div class="absolute -bottom-6 -left-6 w-full h-full border border-primary/20 z-0 hidden lg:block"></div>
-          <!-- Immagine Focus -->
-          <div class="aspect-[4/5] overflow-hidden bg-base-300 relative z-10">
-            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=800&h=1000" alt="Dettaglio Iwagumi" class="w-full h-full object-cover hover:scale-105 transition-transform duration-1000 ease-out" loading="lazy" />
+        <h1 class="mb-8 text-5xl md:text-7xl font-serif text-white leading-tight">
+          Non costruiamo acquari.<br>
+          <span class="text-slate-400 italic font-light">Definiamo mondi sommersi.</span>
+        </h1>
+        
+        <p class="mb-10 text-lg md:text-xl text-slate-300 font-light max-w-2xl mx-auto">
+          Progettazione, allestimento e cura di ecosistemi acquatici di lusso. La perfezione della natura, elevata a elemento di interior design.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <%= link_to "Inizia un Progetto", servizi_path, class: "btn btn-primary btn-lg rounded-none uppercase tracking-widest font-semibold text-white" %>
+          <%= link_to "Esplora Galleria", galleria_path, class: "btn btn-outline btn-lg rounded-none uppercase tracking-widest text-slate-300 hover:text-white" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sezione Philosophy (DaisyUI Diff Component x In e Out dell'acqua) -->
+  <section class="w-full py-24 md:py-32 bg-base-100 border-t border-white/5">
+    <div class="container mx-auto px-6 md:px-12 max-w-6xl">
+      <div class="flex flex-col lg:flex-row items-center justify-between gap-16">
+        
+        <!-- Diff Image (Prima/Dopo l'ingesso d'acqua) -->
+        <div class="w-full lg:w-1/2" data-controller="scroll-reveal" class="opacity-0 translate-y-10 transition-all duration-1000 ease-out">
+          <div class="diff aspect-[16/9] shadow-2xl border border-white/10">
+            <div class="diff-item-1">
+              <div class="bg-primary text-primary-content grid place-content-center text-4xl font-serif">Natura Pura</div>
+            </div>
+            <div class="diff-item-2">
+              <div class="bg-base-300 grid place-content-center">
+                <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=800&h=1000" alt="Iwagumi" class="w-full h-full object-cover filter grayscale-[10%]" />
+              </div>
+            </div>
+            <div class="diff-resizer"></div>
           </div>
         </div>
-        
-        <!-- Testo Elegante e Spazioso -->
-        <div class="w-full lg:w-7/12 space-y-8">
-          <h2 class="text-4xl md:text-5xl font-serif text-white leading-tight">
-            Non costruiamo acquari.<br />
-            Definiamo mondi sommersi.
+
+        <!-- Testo Esteso -->
+        <div class="w-full lg:w-1/2 space-y-8" data-controller="scroll-reveal" class="opacity-0 translate-y-10 transition-all duration-1000 delay-200">
+          <h2 class="text-4xl lg:text-5xl font-serif text-white leading-tight">
+            Dalla biologia<br>all'architettura.
           </h2>
           
-          <div class="w-12 h-[2px] bg-primary/50"></div>
-          
-          <div class="space-y-6 text-slate-400 text-lg md:text-xl font-light leading-relaxed max-w-2xl">
+          <div class="space-y-6 text-slate-400 font-light leading-relaxed">
             <p>
-              Ogni vasca è un'opera d'arte isolata, progettata meticolosamente per fondersi con l'interior design del tuo ambiente.
-              La geometria della vasca scompare, lasciando spazio solo al quadro fluido della natura.
+              Ogni vasca è un'opera d'arte isolata, progettata meticolosamente per fondersi con il tuo ambiente. La geometria scompare, lasciando spazio al quadro fluido della natura.
             </p>
             <p>
-              Dal bilanciamento chimico dell'acqua alla selezione sartoriale di flora e fauna, applichiamo un approccio scientifico per garantire stabilità e magnificenza duratura, col minimo sforzo da parte tua.
+              Applichiamo un approccio scientifico rigoroso—dal bilanciamento chimico alla selezione sartoriale di flora e fauna—per garantire una magnificenza duratura col minimo sforzo.
             </p>
           </div>
           
-          <div class="pt-8">
-            <%= link_to blog_index_path, class: "group inline-flex items-center text-white hover:text-primary transition-colors text-sm font-semibold uppercase tracking-widest gap-4" do %>
-              Scopri la Nostra Filosofia
-              <span class="group-hover:translate-x-2 transition-transform duration-300 block w-8 h-[1px] bg-current"></span>
-            <% end %>
+          <div class="pt-4">
+            <%= link_to "La nostra Filosofia", blog_index_path, class: "btn btn-outline text-slate-300 hover:text-white rounded-none uppercase tracking-widest text-xs" %>
           </div>
         </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Sezione Servizi a Griglia Tipografica (No Icone, Solo Tipografia) -->
-  <section class="w-full pt-12 pb-20">
-    <div class="container mx-auto px-6 md:px-12 max-w-7xl">
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20 opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-200" data-controller="scroll-reveal">
         
-        <!-- Servizio 1 -->
-        <div class="group cursor-pointer border-t border-white/10 pt-8 mt-4 hover:border-primary/50 transition-colors duration-500">
-          <div class="text-primary font-serif text-2xl italic mb-6 opacity-60">01.</div>
-          <h3 class="text-2xl font-serif text-white mb-4">Design & Architettura</h3>
-          <p class="text-slate-500 font-light leading-relaxed">
-            Allestimento chiavi in mano di ecosistemi d'acqua dolce e marina di altissimo profilo strutturale e biologico.
-          </p>
-        </div>
-
-        <!-- Servizio 2 -->
-        <div class="group cursor-pointer border-t border-white/10 pt-8 md:mt-16 hover:border-primary/50 transition-colors duration-500">
-          <div class="text-primary font-serif text-2xl italic mb-6 opacity-60">02.</div>
-          <h3 class="text-2xl font-serif text-white mb-4">Gestione Premium</h3>
-          <p class="text-slate-500 font-light leading-relaxed">
-            Mantenimento periodico totale. Gestiamo i rigidi protocolli chimici e nutrizionali; il tuo unico compito è ammirare.
-          </p>
-        </div>
-
-        <!-- Servizio 3 -->
-        <div class="group cursor-pointer border-t border-white/10 pt-8 mt-4 hover:border-primary/50 transition-colors duration-500">
-          <div class="text-primary font-serif text-2xl italic mb-6 opacity-60">03.</div>
-          <h3 class="text-2xl font-serif text-white mb-4">Chirurgia d'Urgenza</h3>
-          <p class="text-slate-500 font-light leading-relaxed">
-            Azioni di salvataggio immediate per ecosistemi compromessi, alghe infestanti o valori chimici pericolosamente sballati.
-          </p>
-        </div>
-
       </div>
-
     </div>
   </section>
 
-  <!-- Sezione Testimonial Carousel (DaisyUI) -->
-  <section class="w-full py-20 md:py-32 bg-base-200">
+  <!-- Sezione Competenze con Mockup & Accordion DaisyUI -->
+  <section class="w-full py-24 bg-base-200">
     <div class="container mx-auto px-6 md:px-12 max-w-5xl">
       
-      <!-- Carousel -->
-      <div class="carousel w-full" data-controller="scroll-reveal">
-        
-        <!-- Testimonial 1 -->
-        <div id="testimonial1" class="carousel-item w-full">
-          <div class="flex flex-col items-center text-center p-8 md:p-16">
-            <!-- Avatar with status -->
-            <div class="avatar online mb-8">
-              <div class="w-24 h-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="Cliente" />
-              </div>
-            </div>
-            
-            <!-- Rating -->
-            <div class="rating rating-md mb-6">
-              <input type="radio" name="rating-1" class="mask mask-star-2 bg-primary" checked="checked" disabled />
-              <input type="radio" name="rating-1" class="mask mask-star-2 bg-primary" checked="checked" disabled />
-              <input type="radio" name="rating-1" class="mask mask-star-2 bg-primary" checked="checked" disabled />
-              <input type="radio" name="rating-1" class="mask mask-star-2 bg-primary" checked="checked" disabled />
-              <input type="radio" name="rating-1" class="mask mask-star-2 bg-primary" checked="checked" disabled />
-            </div>
-            
-            <blockquote class="text-xl md:text-2xl font-serif text-white italic mb-8 leading-relaxed">
-              "Non avevo mai visto nulla di simile. Il mio acquario reef è diventato il centro nevralgico del mio soggiorno. Sergio ha trasformato un sogno in realtà."
-            </blockquote>
-            
-            <div class="flex items-center gap-3">
-              <div class="w-8 h-px bg-primary"></div>
-              <cite class="text-sm uppercase tracking-widest text-slate-400 not-italic">
-                Marco B. - Milano
-              </cite>
-              <div class="w-8 h-px bg-primary"></div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Testimonial 2 -->
-        <div id="testimonial2" class="carousel-item w-full">
-          <div class="flex flex-col items-center text-center p-8 md:p-16">
-            <div class="avatar online mb-8">
-              <div class="w-24 h-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                <img src="https://img.daisyui.com/images/stock/photo-1507003211169-0a1dd7228f2d.webp" alt="Cliente" />
-              </div>
-            </div>
-            
-            <div class="rating rating-md mb-6">
-              <input type="radio" name="rating-2" class="mask mask-star-2 bg-primary" checked="checked" disabled />
-              <input type="radio" name="rating-2" class="mask mask-star-2 bg-primary" checked="checked" disabled />
-              <input type="radio" name="rating-2" class="mask mask-star-2 bg-primary" checked="checked" disabled />
-              <input type="radio" name="rating-2" class="mask mask-star-2 bg-primary" checked="checked" disabled />
-              <input type="radio" name="rating-2" class="mask mask-star-2 bg-primary" checked="checked" disabled />
-            </div>
-            
-            <blockquote class="text-xl md:text-2xl font-serif text-white italic mb-8 leading-relaxed">
-              "Dopo aver perso il mio primo acquario per inexperienza, ho trovato in Aquaura un partner affidabile. La manutenzione è impeccabile."
-            </blockquote>
-            
-            <div class="flex items-center gap-3">
-              <div class="w-8 h-px bg-primary"></div>
-              <cite class="text-sm uppercase tracking-widest text-slate-400 not-italic">
-                Giulia L. - Roma
-              </cite>
-              <div class="w-8 h-px bg-primary"></div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Testimonial 3 -->
-        <div id="testimonial3" class="carousel-item w-full">
-          <div class="flex flex-col items-center text-center p-8 md:p-16">
-            <div class="avatar offline mb-8">
-              <div class="w-24 h-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                <img src="https://img.daisyui.com/images/stock/photo-1500648767791-00dcc994a43e.webp" alt="Cliente" />
-              </div>
-            </div>
-            
-            <div class="rating rating-md mb-6">
-              <input type="radio" name="rating-3" class="mask mask-star-2 bg-primary" checked="checked" disabled />
-              <input type="radio" name="rating-3" class="mask mask-star-2 bg-primary" checked="checked" disabled />
-              <input type="radio" name="rating-3" class="mask mask-star-2 bg-primary" checked="checked" disabled />
-              <input type="radio" name="rating-3" class="mask mask-star-2 bg-primary" checked="checked" disabled />
-              <input type="radio" name="rating-3" class="mask mask-star-2 bg-primary" checked="checked" disabled />
-            </div>
-            
-            <blockquote class="text-xl md:text-2xl font-serif text-white italic mb-8 leading-relaxed">
-              "Il mio acquario di acqua dolce è una opera d'arte vivente. La competenza di Sergio è trasparente quanto l'acqua che cura."
-            </blockquote>
-            
-            <div class="flex items-center gap-3">
-              <div class="w-8 h-px bg-primary"></div>
-              <cite class="text-sm uppercase tracking-widest text-slate-400 not-italic">
-                Roberto T. - Firenze
-              </cite>
-              <div class="w-8 h-px bg-primary"></div>
-            </div>
-          </div>
-        </div>
-        
+      <div class="text-center mb-16" data-controller="scroll-reveal" class="opacity-0 translate-y-10 transition-all duration-1000 ease-out">
+        <h2 class="text-4xl md:text-5xl font-serif text-white mb-4">Le Nostre Discipline</h2>
+        <p class="text-slate-400 font-light">L'eccellenza operativa dietro ogni nostro ecosistema.</p>
       </div>
-      
-      <!-- Carousel Navigation -->
-      <div class="flex justify-center gap-4 mt-8">
-        <a href="#testimonial1" class="btn btn-circle btn-ghost btn-sm">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
-        </a>
-        <a href="#testimonial2" class="btn btn-circle btn-ghost btn-sm">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
-        </a>
-        <a href="#testimonial3" class="btn btn-circle btn-ghost btn-sm">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
-        </a>
-      </div>
-      
-    </div>
-  </section>
 
-  <!-- Sezione Stat Cards -->
-  <section class="w-full py-20 md:py-32 relative overflow-hidden">
-    
-    <div class="container mx-auto px-6 md:px-12 max-w-4xl text-center relative z-10">
-      <h2 class="text-4xl md:text-5xl font-serif text-white mb-8 leading-tight">
-        La Natura, <span class="text-primary italic">Domata.</span>
-      </h2>
-      <p class="text-lg text-slate-400 font-light leading-relaxed mb-12">
-        Ogni ecosistema che creiamo è un equilibrio perfetto tra scienza e bellezza.
-        Utilizziamo solo le migliori tecnologie e i più puri materiali naturali.
-      </p>
-      
-      <!-- Stat Cards con DaisyUI -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="stat bg-base-200/50 border border-white/5 rounded-none p-6">
-          <div class="stat-title text-xs uppercase tracking-widest text-slate-500">Progetti</div>
-          <div class="stat-value text-3xl font-serif text-primary">127</div>
-        </div>
-        <div class="stat bg-base-200/50 border border-white/5 rounded-none p-6">
-          <div class="stat-title text-xs uppercase tracking-widest text-slate-500">Anni</div>
-          <div class="stat-value text-3xl font-serif text-primary">15+</div>
-        </div>
-        <div class="stat bg-base-200/50 border border-white/5 rounded-none p-6">
-          <div class="stat-title text-xs uppercase tracking-widest text-slate-500">Specie</div>
-          <div class="stat-value text-3xl font-serif text-primary">340</div>
-        </div>
-        <div class="stat bg-base-200/50 border border-white/5 rounded-none p-6">
-          <div class="stat-title text-xs uppercase tracking-widest text-slate-500">Clienti</div>
-          <div class="stat-value text-3xl font-serif text-primary">98%</div>
+      <div class="mockup-window border border-base-300 bg-base-300 shadow-2xl" data-controller="scroll-reveal" class="opacity-0 translate-y-10 transition-all duration-1000 delay-100">
+        <div class="flex flex-col justify-center px-4 py-8 bg-base-100 space-y-4">
+          
+          <!-- Accordion 1 -->
+          <div class="collapse collapse-plus bg-base-200 border border-white/5 rounded-box">
+            <input type="radio" name="services-accordion" checked="checked" /> 
+            <div class="collapse-title text-xl font-serif text-white flex items-center gap-4">
+              <span class="text-primary text-sm italic">01</span> Design & Setup
+            </div>
+            <div class="collapse-content text-slate-400 font-light"> 
+              <p>Allestimento chiavi in mano di ecosistemi marini e dolci di altissimo profilo strutturale e biologico. Consulenza architettonica e illuminotecnica inclusa.</p>
+            </div>
+          </div>
+
+          <!-- Accordion 2 -->
+          <div class="collapse collapse-plus bg-base-200 border border-white/5 rounded-box">
+            <input type="radio" name="services-accordion" /> 
+            <div class="collapse-title text-xl font-serif text-white flex items-center gap-4">
+              <span class="text-primary text-sm italic">02</span> Premium Care
+            </div>
+            <div class="collapse-content text-slate-400 font-light"> 
+              <p>Mantenimento periodico totale. Gestiamo i rigidi protocolli chimici, la potatura delle piante e l'alimentazione specifica; il tuo unico compito è ammirare.</p>
+            </div>
+          </div>
+
+          <!-- Accordion 3 -->
+          <div class="collapse collapse-plus bg-base-200 border border-white/5 rounded-box">
+            <input type="radio" name="services-accordion" /> 
+            <div class="collapse-title text-xl font-serif text-white flex items-center gap-4">
+              <span class="text-primary text-sm italic">03</span> Rescue & Rehab
+            </div>
+            <div class="collapse-content text-slate-400 font-light"> 
+              <p>Azioni di salvataggio immediate per ecosistemi compromessi, picchi di ammoniaca o valori chimici critici. Intervento rapido sulle patologie ittiche.</p>
+            </div>
+          </div>
+          
         </div>
       </div>
       
+      <div class="text-center mt-12" data-controller="scroll-reveal" class="opacity-0 translate-y-8 transition-all duration-1000 delay-200">
+         <%= link_to "Esplora tutti i Servizi", servizi_path, class: "btn border-white/20 text-slate-300 uppercase hover:bg-white hover:text-black transition-colors" %>
+      </div>
+
     </div>
   </section>
 
 </div>
-

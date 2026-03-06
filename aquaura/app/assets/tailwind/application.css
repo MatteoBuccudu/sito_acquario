@@ -6,6 +6,35 @@
     --color-ocean-900: #0B132B;
     --color-ocean-800: #111D44;
     --color-ocean-700: #14255A;
+
+    --animate-slide-up-fade: slide-up-fade 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    --animate-fade-out-up: fade-out-up 1.2s cubic-bezier(0.8, 0, 0.1, 1) forwards;
+
+    @keyframes slide-up-fade {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fade-out-up {
+        0% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        100% {
+            opacity: 0;
+            transform: translateY(-100%);
+            visibility: hidden;
+            display: none;
+        }
+    }
 }
 
 :root {
