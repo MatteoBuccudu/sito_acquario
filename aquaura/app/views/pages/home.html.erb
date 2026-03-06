@@ -1,127 +1,136 @@
-<!-- D2C Life Science Aesthetic Home Page -->
-<div class="w-full font-sans bg-[#0c0c0c] selection:bg-slate-800 selection:text-white pb-32 overflow-hidden text-[#e6e6e6]">
+<!-- Awwwards-Level Home Page (Pure CSS, Tailwind, DaisyUI & Hotwire) -->
+<div class="relative w-full bg-base-100 overflow-hidden font-sans">
   
-  <!-- Preloader Sipario (Simulato via CSS) -->
-  <div class="fixed inset-0 z-50 bg-[#0c0c0c] pointer-events-none animate-fade-out-up" style="animation-delay: 1.5s; animation-fill-mode: forwards;"></div>
+  <!-- BACKGROUND SOTTOMARINO (Blob Morph & Parallax Nativo) -->
+  <div class="fixed inset-0 z-0 pointer-events-none opacity-40 mix-blend-screen bg-fixed bg-center bg-cover" style="background-image: url('https://images.unsplash.com/photo-1522069213448-443a614da9b6?auto=format&fit=crop&q=80&w=2000&h=1200');"></div>
+  <!-- Rifrazione della luce nell'acqua (CSS Animato) -->
+  <div class="fixed top-[-20%] left-[-10%] w-[50vw] h-[50vw] bg-accent/20 blur-[120px] rounded-full animate-blob-morph z-0 pointer-events-none"></div>
+  <div class="fixed bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] bg-primary/20 blur-[150px] rounded-full animate-blob-morph z-0 pointer-events-none" style="animation-delay: -4s;"></div>
 
-  <!-- Hero Section DaisyUI -->
-  <div class="hero min-h-screen relative" style="background-image: url('https://images.unsplash.com/photo-1522069213448-443a614da9b6?auto=format&fit=crop&q=80&w=2000&h=1200');" data-controller="parallax" data-parallax-speed-value="0.1">
-    <div class="hero-overlay bg-base-300 bg-opacity-80 mix-blend-multiply"></div>
-    <div class="hero-content text-center text-neutral-content z-10" data-controller="scroll-reveal" class="opacity-0 translate-y-10 transition-all duration-1000">
-      <div class="max-w-4xl">
-        <h3 class="mb-5 text-sm font-bold uppercase tracking-[0.3em] text-primary">Aquaura &mdash; Studio di Acquariologia</h3>
+  <!-- HERO SECTION (Antigravity & DaisyUI Hero) -->
+  <section class="relative z-10 hero min-h-screen bg-transparent pt-20">
+    <div class="hero-content text-center text-neutral-content w-full flex-col">
+      <div class="max-w-4xl animate-fade-up">
+        <h3 class="mb-6 text-xs md:text-sm font-bold uppercase tracking-[0.4em] text-primary">Sergio &mdash; Il Dottore dell'Acqua</h3>
         
-        <h1 class="mb-8 text-5xl md:text-7xl font-serif text-white leading-tight">
-          Non costruiamo acquari.<br>
-          <span class="text-slate-400 italic font-light">Definiamo mondi sommersi.</span>
+        <!-- Kinetic Typography via overflow & tailwind delays -->
+        <h1 class="mb-8 text-6xl md:text-8xl font-serif text-white leading-[1.1] tracking-tight">
+          <div class="overflow-hidden p-2">
+            <div data-controller="scroll-reveal" data-scroll-reveal-reveal-class="opacity-100 translate-y-0" class="opacity-0 translate-y-full transition-transform duration-1000 ease-out">Non costruiamo</div>
+          </div>
+          <div class="overflow-hidden p-2">
+            <div data-controller="scroll-reveal" data-scroll-reveal-reveal-class="opacity-100 translate-y-0" class="opacity-0 translate-y-full transition-transform duration-1000 ease-out delay-100 text-slate-400 italic font-light">Mondi Sommersi.</div>
+          </div>
         </h1>
         
-        <p class="mb-10 text-lg md:text-xl text-slate-300 font-light max-w-2xl mx-auto">
-          Progettazione, allestimento e cura di ecosistemi acquatici di lusso. La perfezione della natura, elevata a elemento di interior design.
+        <p class="mb-12 text-lg md:text-2xl text-slate-300 font-light max-w-2xl mx-auto leading-relaxed overflow-hidden">
+           <div data-controller="scroll-reveal" data-scroll-reveal-reveal-class="opacity-100 translate-y-0" class="opacity-0 translate-y-full transition-all duration-1000 ease-out delay-200">
+             Esaltiamo la natura elevandola a elemento di lusso architettonico.
+           </div>
         </p>
         
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <%= link_to "Inizia un Progetto", servizi_path, class: "btn btn-primary btn-lg rounded-none uppercase tracking-widest font-semibold text-white" %>
-          <%= link_to "Esplora Galleria", galleria_path, class: "btn btn-outline btn-lg rounded-none uppercase tracking-widest text-slate-300 hover:text-white" %>
+        <div data-controller="scroll-reveal" data-scroll-reveal-reveal-class="opacity-100 translate-y-0 scale-100" class="opacity-0 translate-y-10 scale-95 transition-all duration-700 ease-out delay-300">
+          <%= link_to "Inizia un Progetto", servizi_path, class: "btn btn-primary btn-wide rounded-full uppercase tracking-widest font-semibold text-white shadow-[0_0_30px_rgba(14,165,233,0.3)] hover:shadow-[0_0_50px_rgba(14,165,233,0.6)] hover:scale-105 transition-all duration-500 peer" %>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Sezione Philosophy (DaisyUI Diff Component x In e Out dell'acqua) -->
-  <section class="w-full py-24 md:py-32 bg-base-100 border-t border-white/5">
-    <div class="container mx-auto px-6 md:px-12 max-w-6xl">
-      <div class="flex flex-col lg:flex-row items-center justify-between gap-16">
+  <!-- FILOSOFIA (DaisyUI Diff + Glassmorphism) -->
+  <section class="relative z-10 w-full py-32 bg-base-100/60 backdrop-blur-3xl border-t border-white/5">
+    <div class="container mx-auto px-6 max-w-7xl">
+      <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
         
-        <!-- Diff Image (Prima/Dopo l'ingesso d'acqua) -->
-        <div class="w-full lg:w-1/2" data-controller="scroll-reveal" class="opacity-0 translate-y-10 transition-all duration-1000 ease-out">
-          <div class="diff aspect-[16/9] shadow-2xl border border-white/10">
+        <!-- Diff Image (CSS solo nativo DaisyUI) -->
+        <div class="w-full lg:w-1/2" data-controller="scroll-reveal" data-scroll-reveal-reveal-class="opacity-100 translate-y-0" class="opacity-0 translate-y-20 transition-all duration-1000 ease-out">
+          <div class="diff aspect-[4/5] md:aspect-[16/9] lg:aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl border border-white/10 glass animate-float">
             <div class="diff-item-1">
-              <div class="bg-primary text-primary-content grid place-content-center text-4xl font-serif">Natura Pura</div>
+              <div class="bg-primary/20 backdrop-blur-md grid place-content-center text-5xl font-serif text-white">Equilibrio</div>
             </div>
             <div class="diff-item-2">
               <div class="bg-base-300 grid place-content-center">
-                <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=800&h=1000" alt="Iwagumi" class="w-full h-full object-cover filter grayscale-[10%]" />
+                <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800&h=1000" alt="Iwagumi Tank" class="w-full h-full object-cover filter grayscale-[20%]" />
               </div>
             </div>
             <div class="diff-resizer"></div>
           </div>
         </div>
 
-        <!-- Testo Esteso -->
-        <div class="w-full lg:w-1/2 space-y-8" data-controller="scroll-reveal" class="opacity-0 translate-y-10 transition-all duration-1000 delay-200">
-          <h2 class="text-4xl lg:text-5xl font-serif text-white leading-tight">
-            Dalla biologia<br>all'architettura.
+        <div class="w-full lg:w-1/2 space-y-10">
+          <h2 class="text-5xl lg:text-6xl font-serif text-white leading-tight overflow-hidden">
+            <div data-controller="scroll-reveal" data-scroll-reveal-reveal-class="opacity-100 translate-y-0" class="opacity-0 translate-y-full transition-transform duration-1000 ease-out">Dalla Chimica</div>
+            <div data-controller="scroll-reveal" data-scroll-reveal-reveal-class="opacity-100 translate-y-0" class="opacity-0 translate-y-full transition-transform duration-1000 ease-out delay-100 text-slate-400 italic">all'Emozione.</div>
           </h2>
           
-          <div class="space-y-6 text-slate-400 font-light leading-relaxed">
-            <p>
-              Ogni vasca è un'opera d'arte isolata, progettata meticolosamente per fondersi con il tuo ambiente. La geometria scompare, lasciando spazio al quadro fluido della natura.
-            </p>
-            <p>
-              Applichiamo un approccio scientifico rigoroso—dal bilanciamento chimico alla selezione sartoriale di flora e fauna—per garantire una magnificenza duratura col minimo sforzo.
+          <div class="space-y-6 text-xl text-slate-400 font-light leading-relaxed">
+            <p data-controller="scroll-reveal" data-scroll-reveal-reveal-class="opacity-100 translate-y-0" class="opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-200">
+              Il vero lusso è l'assenza di sforzo. Progettiamo veri e propri ecosistemi autonomi dove l'estetica estrema sposa la perfezione biologica.
             </p>
           </div>
           
-          <div class="pt-4">
-            <%= link_to "La nostra Filosofia", blog_index_path, class: "btn btn-outline text-slate-300 hover:text-white rounded-none uppercase tracking-widest text-xs" %>
+          <div data-controller="scroll-reveal" data-scroll-reveal-reveal-class="opacity-100 translate-y-0" class="opacity-0 translate-y-8 transition-all duration-1000 ease-out delay-300">
+             <%= link_to "La nostra Filosofia", blog_index_path, class: "btn btn-outline btn-lg rounded-full border-white/20 text-white uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-colors" %>
           </div>
         </div>
-        
+
       </div>
     </div>
   </section>
 
-  <!-- Sezione Competenze con Mockup & Accordion DaisyUI -->
-  <section class="w-full py-24 bg-base-200">
-    <div class="container mx-auto px-6 md:px-12 max-w-5xl">
+  <!-- COMPETENZE (Glass Cards & CSS Bob) -->
+  <section class="relative z-10 w-full py-32 bg-gradient-to-b from-transparent to-base-100/90">
+    <div class="container mx-auto px-6 max-w-7xl">
       
-      <div class="text-center mb-16" data-controller="scroll-reveal" class="opacity-0 translate-y-10 transition-all duration-1000 ease-out">
-        <h2 class="text-4xl md:text-5xl font-serif text-white mb-4">Le Nostre Discipline</h2>
-        <p class="text-slate-400 font-light">L'eccellenza operativa dietro ogni nostro ecosistema.</p>
+      <div class="text-center mb-24 overflow-hidden">
+        <h2 data-controller="scroll-reveal" data-scroll-reveal-reveal-class="opacity-100 translate-y-0" class="text-5xl md:text-7xl font-serif text-white mb-6 opacity-0 translate-y-full transition-transform duration-1000 ease-out">Le Cure Premium</h2>
       </div>
 
-      <div class="mockup-window border border-base-300 bg-base-300 shadow-2xl" data-controller="scroll-reveal" class="opacity-0 translate-y-10 transition-all duration-1000 delay-100">
-        <div class="flex flex-col justify-center px-4 py-8 bg-base-100 space-y-4">
-          
-          <!-- Accordion 1 -->
-          <div class="collapse collapse-plus bg-base-200 border border-white/5 rounded-box">
-            <input type="radio" name="services-accordion" checked="checked" /> 
-            <div class="collapse-title text-xl font-serif text-white flex items-center gap-4">
-              <span class="text-primary text-sm italic">01</span> Design & Setup
-            </div>
-            <div class="collapse-content text-slate-400 font-light"> 
-              <p>Allestimento chiavi in mano di ecosistemi marini e dolci di altissimo profilo strutturale e biologico. Consulenza architettonica e illuminotecnica inclusa.</p>
-            </div>
+      <!-- CSS Grid con Staggering via Delay Tailwind -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <div data-controller="scroll-reveal" data-scroll-reveal-reveal-class="opacity-100 translate-y-0 scale-100" class="opacity-0 translate-y-20 scale-95 transition-all duration-1000 ease-out card glass shadow-2xl border border-white/10 hover:border-primary/50 group animate-bob" style="animation-delay: 0s;">
+          <div class="card-body gap-6">
+            <span class="text-6xl font-serif text-primary/40 group-hover:text-primary transition-colors duration-500">01</span>
+            <h3 class="card-title text-3xl font-serif text-white">Architettura Naturale</h3>
+            <p class="text-slate-400 font-light leading-relaxed">Design estremo, integrazione architettonica e illuminotecnica su misura per installazioni museali.</p>
           </div>
-
-          <!-- Accordion 2 -->
-          <div class="collapse collapse-plus bg-base-200 border border-white/5 rounded-box">
-            <input type="radio" name="services-accordion" /> 
-            <div class="collapse-title text-xl font-serif text-white flex items-center gap-4">
-              <span class="text-primary text-sm italic">02</span> Premium Care
-            </div>
-            <div class="collapse-content text-slate-400 font-light"> 
-              <p>Mantenimento periodico totale. Gestiamo i rigidi protocolli chimici, la potatura delle piante e l'alimentazione specifica; il tuo unico compito è ammirare.</p>
-            </div>
-          </div>
-
-          <!-- Accordion 3 -->
-          <div class="collapse collapse-plus bg-base-200 border border-white/5 rounded-box">
-            <input type="radio" name="services-accordion" /> 
-            <div class="collapse-title text-xl font-serif text-white flex items-center gap-4">
-              <span class="text-primary text-sm italic">03</span> Rescue & Rehab
-            </div>
-            <div class="collapse-content text-slate-400 font-light"> 
-              <p>Azioni di salvataggio immediate per ecosistemi compromessi, picchi di ammoniaca o valori chimici critici. Intervento rapido sulle patologie ittiche.</p>
-            </div>
-          </div>
-          
+          <figure class="px-8 pb-8">
+             <div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+               <div class="w-0 h-full bg-primary group-hover:w-full transition-all duration-1000 ease-in-out"></div>
+             </div>
+          </figure>
         </div>
+
+        <div data-controller="scroll-reveal" data-scroll-reveal-reveal-class="opacity-100 translate-y-0 scale-100" class="opacity-0 translate-y-20 scale-95 transition-all duration-1000 ease-out delay-100 card glass shadow-2xl border border-white/10 hover:border-accent/50 group animate-bob" style="animation-delay: 1.5s;">
+          <div class="card-body gap-6">
+             <span class="text-6xl font-serif text-accent/40 group-hover:text-accent transition-colors duration-500">02</span>
+            <h3 class="card-title text-3xl font-serif text-white">Mantenimento Totale</h3>
+            <p class="text-slate-400 font-light leading-relaxed">Assenza totale di oneri per il cliente. Gestiamo la biochimica e la salute della fauna con screening periodici.</p>
+          </div>
+          <figure class="px-8 pb-8">
+             <div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+               <div class="w-0 h-full bg-accent group-hover:w-full transition-all duration-1000 ease-in-out"></div>
+             </div>
+          </figure>
+        </div>
+
+        <div data-controller="scroll-reveal" data-scroll-reveal-reveal-class="opacity-100 translate-y-0 scale-100" class="opacity-0 translate-y-20 scale-95 transition-all duration-1000 ease-out delay-200 card glass shadow-2xl border border-white/10 hover:border-error/50 group animate-bob" style="animation-delay: 3s;">
+          <div class="card-body gap-6">
+             <span class="text-6xl font-serif text-error/40 group-hover:text-error transition-colors duration-500">03</span>
+            <h3 class="card-title text-3xl font-serif text-white">ER Sotterraneo</h3>
+            <p class="text-slate-400 font-light leading-relaxed">Pronto intervento avanzato H24 per crisi di sistema, squilibri algali e salvataggio coralli.</p>
+          </div>
+          <figure class="px-8 pb-8">
+             <div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+               <div class="w-0 h-full bg-error group-hover:w-full transition-all duration-1000 ease-in-out"></div>
+             </div>
+          </figure>
+        </div>
+
       </div>
       
-      <div class="text-center mt-12" data-controller="scroll-reveal" class="opacity-0 translate-y-8 transition-all duration-1000 delay-200">
-         <%= link_to "Esplora tutti i Servizi", servizi_path, class: "btn border-white/20 text-slate-300 uppercase hover:bg-white hover:text-black transition-colors" %>
+      <div class="text-center mt-20" data-controller="scroll-reveal" data-scroll-reveal-reveal-class="opacity-100 translate-y-0" class="opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-300">
+         <%= link_to "Esplora i Trattamenti", servizi_path, class: "btn btn-ghost rounded-full uppercase tracking-widest text-slate-300 hover:text-white" %>
       </div>
 
     </div>

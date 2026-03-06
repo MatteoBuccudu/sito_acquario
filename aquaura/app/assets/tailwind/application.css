@@ -7,22 +7,72 @@
     --color-ocean-800: #111D44;
     --color-ocean-700: #14255A;
 
-    --animate-slide-up-fade: slide-up-fade 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    --animate-fade-out-up: fade-out-up 1.2s cubic-bezier(0.8, 0, 0.1, 1) forwards;
+    --animate-float: float 6s ease-in-out infinite;
+    --animate-bob: bob 4s ease-in-out infinite;
+    --animate-blob-morph: blob-morph 8s ease-in-out infinite;
+    --animate-fade-up: fade-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    --animate-water-drop: water-drop 1.5s ease-in-out forwards;
+    --animate-preloader-exit: preloader-exit 2s ease-in-out 0.3s forwards;
 
-    @keyframes slide-up-fade {
+    @keyframes float {
+        0% {
+            transform: translateY(0px);
+        }
+
+        50% {
+            transform: translateY(-20px);
+        }
+
+        100% {
+            transform: translateY(0px);
+        }
+    }
+
+    @keyframes bob {
+        0% {
+            transform: translateY(0px) rotate(0deg);
+        }
+
+        50% {
+            transform: translateY(-10px) rotate(2deg);
+        }
+
+        100% {
+            transform: translateY(0px) rotate(0deg);
+        }
+    }
+
+    @keyframes blob-morph {
+        0% {
+            border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
+        }
+
+        34% {
+            border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%;
+        }
+
+        67% {
+            border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;
+        }
+
+        100% {
+            border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
+        }
+    }
+
+    @keyframes fade-up {
         0% {
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(30px) scale(0.95);
         }
 
         100% {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
         }
     }
 
-    @keyframes fade-out-up {
+    @keyframes water-drop {
         0% {
             opacity: 1;
             transform: translateY(0);
@@ -32,9 +82,27 @@
             opacity: 0;
             transform: translateY(-100%);
             visibility: hidden;
-            display: none;
         }
     }
+
+    /* Preloader: animazione CSS-first, funziona anche senza JavaScript */
+    @keyframes preloader-exit {
+        0%, 40% {
+            opacity: 1;
+            visibility: visible;
+        }
+        100% {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+    }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 0.6s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 :root {

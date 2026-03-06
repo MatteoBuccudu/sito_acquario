@@ -13,6 +13,9 @@ application.register("chart", ChartController)
 import CountdownController from "./countdown_controller"
 application.register("countdown", CountdownController)
 
+import CursorController from "./cursor_controller"
+application.register("cursor", CursorController)
+
 import DatepickerController from "./datepicker_controller"
 application.register("datepicker", DatepickerController)
 
@@ -22,14 +25,8 @@ application.register("hamburger", HamburgerController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
-import MaskRevealController from "./mask_reveal_controller"
-application.register("mask-reveal", MaskRevealController)
-
-import ParallaxController from "./parallax_controller"
-application.register("parallax", ParallaxController)
+import PreloaderController from "./preloader_controller"
+application.register("preloader", PreloaderController)
 
 import ScrollRevealController from "./scroll_reveal_controller"
 application.register("scroll-reveal", ScrollRevealController)
-
-import SmoothScrollController from "./smooth_scroll_controller"
-application.register("smooth-scroll", SmoothScrollController)

@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="dark" class="scroll-smooth bg-base-100">
   <head>
-    <title><%= content_for(:title) || "Aquaura" %></title>
+    <title><%= content_for(:title) || "Sergio | Il Dottore dell'Acqua" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Aquaura">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -19,11 +18,22 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <meta name="view-transition" content="same-origin">
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body data-theme="dark" data-controller="smooth-scroll">
+  <body class="font-sans antialiased bg-base-100 text-base-content selection:bg-primary/30 selection:text-white">
+    
+    <!-- Custom Cursor Awwwards Style -->
+    <div data-controller="cursor" class="fixed top-0 left-0 w-8 h-8 rounded-full border border-white/50 backdrop-blur-sm pointer-events-none z-[99999] mix-blend-screen transition-transform duration-75 ease-out will-change-transform hidden md:block flex items-center justify-center isolate" id="custom-cursor">
+      <div class="w-2 h-2 bg-white rounded-full"></div>
+    </div>
+
+    <!-- Preloader "Livello Acqua" - animazione CSS-first (funziona anche senza JS) -->
+    <div data-controller="preloader" class="fixed inset-0 z-[99990] bg-ocean-900 flex justify-center items-center animate-preloader-exit">
+      <div class="radial-progress text-primary animate-pulse" style="--value:100; --size:3rem; --thickness: 2px;" role="progressbar"></div>
+    </div>
     <%= render 'shared/navbar' %>
     <!-- Add padding top so fixed navbar doesn't completely overlap initial view layout -->
     <main class="w-full min-h-screen pt-16">
