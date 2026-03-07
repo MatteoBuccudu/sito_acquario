@@ -6,6 +6,7 @@
     --color-ocean-900: #0B132B;
     --color-ocean-800: #111D44;
     --color-ocean-700: #14255A;
+    --color-ocean-950: #020617;
 
     --animate-float: float 6s ease-in-out infinite;
     --animate-bob: bob 4s ease-in-out infinite;
@@ -15,37 +16,37 @@
     --animate-preloader-exit: preloader-exit 2s ease-in-out 0.3s forwards;
     --animate-bubble-rise: bubble-rise 4s ease-in infinite;
     --animate-caustics: caustics 5s ease-in-out infinite alternate;
+    --animate-rotate-360: rotate-360 2s linear infinite;
+    --animate-premium-rotate: premium-rotate 12s infinite ease-in-out;
 
     @keyframes float {
-        0% {
+
+        0%,
+        100% {
             transform: translateY(0px);
         }
 
         50% {
             transform: translateY(-20px);
         }
-
-        100% {
-            transform: translateY(0px);
-        }
     }
 
     @keyframes bob {
-        0% {
+
+        0%,
+        100% {
             transform: translateY(0px) rotate(0deg);
         }
 
         50% {
             transform: translateY(-10px) rotate(2deg);
         }
-
-        100% {
-            transform: translateY(0px) rotate(0deg);
-        }
     }
 
     @keyframes blob-morph {
-        0% {
+
+        0%,
+        100% {
             border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
         }
 
@@ -55,10 +56,6 @@
 
         67% {
             border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;
-        }
-
-        100% {
-            border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
         }
     }
 
@@ -87,7 +84,6 @@
         }
     }
 
-    /* Preloader: animazione CSS-first, funziona anche senza JavaScript */
     @keyframes preloader-exit {
 
         0%,
@@ -118,10 +114,6 @@
             transform: translateY(50vh) scale(1.2) translateX(-15px);
         }
 
-        80% {
-            opacity: 0.6;
-        }
-
         100% {
             transform: translateY(-20vh) scale(0.5) translateX(10px);
             opacity: 0;
@@ -143,30 +135,6 @@
             opacity: 0.1;
         }
     }
-}
-
-::view-transition-old(root),
-::view-transition-new(root) {
-    animation-duration: 0.6s;
-    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-:root {
-    /* Override DaisyUI dark theme variables to create the custom Aquaura Ocean Theme */
-    --b1: 222 47% 11%;
-    /* base-100: #0f172a (tailwind slate-900) */
-    --b2: 240 83% 4%;
-    /* base-200: #020617 (tailwind slate-950) */
-    --b3: 215 32% 17%;
-    /* base-300: #1e293b */
-    --p: 199 89% 48%;
-    /* primary: #0ea5e9 */
-    --s: 173 80% 40%;
-    /* secondary: #14b8a6 */
-    --a: 38 92% 50%;
-    /* accent: #f59e0b */
-    --n: 215 32% 17%;
-    /* neutral: #1e293b */
 
     @keyframes sweep {
         0% {
@@ -253,9 +221,101 @@
             transform: translateX(0);
         }
     }
+
+    @keyframes rotate-360 {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes premium-rotate {
+
+        0%,
+        20% {
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+        }
+
+        22%,
+        42% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        45%,
+        100% {
+            opacity: 0;
+            transform: translateY(-20px) scale(1.05);
+        }
+    }
+}
+
+@layer base {
+    :root {
+        --b1: 222 47% 11%;
+        --b2: 240 83% 4%;
+        --b3: 215 32% 17%;
+        --p: 199 89% 48%;
+        --s: 173 80% 40%;
+        --a: 38 92% 50%;
+        --n: 215 32% 17%;
+    }
 }
 
 @layer utilities {
+    .glass-navbar {
+        background: rgba(255, 255, 255, 0.12) !important;
+        backdrop-filter: blur(50px) saturate(200%) brightness(1.2) !important;
+        -webkit-backdrop-filter: blur(50px) saturate(200%) brightness(1.2) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.25) !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+        box-shadow: 0 15px 60px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .modal-box {
+        background: rgba(2, 6, 23, 0.95) !important;
+        backdrop-filter: blur(60px) saturate(200%) !important;
+        -webkit-backdrop-filter: blur(60px) saturate(200%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .text-rotate {
+        display: inline-grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .text-rotate>span {
+        grid-column: 1;
+        grid-row: 1;
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+        animation: premium-rotate 12s infinite ease-in-out;
+        white-space: nowrap;
+    }
+
+    .text-rotate>span:nth-child(1) {
+        animation-delay: 0s;
+    }
+
+    .text-rotate>span:nth-child(2) {
+        animation-delay: 3s;
+    }
+
+    .text-rotate>span:nth-child(3) {
+        animation-delay: 6s;
+    }
+
+    .text-rotate>span:nth-child(4) {
+        animation-delay: 9s;
+    }
+
     .card-enter {
         animation: fade-up-3d .65s cubic-bezier(.22, 1, .36, 1) both;
     }
@@ -287,8 +347,7 @@
     .price-reveal {
         opacity: 0;
         transform: translateY(8px);
-        transition: opacity .4s cubic-bezier(.22, 1, .36, 1),
-            transform .4s cubic-bezier(.22, 1, .36, 1);
+        transition: opacity .4s cubic-bezier(.22, 1, .36, 1), transform .4s cubic-bezier(.22, 1, .36, 1);
     }
 
     .hover-3d:hover .price-reveal {
@@ -317,22 +376,14 @@
     }
 
     .glow-border {
-        box-shadow:
-            0 0 0 1px oklch(68% 0.22 38 / .25),
-            0 20px 60px -8px oklch(0% 0 0 / .6),
-            0 4px 20px oklch(68% 0.22 38 / .15);
+        box-shadow: 0 0 0 1px oklch(68% 0.22 38 / .25), 0 20px 60px -8px oklch(0% 0 0 / .6), 0 4px 20px oklch(68% 0.22 38 / .15);
         transition: box-shadow .5s cubic-bezier(.22, 1, .36, 1);
     }
 
     .hover-3d:hover .glow-border {
-        box-shadow:
-            0 0 0 1.5px oklch(68% 0.22 38 / .55),
-            0 28px 72px -8px oklch(0% 0 0 / .7),
-            0 6px 28px oklch(68% 0.22 38 / .3);
+        box-shadow: 0 0 0 1.5px oklch(68% 0.22 38 / .55), 0 28px 72px -8px oklch(0% 0 0 / .7), 0 6px 28px oklch(68% 0.22 38 / .3);
     }
-}
 
-@layer utilities {
     .hover-3d {
         display: grid;
         grid-template-columns: repeat(3, 1fr);

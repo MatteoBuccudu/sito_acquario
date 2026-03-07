@@ -8,10 +8,27 @@ export default class extends Controller {
         if (this.hasProgressTarget) {
             this.progressTarget.style.display = 'none'
         }
+        this.handleScroll = this.handleScroll.bind(this)
+        window.addEventListener('scroll', this.handleScroll, { passive: true })
+        this.handleScroll()
     }
 
     disconnect() {
+        window.removeEventListener('scroll', this.handleScroll)
         this.closeMenu()
+    }
+
+    handleScroll() {
+        const s = window.scrollY
+        if (this.hasNavbarTarget) {
+            if (s > 20) {
+                this.navbarTarget.classList.add('glass-navbar')
+                this.navbarTarget.classList.remove('md:mt-4', 'mt-3')
+            } else {
+                this.navbarTarget.classList.remove('glass-navbar')
+                this.navbarTarget.classList.add('md:mt-4', 'mt-3')
+            }
+        }
     }
 
     toggleMenu() {

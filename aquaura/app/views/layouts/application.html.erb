@@ -27,12 +27,21 @@
   <body class="font-sans antialiased bg-base-100 text-base-content selection:bg-primary/30 selection:text-white">
     
 
-    <!-- Preloader "Livello Acqua" - animazione CSS-first (funziona anche senza JS) -->
-    <div data-controller="preloader" class="fixed inset-0 z-[99990] bg-ocean-900 flex justify-center items-center animate-preloader-exit">
-      <div class="radial-progress text-primary animate-pulse" style="--value:100; --size:3rem; --thickness: 2px;" role="progressbar"></div>
+    <!-- Preloader "Livello Acqua" -->
+    <div data-controller="preloader" class="fixed inset-0 z-[99990] bg-ocean-950 flex flex-col justify-center items-center animate-preloader-exit gap-8">
+      <!-- Rotating Water Drop -->
+      <div class="relative flex items-center justify-center">
+        <%= image_tag "water-drop.png", class: "w-20 h-20 object-contain animate-rotate-360 relative z-10" %>
+        <!-- Glowing Pulse behind -->
+        <div class="absolute inset-0 bg-primary/20 blur-3xl rounded-full scale-150 animate-pulse"></div>
+      </div>
+      
+      <span class="text-white/60 text-[0.8rem] md:text-sm uppercase tracking-[0.5em] font-light mt-8 animate-pulse">
+        IMMERSIONE TOTALE
+      </span>
     </div>
     <%= render 'shared/navbar' %>
-    <main class="w-full min-h-screen">
+    <main class="w-full min-h-screen pt-24 md:pt-32">
       <%= yield %>
     </main>
     <%= render 'shared/footer' %>
