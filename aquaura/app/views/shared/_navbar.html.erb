@@ -1,211 +1,190 @@
-<div data-controller="navbar" data-action="resize@window->navbar#resize keydown@window->navbar#closeMenu">
-  <!-- ══ SCROLL PROGRESS BAR ══ -->
-  <div data-navbar-target="progress"
-    class="fixed top-0 left-0 z-[1005] h-[2px] w-0
-      [background:linear-gradient(90deg,#0ea5e9,#14b8a6,#0ea5e9)]
-      [background-size:200%_100%]
-      [transition:width_80ms_linear]"
-    style="animation:progress-shimmer 3s linear infinite;">
-  </div>
+<input type="checkbox" id="nav-mobile-menu" class="modal-toggle lg:hidden" />
 
-  <!-- ══ OVERLAY ══ -->
-  <div data-navbar-target="overlay" data-action="click->navbar#closeMenu"
-    class="fixed inset-0 z-[1001] bg-black/60 lg:hidden overlay-hidden
-      [backdrop-filter:blur(4px)] [-webkit-backdrop-filter:blur(4px)] transition-opacity duration-300">
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       NAVBAR
-  ══════════════════════════════════════════ -->
-  <div data-navbar-target="navbar"
-    class="navbar fixed top-[2px] inset-x-0 z-[1002] px-4 md:px-6
-      transition-[background,backdrop-filter,box-shadow,top] duration-500 ease-[cubic-bezier(.16,1,.3,1)]
-      [animation:nav-in_500ms_cubic-bezier(.16,1,.3,1)_100ms_both]">
-
-    <div class="mx-auto w-full max-w-[1400px] flex items-center justify-between h-[64px] gap-4">
-
-      <!-- ── LOGO ── -->
-      <div class="navbar-start shrink-0 basis-auto grow-0">
-        <%= link_to root_path, class: "nav-line font-serif text-[1.3rem] font-medium tracking-[.04em] hover:tracking-[.14em] text-[#f0ede8] hover:text-white transition-[letter-spacing,color] duration-500 ease-[cubic-bezier(.16,1,.3,1)] cursor-pointer select-none no-underline" do %>
-          Aquaura<span class="text-primary transition-colors duration-[250ms]">.</span>
-        <% end %>
-      </div>
-
-      <!-- ── DESKTOP LINKS ── -->
-      <div class="navbar-center hidden lg:flex">
-        <ul class="menu menu-horizontal p-0 gap-0.5 overflow-visible">
-
-          <li>
-            <%= link_to root_path, data: { navbar_target: "link", action: "click->navbar#setActive" }, 
-                class: "nav-line is-active text-[.78rem] uppercase tracking-[.06em] font-light text-base-content/60 hover:text-[#f0ede8] hover:-translate-y-px transition-[color,transform] duration-[250ms] px-4 rounded-lg bg-transparent! hover:bg-white/5!" do %>
-              Home
-            <% end %>
-          </li>
-
-          <!-- Work dropdown -->
-          <li class="relative group/work overflow-visible">
-            <span class="nav-line text-[.78rem] uppercase tracking-[.06em] font-light
-              text-base-content/60 hover:text-[#f0ede8] hover:-translate-y-px
-              transition-[color,transform] duration-[250ms] ease-[cubic-bezier(.16,1,.3,1)]
-              cursor-pointer px-4 rounded-lg flex items-center gap-1.5 bg-transparent! hover:bg-white/5!">
-              Collezione
-              <svg class="w-[9px] h-[9px] opacity-40 shrink-0 transition-transform duration-[250ms] group-hover/work:rotate-180" viewBox="0 0 10 6" fill="currentColor"><path d="M0 0 L5 6 L10 0 Z"/></svg>
-            </span>
-            <div class="absolute top-full left-1/2 -translate-x-1/2 z-50 mt-3 w-56 pt-1
-              opacity-0 pointer-events-none -translate-y-2 scale-[.97]
-              group-hover/work:opacity-100 group-hover/work:pointer-events-auto
-              group-hover/work:translate-y-0 group-hover/work:scale-100
-              transition-[opacity,transform] duration-300 ease-[cubic-bezier(.16,1,.3,1)]">
-              <ul class="rounded-2xl border border-white/[.07] p-2
-                [background:rgba(12,14,20,.92)] [backdrop-filter:blur(20px)_saturate(150%)]
-                [box-shadow:0_20px_60px_rgba(0,0,0,.55),0_1px_0_rgba(255,255,255,.05)_inset]">
-                <li class="opacity-0 -translate-y-1.5 group-hover/work:opacity-100 group-hover/work:translate-y-0 transition-[opacity,transform] duration-[220ms] ease-[cubic-bezier(.16,1,.3,1)] [transition-delay:40ms]">
-                  <%= link_to shop_path, class: "flex items-center gap-2.5 rounded-xl p-2.5 hover:bg-primary/10 hover:translate-x-0.5 transition-[background,transform] duration-[200ms] text-[#e8e8e0]! bg-transparent!" do %>
-                    <span class="w-7 h-7 shrink-0 rounded-lg bg-primary/15 flex items-center justify-center text-xs">✦</span>
-                    <div><p class="text-[.82rem] font-medium text-[#e8e8e0]">Shop Online</p><p class="text-[.7rem] opacity-40 mt-0.5">Creature & Accessori</p></div>
-                  <% end %>
-                </li>
-                <li class="opacity-0 -translate-y-1.5 group-hover/work:opacity-100 group-hover/work:translate-y-0 transition-[opacity,transform] duration-[220ms] ease-[cubic-bezier(.16,1,.3,1)] [transition-delay:80ms]">
-                  <%= link_to galleria_path, class: "flex items-center gap-2.5 rounded-xl p-2.5 hover:bg-primary/10 hover:translate-x-0.5 transition-[background,transform] duration-[200ms] text-[#e8e8e0]! bg-transparent!" do %>
-                    <span class="w-7 h-7 shrink-0 rounded-lg bg-primary/15 flex items-center justify-center text-xs">◈</span>
-                    <div><p class="text-[.82rem] font-medium text-[#e8e8e0]">Showcase</p><p class="text-[.7rem] opacity-40 mt-0.5">Le nostre installazioni</p></div>
-                  <% end %>
-                </li>
-              </ul>
-            </div>
-          </li>
-
-          <li>
-            <%= link_to servizi_path, class: "nav-line text-[.78rem] uppercase tracking-[.06em] font-light text-base-content/60 hover:text-[#f0ede8] hover:-translate-y-px transition-[color,transform] duration-[250ms] px-4 rounded-lg bg-transparent! hover:bg-white/5!" do %>
-              Servizi
-            <% end %>
-          </li>
-          <li>
-            <%= link_to blog_index_path, class: "nav-line text-[.78rem] uppercase tracking-[.06em] font-light text-base-content/60 hover:text-[#f0ede8] hover:-translate-y-px transition-[color,transform] duration-[250ms] px-4 rounded-lg bg-transparent! hover:bg-white/5!" do %>
-              Journal
-            <% end %>
-          </li>
-          <li>
-            <%= link_to root_path, class: "nav-line text-[.78rem] uppercase tracking-[.06em] font-light text-base-content/60 hover:text-[#f0ede8] hover:-translate-y-px transition-[color,transform] duration-[250ms] px-4 rounded-lg bg-transparent! hover:bg-white/5!" do %>
-              Contatti
-            <% end %>
-          </li>
-
-        </ul>
-      </div>
-
-      <!-- ── RIGHT ACTIONS ── -->
-      <div class="navbar-end shrink-0 basis-auto grow-0 flex items-center gap-1">
-
-        <!-- Search — desktop only -->
-        <button class="btn btn-ghost btn-circle min-h-0 h-9 w-9 hidden lg:flex
-          text-base-content/55 hover:text-[#f0ede8] hover:bg-white/7
-          hover:scale-[1.08] active:scale-95
-          border border-transparent hover:border-white/[.08]
-          transition-[background,border-color,color,transform] duration-[250ms] ease-[cubic-bezier(.16,1,.3,1)]"
-          aria-label="Search">
-          <svg class="w-[17px] h-[17px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/>
-          </svg>
-        </button>
-
-        <!-- Notification indicator -->
-        <div class="indicator hidden lg:flex">
-          <button class="btn btn-ghost btn-circle min-h-0 h-9 w-9
-            text-base-content/55 hover:text-[#f0ede8] hover:bg-white/7
-            hover:scale-[1.08] active:scale-95
-            border border-transparent hover:border-white/[.08]
-            transition-[background,border-color,color,transform] duration-[250ms] ease-[cubic-bezier(.16,1,.3,1)]"
-            aria-label="Notifications">
-            <svg class="w-[17px] h-[17px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-            </svg>
-          </button>
-          <span class="indicator-item badge badge-primary badge-xs rounded-full w-2! h-2! p-0! border-[1.5px] border-[#080a0f]"
-            style="animation:badge-pulse 2.4s ease-in-out infinite;"></span>
-        </div>
-
-        <!-- Divider — desktop only -->
-        <div class="w-px h-5 bg-white/10 mx-1.5 shrink-0 hidden lg:block"></div>
-
-        <!-- Avatar — dropdown -->
-        <div class="dropdown dropdown-end overflow-visible">
-          <div tabindex="0" role="button" class="avatar cursor-pointer transition-[transform,box-shadow] duration-300 hover:scale-110 rounded-full">
-            <div class="w-[32px] rounded-full ring-[1.5px] ring-primary/30 bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg">
-              <span class="text-[.68rem] font-semibold text-white select-none leading-none">SB</span>
-            </div>
-          </div>
-          <ul tabindex="0" class="dropdown-content menu p-2 mt-4 shadow-2xl bg-base-100/95 backdrop-blur-xl border border-white/5 rounded-2xl w-52 z-50">
-            <li><%= link_to "Dashboard", dashboard_path, class: "rounded-xl py-3 text-sm" %></li>
-            <li><%= link_to "Ordini", root_path, class: "rounded-xl py-3 text-sm" %></li>
-            <div class="divider my-1 opacity-5"></div>
-            <li><a class="text-error rounded-xl py-3 text-sm">Esci</a></li>
-          </ul>
-        </div>
-
-        <!-- CTA — desktop only -->
-        <%= link_to "Inizia Progetto", root_path, class: "btn btn-primary btn-sm ml-2 rounded-[9px] hidden lg:flex text-[.78rem] uppercase tracking-[.05em] font-medium px-5 border-0 hover:-translate-y-0.5 hover:scale-[1.03] active:scale-[.97] transition-[transform,box-shadow] duration-[250ms] [box-shadow:0_4px_15px_oklch(68%_0.22_38_/_0.4)] hover:[box-shadow:0_8px_25px_oklch(68%_0.22_38_/_0.55)]" %>
-
-        <!-- ── HAMBURGER (mobile only) ── -->
-        <button data-navbar-target="hammer" data-action="click->navbar#toggleMenu"
-          class="btn btn-ghost btn-circle min-h-0 h-9 w-9 lg:hidden ml-1
-            flex flex-col items-center justify-center gap-[5px]
-            text-base-content/70 hover:text-[#f0ede8] hover:bg-white/7
-            transition-colors duration-[250ms]"
-          aria-label="Toggle menu" aria-expanded="false">
-          <span class="ham-bar bar-top"></span>
-          <span class="ham-bar bar-mid"></span>
-          <span class="ham-bar bar-bot"></span>
-        </button>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       MOBILE PANEL (right drawer)
-  ══════════════════════════════════════════ -->
-  <aside data-navbar-target="panel"
-    class="fixed top-0 right-0 bottom-0 z-[1003] w-[85vw] max-w-[340px] lg:hidden
-      flex flex-col mobile-panel-hidden
-      [background:rgba(9,11,17,.97)]
-      [backdrop-filter:blur(28px)_saturate(160%)]
-      border-l border-white/[.06]
-      [box-shadow:-20px_0_60px_rgba(0,0,0,.65)] transition-all duration-500"
-    role="dialog" aria-modal="true" aria-label="Mobile navigation">
-
-    <!-- Panel header -->
-    <div class="flex items-center justify-between px-5 h-[64px] shrink-0 border-b border-white/[.05]">
-      <span class="font-serif text-[1.2rem] font-medium tracking-[.04em] text-[#f0ede8]">
+<!-- Fullscreen mobile popup menu -->
+<div class="modal lg:hidden" role="dialog" aria-label="Mobile navigation">
+  <div class="modal-box max-w-none w-full h-full rounded-none border-0 px-6 sm:px-8 pt-7 pb-10
+              bg-[#020617]/98 backdrop-blur-3xl flex flex-col">
+    <div class="flex items-center justify-between">
+      <%= link_to root_path,
+          class: "font-serif text-[1.3rem] font-medium tracking-[.18em] uppercase text-[#f5f3ec] hover:text-white transition-colors no-underline" do %>
         Aquaura<span class="text-primary">.</span>
-      </span>
-      <button data-action="click->navbar#closeMenu"
-        class="btn btn-ghost btn-circle min-h-0 h-8 w-8
-          flex flex-col items-center justify-center gap-0
-          text-base-content/60 hover:text-[#f0ede8]"
-        aria-label="Close menu">
-        <span class="ham-bar" style="transform:translateY(0.75px) rotate(45deg);"></span>
-        <span class="ham-bar" style="transform:translateY(-0.75px) rotate(-45deg);"></span>
-      </button>
+      <% end %>
+      <label for="nav-mobile-menu"
+        class="btn btn-ghost btn-circle border border-white/10 text-white/70 hover:text-white hover:bg-white/10 hover:border-white/40">
+        <span class="sr-only">Chiudi menu</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 6L6 18" />
+          <path d="M6 6l12 12" />
+        </svg>
+      </label>
     </div>
 
-    <!-- Nav list -->
-    <nav class="flex-1 overflow-y-auto px-3 py-5">
-      <ul class="menu menu-vertical p-0 gap-0.5 w-full">
-        <li class="mob-item"><%= link_to "Home", root_path, class: "flex items-center gap-3 px-3.5 py-3 rounded-xl text-[.88rem] font-medium text-base-content/80 hover:bg-white/5 bg-transparent!" %></li>
-        <li class="mob-item"><%= link_to "Shop Online", shop_path, class: "flex items-center gap-3 px-3.5 py-3 rounded-xl text-[.88rem] font-medium text-base-content/80 hover:bg-white/5 bg-transparent!" %></li>
-        <li class="mob-item"><%= link_to "I Nostri Servizi", servizi_path, class: "flex items-center gap-3 px-3.5 py-3 rounded-xl text-[.88rem] font-medium text-base-content/80 hover:bg-white/5 bg-transparent!" %></li>
-        <li class="mob-item"><%= link_to "Galleria Opere", galleria_path, class: "flex items-center gap-3 px-3.5 py-3 rounded-xl text-[.88rem] font-medium text-base-content/80 hover:bg-white/5 bg-transparent!" %></li>
-        <li class="mob-item"><%= link_to "Journal", blog_index_path, class: "flex items-center gap-3 px-3.5 py-3 rounded-xl text-[.88rem] font-medium text-base-content/80 hover:bg-white/5 bg-transparent!" %></li>
-        <li class="mob-item"><%= link_to "Contatti", root_path, class: "flex items-center gap-3 px-3.5 py-3 rounded-xl text-[.88rem] font-medium text-base-content/80 hover:bg-white/5 bg-transparent!" %></li>
+    <% mobile_link_base = "block w-full text-center text-[1.4rem] sm:text-[1.55rem] font-light tracking-[.06em] text-white/80 hover:text-white transition-colors duration-200" %>
+    <% mobile_link_active = "bg-primary/90 text-[#050816] shadow-[0_12px_40px_rgba(15,23,42,0.9)]" %>
+
+    <nav class="mt-14 flex-1 flex flex-col items-center justify-start">
+      <ul class="w-full max-w-sm space-y-1.5">
+        <li>
+          <%= link_to "Home", root_path,
+              class: [
+                mobile_link_base,
+                (current_page?(root_path) ? mobile_link_active : "hover:bg-white/5")
+              ].compact.join(" ") %>
+        </li>
+        <li>
+          <%= link_to "Collezione", galleria_path,
+              class: [
+                mobile_link_base,
+                (current_page?(galleria_path) ? mobile_link_active : "hover:bg-white/5")
+              ].compact.join(" ") %>
+        </li>
+        <li>
+          <%= link_to "Shop Online", shop_path,
+              class: [
+                mobile_link_base,
+                (current_page?(shop_path) ? mobile_link_active : "hover:bg-white/5")
+              ].compact.join(" ") %>
+        </li>
+        <li>
+          <%= link_to "Servizi", servizi_path,
+              class: [
+                mobile_link_base,
+                (current_page?(servizi_path) ? mobile_link_active : "hover:bg-white/5")
+              ].compact.join(" ") %>
+        </li>
+        <li>
+          <%= link_to "Journal", blog_index_path,
+              class: [
+                mobile_link_base,
+                (current_page?(blog_index_path) ? mobile_link_active : "hover:bg-white/5")
+              ].compact.join(" ") %>
+        </li>
+        <li>
+          <%= link_to "Contatti", root_path(anchor: "contatti"),
+              class: [
+                mobile_link_base,
+                (current_page?(root_path(anchor: "contatti")) ? mobile_link_active : "hover:bg-white/5")
+              ].compact.join(" ") %>
+        </li>
       </ul>
     </nav>
 
-    <!-- Footer CTA -->
-    <div class="px-4 py-6 border-t border-white/[.05] shrink-0 mob-item">
-      <%= link_to "Inizia Ora", root_path, class: "btn btn-primary btn-block rounded-xl text-[.8rem] uppercase tracking-[.06em] font-medium border-0 shadow-lg shadow-primary/30" %>
-      <p class="text-center text-[.68rem] text-base-content/20 mt-4 tracking-[.05em]">L'Eccellenza in Ogni Goccia.</p>
+    <div class="mt-10 flex justify-center">
+      <%= link_to "Inizia Progetto", root_path,
+          class: "btn btn-primary btn-wide rounded-full text-[0.8rem] tracking-[.18em] uppercase border-0" %>
     </div>
-  </aside>
+  </div>
+</div>
+
+<!-- Desktop / main navbar -->
+<div class="fixed top-0 inset-x-0 z-[1002] px-4 md:px-6">
+  <div
+    class="navbar mx-auto w-full max-w-[1400px] mt-3 md:mt-4 rounded-2xl
+           bg-white/8 backdrop-blur-2xl
+           border border-white/15
+           shadow-[0_18px_60px_rgba(0,0,0,0.7)]">
+
+    <% base_nav_link = "relative text-[0.82rem] uppercase tracking-[.2em] font-light px-4 py-2 rounded-xl border-b border-transparent text-base-content/60 hover:text-white hover:border-white/40 hover:bg-white/5 transition-colors duration-300" %>
+
+    <!-- Logo + mobile trigger -->
+    <div class="navbar-start gap-2">
+      <!-- Mobile open button -->
+      <label
+        for="nav-mobile-menu"
+        class="btn btn-ghost btn-circle text-base-content/70 hover:text-white lg:hidden"
+        aria-label="Apri navigazione">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </label>
+
+      <!-- Logo -->
+      <%= link_to root_path,
+          class: "font-serif text-[1.25rem] md:text-[1.35rem] font-medium tracking-[.16em] uppercase text-[#f5f3ec] hover:text-white transition-colors no-underline" do %>
+        Aquaura<span class="text-primary">.</span>
+      <% end %>
+    </div>
+
+    <!-- Desktop links -->
+    <div class="navbar-center hidden lg:flex">
+      <ul class="menu menu-horizontal px-1 gap-1">
+        <li>
+          <%= link_to "Home", root_path,
+              class: [
+                base_nav_link,
+                (current_page?(root_path) ? "text-white border-white/70" : nil)
+              ].compact.join(" ") %>
+        </li>
+        <li>
+          <details>
+            <summary class="relative text-[0.82rem] uppercase tracking-[.2em] font-light px-4 py-2 rounded-xl
+                           border-b border-transparent text-base-content/60 hover:text-white hover:border-white/40 hover:bg-white/5 transition-colors duration-300">
+              Collezione
+            </summary>
+            <ul
+              class="bg-base-100/95 backdrop-blur-2xl rounded-2xl mt-2 p-2 shadow-2xl border border-white/10 w-60">
+              <li>
+                <%= link_to shop_path,
+                    class: "flex items-center gap-2.5 rounded-xl px-3 py-2 hover:bg-primary/10 transition-colors" do %>
+                  <span class="w-7 h-7 shrink-0 rounded-lg bg-primary/15 flex items-center justify-center text-xs">✦</span>
+                  <div>
+                    <p class="text-[0.85rem] text-[#f5f3ec] font-medium">Shop Online</p>
+                    <p class="text-[0.75rem] text-base-content/60">Creature &amp; accessori</p>
+                  </div>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to galleria_path,
+                    class: "flex items-center gap-2.5 rounded-xl px-3 py-2 hover:bg-primary/10 transition-colors" do %>
+                  <span class="w-7 h-7 shrink-0 rounded-lg bg-primary/15 flex items-center justify-center text-xs">◈</span>
+                  <div>
+                    <p class="text-[0.85rem] text-[#f5f3ec] font-medium">Showcase</p>
+                    <p class="text-[0.75rem] text-base-content/60">Le nostre installazioni</p>
+                  </div>
+                <% end %>
+              </li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <%= link_to "Servizi", servizi_path,
+              class: [
+                base_nav_link,
+                (current_page?(servizi_path) ? "text-white border-white/70" : nil)
+              ].compact.join(" ") %>
+        </li>
+        <li>
+          <%= link_to "Journal", blog_index_path,
+              class: [
+                base_nav_link,
+                (current_page?(blog_index_path) ? "text-white border-white/70" : nil)
+              ].compact.join(" ") %>
+        </li>
+        <li>
+          <%= link_to "Contatti", root_path(anchor: "contatti"),
+              class: [
+                base_nav_link,
+                (current_page?(root_path(anchor: "contatti")) ? "text-white border-white/70" : nil)
+              ].compact.join(" ") %>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Right side -->
+    <div class="navbar-end gap-2">
+      <button
+        class="btn btn-ghost btn-circle hidden md:inline-flex text-base-content/60 hover:text-white hover:bg-white/5"
+        aria-label="Cerca">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-[18px] w-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <circle cx="11" cy="11" r="7" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+      </button>
+
+      <%= link_to "Inizia Progetto", root_path,
+          class: "btn btn-primary btn-sm rounded-full px-5 text-[0.78rem] uppercase tracking-[.16em] border-0
+                  hover:-translate-y-0.5 hover:shadow-[0_10px_30px_oklch(68%_0.22_38_/_0.55)]
+                  transition-transform transition-shadow duration-300 hidden sm:inline-flex" %>
+    </div>
+  </div>
 </div>
