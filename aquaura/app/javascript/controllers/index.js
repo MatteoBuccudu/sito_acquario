@@ -25,6 +25,9 @@ application.register("hamburger", HamburgerController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import NavbarController from "./navbar_controller"
+application.register("navbar", NavbarController)
+
 import PreloaderController from "./preloader_controller"
 application.register("preloader", PreloaderController)
 

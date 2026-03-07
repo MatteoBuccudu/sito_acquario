@@ -20,15 +20,12 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <meta name="view-transition" content="same-origin">
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
     <%= javascript_importmap_tags %>
   </head>
 
   <body class="font-sans antialiased bg-base-100 text-base-content selection:bg-primary/30 selection:text-white">
     
-    <!-- Custom Cursor Awwwards Style -->
-    <div data-controller="cursor" class="fixed top-0 left-0 w-8 h-8 rounded-full border border-white/50 backdrop-blur-sm pointer-events-none z-[99999] mix-blend-screen transition-transform duration-75 ease-out will-change-transform hidden md:block flex items-center justify-center isolate" id="custom-cursor">
-      <div class="w-2 h-2 bg-white rounded-full"></div>
-    </div>
 
     <!-- Preloader "Livello Acqua" - animazione CSS-first (funziona anche senza JS) -->
     <div data-controller="preloader" class="fixed inset-0 z-[99990] bg-ocean-900 flex justify-center items-center animate-preloader-exit">
