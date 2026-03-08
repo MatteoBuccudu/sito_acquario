@@ -1,202 +1,465 @@
-<%
-  # ─── SINGLE SOURCE OF TRUTH per i link (fix #25, #29, #31) ──────────────────
-  # Aggiungere/rimuovere link qui propaga automaticamente su mobile + desktop.
-  # `desktop: false` esclude la voce dal menu orizzontale desktop.
-  nav_links = [
-    { label: "Home",         path: root_path,                  desktop: true  },
-    { label: "Collezione",   path: galleria_path,              desktop: true  },
-    { label: "Shop Online",  path: shop_path,                  desktop: true  },  # fix #25
-    { label: "Servizi",      path: servizi_path,               desktop: true  },
-    { label: "Journal",      path: blog_index_path,            desktop: true  },
-    { label: "Contatti",     path: root_path(anchor: "contatti"), desktop: true, turbo_prefetch: false }  # fix #35
+<% nav_links = [
+    { label: "Home", path: root_path },
+    { label: "Collezione", path: galleria_path },
+    { label: "Shop Online", path: shop_path },
+    { label: "Servizi", path: servizi_path },
+    { label: "Journal", path: blog_index_path },
+    { label: "Contatti", path: root_path(anchor: "contatti") },
   ]
-
-  # Helper: active? gestisce anche anchor e route annidate (fix #27)
-  # Valuta sia current_page? che controller/action match
+  
   def nav_active?(path)
     current_page?(path) rescue false
-  end
-%>
+  end %>
 
-<%# ─── Scroll Progress Indicator ──────────────────────────────────────────── %>
-<%# will-change aggiunto inline come attributo data (gestito dal controller) (fix #23) %>
-<div
-  data-controller="navbar"
-  class="relative"
-  data-navbar-reduced-motion-value="<%= request.headers['Sec-CH-Prefers-Reduced-Motion'] == 'reduce' %>"
->
-  <%# Barra progresso scroll (fix #23 will-change gestito via JS) %>
-  <div
-    data-navbar-target="progress"
-    aria-hidden="true"
-    class="fixed top-0 left-0 h-[2px] bg-primary z-[2000] scale-x-0 origin-left"
-    style="transition: transform 0.2s linear; will-change: transform;"
-  ></div>
+<!-- Mobile Overlay -->
+<div id="mobile-overlay" class="mobile-overlay"></div>
 
-  <%# ─── Mobile Menu: usa <dialog> nativo al posto del checkbox hack ─────────
-      Fix #1 (checkbox hack), #5 (focus trap nativo), #7 (aria-label) ──────── %>
-  <dialog
-    data-navbar-target="mobileDialog"
-    id="mobile-nav-dialog"
-    aria-label="Menu navigazione mobile"
-    class="modal lg:hidden bg-transparent p-0 max-w-none w-full h-dvh z-[9999]"
-  >
-    <div
-      class="modal-box max-w-none w-full h-full rounded-none border-0 px-8 pt-10 pb-12
-             bg-[#050505] flex flex-col justify-between overflow-hidden relative"
-    >
-      <%# Grain Texture Overlay %>
-      <div class="menu-grain-overlay absolute inset-0 z-0"></div>
-      <%# Mobile Header %>
-      <div class="flex items-center justify-between">
-        <%= link_to root_path,
-            class: "font-serif text-[1.4rem] tracking-[.18em] uppercase text-white no-underline",
-            aria: { label: "Aquaura – torna alla home" } do %>
-          Aquaura<span class="text-primary" aria-hidden="true">.</span>
-        <% end %>
+<!-- Mobile Menu Panel -->
+<div id="mobile-panel" class="mobile-panel">
+  <div class="mobile-panel-header">
+    <button id="mobile-close" class="mobile-close-btn" aria-label="Chiudi menu">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    <button id="mobile-search" class="mobile-search-btn" aria-label="Cerca">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+    </button>
+  </div>
+  
+  <nav class="mobile-nav">
+    <% nav_links.each_with_index do |item, i| %>
+      <%= link_to item[:label], item[:path],
+                  class: "mobile-link #{nav_active?(item[:path]) ? "active" : ""}",
+                  style: "animation-delay: #{50 + (i * 60)}ms" %>
+    <% end %>
+  </nav>
+  
+  <div class="mobile-divider"></div>
+  
+  <div class="mobile-footer">
+    <%= link_to "Il mio account", "#", class: "mobile-footer-link", style: "animation-delay: 400ms" %>
+    <%= link_to "Impostazioni", "#", class: "mobile-footer-link", style: "animation-delay: 460ms" %>
+  </div>
+</div>
 
-        <%# Chiudi menu — fix #7 (aria-label esplicita) fix #14 (focus return) %>
-        <button
-          data-action="click->navbar#closeMobileMenu"
-          class="btn btn-ghost btn-circle border border-white/5 text-white/40 hover:text-white transition-all duration-500"
-          aria-label="Chiudi menu"
-          type="button"
-        >
-          <div class="burger-icon is-open">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </button>
-      </div>
-
-      <%# ── Mobile Nav Links ──────────────────────────────────────────────────
-          Fix #22: transition-delay gestito con CSS nth-child, non inline style
-          Fix #29: stessa lista `nav_links` del desktop ─────────────────────── %>
-      <nav class="flex-1 flex flex-col items-start justify-center relative z-10" aria-label="Menu principale">
-        <ul class="w-full space-y-8">
-          <% nav_links.each do |item| %>
-            <li class="mob-nav-item flex items-center group">
-              <% is_active = nav_active?(item[:path]) %>
-              <% if is_active %>
-                <div class="nav-link-active-dot"></div>
-              <% end %>
-              
-              <%= link_to item[:label], item[:path],
-                  class: "font-serif text-[2.4rem] font-light tracking-tight transition-all duration-700 nav-link-magical
-                         #{is_active ? 'text-primary' : 'text-white/40 hover:text-white translate-x-0 hover:translate-x-2'}",
-                  aria: { current: (is_active ? "page" : false) },
-                  data: (item[:turbo_prefetch] == false ? { turbo_prefetch: "false" } : {}) %>
-            </li>
-          <% end %>
-        </ul>
-      </nav>
-
-      <%# Mobile Footer: Info & CTA %>
-      <div class="pb-6 flex flex-col gap-10 mob-nav-footer relative z-10">
-        <div class="flex items-center gap-4 text-[10px] uppercase tracking-[0.4em] text-white/20 font-mono">
-          <span>Studio · Roma</span>
-          <span class="w-1 h-1 rounded-full bg-white/10"></span>
-          <span>@aquaura.art</span>
-          <span class="w-1 h-1 rounded-full bg-white/10"></span>
-          <span>hello@aquaura.com</span>
-        </div>
-
-        <%= link_to root_path(anchor: "contatti"),
-            class: "cta-magic-border group flex items-center justify-between w-full rounded-full py-5 px-8 text-white no-underline transition-all duration-500",
-            data: { action: "click->navbar#closeMobileMenu" } do %>
-          <span class="text-[0.9rem] uppercase tracking-[0.3em] font-light">Inizia Progetto</span>
-          <svg class="w-5 h-5 translate-x-0 group-hover:translate-x-2 transition-transform duration-500" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4.16669 10H15.8334M15.8334 10L10.8334 5M15.8334 10L10.8334 15" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        <% end %>
-      </div>
+<!-- Navbar Container -->
+<nav class="main-navbar" data-controller="navbar">
+  <!-- Progress Bar -->
+  <div id="scroll-progress" class="scroll-progress"></div>
+  
+  <div class="navbar-container">
+    <!-- Left: Burger + Logo -->
+    <div class="navbar-left">
+      <button id="hamburger" class="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+      <%= link_to root_path, class: "navbar-logo" do %>
+        Aquaura<span class="logo-dot">.</span>
+      <% end %>
     </div>
-
-    <%# Backdrop click per chiudere (fix #1 — comportamento dialog nativo) %>
-    <form method="dialog" class="modal-backdrop">
-      <button type="submit" aria-label="Chiudi menu">close</button>
-    </form>
-  </dialog>
-
-  <%# ─── Desktop Navbar (Fixed on scroll) ────────────────────────────────── %>
-  <div class="fixed top-0 inset-x-0 z-[1002] px-4 md:px-8 pointer-events-none">
-    <div
-      data-navbar-target="bar"
-      class="navbar mx-auto w-full max-w-[--navbar-max-w] mt-4 md:mt-6 rounded-2xl pointer-events-auto
-             bg-white/5 backdrop-blur-xl border border-white/10
-             shadow-[0_20px_60px_rgba(0,0,0,0.45)]
-             transition-[max-width,margin,background,box-shadow] duration-700 ease-out"
-      style="--navbar-max-w: 1400px;"
-    >
-      <%# ── Logo ─────────────────────────────────────────────────────────── %>
-      <div class="navbar-start gap-3">
-        <%# Burger: fix #2 (aria-expanded), fix #4 implicitamente con label %>
-        <button
-          data-action="click->navbar#openMobileMenu"
-          data-navbar-target="burger"
-          class="btn btn-ghost btn-circle text-white/70 hover:text-white lg:hidden group"
-          aria-label="Apri menu di navigazione"
-          aria-expanded="false"
-          aria-controls="mobile-nav-dialog"
-          type="button"
-        >
-          <div class="burger-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </button>
-
-        <%= link_to root_path,
-            class: "font-serif text-[1.3rem] font-medium tracking-[.16em] uppercase
-                    text-white hover:scale-[1.02] transition-transform no-underline pl-2",
-            aria: { label: "Aquaura – Home" } do %>
-          Aquaura<span class="text-primary" aria-hidden="true">.</span>
+    
+    <!-- Center: Desktop Menu -->
+    <div class="navbar-center">
+      <% nav_links.each do |item| %>
+        <%= link_to item[:path],
+                    class: "nav-link #{nav_active?(item[:path]) ? "active" : ""}" do %>
+          <%= item[:label] %>
         <% end %>
-      </div>
-
-      <%# ── Desktop Menu ──────────────────────────────────────────────────── %>
-      <%# Fix #6: nav con aria-label esplicito ────────────────────────────── %>
-      <nav class="navbar-center hidden lg:flex" aria-label="Navigazione principale">
-        <ul class="menu menu-horizontal gap-1.5 p-0" role="list">
-          <% nav_links.select { |i| i[:desktop] }.each do |item| %>
-            <li role="listitem">
-              <% class_list = "relative px-5 py-2.5 text-[0.8rem] uppercase font-light tracking-[.25em] transition-all duration-300 rounded-xl" %>
-              <% active_class = nav_active?(item[:path]) ? 'text-white bg-white/10 border-b-2 border-primary/60' : 'text-white/50 hover:text-white hover:bg-white/5' %>
-              <%= link_to item[:label], item[:path],
-                  class: "#{class_list} #{active_class}",
-                  aria: { current: (nav_active?(item[:path]) ? "page" : false) },
-                  data: (item[:turbo_prefetch] == false ? { turbo_prefetch: "false" } : {}) %>
-            </li>
-          <% end %>
-        </ul>
-      </nav>
-
-      <%# ── Right Actions ─────────────────────────────────────────────────── %>
-      <div class="navbar-end gap-3 pr-2">
-        <%# Search: fix #4 (aria-label) e fix #28 (collegato a Stimulus) %>
-        <button
-          data-action="click->navbar#openSearch"
-          class="btn btn-ghost btn-circle text-white/30 hover:text-white transition-colors"
-          aria-label="Cerca nel sito"
-          aria-haspopup="dialog"
-          type="button"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-               viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-        </button>
-
-        <%# Fix #26: CTA sempre visibile (rimosso hidden sm:inline-flex) %>
-        <%= link_to "Inizia Progetto", root_path(anchor: "contatti"),
-            class: "btn btn-primary btn-sm rounded-full px-6 text-[0.75rem] uppercase tracking-[.2em]
-                    border-0 hover:scale-[1.05] transition-all duration-300 inline-flex h-10
-                    hover:shadow-[0_12px_30px_color-mix(in_oklch,var(--color-primary)_30%,transparent)]" %>
-      </div>
+      <% end %>
+    </div>
+    
+    <!-- Right: Search + CTA -->
+    <div class="navbar-right">
+      <button class="search-btn" aria-label="Cerca">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </button>
+      
+      <%= link_to "Inizia Progetto", root_path(anchor: "contatti"), class: "cta-button" %>
     </div>
   </div>
+</nav>
 
-</div>
+<style>
+.main-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: linear-gradient(to bottom, rgba(2, 6, 23, 0.95), rgba(2, 6, 23, 0.8));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.scroll-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #06b6d4, #0ea5e9);
+  width: 0%;
+  transition: width 0.1s ease;
+}
+
+.navbar-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+.navbar-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: white;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.navbar-logo:hover {
+  transform: scale(1.02);
+}
+
+.logo-dot {
+  color: #06b6d4;
+}
+
+.navbar-center {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-link {
+  position: relative;
+  padding: 0.6rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-radius: 0.5rem;
+}
+
+.nav-link:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-link.active {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.search-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.search-btn:hover {
+  color: white;
+}
+
+.cta-button {
+  padding: 0.6rem 1.5rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: white;
+  background: linear-gradient(135deg, #06b6d4, #0891b2);
+  border: none;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3);
+}
+
+/* Mobile Overlay */
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1001;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease;
+}
+
+.mobile-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Mobile Panel */
+.mobile-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 320px;
+  max-width: 85%;
+  height: 100vh;
+  background: white;
+  z-index: 1002;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
+}
+
+.mobile-panel.active {
+  transform: translateX(0);
+}
+
+.mobile-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.mobile-close-btn,
+.mobile-search-btn {
+  background: none;
+  border: none;
+  color: #1a1a1a;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.mobile-close-btn:hover,
+.mobile-search-btn:hover {
+  color: #06b6d4;
+}
+
+.mobile-nav {
+  flex: 1;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.mobile-link {
+  display: block;
+  padding: 0.875rem 0;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  text-decoration: none;
+  opacity: 0;
+  transform: translateX(20px);
+  animation: slideIn 0.4s ease forwards;
+  transition: color 0.2s ease;
+}
+
+.mobile-link:hover,
+.mobile-link.active {
+  color: #06b6d4;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.mobile-divider {
+  height: 1px;
+  background: #e5e5e5;
+  margin: 0 1.5rem;
+}
+
+.mobile-footer {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.mobile-footer-link {
+  display: block;
+  padding: 0.625rem 0;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  text-decoration: none;
+  opacity: 0;
+  transform: translateX(20px);
+  animation: slideIn 0.4s ease forwards;
+  transition: color 0.2s ease;
+}
+
+.mobile-footer-link:hover {
+  color: #06b6d4;
+}
+
+/* Mobile Styles */
+@media (max-width: 1023px) {
+  .hamburger {
+    display: flex;
+  }
+  
+  .navbar-center {
+    display: none;
+  }
+  
+  .cta-button {
+    display: none;
+  }
+  
+  .navbar-logo {
+    font-size: 1.25rem;
+  }
+  
+  .navbar-container {
+    padding: 0.875rem 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mobile-overlay,
+  .mobile-panel {
+    display: none !important;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const hamburger = document.getElementById('hamburger');
+  const overlay = document.getElementById('mobile-overlay');
+  const panel = document.getElementById('mobile-panel');
+  const closeBtn = document.getElementById('mobile-close');
+  const searchBtn = document.getElementById('mobile-search');
+  const progressBar = document.getElementById('scroll-progress');
+  
+  function openMenu() {
+    overlay.classList.add('active');
+    panel.classList.add('active');
+    hamburger.classList.add('active');
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  
+  function closeMenu() {
+    overlay.classList.remove('active');
+    panel.classList.remove('active');
+    hamburger.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  
+  function toggleMenu() {
+    if (panel.classList.contains('active')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  }
+  
+  // Hamburger click
+  hamburger.addEventListener('click', toggleMenu);
+  
+  // Close button click
+  closeBtn.addEventListener('click', closeMenu);
+  
+  // Overlay click
+  overlay.addEventListener('click', closeMenu);
+  
+  // ESC key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && panel.classList.contains('active')) {
+      closeMenu();
+    }
+  });
+  
+  // Link clicks
+  document.querySelectorAll('.mobile-link, .mobile-footer-link').forEach(function(link) {
+    link.addEventListener('click', closeMenu);
+  });
+  
+  // Scroll progress
+  window.addEventListener('scroll', function() {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    progressBar.style.width = scrolled + '%';
+  });
+});
+</script>
+

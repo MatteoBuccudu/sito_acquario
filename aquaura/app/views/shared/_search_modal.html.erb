@@ -1,0 +1,50 @@
+<dialog
+  id="search-modal"
+  class="modal modal-bottom sm:modal-middle"
+  aria-label="Cerca nel sito Aquaura"
+>
+  <div class="modal-box bg-base-200/95 backdrop-blur-xl border border-white/10">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-sm font-semibold tracking-[0.2em] uppercase text-white/60">
+        Cerca nel sito
+      </h2>
+      <button
+        type="button"
+        class="btn btn-ghost btn-xs text-white/40 hover:text-white"
+        aria-label="Chiudi ricerca"
+        onclick="this.closest('dialog')?.close();"
+      >
+        ✕
+      </button>
+    </div>
+
+    <form method="dialog" class="space-y-4">
+      <label class="form-control w-full">
+        <span class="label-text text-xs uppercase tracking-[0.2em] text-white/40 mb-2">
+          Termine di ricerca
+        </span>
+        <input
+          type="search"
+          name="q"
+          placeholder="Cerca contenuti, servizi, articoli..."
+          class="input input-bordered w-full bg-base-100/80 border-white/10 focus:border-primary focus:outline-none"
+          autofocus
+        >
+      </label>
+
+      <p class="text-[0.7rem] text-white/40 leading-relaxed">
+        Questa è una ricerca di base lato interfaccia. Puoi perfezionarla o collegarla in futuro ad un motore di ricerca interno.
+      </p>
+
+      <div class="modal-action">
+        <button
+          type="submit"
+          class="btn btn-primary btn-sm rounded-full px-6 text-[0.75rem] uppercase tracking-[0.18em]"
+        >
+          Chiudi
+        </button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
