@@ -25,7 +25,7 @@
 
   <!-- Rifrazione della luce nell'acqua (Fluid Blobs) -->
   <div class="fixed top-[-10%] left-[-5%] w-[60vw] h-[60vw] bg-primary/10 blur-[120px] rounded-full animate-blob-morph z-0 pointer-events-none"></div>
-  <div class="fixed bottom-[-10%] right-[-5%] w-[70vw] h-[70vw] bg-ocean-700/20 blur-[150px] rounded-full animate-blob-morph z-0 pointer-events-none" style="animation-delay: -4s;"></div>
+  <div class="fixed bottom-[-10%] right-[-5%] w-[70vw] h-[70vw] bg-secondary/20 blur-[150px] rounded-full animate-blob-morph z-0 pointer-events-none" style="animation-delay: -4s;"></div>
 
   <!-- HERO SECTION: DAISYUI CLASSIC STRUCTURE -->
   <section class="hero min-h-screen relative z-10 overflow-hidden" 
@@ -122,167 +122,213 @@
           <h2 class="text-5xl md:text-7xl font-serif text-base-content mb-6">Trattamenti d'Elite</h2>
           <p class="text-base-content/60 text-lg leading-relaxed italic">Esperienze sensoriali e bio-gestione avanzata. Il lusso del tempo ritrovato.</p>
         </div>
-        <%= link_to "Tutti i Servizi", servizi_path, class: "btn btn-outline rounded-full px-10 text-primary border-primary/30 hover:bg-primary hover:text-white transition-all duration-500 uppercase tracking-widest text-xs font-bold" %>
+        <%= link_to "Tutti i Servizi", servizi_path, class: "btn btn-outline btn-primary rounded-full px-10 border-primary/30 hover:bg-primary hover:text-primary-content transition-all duration-500 uppercase tracking-widest text-xs font-bold" %>
       </div>
 
       <!-- Grid for 4 3D Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
-        
-        <!-- CARD 1: AQUASCAPING -->
-        <a href="<%= servizi_path %>" class="hover-3d card-enter block w-full max-w-[320px] no-underline">
-          <div class="card bg-base-100 w-full rounded-3xl overflow-hidden glow-border">
-            <figure class="relative overflow-hidden h-[210px]">
-              <div class="absolute inset-0 scale-110 blur-sm opacity-30" style="background:url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800') center/cover;"></div>
-              <img class="zoom-img absolute inset-0 w-full h-full object-cover" src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800" alt="Aquascaping" />
-              <div class="absolute inset-0 bg-gradient-to-t from-base-200/90 via-base-200/20 to-transparent"></div>
-              <div class="sweep-fx"></div>
-              <div class="s1 absolute top-3 left-3">
-                <span class="badge badge-primary badge-sm font-bold tracking-widest uppercase">Elite</span>
-              </div>
-            </figure>
-            <div class="card-body gap-3 px-5 py-4">
-              <div class="s2 flex items-start justify-between gap-2">
-                <h2 class="card-title text-xl font-bold leading-tight tracking-tight text-base-content">Aquascaping <span class="text-primary italic">D'Autore</span></h2>
-              </div>
-              <div class="s2 soft-divider"></div>
-              <p class="s3 text-sm text-base-content/60 leading-relaxed line-clamp-2">Design botanico museale integrato in architetture di pregio.</p>
-              <div class="s3 flex gap-2 flex-wrap mt-1">
-                <span class="badge badge-soft badge-primary badge-xs">Design</span>
-                <span class="badge badge-ghost badge-xs text-base-content/30 italic font-serif tracking-widest">A Q U A U R A</span>
-              </div>
-              <div class="s3 soft-divider"></div>
-              <div class="s4 flex justify-between items-center pt-0.5">
-                <span class="text-[10px] text-base-content/40 tracking-widest uppercase">Dettagli →</span>
-                <span class="btn btn-primary btn-xs rounded-full font-bold pointer-events-none">PROGETTA</span>
-              </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+    <%# ─── CARD 1: Aquascaping D'Autore ─── %>
+    <div class="tooltip tooltip-bottom tooltip-primary w-72" data-tip="Ogni acquario è un progetto unico, mai replicato">
+      <div class="hover-3d">
+        <div class="card image-full rounded-2xl overflow-hidden shadow-2xl h-[520px]">
+          <figure class="h-full">
+            <img
+              src="https://images.pexels.com/photos/10519036/pexels-photo-10519036.jpeg?auto=compress&cs=tinysrgb&w=600"
+              alt="Aquascape con piante sommerse"
+              class="w-full h-full object-cover"
+            />
+          </figure>
+          <div class="card-body p-6 flex flex-col justify-between">
+
+            <div class="flex justify-between items-center">
+              <span class="badge badge-soft badge-accent text-[0.6rem] tracking-widest uppercase">Aquascaping</span>
+              <span class="badge badge-warning badge-soft badge-sm">★ Premium</span>
             </div>
-          </div>
-          <% 8.times do %><div></div><% end %>
-        </a>
 
-        <!-- CARD 2: BIO-REMOTO -->
-        <a href="<%= servizi_path %>" class="hover-3d card-enter block w-full max-w-[320px] no-underline" style="animation-delay: 0.1s;">
-          <div class="card bg-base-100 w-full rounded-3xl overflow-hidden glow-border">
-            <figure class="relative overflow-hidden h-[210px]">
-              <div class="absolute inset-0 scale-110 blur-sm opacity-30" style="background:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800') center/cover;"></div>
-              <img class="zoom-img absolute inset-0 w-full h-full object-cover" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800" alt="Bio-Remoto" />
-              <div class="absolute inset-0 bg-gradient-to-t from-base-200/90 via-base-200/20 to-transparent"></div>
-              <div class="sweep-fx"></div>
-              <div class="s1 absolute top-3 left-3">
-                <span class="badge badge-accent badge-sm font-bold tracking-widest uppercase">Tech</span>
-              </div>
-            </figure>
-            <div class="card-body gap-3 px-5 py-4">
-              <div class="s2 flex items-start justify-between gap-2">
-                <h2 class="card-title text-xl font-bold leading-tight tracking-tight text-base-content">Bio-Remoto <span class="text-accent italic">24/7</span></h2>
-              </div>
-              <div class="s2 soft-divider"></div>
-              <p class="s3 text-sm text-base-content/60 leading-relaxed line-clamp-2">Gestione chimica avanzata e monitoraggio parametri in tempo reale.</p>
-              <div class="s3 flex gap-2 flex-wrap mt-1">
-                <span class="badge badge-soft badge-accent badge-xs">Bio-Monitor</span>
-                <span class="badge badge-ghost badge-xs text-base-content/30 italic font-serif tracking-widest">A Q U A U R A</span>
-              </div>
-              <div class="s3 soft-divider"></div>
-              <div class="s4 flex justify-between items-center pt-0.5">
-                <span class="text-[10px] text-base-content/40 tracking-widest uppercase">Dettagli →</span>
-                <span class="btn btn-accent btn-xs rounded-full font-bold pointer-events-none text-black">MONITORA</span>
-              </div>
+            <div class="flex-1 flex flex-col justify-center gap-3 py-4">
+              <h2 class="card-title text-white text-xl leading-snug">
+                Design Sommerso<br/>Su Misura
+              </h2>
+              <p class="text-white/65 text-sm leading-relaxed">
+                Non un semplice acquario, ma un'opera d'arte viva. Progettiamo layout con rocce rare, legni pregiati e piante vere, integrando sistemi di illuminazione LED a spettro completo per una crescita rigogliosa e colori vibranti.
+              </p>
             </div>
-          </div>
-          <% 8.times do %><div></div><% end %>
-        </a>
 
-        <!-- CARD 3: RECOVERY -->
-        <a href="<%= servizi_path %>" class="hover-3d card-enter block w-full max-w-[320px] no-underline" style="animation-delay: 0.2s;">
-          <div class="card bg-base-100 w-full rounded-3xl overflow-hidden glow-border">
-            <figure class="relative overflow-hidden h-[210px]">
-              <div class="absolute inset-0 scale-110 blur-sm opacity-30" style="background:url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=800') center/cover;"></div>
-              <img class="zoom-img absolute inset-0 w-full h-full object-cover" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=800" alt="Recovery" />
-              <div class="absolute inset-0 bg-gradient-to-t from-base-200/90 via-base-200/20 to-transparent"></div>
-              <div class="sweep-fx"></div>
-              <div class="s1 absolute top-3 left-3">
-                <span class="badge badge-error badge-sm font-bold tracking-widest uppercase">SOS</span>
+            <div class="flex flex-col gap-3">
+              <div>
+                <div class="flex justify-between mb-1.5">
+                  <span class="text-white/50 text-[0.6rem] tracking-widest uppercase">Soddisfazione clienti</span>
+                  <span class="text-white/70 text-xs">98%</span>
+                </div>
+                <progress class="progress progress-accent w-full h-1.5" value="98" max="100"></progress>
               </div>
-            </figure>
-            <div class="card-body gap-3 px-5 py-4">
-              <div class="s2 flex items-start justify-between gap-2">
-                <h2 class="card-title text-xl font-bold leading-tight tracking-tight text-base-content">Rescue & <span class="text-error italic">Recovery</span></h2>
-              </div>
-              <div class="s2 soft-divider"></div>
-              <p class="s3 text-sm text-base-content/60 leading-relaxed line-clamp-2">Pronto intervento avanzato per emergenze biologiche e sistemiche.</p>
-              <div class="s3 flex gap-2 flex-wrap mt-1">
-                <span class="badge badge-soft badge-error badge-xs">H24</span>
-                <span class="badge badge-ghost badge-xs text-base-content/30 italic font-serif tracking-widest">A Q U A U R A</span>
-              </div>
-              <div class="s3 soft-divider"></div>
-              <div class="s4 flex justify-between items-center pt-0.5">
-                <span class="text-[10px] text-base-content/40 tracking-widest uppercase">Emergenza →</span>
-                <span class="btn btn-error btn-xs rounded-full font-bold pointer-events-none text-white">AIUTO</span>
-              </div>
+              <a href="#" class="btn btn-accent btn-sm btn-block rounded-xl text-xs tracking-wide">
+                Esplora le Opere →
+              </a>
             </div>
+
           </div>
-          <% 8.times do %><div></div><% end %>
-        </a>
-
-        <!-- CARD 4: ARCHITECTURE -->
-        <a href="<%= servizi_path %>" class="hover-3d card-enter block w-full max-w-[320px] no-underline" style="animation-delay: 0.3s;">
-          <div class="card bg-base-100 w-full rounded-3xl overflow-hidden glow-border">
-            <figure class="relative overflow-hidden h-[210px]">
-              <div class="absolute inset-0 scale-110 blur-sm opacity-30" style="background:url('https://images.unsplash.com/photo-1621252179027-94459d278660?auto=format&fit=crop&q=80&w=800') center/cover;"></div>
-              <img class="zoom-img absolute inset-0 w-full h-full object-cover" src="https://images.unsplash.com/photo-1621252179027-94459d278660?auto=format&fit=crop&q=80&w=800" alt="Architecture" />
-              <div class="absolute inset-0 bg-gradient-to-t from-base-200/90 via-base-200/20 to-transparent"></div>
-              <div class="sweep-fx"></div>
-              <div class="s1 absolute top-3 left-3">
-                <span class="badge badge-secondary badge-sm font-bold tracking-widest uppercase">Arch</span>
-              </div>
-            </figure>
-            <div class="card-body gap-3 px-5 py-4">
-              <div class="s2 flex items-start justify-between gap-2">
-                <h2 class="card-title text-xl font-bold leading-tight tracking-tight text-base-content">Architecture <span class="text-secondary italic">Integration</span></h2>
-              </div>
-              <div class="s2 soft-divider"></div>
-              <p class="s3 text-sm text-base-content/60 leading-relaxed line-clamp-2">Sistemi su misura per yacht, hotel di lusso e residenze private.</p>
-              <div class="s3 flex gap-2 flex-wrap mt-1">
-                <span class="badge badge-soft badge-secondary badge-xs">Luxury</span>
-                <span class="badge badge-ghost badge-xs text-base-content/30 italic font-serif tracking-widest">A Q U A U R A</span>
-              </div>
-              <div class="s3 soft-divider"></div>
-              <div class="s4 flex justify-between items-center pt-0.5">
-                <span class="text-[10px] text-base-content/40 tracking-widest uppercase">Dettagli →</span>
-                <span class="btn btn-secondary btn-xs rounded-full font-bold pointer-events-none text-white">VALUTA</span>
-              </div>
-            </div>
-          </div>
-          <% 8.times do %><div></div><% end %>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA FINAL -->
-  <section class="relative z-10 w-full py-40 bg-gradient-to-t from-primary/20 to-transparent">
-    <div class="container mx-auto px-6 text-center">
-      <div class="max-w-4xl mx-auto space-y-10" data-controller="scroll-reveal" data-scroll-reveal-reveal-class="opacity-100 translate-y-0 scale-100" class="opacity-0 translate-y-20 scale-95 transition-all duration-1000">
-        <h2 class="text-6xl md:text-8xl font-serif text-base-content">Pronto a <br/>immergerti?</h2>
-        <p class="text-2xl text-base-content/80 font-light">Contatta Sergio per una consulenza privata direttamente a casa tua o nel tuo showroom.</p>
-        <div class="pt-10 flex justify-center">
-           <%= link_to servizi_path, class: "group relative inline-flex items-center justify-center gap-3 px-10 py-4 bg-base-content/5 backdrop-blur-xl border border-base-content/20 rounded-full text-base-content font-serif text-xl tracking-[0.2em] overflow-hidden transition-all duration-700 hover:border-primary/50" do %>
-             <span class="relative z-10 uppercase">Richiedi Sopralluogo</span>
-             
-             <!-- Animated background bubble -->
-             <div class="absolute -left-full top-1/2 -translate-y-1/2 w-full aspect-square bg-primary/80 rounded-full transition-all duration-700 group-hover:left-0 group-hover:scale-[2.5] -z-10"></div>
-             
-             <!-- Animated Icon Box -->
-             <div class="relative z-10 w-10 h-10 flex items-center justify-center rounded-full border border-base-content/30 group-hover:border-transparent group-hover:bg-primary transition-all duration-500 rotate-45 group-hover:rotate-90">
-               <svg class="w-5 h-5 fill-base-content group-hover:fill-primary-content transition-colors duration-500" viewBox="0 0 16 19" xmlns="http://www.w3.org/2000/svg">
-                 <path d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z" />
-               </svg>
-             </div>
-           <% end %>
         </div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
       </div>
     </div>
-  </section>
 
-</div>
+    <%# ─── CARD 2: Bio-Remote 24/7 ─── %>
+    <div class="tooltip tooltip-bottom tooltip-primary w-72" data-tip="Monitoraggio remoto H24 con alert immediati su smartphone">
+      <div class="hover-3d">
+        <div class="card image-full rounded-2xl overflow-hidden shadow-2xl h-[520px]">
+          <figure class="h-full">
+            <img
+              src="https://images.pexels.com/photos/2280549/pexels-photo-2280549.jpeg?auto=compress&cs=tinysrgb&w=600"
+              alt="Provette laboratorio analisi acqua"
+              class="w-full h-full object-cover"
+            />
+          </figure>
+          <div class="card-body p-6 flex flex-col justify-between">
+
+            <div class="flex justify-between items-center">
+              <span class="badge badge-soft badge-info text-[0.6rem] tracking-widest uppercase">Bio-Remote</span>
+              <div class="flex items-center gap-1.5">
+                <span class="status status-success status-sm"></span>
+                <span class="text-white/65 text-xs">Live 24/7</span>
+              </div>
+            </div>
+
+            <div class="flex-1 flex flex-col justify-center gap-3 py-4">
+              <h2 class="card-title text-white text-xl leading-snug">
+                Controllo Chimico<br/>Intelligente
+              </h2>
+              <p class="text-white/65 text-sm leading-relaxed">
+                Monitoriamo i tuoi valori da remoto. Gestione computerizzata di pH, temperatura e livelli di CO2. Interveniamo prima che i nitriti salgano, garantendo un ciclo dell'azoto perfetto e un ambiente stabile per i tuoi pesci più delicati.
+              </p>
+            </div>
+
+            <div class="flex flex-col gap-3">
+              <div class="grid grid-cols-3 gap-2">
+                <div class="bg-black/40 rounded-xl p-2.5 text-center">
+                  <div class="text-info font-bold text-base">7.2</div>
+                  <div class="text-white/40 text-[0.6rem] mt-0.5">pH</div>
+                </div>
+                <div class="bg-black/40 rounded-xl p-2.5 text-center">
+                  <div class="text-success font-bold text-base">24°</div>
+                  <div class="text-white/40 text-[0.6rem] mt-0.5">Temp.</div>
+                </div>
+                <div class="bg-black/40 rounded-xl p-2.5 text-center">
+                  <div class="text-warning font-bold text-base">30</div>
+                  <div class="text-white/40 text-[0.6rem] mt-0.5">CO₂</div>
+                </div>
+              </div>
+              <a href="#" class="btn btn-info btn-sm btn-block rounded-xl text-xs tracking-wide">
+                Scopri il Sistema →
+              </a>
+            </div>
+
+          </div>
+        </div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+      </div>
+    </div>
+
+    <%# ─── CARD 3: Rescue & Recovery ─── %>
+    <div class="tooltip tooltip-bottom tooltip-primary w-72" data-tip="Intervento d'emergenza entro 4 ore dalla chiamata">
+      <div class="hover-3d">
+        <div class="card image-full rounded-2xl overflow-hidden shadow-2xl h-[520px]">
+          <figure class="h-full">
+            <img
+              src="https://images.pexels.com/photos/220213/pexels-photo-220213.jpeg?auto=compress&cs=tinysrgb&w=600"
+              alt="Goccia d'acqua pura osmosi inversa"
+              class="w-full h-full object-cover"
+            />
+          </figure>
+          <div class="card-body p-6 flex flex-col justify-between">
+
+            <div class="flex justify-between items-center">
+              <span class="badge badge-soft badge-error text-[0.6rem] tracking-widest uppercase">Rescue</span>
+              <div class="flex items-center gap-1.5">
+                <span class="status status-error status-sm"></span>
+                <span class="text-white/65 text-xs">Entro 4h</span>
+              </div>
+            </div>
+
+            <div class="flex-1 flex flex-col justify-center gap-3 py-4">
+              <h2 class="card-title text-white text-xl leading-snug">
+                Pronto Intervento<br/>Biologico
+              </h2>
+              <p class="text-white/65 text-sm leading-relaxed">
+                Hai l'acqua torbida o pesci sofferenti? Il nostro team interviene a domicilio per ripristinare l'equilibrio. Utilizziamo acqua da osmosi inversa pura e biocondizionatori professionali per salvare il tuo ecosistema in tempi record.
+              </p>
+            </div>
+
+            <div class="flex flex-col gap-3">
+              <div role="alert" class="alert alert-error alert-soft py-2.5 px-3.5 text-xs rounded-xl">
+                <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                </svg>
+                Tasso di recupero ecosistemi: 96%
+              </div>
+              <a href="#" class="btn btn-error btn-sm btn-block rounded-xl text-xs tracking-wide">
+                Richiedi Soccorso →
+              </a>
+            </div>
+
+          </div>
+        </div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+      </div>
+    </div>
+
+    <%# ─── CARD 4: Architecture Integration ─── %>
+    <div class="tooltip tooltip-bottom tooltip-primary w-72" data-tip="Acquari su misura integrati nell'architettura del tuo spazio">
+      <div class="hover-3d">
+        <div class="card image-full rounded-2xl overflow-hidden shadow-2xl h-[520px]">
+          <figure class="h-full">
+            <img
+              src="https://images.pexels.com/photos/6758359/pexels-photo-6758359.jpeg?auto=compress&cs=tinysrgb&w=600"
+              alt="Acquario integrato in arredamento di lusso"
+              class="w-full h-full object-cover"
+            />
+          </figure>
+          <div class="card-body p-6 flex flex-col justify-between">
+
+            <div class="flex justify-between items-center">
+              <span class="badge badge-soft badge-secondary text-[0.6rem] tracking-widest uppercase">Luxury</span>
+              <span class="badge badge-ghost badge-sm">◆ Su misura</span>
+            </div>
+
+            <div class="flex-1 flex flex-col justify-center gap-3 py-4">
+              <h2 class="card-title text-white text-xl leading-snug">
+                Acquari Strutturali<br/>di Lusso
+              </h2>
+              <p class="text-white/65 text-sm leading-relaxed">
+                Integriamo l'acquariologia professionale nell'arredamento di alta classe. Dalle pareti divisorie trasparenti ai mobili di design, curiamo ogni dettaglio tecnico affinché la tecnologia sia invisibile e l'emozione sia totale.
+              </p>
+            </div>
+
+            <div class="flex flex-col gap-3">
+              <div class="grid grid-cols-2 gap-2">
+                <div class="bg-black/40 rounded-xl p-2.5 text-center">
+                  <div class="text-secondary font-bold text-base">5.000L</div>
+                  <div class="text-white/40 text-[0.6rem] mt-0.5">Max volume</div>
+                </div>
+                <div class="bg-black/40 rounded-xl p-2.5 text-center">
+                  <div class="text-accent font-bold text-base">360°</div>
+                  <div class="text-white/40 text-[0.6rem] mt-0.5">Visuale</div>
+                </div>
+              </div>
+              <a href="#" class="btn btn-secondary btn-sm btn-block rounded-xl text-xs tracking-wide">
+                Progetta con Noi →
+              </a>
+            </div>
+
+          </div>
+        </div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+      </div>
+    </div>
+
+  </div>

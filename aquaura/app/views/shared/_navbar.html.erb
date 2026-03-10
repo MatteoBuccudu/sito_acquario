@@ -1,79 +1,326 @@
-<% 
-  # Navigation links
+<%
   nav_links = [
-    { label: "Home", path: root_path },
+    { label: "Home",       path: root_path },
     { label: "Collezione", path: galleria_path },
-    { label: "Shop", path: shop_path },
-    { label: "Servizi", path: servizi_path },
-    { label: "Journal", path: blog_index_path },
-    { label: "Contatti", path: root_path(anchor: "contatti") },
+    { label: "Shop",       path: shop_path },
+    { label: "Servizi",    path: servizi_path },
+    { label: "Journal",    path: blog_index_path },
+    { label: "Contatti",   path: root_path(anchor: "contatti") },
   ]
-  
+
   def nav_active?(path)
     current_page?(path) rescue false
-  end 
+  end
 %>
 
-<nav class="navbar glass-effect sticky top-4 mx-auto w-[95%] max-w-7xl rounded-3xl z-[1002] px-4 py-2 transition-all duration-500 hover:scale-[1.01] hover:shadow-2xl active:scale-[0.99]"
-     data-controller="navbar">
-  
-  <!-- Navbar Start -->
-  <div class="navbar-start">
-    <div class="dropdown">
-      <div tabindex="0" role="button" class="btn btn-ghost lg:hidden interactive-pulse" aria-label="Menu">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+<%# ─── STYLES ─────────────────────────────────────────────────────────── %>
+<style>
+  /* Panel: parte chiuso fuori destra */
+  #menu-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100dvh;
+    width: min(88vw, 360px);
+    background: #080c10;
+    transform: translateX(100%);
+    transition: transform 480ms cubic-bezier(0.32, 0.72, 0, 1);
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-left: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* Backdrop */
+  #menu-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 400ms ease, visibility 400ms ease;
+    z-index: 55;
+  }
+
+  /* OPEN state */
+  body.menu-open #menu-panel    { transform: translateX(0); }
+  body.menu-open #menu-backdrop { opacity: 1; visibility: visible; }
+  body.menu-open                { overflow: hidden; }
+
+  /* Stagger link entrata */
+  .menu-link {
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0ms, transform 0ms,
+                background-color 150ms ease, color 150ms ease;
+  }
+
+  body.menu-open .menu-link {
+    opacity: 1;
+    transform: translateX(0);
+    transition:
+      opacity   320ms ease calc(var(--i) * 55ms + 150ms),
+      transform 320ms ease calc(var(--i) * 55ms + 150ms),
+      background-color 150ms ease,
+      color 150ms ease;
+  }
+
+  .menu-cta {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0ms, transform 0ms,
+                background-color 200ms, box-shadow 200ms;
+  }
+
+  body.menu-open .menu-cta {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity   300ms ease 500ms,
+      transform 300ms ease 500ms,
+      background-color 200ms, box-shadow 200ms;
+  }
+
+  /* Hamburger morph */
+  .h-bar {
+    display: block;
+    height: 1.5px;
+    background: currentColor;
+    border-radius: 9999px;
+    transform-origin: center;
+    transition: width 250ms ease, transform 300ms ease, opacity 200ms ease;
+  }
+  #h1 { width: 18px; }
+  #h2 { width: 12px; align-self: flex-end; }
+  #h3 { width: 18px; }
+
+  body.menu-open #h1 { width: 18px; transform: translateY(6.5px)  rotate(45deg); }
+  body.menu-open #h2 { width: 0;    opacity: 0; }
+  body.menu-open #h3 { width: 18px; transform: translateY(-6.5px) rotate(-45deg); }
+
+  /* Glow accent decorativo */
+  .sky-glow {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, color-mix(in srgb, var(--color-primary) 12%, transparent) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+</style>
+
+<%# ─── BACKDROP ───────────────────────────────────────────────────────── %>
+<div id="menu-backdrop" onclick="closeMenu()" aria-hidden="true"></div>
+
+<%# ─── SLIDE PANEL ────────────────────────────────────────────────────── %>
+<div id="menu-panel" role="dialog" aria-modal="true" aria-label="Menu navigazione">
+
+  <%# Glow decorativi %>
+  <div class="sky-glow" style="top:-80px; right:-80px;"></div>
+  <div class="sky-glow" style="bottom:-100px; left:-60px; opacity:0.5;"></div>
+
+  <%# Linea accent sinistra %>
+  <div style="position:absolute;left:0;top:12%;bottom:12%;width:1px;
+              background:linear-gradient(to bottom,transparent,color-mix(in srgb, var(--color-primary) 50%, transparent),transparent);"></div>
+
+  <%# Header %>
+  <div class="relative flex items-center justify-between px-7 py-6"
+       style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+    <%= link_to root_path, onclick: "closeMenu()", class: "flex items-center select-none" do %>
+      <span class="text-[0.75rem] font-black tracking-[0.22em] uppercase text-white">Aqua</span>
+      <span class="text-[0.75rem] font-black tracking-[0.22em] uppercase text-primary">ura</span>
+    <% end %>
+
+    <button onclick="closeMenu()" aria-label="Chiudi menu"
+            class="flex items-center justify-center w-9 h-9 rounded-xl
+                   text-white/40 hover:text-white
+                   hover:bg-white/8 border border-white/8 hover:border-white/16
+                   transition-all duration-200 active:scale-90">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+
+  <%# Label %>
+  <p class="px-8 pt-7 pb-2"
+     style="font-size:0.58rem;letter-spacing:0.28em;text-transform:uppercase;color:rgba(255,255,255,0.25);font-weight:600;">
+    Navigazione
+  </p>
+
+  <%# Links %>
+  <nav class="flex flex-col gap-1 px-4 flex-1">
+    <% nav_links.each_with_index do |item, i| %>
+      <%= link_to item[:path],
+            onclick: "closeMenu()",
+            style: "--i: #{i}",
+            class: [
+              "menu-link group relative flex items-center justify-between",
+              "px-4 py-[14px] rounded-2xl",
+              "active:scale-[0.98]",
+              (nav_active?(item[:path]) ? "text-primary" : "text-white/80 hover:text-white")
+             ].join(" "),
+             style: "--i:#{i}; #{nav_active?(item[:path]) ? 'background:color-mix(in srgb, var(--color-primary) 10%, transparent);' : ''}" do %>
+
+        <div class="flex items-baseline gap-4">
+          <span class="text-[0.58rem] font-mono w-[1.2rem] shrink-0 transition-colors group-hover:text-primary/60 <%= nav_active?(item[:path]) ? '!text-primary/60' : 'text-white/20' %>">
+            <%= (i + 1).to_s.rjust(2, "0") %>
+          </span>
+          <span class="text-[1.5rem] font-bold tracking-tight leading-none">
+            <%= item[:label] %>
+          </span>
+        </div>
+
+        <svg class="w-4 h-4 flex-shrink-0 opacity-20 group-hover:opacity-50
+                    group-hover:translate-x-0.5 transition-all duration-200
+                    <%= nav_active?(item[:path]) ? 'opacity-50 text-primary' : '' %>"
+             fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+        </svg>
+
+        <%# Underline hover animata %>
+        <span class="absolute bottom-2 left-4 right-4 h-px rounded-full origin-left
+                     scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+              style="background:linear-gradient(to right,transparent,color-mix(in srgb, var(--color-primary) 30%, transparent),transparent);">
+        </span>
+      <% end %>
+    <% end %>
+  </nav>
+
+  <%# Footer CTA %>
+  <div class="px-5 pb-8 mt-auto">
+    <div style="height:1px;background:rgba(255,255,255,0.06);margin-bottom:1.25rem;"></div>
+
+    <%= link_to root_path(anchor: "contatti"),
+          onclick: "closeMenu()",
+          class: "menu-cta group flex items-center justify-between w-full
+                  px-6 py-4 rounded-2xl text-primary-content bg-primary hover:bg-primary-focus
+                  shadow-[0_0_30px_color-mix(in_srgb,var(--color-primary)_25%,transparent)] hover:shadow-[0_0_50px_color-mix(in_srgb,var(--color-primary)_40%,transparent)]
+                  active:scale-[0.98] transition-all duration-200" do %>
+      <div>
+        <p style="font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;opacity:0.75;margin-bottom:2px;">
+          Scrivici ora
+        </p>
+        <p style="font-size:1rem;font-weight:700;letter-spacing:-0.01em;">
+          Inizia un progetto →
+        </p>
+      </div>
+      <div class="flex items-center justify-center w-9 h-9 rounded-xl
+                  bg-white/20 group-hover:bg-white/30 transition-colors duration-200">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
         </svg>
       </div>
-      <ul tabindex="0" class="dropdown-content mt-4 z-[1] p-4 glass-effect rounded-3xl w-64 space-y-2">
-        <% nav_links.each do |item| %>
-          <li>
-            <%= link_to item[:label], item[:path], 
-                        class: "block px-4 py-3 rounded-2xl transition-all duration-300 hover:bg-white/10 active:scale-95 #{nav_active?(item[:path]) ? 'bg-primary/20 text-primary font-bold' : 'text-base-content/70'}" %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-    
-    <%= link_to root_path, class: "btn btn-ghost text-xl font-sans font-bold tracking-tighter uppercase group relative overflow-hidden" do %>
-      <span class="relative z-10 transition-transform duration-500 group-hover:translate-x-1">
-        Aquaura<span class="text-primary group-hover:animate-pulse">.</span>
-      </span>
-      <div class="absolute inset-0 bg-primary/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500 rounded-xl"></div>
     <% end %>
-  </div>
 
-  <!-- Navbar Center -->
-  <div class="navbar-center hidden lg:flex">
-    <div class="flex items-center gap-1 p-1 bg-black/5 dark:bg-white/5 rounded-full border border-white/10">
+    <p class="text-center mt-4"
+       style="font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.18);">
+      Aquaura © <%= Time.now.year %>
+    </p>
+  </div>
+</div>
+
+<%# ─── NAVBAR ──────────────────────────────────────────────────────────── %>
+<header class="fixed top-0 inset-x-0 z-50 flex justify-center pt-5 px-4">
+  <nav class="w-full max-w-6xl flex items-center justify-between
+              px-5 py-3 rounded-2xl
+              bg-base-100/70
+              backdrop-blur-xl backdrop-saturate-150
+              border border-base-content/10
+              shadow-[0_8px_32px_rgba(0,0,0,0.07)]
+              transition-all duration-500">
+
+    <%# Logo %>
+    <%= link_to root_path, class: "group flex items-center shrink-0 select-none" do %>
+      <span class="text-sm font-black tracking-[0.22em] uppercase
+                   text-base-content
+                   transition-opacity duration-300 group-hover:opacity-60">Aqua</span>
+      <span class="text-sm font-black tracking-[0.22em] uppercase
+                   text-primary
+                   transition-opacity duration-300 group-hover:opacity-60">ura</span>
+    <% end %>
+
+    <%# Desktop links %>
+    <div class="hidden lg:flex items-center gap-0.5">
       <% nav_links.each do |item| %>
-        <%= link_to item[:label], item[:path], 
-                    class: "px-5 py-2 rounded-full text-[0.65rem] font-bold tracking-widest uppercase transition-all duration-500 hover:bg-primary/10 hover:text-primary active:scale-90 #{nav_active?(item[:path]) ? 'bg-primary text-primary-content shadow-lg shadow-primary/30 scale-105' : 'text-base-content/60'}" %>
+        <%= link_to item[:label], item[:path],
+              class: [
+                "px-4 py-2 rounded-xl text-[0.68rem] font-semibold tracking-[0.14em] uppercase transition-all duration-150",
+                (nav_active?(item[:path]) ? "text-primary bg-primary/10" : "text-base-content/60 hover:text-base-content hover:bg-base-content/5")
+              ].join(" ") %>
       <% end %>
     </div>
-  </div>
 
-  <!-- Navbar End -->
-  <div class="navbar-end gap-3">
-    <!-- Theme Toggle with Glass Effect -->
-    <label class="swap swap-rotate btn btn-ghost btn-circle btn-sm glass-effect border-none hover:rotate-12 transition-transform duration-500" data-controller="theme">
-      <input type="checkbox" class="theme-controller" data-theme-target="checkbox" data-action="click->theme#toggle" value="dark" />
-      <svg class="swap-on fill-primary w-5 h-5 animate-float" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/></svg>
-      <svg class="swap-off fill-primary w-5 h-5 animate-pulse-subtle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22,10.27,10.27,0,0,0,12.14,19.73Z"/></svg>
-    </label>
+    <%# Destra %>
+    <div class="flex items-center gap-1.5">
 
-    <%= link_to "Contatti", root_path(anchor: "contatti"), 
-                class: "btn btn-primary btn-sm rounded-full px-6 hidden sm:flex text-[0.6rem] font-bold tracking-widest uppercase border-none glass-effect bg-primary/80 hover:bg-primary hover:scale-105 hover:rotate-1 active:scale-95 transition-all duration-500 shadow-lg shadow-primary/20" %>
-  </div>
-</nav>
+      <%# Theme toggle %>
+      <label data-controller="theme" aria-label="Cambia tema"
+             class="flex items-center justify-center w-9 h-9 rounded-xl cursor-pointer
+                    text-base-content/60
+                    hover:bg-base-content/5
+                    hover:text-base-content transition-all duration-150">
+        <input type="checkbox" class="sr-only theme-controller"
+               data-theme-target="checkbox" data-action="click->theme#toggle" value="dark"/>
+        <svg class="block dark:hidden w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+        <svg class="hidden dark:block w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </label>
 
-<!-- Optional: Skeleton Loader State (can be toggled via JS if needed) -->
-<div id="navbar-skeleton" class="hidden navbar glass-effect sticky top-4 mx-auto w-[95%] max-w-7xl rounded-3xl z-[1002] px-4 py-2">
-  <div class="navbar-start"><div class="w-32 h-8 skeleton-box rounded-xl"></div></div>
-  <div class="navbar-center hidden lg:flex gap-4">
-    <div class="w-20 h-6 skeleton-box rounded-full"></div>
-    <div class="w-20 h-6 skeleton-box rounded-full"></div>
-    <div class="w-20 h-6 skeleton-box rounded-full"></div>
-  </div>
-  <div class="navbar-end"><div class="w-24 h-8 skeleton-box rounded-full"></div></div>
-</div>
+      <%= link_to "Contatti", root_path(anchor: "contatti"),
+            class: "hidden lg:inline-flex items-center px-5 py-2 rounded-xl
+                    text-[0.65rem] font-bold tracking-[0.18em] uppercase
+                    btn-primary text-primary-content shadow-sm shadow-primary/20
+                    transition-all duration-150 active:scale-95" %>
+
+      <%# Hamburger %>
+      <button id="hamburger-btn"
+              onclick="toggleMenu()"
+              aria-label="Menu"
+              aria-expanded="false"
+              aria-controls="menu-panel"
+              class="lg:hidden flex flex-col items-end justify-center gap-[5px]
+                     w-10 h-10 px-2.5 rounded-xl
+                     text-base-content
+                     hover:bg-base-content/5
+                     border border-transparent hover:border-base-content/10
+                     transition-all duration-200 active:scale-90">
+        <span id="h1" class="h-bar"></span>
+        <span id="h2" class="h-bar"></span>
+        <span id="h3" class="h-bar"></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<div class="h-[4.5rem]"></div>
+
+<%# ─── JS ──────────────────────────────────────────────────────────────── %>
+<script>
+  const btn = document.getElementById('hamburger-btn');
+
+  function openMenu() {
+    document.body.classList.add('menu-open');
+    btn.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeMenu() {
+    document.body.classList.remove('menu-open');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+
+  function toggleMenu() {
+    document.body.classList.contains('menu-open') ? closeMenu() : openMenu();
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeMenu();
+  });
+</script>
