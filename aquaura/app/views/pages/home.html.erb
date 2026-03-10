@@ -1,9 +1,9 @@
 <!-- Home Page: Deep Sea Luxury Edition -->
-<div class="relative w-full bg-ocean-950 overflow-hidden font-sans selection:bg-primary/40">
+<div class="relative w-full bg-base-100 overflow-hidden font-sans selection:bg-primary/40">
   
   <!-- UNDERWATER CORE BACKGROUND -->
-  <!-- Deep Blue Gradient -->
-  <div class="fixed inset-0 z-0 bg-gradient-to-b from-ocean-900 via-ocean-950 to-black"></div>
+  <!-- Dynamic Gradient -->
+  <div class="fixed inset-0 z-0 bg-gradient-to-b from-base-200 via-base-100 to-base-200"></div>
   
   <!-- Surface Shimmer (Caustics) -->
   <div class="fixed inset-0 z-0 opacity-20 pointer-events-none animate-caustics" 
@@ -12,7 +12,7 @@
   <!-- BUBBLES SYSTEM (Native CSS) -->
   <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
     <% 20.times do |i| %>
-      <div class="absolute bottom-0 rounded-full bg-white/10 blur-[1px] animate-bubble-rise"
+      <div class="absolute bottom-0 rounded-full bg-primary/10 blur-[1px] animate-bubble-rise"
            style="left: <%= rand(5..95) %>%; 
                   width: <%= w = rand(4..12) %>px; 
                   height: <%= w %>px; 
@@ -30,13 +30,13 @@
   <!-- HERO SECTION: DAISYUI CLASSIC STRUCTURE -->
   <section class="hero min-h-screen relative z-10 overflow-hidden" 
            style="background-image: url('https://images.unsplash.com/photo-1524704659690-3f8037f7f96d?auto=format&fit=crop&q=80&w=2000');">
-    <div class="hero-overlay bg-ocean-950/70 backdrop-blur-[2px]"></div>
-    <div class="hero-content text-center text-white">
+    <div class="hero-overlay bg-base-100/70 backdrop-blur-[2px]"></div>
+    <div class="hero-content text-center text-base-content">
       <div class="max-w-4xl animate-fade-up">
         
         <!-- Badge -->
         <div class="inline-block mb-8 px-6 py-2 rounded-full border border-primary/30 bg-primary/5 backdrop-blur-md">
-           <span class="text-[10px] md:text-xs font-bold uppercase tracking-[0.5em] text-primary-content/80">
+           <span class="text-[10px] md:text-xs font-bold uppercase tracking-[0.5em] text-primary">
              Sergio &mdash; L'Eccellenza Sommersa
            </span>
         </div>
@@ -45,31 +45,31 @@
         <h1 class="mb-10 text-5xl md:text-8xl font-serif font-bold tracking-tight h-24 md:h-32 flex items-center justify-center">
           <div class="text-rotate w-full">
             <span class="italic font-light text-primary">Puro Silenzio.</span>
-            <span class="italic font-light text-blue-400">Profonda Emozione.</span>
-            <span class="italic font-light text-cyan-400">Lusso Acquatico.</span>
-            <span class="italic font-light text-white">Architettura Viva.</span>
+            <span class="italic font-light text-secondary">Profonda Emozione.</span>
+            <span class="italic font-light text-accent">Lusso Acquatico.</span>
+            <span class="italic font-light text-base-content">Architettura Viva.</span>
           </div>
         </h1>
         
-        <p class="mb-12 text-xl md:text-2xl text-slate-200 font-light max-w-2xl mx-auto leading-relaxed">
+        <p class="mb-12 text-xl md:text-2xl text-base-content/80 font-light max-w-2xl mx-auto leading-relaxed">
           Creiamo ecosistemi di lusso che respirano con te. Un'esperienza sensoriale dove l'acqua diventa pura forma d'arte architettonica.
         </p>
         
         <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
-          <%= link_to "Esplora il Lusso", servizi_path, class: "btn btn-primary btn-lg rounded-full px-12 group transition-all duration-500 hover:scale-105 shadow-[0_0_40px_rgba(14,165,233,0.3)]" %>
-          <%= link_to "Guarda le Opere", galleria_path, class: "btn btn-ghost btn-lg rounded-full px-12 text-white/70 hover:text-white transition-all underline underline-offset-8 decoration-primary/30 hover:decoration-primary" %>
+          <%= link_to "Esplora il Lusso", servizi_path, class: "btn btn-primary btn-lg rounded-full px-12 group transition-all duration-500 hover:scale-105 shadow-[0_0_40px_rgba(var(--color-primary),0.3)]" %>
+          <%= link_to "Guarda le Opere", galleria_path, class: "btn btn-ghost btn-lg rounded-full px-12 text-base-content/70 hover:text-base-content transition-all underline underline-offset-8 decoration-primary/30 hover:decoration-primary" %>
         </div>
       </div>
     </div>
 
     <!-- Scroll Down indicator -->
     <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
-      <div class="w-px h-20 bg-gradient-to-b from-white to-transparent"></div>
+      <div class="w-px h-20 bg-gradient-to-b from-base-content to-transparent"></div>
     </div>
   </section>
 
   <!-- FILOSOFIA: "Sotto il Pelo dell'Acqua" -->
-  <section class="relative z-10 w-full py-40 bg-black/40 backdrop-blur-sm border-y border-white/5">
+  <section class="relative z-10 w-full py-40 bg-base-200/40 backdrop-blur-sm border-y border-base-content/5">
     <div class="container mx-auto px-6 max-w-7xl">
       <div class="flex flex-col lg:flex-row items-center gap-20">
         
@@ -77,7 +77,7 @@
         <div class="w-full lg:w-1/2 relative group" data-controller="scroll-reveal" data-scroll-reveal-reveal-class="opacity-100 translate-x-0" class="opacity-0 -translate-x-20 transition-all duration-1000">
           <div class="relative z-10 rounded-[3rem] overflow-hidden aspect-[4/5] shadow-2xl transition-transform duration-700 group-hover:scale-[1.02]">
             <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=1200" alt="Deep Sea Life" class="w-full h-full object-cover scale-110 transition-transform duration-[10s] group-hover:scale-125" />
-            <div class="absolute inset-0 bg-gradient-to-t from-ocean-950/80 via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-base-100/80 via-transparent to-transparent"></div>
           </div>
           <!-- Decorative element -->
           <div class="absolute -top-10 -right-10 w-40 h-40 border-t border-r border-primary/20 rounded-tr-[4rem] pointer-events-none"></div>
@@ -87,23 +87,23 @@
         <div class="w-full lg:w-1/2 space-y-12">
           <div class="space-y-4">
             <span class="text-primary font-bold tracking-[0.3em] uppercase text-sm block">La nostra Visione</span>
-            <h2 class="text-5xl lg:text-7xl font-serif text-white tracking-tight leading-[1.1]">
+            <h2 class="text-5xl lg:text-7xl font-serif text-base-content tracking-tight leading-[1.1]">
               Equilibrio <br/>
-              <span class="text-slate-500 italic font-light">senza compromessi.</span>
+              <span class="text-base-content/40 italic font-light">senza compromessi.</span>
             </h2>
           </div>
           
-          <p class="text-xl text-slate-400 font-light leading-relaxed max-w-xl">
+          <p class="text-xl text-base-content/60 font-light leading-relaxed max-w-xl">
             Non siamo semplici installatori. Siamo architetti della vita. Ogni progetto è una sfida alla chimica e un inno alla pace interiore, consegnato chiavi in mano per chi non accetta meno della perfezione.
           </p>
           
           <div class="grid grid-cols-2 gap-10 pt-6">
             <div class="space-y-2">
-              <span class="text-4xl font-serif text-white">#1</span>
+              <span class="text-4xl font-serif text-base-content">#1</span>
               <p class="text-xs uppercase tracking-widest text-primary font-bold">In Italia</p>
             </div>
             <div class="space-y-2">
-              <span class="text-4xl font-serif text-white">0%</span>
+              <span class="text-4xl font-serif text-base-content">0%</span>
               <p class="text-xs uppercase tracking-widest text-primary font-bold">Intervento Cliente</p>
             </div>
           </div>
@@ -119,8 +119,8 @@
       
       <div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-8 px-4">
         <div class="max-w-2xl">
-          <h2 class="text-5xl md:text-7xl font-serif text-white mb-6">Trattamenti d'Elite</h2>
-          <p class="text-slate-400 text-lg leading-relaxed italic">Esperienze sensoriali e bio-gestione avanzata. Il lusso del tempo ritrovato.</p>
+          <h2 class="text-5xl md:text-7xl font-serif text-base-content mb-6">Trattamenti d'Elite</h2>
+          <p class="text-base-content/60 text-lg leading-relaxed italic">Esperienze sensoriali e bio-gestione avanzata. Il lusso del tempo ritrovato.</p>
         </div>
         <%= link_to "Tutti i Servizi", servizi_path, class: "btn btn-outline rounded-full px-10 text-primary border-primary/30 hover:bg-primary hover:text-white transition-all duration-500 uppercase tracking-widest text-xs font-bold" %>
       </div>
@@ -134,7 +134,7 @@
             <figure class="relative overflow-hidden h-[210px]">
               <div class="absolute inset-0 scale-110 blur-sm opacity-30" style="background:url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800') center/cover;"></div>
               <img class="zoom-img absolute inset-0 w-full h-full object-cover" src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800" alt="Aquascaping" />
-              <div class="absolute inset-0 bg-gradient-to-t from-ocean-950/90 via-ocean-950/20 to-transparent"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-base-200/90 via-base-200/20 to-transparent"></div>
               <div class="sweep-fx"></div>
               <div class="s1 absolute top-3 left-3">
                 <span class="badge badge-primary badge-sm font-bold tracking-widest uppercase">Elite</span>
@@ -142,17 +142,17 @@
             </figure>
             <div class="card-body gap-3 px-5 py-4">
               <div class="s2 flex items-start justify-between gap-2">
-                <h2 class="card-title text-xl font-bold leading-tight tracking-tight text-white">Aquascaping <span class="text-primary italic">D'Autore</span></h2>
+                <h2 class="card-title text-xl font-bold leading-tight tracking-tight text-base-content">Aquascaping <span class="text-primary italic">D'Autore</span></h2>
               </div>
               <div class="s2 soft-divider"></div>
-              <p class="s3 text-sm text-slate-400 leading-relaxed line-clamp-2">Design botanico museale integrato in architetture di pregio.</p>
+              <p class="s3 text-sm text-base-content/60 leading-relaxed line-clamp-2">Design botanico museale integrato in architetture di pregio.</p>
               <div class="s3 flex gap-2 flex-wrap mt-1">
                 <span class="badge badge-soft badge-primary badge-xs">Design</span>
-                <span class="badge badge-ghost badge-xs text-white/30 italic font-serif tracking-widest">A Q U A U R A</span>
+                <span class="badge badge-ghost badge-xs text-base-content/30 italic font-serif tracking-widest">A Q U A U R A</span>
               </div>
               <div class="s3 soft-divider"></div>
               <div class="s4 flex justify-between items-center pt-0.5">
-                <span class="text-[10px] text-white/40 tracking-widest uppercase">Dettagli →</span>
+                <span class="text-[10px] text-base-content/40 tracking-widest uppercase">Dettagli →</span>
                 <span class="btn btn-primary btn-xs rounded-full font-bold pointer-events-none">PROGETTA</span>
               </div>
             </div>
@@ -166,25 +166,25 @@
             <figure class="relative overflow-hidden h-[210px]">
               <div class="absolute inset-0 scale-110 blur-sm opacity-30" style="background:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800') center/cover;"></div>
               <img class="zoom-img absolute inset-0 w-full h-full object-cover" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800" alt="Bio-Remoto" />
-              <div class="absolute inset-0 bg-gradient-to-t from-ocean-950/90 via-ocean-950/20 to-transparent"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-base-200/90 via-base-200/20 to-transparent"></div>
               <div class="sweep-fx"></div>
               <div class="s1 absolute top-3 left-3">
-                <span class="badge badge-accent badge-sm font-bold tracking-widest uppercase text-black">Tech</span>
+                <span class="badge badge-accent badge-sm font-bold tracking-widest uppercase">Tech</span>
               </div>
             </figure>
             <div class="card-body gap-3 px-5 py-4">
               <div class="s2 flex items-start justify-between gap-2">
-                <h2 class="card-title text-xl font-bold leading-tight tracking-tight text-white">Bio-Remoto <span class="text-accent italic">24/7</span></h2>
+                <h2 class="card-title text-xl font-bold leading-tight tracking-tight text-base-content">Bio-Remoto <span class="text-accent italic">24/7</span></h2>
               </div>
               <div class="s2 soft-divider"></div>
-              <p class="s3 text-sm text-slate-400 leading-relaxed line-clamp-2">Gestione chimica avanzata e monitoraggio parametri in tempo reale.</p>
+              <p class="s3 text-sm text-base-content/60 leading-relaxed line-clamp-2">Gestione chimica avanzata e monitoraggio parametri in tempo reale.</p>
               <div class="s3 flex gap-2 flex-wrap mt-1">
-                <span class="badge badge-soft badge-accent badge-xs text-black">Bio-Monitor</span>
-                <span class="badge badge-ghost badge-xs text-white/30 italic font-serif tracking-widest">A Q U A U R A</span>
+                <span class="badge badge-soft badge-accent badge-xs">Bio-Monitor</span>
+                <span class="badge badge-ghost badge-xs text-base-content/30 italic font-serif tracking-widest">A Q U A U R A</span>
               </div>
               <div class="s3 soft-divider"></div>
               <div class="s4 flex justify-between items-center pt-0.5">
-                <span class="text-[10px] text-white/40 tracking-widest uppercase">Dettagli →</span>
+                <span class="text-[10px] text-base-content/40 tracking-widest uppercase">Dettagli →</span>
                 <span class="btn btn-accent btn-xs rounded-full font-bold pointer-events-none text-black">MONITORA</span>
               </div>
             </div>
@@ -198,25 +198,25 @@
             <figure class="relative overflow-hidden h-[210px]">
               <div class="absolute inset-0 scale-110 blur-sm opacity-30" style="background:url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=800') center/cover;"></div>
               <img class="zoom-img absolute inset-0 w-full h-full object-cover" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=800" alt="Recovery" />
-              <div class="absolute inset-0 bg-gradient-to-t from-ocean-950/90 via-ocean-950/20 to-transparent"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-base-200/90 via-base-200/20 to-transparent"></div>
               <div class="sweep-fx"></div>
               <div class="s1 absolute top-3 left-3">
-                <span class="badge badge-error badge-sm font-bold tracking-widest uppercase text-white">SOS</span>
+                <span class="badge badge-error badge-sm font-bold tracking-widest uppercase">SOS</span>
               </div>
             </figure>
             <div class="card-body gap-3 px-5 py-4">
               <div class="s2 flex items-start justify-between gap-2">
-                <h2 class="card-title text-xl font-bold leading-tight tracking-tight text-white">Rescue & <span class="text-error italic">Recovery</span></h2>
+                <h2 class="card-title text-xl font-bold leading-tight tracking-tight text-base-content">Rescue & <span class="text-error italic">Recovery</span></h2>
               </div>
               <div class="s2 soft-divider"></div>
-              <p class="s3 text-sm text-slate-400 leading-relaxed line-clamp-2">Pronto intervento avanzato per emergenze biologiche e sistemiche.</p>
+              <p class="s3 text-sm text-base-content/60 leading-relaxed line-clamp-2">Pronto intervento avanzato per emergenze biologiche e sistemiche.</p>
               <div class="s3 flex gap-2 flex-wrap mt-1">
-                <span class="badge badge-soft badge-error badge-xs text-white">H24</span>
-                <span class="badge badge-ghost badge-xs text-white/30 italic font-serif tracking-widest">A Q U A U R A</span>
+                <span class="badge badge-soft badge-error badge-xs">H24</span>
+                <span class="badge badge-ghost badge-xs text-base-content/30 italic font-serif tracking-widest">A Q U A U R A</span>
               </div>
               <div class="s3 soft-divider"></div>
               <div class="s4 flex justify-between items-center pt-0.5">
-                <span class="text-[10px] text-white/40 tracking-widest uppercase">Emergenza →</span>
+                <span class="text-[10px] text-base-content/40 tracking-widest uppercase">Emergenza →</span>
                 <span class="btn btn-error btn-xs rounded-full font-bold pointer-events-none text-white">AIUTO</span>
               </div>
             </div>
@@ -230,25 +230,25 @@
             <figure class="relative overflow-hidden h-[210px]">
               <div class="absolute inset-0 scale-110 blur-sm opacity-30" style="background:url('https://images.unsplash.com/photo-1621252179027-94459d278660?auto=format&fit=crop&q=80&w=800') center/cover;"></div>
               <img class="zoom-img absolute inset-0 w-full h-full object-cover" src="https://images.unsplash.com/photo-1621252179027-94459d278660?auto=format&fit=crop&q=80&w=800" alt="Architecture" />
-              <div class="absolute inset-0 bg-gradient-to-t from-ocean-950/90 via-ocean-950/20 to-transparent"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-base-200/90 via-base-200/20 to-transparent"></div>
               <div class="sweep-fx"></div>
               <div class="s1 absolute top-3 left-3">
-                <span class="badge badge-secondary badge-sm font-bold tracking-widest uppercase text-white">Arch</span>
+                <span class="badge badge-secondary badge-sm font-bold tracking-widest uppercase">Arch</span>
               </div>
             </figure>
             <div class="card-body gap-3 px-5 py-4">
               <div class="s2 flex items-start justify-between gap-2">
-                <h2 class="card-title text-xl font-bold leading-tight tracking-tight text-white">Architecture <span class="text-secondary italic">Integration</span></h2>
+                <h2 class="card-title text-xl font-bold leading-tight tracking-tight text-base-content">Architecture <span class="text-secondary italic">Integration</span></h2>
               </div>
               <div class="s2 soft-divider"></div>
-              <p class="s3 text-sm text-slate-400 leading-relaxed line-clamp-2">Sistemi su misura per yacht, hotel di lusso e residenze private.</p>
+              <p class="s3 text-sm text-base-content/60 leading-relaxed line-clamp-2">Sistemi su misura per yacht, hotel di lusso e residenze private.</p>
               <div class="s3 flex gap-2 flex-wrap mt-1">
-                <span class="badge badge-soft badge-secondary badge-xs text-white">Luxury</span>
-                <span class="badge badge-ghost badge-xs text-white/30 italic font-serif tracking-widest">A Q U A U R A</span>
+                <span class="badge badge-soft badge-secondary badge-xs">Luxury</span>
+                <span class="badge badge-ghost badge-xs text-base-content/30 italic font-serif tracking-widest">A Q U A U R A</span>
               </div>
               <div class="s3 soft-divider"></div>
               <div class="s4 flex justify-between items-center pt-0.5">
-                <span class="text-[10px] text-white/40 tracking-widest uppercase">Dettagli →</span>
+                <span class="text-[10px] text-base-content/40 tracking-widest uppercase">Dettagli →</span>
                 <span class="btn btn-secondary btn-xs rounded-full font-bold pointer-events-none text-white">VALUTA</span>
               </div>
             </div>
@@ -264,18 +264,18 @@
   <section class="relative z-10 w-full py-40 bg-gradient-to-t from-primary/20 to-transparent">
     <div class="container mx-auto px-6 text-center">
       <div class="max-w-4xl mx-auto space-y-10" data-controller="scroll-reveal" data-scroll-reveal-reveal-class="opacity-100 translate-y-0 scale-100" class="opacity-0 translate-y-20 scale-95 transition-all duration-1000">
-        <h2 class="text-6xl md:text-8xl font-serif text-white">Pronto a <br/>immergerti?</h2>
-        <p class="text-2xl text-slate-300 font-light">Contatta Sergio per una consulenza privata direttamente a casa tua o nel tuo showroom.</p>
+        <h2 class="text-6xl md:text-8xl font-serif text-base-content">Pronto a <br/>immergerti?</h2>
+        <p class="text-2xl text-base-content/80 font-light">Contatta Sergio per una consulenza privata direttamente a casa tua o nel tuo showroom.</p>
         <div class="pt-10 flex justify-center">
-           <%= link_to servizi_path, class: "group relative inline-flex items-center justify-center gap-3 px-10 py-4 bg-white/5 backdrop-blur-xl border border-white/20 rounded-full text-white font-serif text-xl tracking-[0.2em] overflow-hidden transition-all duration-700 hover:border-primary/50" do %>
+           <%= link_to servizi_path, class: "group relative inline-flex items-center justify-center gap-3 px-10 py-4 bg-base-content/5 backdrop-blur-xl border border-base-content/20 rounded-full text-base-content font-serif text-xl tracking-[0.2em] overflow-hidden transition-all duration-700 hover:border-primary/50" do %>
              <span class="relative z-10 uppercase">Richiedi Sopralluogo</span>
              
              <!-- Animated background bubble -->
              <div class="absolute -left-full top-1/2 -translate-y-1/2 w-full aspect-square bg-primary/80 rounded-full transition-all duration-700 group-hover:left-0 group-hover:scale-[2.5] -z-10"></div>
              
              <!-- Animated Icon Box -->
-             <div class="relative z-10 w-10 h-10 flex items-center justify-center rounded-full border border-white/30 group-hover:border-transparent group-hover:bg-white transition-all duration-500 rotate-45 group-hover:rotate-90">
-               <svg class="w-5 h-5 fill-white group-hover:fill-ocean-950 transition-colors duration-500" viewBox="0 0 16 19" xmlns="http://www.w3.org/2000/svg">
+             <div class="relative z-10 w-10 h-10 flex items-center justify-center rounded-full border border-base-content/30 group-hover:border-transparent group-hover:bg-primary transition-all duration-500 rotate-45 group-hover:rotate-90">
+               <svg class="w-5 h-5 fill-base-content group-hover:fill-primary-content transition-colors duration-500" viewBox="0 0 16 19" xmlns="http://www.w3.org/2000/svg">
                  <path d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z" />
                </svg>
              </div>

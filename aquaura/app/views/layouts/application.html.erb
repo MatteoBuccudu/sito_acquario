@@ -1,6 +1,13 @@
 <!DOCTYPE html>
-<html data-theme="dark" class="scroll-smooth bg-base-100">
+<html class="scroll-smooth bg-base-100">
   <head>
+    <script>
+      (function() {
+        const theme = localStorage.getItem('theme') || 
+                      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
     <title><%= content_for(:title) || "Sergio | Il Dottore dell'Acqua" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -28,7 +35,7 @@
     
 
     <!-- Preloader "Livello Acqua" -->
-    <div data-controller="preloader" class="fixed inset-0 z-[99990] bg-ocean-950 flex flex-col justify-center items-center animate-preloader-exit gap-8">
+    <div data-controller="preloader" class="fixed inset-0 z-[99990] bg-base-100 flex flex-col justify-center items-center animate-preloader-exit gap-8">
       <!-- Rotating Water Drop -->
       <div class="relative flex items-center justify-center">
         <%= image_tag "water-drop.png", class: "w-20 h-20 object-contain animate-rotate-360 relative z-10" %>
@@ -36,7 +43,7 @@
         <div class="absolute inset-0 bg-primary/20 blur-3xl rounded-full scale-150 animate-pulse"></div>
       </div>
       
-      <span class="text-white/60 text-[0.8rem] md:text-sm uppercase tracking-[0.5em] font-light mt-8 animate-pulse">
+      <span class="text-base-content/60 text-[0.8rem] md:text-sm uppercase tracking-[0.5em] font-light mt-8 animate-pulse">
         IMMERSIONE TOTALE
       </span>
     </div>

@@ -3,14 +3,15 @@
   class="modal modal-bottom sm:modal-middle"
   aria-label="Cerca nel sito Aquaura"
 >
-  <div class="modal-box bg-base-200/95 backdrop-blur-xl border border-white/10">
+  <div class="modal-box bg-base-100 backdrop-blur-xl border border-base-content/10 shadow-2xl">
     <div class="flex items-center justify-between mb-4">
-      <h2 class="text-sm font-semibold tracking-[0.2em] uppercase text-white/60">
+      <h2 class="text-sm font-semibold tracking-[0.2em] uppercase text-base-content/60 flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-primary"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
         Cerca nel sito
       </h2>
       <button
         type="button"
-        class="btn btn-ghost btn-xs text-white/40 hover:text-white"
+        class="btn btn-ghost btn-xs text-base-content/40 hover:text-base-content"
         aria-label="Chiudi ricerca"
         onclick="this.closest('dialog')?.close();"
       >
@@ -20,19 +21,24 @@
 
     <form method="dialog" class="space-y-4">
       <label class="form-control w-full">
-        <span class="label-text text-xs uppercase tracking-[0.2em] text-white/40 mb-2">
+        <span class="label-text text-xs uppercase tracking-[0.2em] text-base-content/40 mb-2 flex items-center gap-2">
           Termine di ricerca
         </span>
-        <input
-          type="search"
-          name="q"
-          placeholder="Cerca contenuti, servizi, articoli..."
-          class="input input-bordered w-full bg-base-100/80 border-white/10 focus:border-primary focus:outline-none"
-          autofocus
-        >
+        <div class="relative group">
+          <input
+            type="search"
+            name="q"
+            placeholder="Cerca contenuti, servizi, articoli..."
+            class="input input-bordered w-full bg-base-100/80 border-base-content/10 focus:border-primary focus:outline-none pl-11 h-12"
+            autofocus
+          >
+          <div class="absolute left-4 top-1/2 -translate-y-1/2 text-base-content/20 group-focus-within:text-primary transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+          </div>
+        </div>
       </label>
 
-      <p class="text-[0.7rem] text-white/40 leading-relaxed">
+      <p class="text-[0.7rem] text-base-content/40 leading-relaxed">
         Questa è una ricerca di base lato interfaccia. Puoi perfezionarla o collegarla in futuro ad un motore di ricerca interno.
       </p>
 

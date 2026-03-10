@@ -5,27 +5,27 @@
     <!-- Breadcrumb con DaisyUI -->
     <div class="breadcrumbs text-sm mb-12 opacity-0 translate-y-10 transition-all duration-1000" data-controller="scroll-reveal">
       <ul>
-        <li><%= link_to "Home", root_path, class: "text-slate-500 hover:text-primary" %></li>
-        <li class="text-primary">Blog</li>
+        <li><%= link_to "Home", root_path, class: "text-base-content/60 hover:text-primary" %></li>
+        <li class="text-primary font-medium">Blog</li>
       </ul>
     </div>
     
     <!-- Hero Editoriale del Blog -->
     <div class="mb-20 text-center" data-controller="scroll-reveal">
       <h3 class="text-xs tracking-[0.2em] font-bold text-primary uppercase mb-4">Gazzetta del Sommerso</h3>
-      <h1 class="text-5xl md:text-6xl font-serif text-white mb-6 tracking-tight">Il Diario del Dottore.</h1>
-      <p class="text-lg text-slate-400 font-light max-w-2xl mx-auto leading-relaxed">
+      <h1 class="text-5xl md:text-6xl font-serif text-base-content mb-6 tracking-tight">Il Diario del Dottore.</h1>
+      <p class="text-lg text-base-content/60 font-light max-w-2xl mx-auto leading-relaxed">
         Tecniche, scoperte scientifiche e riflessioni sulla vita sotto il pelo dell'acqua.
       </p>
     </div>
 
     <!-- Filtri con DaisyUI -->
     <div class="flex flex-wrap gap-2 mb-12 justify-center" data-controller="scroll-reveal">
-      <button class="badge badge-lg badge-primary p-4">Tutti gli Articoli</button>
-      <button class="badge badge-lg badge-outline p-4 text-slate-400 hover:text-white hover:badge-primary">Acquariologia</button>
-      <button class="badge badge-lg badge-outline p-4 text-slate-400 hover:text-white hover:badge-primary">Chimica</button>
-      <button class="badge badge-lg badge-outline p-4 text-slate-400 hover:text-white hover:badge-primary">Design</button>
-      <button class="badge badge-lg badge-outline p-4 text-slate-400 hover:text-white hover:badge-primary">Manutenzione</button>
+      <button class="badge badge-lg badge-primary text-primary-content p-4">Tutti gli Articoli</button>
+      <button class="badge badge-lg badge-outline p-4 text-base-content/60 hover:text-base-content hover:badge-primary">Acquariologia</button>
+      <button class="badge badge-lg badge-outline p-4 text-base-content/60 hover:text-base-content hover:badge-primary">Chimica</button>
+      <button class="badge badge-lg badge-outline p-4 text-base-content/60 hover:text-base-content hover:badge-primary">Design</button>
+      <button class="badge badge-lg badge-outline p-4 text-base-content/60 hover:text-base-content hover:badge-primary">Manutenzione</button>
     </div>
 
     <!-- Lista Articoli -->
@@ -43,30 +43,30 @@
 
           <!-- Contenuto Articolo -->
           <div class="w-full md:w-1/2 flex flex-col justify-center space-y-6">
-            <div class="flex items-center space-x-4 text-xs font-medium uppercase tracking-widest text-slate-500">
-              <span class="text-primary"><%= article[:category] %></span>
+            <div class="flex items-center space-x-4 text-xs font-medium uppercase tracking-widest text-base-content/40">
+              <span class="text-primary font-bold"><%= article[:category] %></span>
               <span>&bull;</span>
               <span><%= article[:date] %></span>
             </div>
             
             <%= link_to blog_path(article[:id]), data: { turbo_frame: "_top" }, class: "block" do %>
-              <h2 class="text-3xl font-serif text-white hover:text-primary transition-colors duration-300 leading-tight">
+              <h2 class="text-3xl font-serif text-base-content hover:text-primary transition-colors duration-300 leading-tight">
                 <%= article[:title] %>
               </h2>
             <% end %>
             
-            <p class="text-slate-400 font-light leading-relaxed line-clamp-3">
+            <p class="text-base-content/60 font-light leading-relaxed line-clamp-3">
               <%= article[:excerpt] %>
             </p>
 
-            <div class="flex items-center justify-between pt-4 border-t border-white/10">
-              <%= link_to blog_path(article[:id]), class: "text-xs uppercase tracking-widest text-white hover:text-primary transition-colors flex items-center gap-2" do %>
-                <span>Leggi tutto</span>
+            <div class="flex items-center justify-between pt-4 border-t border-base-content/10">
+              <%= link_to blog_path(article[:id]), class: "text-xs uppercase tracking-widest text-base-content hover:text-primary transition-colors flex items-center gap-2" do %>
+                <span class="font-bold">Leggi tutto</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
               <% end %>
               <!-- Social Share -->
               <div class="flex gap-2">
-                <button class="btn btn-circle btn-ghost btn-xs text-slate-500 hover:text-primary">
+                <button class="btn btn-circle btn-ghost btn-xs text-base-content/40 hover:text-primary transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>
                 </button>
               </div>
@@ -80,12 +80,12 @@
     <!-- Pagination con DaisyUI -->
     <div class="flex justify-center mt-20" data-controller="scroll-reveal">
       <div class="join">
-        <button class="join-item btn btn-ghost text-slate-400">«</button>
-        <button class="join-item btn btn-ghost text-slate-400">1</button>
-        <button class="join-item btn btn-primary">2</button>
-        <button class="join-item btn btn-ghost text-slate-400">3</button>
-        <button class="join-item btn btn-ghost text-slate-400">4</button>
-        <button class="join-item btn btn-ghost text-slate-400">»</button>
+        <button class="join-item btn btn-ghost text-base-content/40 transition-colors">«</button>
+        <button class="join-item btn btn-ghost text-base-content/40 transition-colors">1</button>
+        <button class="join-item btn btn-primary text-primary-content">2</button>
+        <button class="join-item btn btn-ghost text-base-content/40 transition-colors">3</button>
+        <button class="join-item btn btn-ghost text-base-content/40 transition-colors">4</button>
+        <button class="join-item btn btn-ghost text-base-content/40 transition-colors">»</button>
       </div>
     </div>
 

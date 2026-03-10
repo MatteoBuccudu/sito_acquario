@@ -1,465 +1,123 @@
-<% nav_links = [
-    { label: "Home", path: root_path },
-    { label: "Collezione", path: galleria_path },
-    { label: "Shop Online", path: shop_path },
-    { label: "Servizi", path: servizi_path },
-    { label: "Journal", path: blog_index_path },
-    { label: "Contatti", path: root_path(anchor: "contatti") },
+<% 
+  # Heroicon SVG definitions
+  icons = {
+    home: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>',
+    collection: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-1125h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>',
+    shop: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>',
+    services: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M11.423 20.242L21 10.666a2.121 2.121 0 000-3L16.334 3l-9.577 9.577a2.12 2.12 0 00-.591 1.05l-1.009 4.304c-.103.44.316.83.743.702l4.304-1.217a2.25 2.25 0 001.22-.874z" /></svg>',
+    journal: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18c-2.305 0-4.408.867-6 2.292m0-14.25v14.25" /></svg>',
+    contact: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>'
+  }
+
+  nav_links = [
+    { label: "Home", path: root_path, icon: icons[:home] },
+    { label: "Collezione", path: galleria_path, icon: icons[:collection] },
+    { label: "Shop", path: shop_path, icon: icons[:shop] },
+    { label: "Servizi", path: servizi_path, icon: icons[:services] },
+    { label: "Journal", path: blog_index_path, icon: icons[:journal] },
+    { label: "Contatti", path: root_path(anchor: "contatti"), icon: icons[:contact] },
   ]
   
   def nav_active?(path)
     current_page?(path) rescue false
   end %>
 
-<!-- Mobile Overlay -->
-<div id="mobile-overlay" class="mobile-overlay"></div>
-
-<!-- Mobile Menu Panel -->
-<div id="mobile-panel" class="mobile-panel">
-  <div class="mobile-panel-header">
-    <button id="mobile-close" class="mobile-close-btn" aria-label="Chiudi menu">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-      </svg>
-    </button>
-    <button id="mobile-search" class="mobile-search-btn" aria-label="Cerca">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-      </svg>
-    </button>
-  </div>
+<!-- Main Navbar -->
+<nav class="fixed top-0 left-0 right-0 z-navbar transition-all duration-500 will-change-transform" 
+     data-controller="navbar" 
+     data-navbar-target="bar">
   
-  <nav class="mobile-nav">
-    <% nav_links.each_with_index do |item, i| %>
-      <%= link_to item[:label], item[:path],
-                  class: "mobile-link #{nav_active?(item[:path]) ? "active" : ""}",
-                  style: "animation-delay: #{50 + (i * 60)}ms" %>
-    <% end %>
-  </nav>
+  <!-- Scroll Progress -->
+  <div class="absolute top-0 left-0 h-[2px] bg-gradient-to-r from-primary to-secondary origin-left transition-transform duration-150" 
+       data-navbar-target="progress"></div>
   
-  <div class="mobile-divider"></div>
-  
-  <div class="mobile-footer">
-    <%= link_to "Il mio account", "#", class: "mobile-footer-link", style: "animation-delay: 400ms" %>
-    <%= link_to "Impostazioni", "#", class: "mobile-footer-link", style: "animation-delay: 460ms" %>
-  </div>
-</div>
-
-<!-- Navbar Container -->
-<nav class="main-navbar" data-controller="navbar">
-  <!-- Progress Bar -->
-  <div id="scroll-progress" class="scroll-progress"></div>
-  
-  <div class="navbar-container">
-    <!-- Left: Burger + Logo -->
-    <div class="navbar-left">
-      <button id="hamburger" class="hamburger" aria-label="Menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
+  <div class="max-w-navbar-max mx-auto px-6 lg:px-10 py-4 flex items-center justify-between transition-all duration-700">
+    <!-- Left: Burger (Mobile) + Logo -->
+    <div class="flex items-center gap-6">
+      <button class="lg:hidden flex flex-col justify-between w-6 h-4 group" 
+              data-navbar-target="burger" 
+              data-action="click->navbar#openMobileMenu"
+              aria-label="Menu">
+        <span class="w-full h-[1.5px] bg-base-content transition-all duration-300 origin-left group-[.is-open]:rotate-45 group-[.is-open]:translate-x-1"></span>
+        <span class="w-full h-[1.5px] bg-base-content transition-all duration-300 group-[.is-open]:opacity-0"></span>
+        <span class="w-full h-[1.5px] bg-base-content transition-all duration-300 origin-left group-[.is-open]:-rotate-45 group-[.is-open]:translate-x-1"></span>
       </button>
       
-      <%= link_to root_path, class: "navbar-logo" do %>
-        Aquaura<span class="logo-dot">.</span>
+      <%= link_to root_path, class: "font-serif text-xl lg:text-2xl tracking-[0.18em] uppercase text-base-content" do %>
+        Aquaura<span class="text-primary">.</span>
       <% end %>
     </div>
     
-    <!-- Center: Desktop Menu -->
-    <div class="navbar-center">
+    <!-- Center: Desktop Navigation -->
+    <div class="hidden lg:flex items-center gap-2">
       <% nav_links.each do |item| %>
-        <%= link_to item[:path],
-                    class: "nav-link #{nav_active?(item[:path]) ? "active" : ""}" do %>
-          <%= item[:label] %>
+        <%= link_to item[:path], 
+                    class: "px-5 py-2.5 text-[0.65rem] font-medium tracking-[0.2em] uppercase rounded-full transition-all duration-300 flex items-center gap-2 group #{nav_active?(item[:path]) ? 'bg-base-content/5 text-base-content' : 'text-base-content/60 hover:text-base-content hover:bg-base-content/5'}" do %>
+          <span class="opacity-40 group-hover:opacity-100 transition-opacity"><%= raw item[:icon] %></span>
+          <span><%= item[:label] %></span>
         <% end %>
       <% end %>
     </div>
     
-    <!-- Right: Search + CTA -->
-    <div class="navbar-right">
-      <button class="search-btn" aria-label="Cerca">
+    <!-- Right: Search + Theme + CTA -->
+    <div class="flex items-center gap-4 lg:gap-6">
+      <button class="p-2 text-base-content/60 hover:text-base-content transition-colors" 
+              data-action="click->navbar#openSearch"
+              aria-label="Cerca">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
       </button>
+
+      <!-- Theme Toggle -->
+      <div data-controller="theme" class="flex items-center">
+        <input type="checkbox" 
+               class="toggle toggle-sm bg-base-content/10 border-base-content/20 [--tglbg:theme(colors.primary)] checked:bg-primary" 
+               data-theme-target="checkbox" 
+               data-action="click->theme#toggle" />
+      </div>
       
-      <%= link_to "Inizia Progetto", root_path(anchor: "contatti"), class: "cta-button" %>
+      <%= link_to "Contatti", root_path(anchor: "contatti"), 
+                  class: "hidden md:block px-6 py-2.5 bg-primary text-primary-content text-[0.65rem] font-bold tracking-widest uppercase rounded-full hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20" %>
     </div>
   </div>
 </nav>
 
-<style>
-.main-navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background: linear-gradient(to bottom, rgba(2, 6, 23, 0.95), rgba(2, 6, 23, 0.8));
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-}
-
-.scroll-progress {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #06b6d4, #0ea5e9);
-  width: 0%;
-  transition: width 0.1s ease;
-}
-
-.navbar-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 1rem 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.navbar-left {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 28px;
-  height: 20px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
-
-.hamburger span {
-  display: block;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 2px;
-  transition: all 0.3s ease;
-  transform-origin: center;
-}
-
-.hamburger.active span:nth-child(1) {
-  transform: translateY(9px) rotate(45deg);
-}
-
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-  transform: scaleX(0);
-}
-
-.hamburger.active span:nth-child(3) {
-  transform: translateY(-9px) rotate(-45deg);
-}
-
-.navbar-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.4rem;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: white;
-  text-decoration: none;
-  transition: transform 0.3s ease;
-}
-
-.navbar-logo:hover {
-  transform: scale(1.02);
-}
-
-.logo-dot {
-  color: #06b6d4;
-}
-
-.navbar-center {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.nav-link {
-  position: relative;
-  padding: 0.6rem 1rem;
-  font-size: 0.75rem;
-  font-weight: 400;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
-  text-decoration: none;
-  transition: all 0.3s ease;
-  border-radius: 0.5rem;
-}
-
-.nav-link:hover {
-  color: white;
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.nav-link.active {
-  color: white;
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.navbar-right {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.search-btn {
-  background: none;
-  border: none;
-  color: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  padding: 0.5rem;
-  transition: color 0.3s ease;
-}
-
-.search-btn:hover {
-  color: white;
-}
-
-.cta-button {
-  padding: 0.6rem 1.5rem;
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: white;
-  background: linear-gradient(135deg, #06b6d4, #0891b2);
-  border: none;
-  border-radius: 9999px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.cta-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3);
-}
-
-/* Mobile Overlay */
-.mobile-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
-  z-index: 1001;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.4s ease;
-}
-
-.mobile-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Mobile Panel */
-.mobile-panel {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 320px;
-  max-width: 85%;
-  height: 100vh;
-  background: white;
-  z-index: 1002;
-  transform: translateX(100%);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  display: flex;
-  flex-direction: column;
-  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
-}
-
-.mobile-panel.active {
-  transform: translateX(0);
-}
-
-.mobile-panel-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.mobile-close-btn,
-.mobile-search-btn {
-  background: none;
-  border: none;
-  color: #1a1a1a;
-  cursor: pointer;
-  padding: 0.5rem;
-  transition: color 0.2s ease;
-}
-
-.mobile-close-btn:hover,
-.mobile-search-btn:hover {
-  color: #06b6d4;
-}
-
-.mobile-nav {
-  flex: 1;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.mobile-link {
-  display: block;
-  padding: 0.875rem 0;
-  font-size: 1.125rem;
-  font-weight: 500;
-  color: #1a1a1a;
-  text-decoration: none;
-  opacity: 0;
-  transform: translateX(20px);
-  animation: slideIn 0.4s ease forwards;
-  transition: color 0.2s ease;
-}
-
-.mobile-link:hover,
-.mobile-link.active {
-  color: #06b6d4;
-}
-
-@keyframes slideIn {
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.mobile-divider {
-  height: 1px;
-  background: #e5e5e5;
-  margin: 0 1.5rem;
-}
-
-.mobile-footer {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.mobile-footer-link {
-  display: block;
-  padding: 0.625rem 0;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  color: #1a1a1a;
-  text-decoration: none;
-  opacity: 0;
-  transform: translateX(20px);
-  animation: slideIn 0.4s ease forwards;
-  transition: color 0.2s ease;
-}
-
-.mobile-footer-link:hover {
-  color: #06b6d4;
-}
-
-/* Mobile Styles */
-@media (max-width: 1023px) {
-  .hamburger {
-    display: flex;
-  }
+<!-- Mobile Menu Overlay -->
+<div class="fixed inset-0 z-overlay bg-base-100/30 backdrop-blur-md opacity-0 invisible transition-all duration-500 mobile-menu-overlay" 
+     data-navbar-target="mobileOverlay" 
+     data-action="click->navbar#closeMobileMenu">
   
-  .navbar-center {
-    display: none;
-  }
-  
-  .cta-button {
-    display: none;
-  }
-  
-  .navbar-logo {
-    font-size: 1.25rem;
-  }
-  
-  .navbar-container {
-    padding: 0.875rem 1.25rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .mobile-overlay,
-  .mobile-panel {
-    display: none !important;
-  }
-}
-</style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const hamburger = document.getElementById('hamburger');
-  const overlay = document.getElementById('mobile-overlay');
-  const panel = document.getElementById('mobile-panel');
-  const closeBtn = document.getElementById('mobile-close');
-  const searchBtn = document.getElementById('mobile-search');
-  const progressBar = document.getElementById('scroll-progress');
-  
-  function openMenu() {
-    overlay.classList.add('active');
-    panel.classList.add('active');
-    hamburger.classList.add('active');
-    hamburger.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-  }
-  
-  function closeMenu() {
-    overlay.classList.remove('active');
-    panel.classList.remove('active');
-    hamburger.classList.remove('active');
-    hamburger.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  }
-  
-  function toggleMenu() {
-    if (panel.classList.contains('active')) {
-      closeMenu();
-    } else {
-      openMenu();
-    }
-  }
-  
-  // Hamburger click
-  hamburger.addEventListener('click', toggleMenu);
-  
-  // Close button click
-  closeBtn.addEventListener('click', closeMenu);
-  
-  // Overlay click
-  overlay.addEventListener('click', closeMenu);
-  
-  // ESC key
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && panel.classList.contains('active')) {
-      closeMenu();
-    }
-  });
-  
-  // Link clicks
-  document.querySelectorAll('.mobile-link, .mobile-footer-link').forEach(function(link) {
-    link.addEventListener('click', closeMenu);
-  });
-  
-  // Scroll progress
-  window.addEventListener('scroll', function() {
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
-    progressBar.style.width = scrolled + '%';
-  });
-});
-</script>
+  <div class="absolute right-0 top-0 w-4/5 max-w-[320px] h-full bg-base-100 shadow-2xl flex flex-col translate-x-full transition-transform duration-500 will-change-transform" 
+       data-action="click->stop">
+    
+    <div class="p-6 border-b border-base-content/5 flex items-center justify-between">
+      <span class="font-serif text-lg tracking-widest uppercase opacity-50">Menu</span>
+      <button class="p-2 text-base-content/60" data-action="click->navbar#closeMobileMenu">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+      </button>
+    </div>
+    
+    <nav class="flex-1 px-4 py-8 overflow-y-auto">
+      <ul class="space-y-2">
+        <% nav_links.each do |item| %>
+          <li>
+            <%= link_to item[:path], 
+                        class: "flex items-center gap-4 px-4 py-4 rounded-2xl text-[0.95rem] font-medium transition-all duration-300 #{nav_active?(item[:path]) ? 'bg-primary/10 text-primary' : 'text-base-content/70 active:bg-base-content/5'}" do %>
+              <span class="opacity-50"><%= raw item[:icon] %></span>
+              <%= item[:label] %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+    
+    <div class="p-8 border-t border-base-content/5 space-y-4">
+       <%= link_to root_path(anchor: "contatti"), class: "btn btn-primary btn-block rounded-xl" do %>
+         Inizia Progetto
+       <% end %>
+       <p class="text-[10px] text-center uppercase tracking-widest opacity-30 mt-4">Aquaura Luxury Systems</p>
+    </div>
+  </div>
+</div>
 

@@ -4,8 +4,8 @@
     <!-- Hero Galleria -->
     <div class="text-center mb-20 space-y-6" data-controller="scroll-reveal">
       <h3 class="text-xs tracking-[0.2em] font-bold text-primary uppercase">I Nostri Orizzonti</h3>
-      <h1 class="text-5xl md:text-6xl font-serif text-white tracking-tight">Galleria del Sommerso.</h1>
-      <p class="text-lg text-slate-400 font-light max-w-2xl mx-auto leading-relaxed">
+      <h1 class="text-5xl md:text-6xl font-serif text-base-content tracking-tight">Galleria del Sommerso.</h1>
+      <p class="text-lg text-base-content/60 font-light max-w-2xl mx-auto leading-relaxed">
         Frammenti di oceano ricreati in ambienti domestici e professionali.<br>Il risultato tangibile del metodo "Aquaura".
       </p>
     </div>
@@ -16,7 +16,7 @@
         <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=1600&h=900" class="w-full h-[50vh] object-cover" alt="Featured 1"/>
         <div class="absolute inset-0 bg-gradient-to-t from-base-100/90 via-transparent to-transparent"></div>
         <div class="absolute bottom-8 left-8">
-          <h3 class="text-3xl font-serif text-white mb-2">Progetto Iwagumi Master</h3>
+          <h3 class="text-3xl font-serif text-base-content mb-2">Progetto Iwagumi Master</h3>
           <div class="flex items-center gap-4">
             <div class="rating rating-sm">
               <input type="radio" name="rating-featured-1" class="mask mask-star-2 bg-primary" checked="checked" disabled />
@@ -38,7 +38,7 @@
         <img src="https://images.unsplash.com/photo-1522069213448-443a614da9b6?auto=format&fit=crop&q=80&w=1600&h=900" class="w-full h-[50vh] object-cover" alt="Featured 2"/>
         <div class="absolute inset-0 bg-gradient-to-t from-base-100/90 via-transparent to-transparent"></div>
         <div class="absolute bottom-8 left-8">
-          <h3 class="text-3xl font-serif text-white mb-2">Reef Tank Dream</h3>
+          <h3 class="text-3xl font-serif text-base-content mb-2">Reef Tank Dream</h3>
           <div class="flex items-center gap-4">
             <div class="rating rating-sm">
               <input type="radio" name="rating-featured-2" class="mask mask-star-2 bg-primary" checked="checked" disabled />
@@ -60,7 +60,7 @@
         <img src="https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&q=80&w=1600&h=900" class="w-full h-[50vh] object-cover" alt="Featured 3"/>
         <div class="absolute inset-0 bg-gradient-to-t from-base-100/90 via-transparent to-transparent"></div>
         <div class="absolute bottom-8 left-8">
-          <h3 class="text-3xl font-serif text-white mb-2">Acquario Olandese</h3>
+          <h3 class="text-3xl font-serif text-base-content mb-2">Acquario Olandese</h3>
           <div class="flex items-center gap-4">
             <div class="rating rating-sm">
               <input type="radio" name="rating-featured-3" class="mask mask-star-2 bg-primary" checked="checked" disabled />
@@ -81,10 +81,10 @@
 
     <!-- Filtri con DaisyUI Tabs -->
     <div class="tabs tabs-boxed bg-base-200/50 mb-16 w-fit mx-auto opacity-0 translate-y-10 transition-all duration-1000 delay-100" data-controller="scroll-reveal">
-      <a class="tab tab-lifted tab-active text-white">Tutti</a>
-      <a class="tab tab-lifted text-slate-400">Hardscape</a>
-      <a class="tab tab-lifted text-slate-400">Olandese</a>
-      <a class="tab tab-lifted text-slate-400">Reef SPS</a>
+      <a class="tab tab-lifted tab-active text-primary-content bg-primary">Tutti</a>
+      <a class="tab tab-lifted text-base-content/60 hover:text-base-content">Hardscape</a>
+      <a class="tab tab-lifted text-base-content/60 hover:text-base-content">Olandese</a>
+      <a class="tab tab-lifted text-base-content/60 hover:text-base-content">Reef SPS</a>
     </div>
 
     <!-- Griglia Masonry Fluida Custom -->
@@ -98,14 +98,14 @@
 
           <!-- Badge Categoria -->
           <div class="absolute top-4 left-4">
-            <div class="badge badge-outline border-white/30 text-white/80 text-xs uppercase tracking-widest">
+            <div class="badge badge-outline border-base-content/30 text-base-content/80 text-xs uppercase tracking-widest">
               <%= image[:type] %>
             </div>
           </div>
 
           <!-- Overlay Elegante con Rating -->
           <div class="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-base-100/90 via-base-100/50 to-transparent translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out opacity-0 group-hover:opacity-100">
-            <h3 class="text-xl font-serif text-white mb-2 tracking-wide"><%= image[:title] %></h3>
+            <h3 class="text-xl font-serif text-base-content mb-2 tracking-wide"><%= image[:title] %></h3>
             <div class="flex items-center justify-between">
               <div class="flex items-center space-x-2">
                 <span class="w-6 h-px bg-primary"></span>

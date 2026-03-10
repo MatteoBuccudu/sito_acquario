@@ -1,5 +1,33 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+}
+@plugin "daisyui/theme" {
+  name: "dark";
+  color-scheme: dark;
+  --color-primary: #06b6d4;
+  --color-primary-content: #ffffff;
+  --color-secondary: #3b82f6;
+  --color-accent: #22d3ee;
+  --color-neutral: #1e293b;
+  --color-base-100: #020617;
+  --color-base-200: #0f172a;
+  --color-base-300: #1e293b;
+  --color-base-content: #f8fafc;
+}
+@plugin "daisyui/theme" {
+  name: "light";
+  color-scheme: light;
+  --color-primary: #0891b2;
+  --color-primary-content: #ffffff;
+  --color-secondary: #2563eb;
+  --color-accent: #06b6d4;
+  --color-neutral: #e2e8f0;
+  --color-base-100: #ffffff;
+  --color-base-200: #f1f5f9;
+  --color-base-300: #e2e8f0;
+  --color-base-content: #0f172a;
+}
 @plugin "@tailwindcss/typography";
 
 @theme {
@@ -7,6 +35,21 @@
     --color-ocean-800: #111D44;
     --color-ocean-700: #14255A;
     --color-ocean-950: #020617;
+
+    /* Global Design Tokens (Stable) */
+    --z-progress: 2000;
+    --z-navbar: 1002;
+    --z-overlay: 1001;
+    --navbar-max-w: 1400px;
+    --navbar-bg-idle: color-mix(in srgb, var(--color-base-100) 80%, transparent);
+    --navbar-bg-scrolled: color-mix(in srgb, var(--color-base-100) 90%, transparent);
+    --navbar-border-idle: color-mix(in srgb, var(--color-base-content) 10%, transparent);
+    --navbar-border-scrolled: color-mix(in srgb, var(--color-base-content) 15%, transparent);
+    --navbar-shadow-idle: 0 4px 30px rgba(0, 0, 0, 0.1);
+    --navbar-shadow-scrolled: 0 10px 40px rgba(0, 0, 0, 0.2);
+    --navbar-blur: blur(16px);
+    --mobile-menu-bg: color-mix(in srgb, var(--color-base-100) 98%, transparent);
+    --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
 
     --animate-float: float 6s ease-in-out infinite;
     --animate-bob: bob 4s ease-in-out infinite;
@@ -255,32 +298,8 @@
 }
 
 @layer base {
-    :root {
-        --b1: 222 47% 11%;
-        --b2: 240 83% 4%;
-        --b3: 215 32% 17%;
-        --p: 199 89% 48%;
-        --s: 173 80% 40%;
-        --a: 38 92% 50%;
-        --n: 215 32% 17%;
-
-        /* Navbar Design Tokens (fix #17, #18, #19) */
-        --z-progress: 2000;
-        --z-navbar: 1002;
-        --z-overlay: 1001;
-        --navbar-max-w: 1400px;
-        --navbar-bg-idle: oklch(100% 0 0 / 0.05);
-        --navbar-bg-scrolled: oklch(15% 0.02 240 / 0.72);
-        --navbar-border-idle: oklch(100% 0 0 / 0.10);
-        --navbar-border-scrolled: oklch(100% 0 0 / 0.15);
-        --navbar-shadow-idle: 0 20px 60px oklch(0% 0 0 / 0.45);
-        --navbar-shadow-scrolled: 0 30px 60px -12px oklch(0% 0 0 / 0.65),
-            inset 0 0 0 1px oklch(100% 0 0 / 0.08);
-        --navbar-blur-idle: blur(16px);
-        --navbar-blur-scrolled: blur(28px) saturate(190%) brightness(1.08);
-        --mobile-menu-bg: oklch(8% 0.02 240 / 0.97);
-        --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
-    }
+    /* Themes are now managed via DaisyUI data-theme classes. 
+       Specific overrides can be placed here if needed, but avoid hardcoding --b1, --p, etc. globally. */
 }
 
 @layer utilities {
