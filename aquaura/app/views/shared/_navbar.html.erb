@@ -1,15 +1,14 @@
-<% 
-  # Heroicon SVG definitions
+<% # Heroicon SVG definitions
   icons = {
     home: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>',
     collection: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>',
     shop: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>',
     services: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M11.423 20.242L21 10.666a2.121 2.121 0 000-3L16.334 3l-9.577 9.577a2.12 2.12 0 00-.591 1.05l-1.009 4.304c-.103.44.316.83.743.702l4.304-1.217a2.25 2.25 0 001.22-.874z" /></svg>',
     journal: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18c-2.305 0-4.408.867-6 2.292m0-14.25v14.25" /></svg>',
-    contact: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>'
+    contact: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>',
   }
-
-  nav_links =[
+  
+  nav_links = [
     { label: "Home", path: root_path, icon: icons[:home] },
     { label: "Collezione", path: galleria_path, icon: icons[:collection] },
     { label: "Shop Online", path: shop_path, icon: icons[:shop] },
@@ -20,12 +19,11 @@
   
   def nav_active?(path)
     current_page?(path) rescue false
-  end 
-%>
+  end %>
 
 <header data-controller="navbar">
   <!-- Fullscreen Mobile Menu Overlay -->
-  <div id="aww-mobile-menu" data-navbar-target="mobileOverlay" class="group/menu fixed inset-0 z-[1002] pointer-events-none flex items-center p-8 [&.is-open]:pointer-events-auto">
+  <div id="aww-mobile-menu" data-navbar-target="mobile-overlay" class="group/menu fixed inset-0 z-[1002] pointer-events-none flex items-center p-8 [&.is-open]:pointer-events-auto">
     <!-- Background Animato -->
     <div class="absolute inset-0 bg-base-100 -translate-y-full transition-transform duration-800 ease-[cubic-bezier(0.85,0,0.15,1)] will-change-transform group-[.is-open]/menu:translate-y-0"></div>
     
@@ -34,10 +32,10 @@
       <nav class="flex flex-col gap-6 items-center">
         <% nav_links.each_with_index do |item, i| %>
           <div class="overflow-hidden">
-            <%= link_to item[:path], 
-                data: { action: "click->navbar#closeMobileMenu" },
-                class: "block font-sans text-4xl font-light text-base-content text-center no-underline -translate-y-[100%] opacity-0 transition-all duration-800 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform group-[.is-open]/menu:translate-y-0 group-[.is-open]/menu:opacity-100 hover:text-primary hover:tracking-widest aww-mobile-link #{nav_active?(item[:path]) ? 'text-primary font-medium' : ''}",
-                style: "--delay-open: calc(0.3s + #{i * 0.08}s); --delay-close: calc(#{i * 0.05}s);" do %>
+            <%= link_to item[:path],
+                        data: { action: "click->navbar#closeMobileMenu" },
+                        class: "block font-sans text-4xl font-light text-base-content text-center no-underline -translate-y-[100%] opacity-0 transition-all duration-800 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform group-[.is-open]/menu:translate-y-0 group-[.is-open]/menu:opacity-100 hover:text-primary hover:tracking-widest aww-mobile-link #{nav_active?(item[:path]) ? "text-primary font-medium" : ""}",
+                        style: "--delay-open: calc(0.3s + #{i * 0.08}s); --delay-close: calc(#{i * 0.05}s);" do %>
               <span class="block transition-all duration-300 [transition-delay:var(--delay-close)] group-[.is-open]/menu:[transition-delay:var(--delay-open)]">
                 <%= item[:label] %>
               </span>
@@ -74,7 +72,7 @@
       <!-- Center: Desktop Menu (Rolling Text Effect) -->
       <div class="hidden md:flex items-center gap-8 font-sans">
         <% nav_links.each do |item| %>
-          <%= link_to item[:path], class: "group flex items-center gap-2 text-base-content/60 text-xs tracking-[0.15em] uppercase py-2 overflow-hidden hover:text-base-content transition-colors duration-300 #{nav_active?(item[:path]) ? 'is-active text-base-content' : ''}" do %>
+          <%= link_to item[:path], class: "group flex items-center gap-2 text-base-content/60 text-xs tracking-[0.15em] uppercase py-2 overflow-hidden hover:text-base-content transition-colors duration-300 #{nav_active?(item[:path]) ? "is-active text-base-content" : ""}" do %>
             <!-- Icon Reveal -->
             <span class="opacity-0 scale-50 w-0 text-primary transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100 group-hover:scale-100 group-hover:w-4 group-[.is-active]:opacity-100 group-[.is-active]:scale-100 group-[.is-active]:w-4">
               <%= raw item[:icon] %>
@@ -104,11 +102,11 @@
         <% end %>
 
         <!-- Modern Burger (3 lines to X) -->
-        <button id="aww-hamburger" data-action="click->navbar#toggleMobileMenu" data-navbar-target="burger" data-controller="magnetic" class="group/burger p-2 cursor-pointer z-[1003] bg-transparent border-none md:hidden flex flex-col justify-center items-center w-10 h-10" aria-label="Menu" aria-expanded="false">
-          <div class="relative w-6 h-3.5 flex flex-col justify-between">
-            <span class="block w-full h-[1.5px] bg-base-content transition-all duration-500 ease-out origin-center group-[.is-active]/burger:rotate-45 group-[.is-active]/burger:translate-y-[6.25px]"></span>
-            <span class="block w-full h-[1.5px] bg-base-content transition-all duration-500 ease-out group-[.is-active]/burger:opacity-0 group-[.is-active]/burger:scale-x-0"></span>
-            <span class="block w-full h-[1.5px] bg-base-content transition-all duration-500 ease-out origin-center group-[.is-active]/burger:-rotate-45 group-[.is-active]/burger:-translate-y-[6.25px]"></span>
+        <button id="aww-hamburger" data-action="click->navbar#toggleMobileMenu" data-navbar-target="burger" class="group/burger p-2 cursor-pointer z-[1003] bg-transparent border-none md:hidden flex flex-col justify-center items-center w-10 h-10" aria-label="Menu" aria-expanded="false">
+          <div class="relative w-6 h-4 flex flex-col justify-between">
+            <span class="block w-full h-[2px] bg-base-content transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] origin-center group-[.is-active]/burger:rotate-45 group-[.is-active]/burger:translate-y-[7px]"></span>
+            <span class="block w-full h-[2px] bg-base-content transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-[.is-active]/burger:opacity-0 group-[.is-active]/burger:scale-x-0"></span>
+            <span class="block w-full h-[2px] bg-base-content transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] origin-center group-[.is-active]/burger:-rotate-45 group-[.is-active]/burger:-translate-y-[7px]"></span>
           </div>
         </button>
       </div>

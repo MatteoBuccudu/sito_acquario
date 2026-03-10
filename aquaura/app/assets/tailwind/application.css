@@ -561,6 +561,34 @@
     transform-origin: center;
 }
 
+/* Backup Burger Animation via ID */
+#aww-hamburger.is-active span:first-child {
+    transform: translateY(7px) rotate(45deg);
+}
+
+#aww-hamburger.is-active span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+#aww-hamburger.is-active span:last-child {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile menu target animation */
+#aww-mobile-menu.is-open {
+    pointer-events: auto;
+}
+
+#aww-mobile-menu.is-open > div:first-child {
+    transform: translateY(0);
+}
+
+#aww-mobile-menu.is-open .aww-mobile-link {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+}
+
 /* Stato aperto del burger */
 .is-open .burger-icon span:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
