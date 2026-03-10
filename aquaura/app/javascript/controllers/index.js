@@ -25,6 +25,9 @@ application.register("hamburger", HamburgerController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import MagneticController from "./magnetic_controller"
+application.register("magnetic", MagneticController)
+
 import NavbarController from "./navbar_controller"
 application.register("navbar", NavbarController)
 
@@ -33,3 +36,6 @@ application.register("preloader", PreloaderController)
 
 import ScrollRevealController from "./scroll_reveal_controller"
 application.register("scroll-reveal", ScrollRevealController)
+
+import ThemeController from "./theme_controller"
+application.register("theme", ThemeController)

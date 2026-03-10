@@ -2,17 +2,17 @@
   # Heroicon SVG definitions
   icons = {
     home: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>',
-    collection: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-1125h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>',
+    collection: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>',
     shop: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>',
     services: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M11.423 20.242L21 10.666a2.121 2.121 0 000-3L16.334 3l-9.577 9.577a2.12 2.12 0 00-.591 1.05l-1.009 4.304c-.103.44.316.83.743.702l4.304-1.217a2.25 2.25 0 001.22-.874z" /></svg>',
     journal: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18c-2.305 0-4.408.867-6 2.292m0-14.25v14.25" /></svg>',
     contact: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>'
   }
 
-  nav_links = [
+  nav_links =[
     { label: "Home", path: root_path, icon: icons[:home] },
     { label: "Collezione", path: galleria_path, icon: icons[:collection] },
-    { label: "Shop", path: shop_path, icon: icons[:shop] },
+    { label: "Shop Online", path: shop_path, icon: icons[:shop] },
     { label: "Servizi", path: servizi_path, icon: icons[:services] },
     { label: "Journal", path: blog_index_path, icon: icons[:journal] },
     { label: "Contatti", path: root_path(anchor: "contatti"), icon: icons[:contact] },
@@ -20,104 +20,98 @@
   
   def nav_active?(path)
     current_page?(path) rescue false
-  end %>
+  end 
+%>
 
-<!-- Main Navbar -->
-<nav class="fixed top-0 left-0 right-0 z-navbar transition-all duration-500 will-change-transform" 
-     data-controller="navbar" 
-     data-navbar-target="bar">
-  
-  <!-- Scroll Progress -->
-  <div class="absolute top-0 left-0 h-[2px] bg-gradient-to-r from-primary to-secondary origin-left transition-transform duration-150" 
-       data-navbar-target="progress"></div>
-  
-  <div class="max-w-navbar-max mx-auto px-6 lg:px-10 py-4 flex items-center justify-between transition-all duration-700">
-    <!-- Left: Burger (Mobile) + Logo -->
-    <div class="flex items-center gap-6">
-      <button class="lg:hidden flex flex-col justify-between w-6 h-4 group" 
-              data-navbar-target="burger" 
-              data-action="click->navbar#openMobileMenu"
-              aria-label="Menu">
-        <span class="w-full h-[1.5px] bg-base-content transition-all duration-300 origin-left group-[.is-open]:rotate-45 group-[.is-open]:translate-x-1"></span>
-        <span class="w-full h-[1.5px] bg-base-content transition-all duration-300 group-[.is-open]:opacity-0"></span>
-        <span class="w-full h-[1.5px] bg-base-content transition-all duration-300 origin-left group-[.is-open]:-rotate-45 group-[.is-open]:translate-x-1"></span>
-      </button>
-      
-      <%= link_to root_path, class: "font-serif text-xl lg:text-2xl tracking-[0.18em] uppercase text-base-content" do %>
-        Aquaura<span class="text-primary">.</span>
-      <% end %>
-    </div>
+<header data-controller="navbar">
+  <!-- Fullscreen Mobile Menu Overlay -->
+  <div id="aww-mobile-menu" data-navbar-target="mobileOverlay" class="group/menu fixed inset-0 z-[1002] pointer-events-none flex items-center p-8 [&.is-open]:pointer-events-auto">
+    <!-- Background Animato -->
+    <div class="absolute inset-0 bg-base-100 -translate-y-full transition-transform duration-800 ease-[cubic-bezier(0.85,0,0.15,1)] will-change-transform group-[.is-open]/menu:translate-y-0"></div>
     
-    <!-- Center: Desktop Navigation -->
-    <div class="hidden lg:flex items-center gap-2">
-      <% nav_links.each do |item| %>
-        <%= link_to item[:path], 
-                    class: "px-5 py-2.5 text-[0.65rem] font-medium tracking-[0.2em] uppercase rounded-full transition-all duration-300 flex items-center gap-2 group #{nav_active?(item[:path]) ? 'bg-base-content/5 text-base-content' : 'text-base-content/60 hover:text-base-content hover:bg-base-content/5'}" do %>
-          <span class="opacity-40 group-hover:opacity-100 transition-opacity"><%= raw item[:icon] %></span>
-          <span><%= item[:label] %></span>
+    <div class="relative w-full h-full flex flex-col justify-center z-10">
+      <!-- Links Staggered -->
+      <nav class="flex flex-col gap-6 items-center">
+        <% nav_links.each_with_index do |item, i| %>
+          <div class="overflow-hidden">
+            <%= link_to item[:path], 
+                data: { action: "click->navbar#closeMobileMenu" },
+                class: "block font-sans text-4xl font-light text-base-content text-center no-underline -translate-y-[100%] opacity-0 transition-all duration-800 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform group-[.is-open]/menu:translate-y-0 group-[.is-open]/menu:opacity-100 hover:text-primary hover:tracking-widest aww-mobile-link #{nav_active?(item[:path]) ? 'text-primary font-medium' : ''}",
+                style: "--delay-open: calc(0.3s + #{i * 0.08}s); --delay-close: calc(#{i * 0.05}s);" do %>
+              <span class="block transition-all duration-300 [transition-delay:var(--delay-close)] group-[.is-open]/menu:[transition-delay:var(--delay-open)]">
+                <%= item[:label] %>
+              </span>
+            <% end %>
+          </div>
         <% end %>
-      <% end %>
+      </nav>
+      
+      <!-- Footer Mobile -->
+      <div class="mt-auto pb-8 opacity-0 translate-y-5 transition-all duration-800 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col gap-4 items-center text-center group-[.is-open]/menu:opacity-100 group-[.is-open]/menu:translate-y-0[transition-delay:calc(#{(nav_links.length - 1) * 0.05}s)] group-[.is-open]/menu:[transition-delay:calc(0.5s+#{(nav_links.length - 1) * 0.08}s)]">
+        <div class="flex gap-6">
+          <%= link_to "Instagram", "#", class: "text-base-content text-xs uppercase tracking-[0.1em] hover:text-primary transition-colors" %>
+          <%= link_to "LinkedIn", "#", class: "text-base-content text-xs uppercase tracking-[0.1em] hover:text-primary transition-colors" %>
+          <%= link_to "Behance", "#", class: "text-base-content text-xs uppercase tracking-[0.1em] hover:text-primary transition-colors" %>
+        </div>
+        <p class="text-base-content/60 text-xs">© <%= Time.current.year %> Aquaura. All rights reserved.</p>
+      </div>
     </div>
-    
-    <!-- Right: Search + Theme + CTA -->
-    <div class="flex items-center gap-4 lg:gap-6">
-      <button class="p-2 text-base-content/60 hover:text-base-content transition-colors" 
-              data-action="click->navbar#openSearch"
-              aria-label="Cerca">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-      </button>
+  </div>
 
-      <!-- Theme Toggle -->
-      <div data-controller="theme" class="flex items-center">
-        <input type="checkbox" 
-               class="toggle toggle-sm bg-base-content/10 border-base-content/20 [--tglbg:theme(colors.primary)] checked:bg-primary" 
-               data-theme-target="checkbox" 
-               data-action="click->theme#toggle" />
+  <!-- Main Navbar -->
+  <nav id="main-nav" class="fixed top-0 left-0 w-full z-[1000] bg-transparent transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] py-4 [&.scrolled]:bg-base-100/80 [&.scrolled]:backdrop-blur-md [&.scrolled]:py-2 [&.scrolled]:border-b [&.scrolled]:border-base-content/5 [&.hidden-nav]:-translate-y-full">
+    <!-- Progress Bar Line -->
+    <div id="scroll-progress" data-navbar-target="progress" class="absolute top-0 left-0 h-[1px] bg-primary z-[1001] shadow-[0_0_10px_var(--color-primary)] w-0"></div>
+    
+    <div class="max-w-[1440px] mx-auto px-6 md:px-8 flex items-center justify-between">
+      <!-- Left: Logo -->
+      <div class="flex items-center">
+        <%= link_to root_path, data: { controller: "magnetic" }, class: "font-serif text-xl font-medium tracking-[0.1em] uppercase text-base-content p-2 inline-block transition-transform" do %>
+          Aquaura<span class="text-primary">.</span>
+        <% end %>
       </div>
       
-      <%= link_to "Contatti", root_path(anchor: "contatti"), 
-                  class: "hidden md:block px-6 py-2.5 bg-primary text-primary-content text-[0.65rem] font-bold tracking-widest uppercase rounded-full hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20" %>
-    </div>
-  </div>
-</nav>
-
-<!-- Mobile Menu Overlay -->
-<div class="fixed inset-0 z-overlay bg-base-100/30 backdrop-blur-md opacity-0 invisible transition-all duration-500 mobile-menu-overlay" 
-     data-navbar-target="mobileOverlay" 
-     data-action="click->navbar#closeMobileMenu">
-  
-  <div class="absolute right-0 top-0 w-4/5 max-w-[320px] h-full bg-base-100 shadow-2xl flex flex-col translate-x-full transition-transform duration-500 will-change-transform" 
-       data-action="click->stop">
-    
-    <div class="p-6 border-b border-base-content/5 flex items-center justify-between">
-      <span class="font-serif text-lg tracking-widest uppercase opacity-50">Menu</span>
-      <button class="p-2 text-base-content/60" data-action="click->navbar#closeMobileMenu">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
-      </button>
-    </div>
-    
-    <nav class="flex-1 px-4 py-8 overflow-y-auto">
-      <ul class="space-y-2">
+      <!-- Center: Desktop Menu (Rolling Text Effect) -->
+      <div class="hidden md:flex items-center gap-8 font-sans">
         <% nav_links.each do |item| %>
-          <li>
-            <%= link_to item[:path], 
-                        class: "flex items-center gap-4 px-4 py-4 rounded-2xl text-[0.95rem] font-medium transition-all duration-300 #{nav_active?(item[:path]) ? 'bg-primary/10 text-primary' : 'text-base-content/70 active:bg-base-content/5'}" do %>
-              <span class="opacity-50"><%= raw item[:icon] %></span>
-              <%= item[:label] %>
-            <% end %>
-          </li>
+          <%= link_to item[:path], class: "group flex items-center gap-2 text-base-content/60 text-xs tracking-[0.15em] uppercase py-2 overflow-hidden hover:text-base-content transition-colors duration-300 #{nav_active?(item[:path]) ? 'is-active text-base-content' : ''}" do %>
+            <!-- Icon Reveal -->
+            <span class="opacity-0 scale-50 w-0 text-primary transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100 group-hover:scale-100 group-hover:w-4 group-[.is-active]:opacity-100 group-[.is-active]:scale-100 group-[.is-active]:w-4">
+              <%= raw item[:icon] %>
+            </span>
+            <!-- Rolling Text Wrapper -->
+            <div class="relative flex flex-col overflow-hidden">
+              <span class="transition-transform duration-600 ease-[cubic-bezier(0.85,0,0.15,1)] group-hover:-translate-y-full"><%= item[:label] %></span>
+              <span class="absolute top-full left-0 text-base-content transition-transform duration-600 ease-[cubic-bezier(0.85,0,0.15,1)] group-hover:-translate-y-full" aria-hidden="true"><%= item[:label] %></span>
+            </div>
+          <% end %>
         <% end %>
-      </ul>
-    </nav>
-    
-    <div class="p-8 border-t border-base-content/5 space-y-4">
-       <%= link_to root_path(anchor: "contatti"), class: "btn btn-primary btn-block rounded-xl" do %>
-         Inizia Progetto
-       <% end %>
-       <p class="text-[10px] text-center uppercase tracking-widest opacity-30 mt-4">Aquaura Luxury Systems</p>
-    </div>
-  </div>
-</div>
+      </div>
+      
+      <!-- Right: Actions & Burger -->
+      <div class="flex items-center gap-6">
+        <!-- Minimalist Theme Toggle -->
+        <label class="group/theme w-10 h-10 rounded-full border border-base-content/10 flex items-center justify-center cursor-pointer transition-colors duration-300 hover:border-primary" data-controller="theme magnetic">
+          <input type="checkbox" class="peer hidden" data-theme-target="checkbox" data-action="click->theme#toggle" />
+          <div class="w-3 h-3 rounded-full bg-base-content transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] peer-checked:bg-transparent peer-checked:shadow-[inset_-4px_-3px_0_var(--color-primary)]"></div>
+        </label>
 
+        <!-- Magnetic CTA -->
+        <%= link_to root_path(anchor: "contatti"), data: { controller: "magnetic" }, class: "group/cta hidden md:flex relative px-8 py-3 rounded-full border border-base-content/20 text-base-content text-[0.7rem] tracking-[0.1em] uppercase overflow-hidden transition-colors duration-400 hover:border-transparent" do %>
+          <span class="relative z-10 transition-colors duration-400 group-hover/cta:text-base-100 font-medium">Inizia Progetto</span>
+          <!-- Liquid Fill Hover -->
+          <div class="absolute top-full left-0 w-full h-full bg-base-content rounded-t-[50%] transition-all duration-600 ease-[cubic-bezier(0.85,0,0.15,1)] z-0 group-hover/cta:top-0 group-hover/cta:rounded-none"></div>
+        <% end %>
+
+        <!-- Modern Burger (3 lines to X) -->
+        <button id="aww-hamburger" data-action="click->navbar#toggleMobileMenu" data-navbar-target="burger" data-controller="magnetic" class="group/burger p-2 cursor-pointer z-[1003] bg-transparent border-none md:hidden flex flex-col justify-center items-center w-10 h-10" aria-label="Menu" aria-expanded="false">
+          <div class="relative w-6 h-3.5 flex flex-col justify-between">
+            <span class="block w-full h-[1.5px] bg-base-content transition-all duration-500 ease-out origin-center group-[.is-active]/burger:rotate-45 group-[.is-active]/burger:translate-y-[6.25px]"></span>
+            <span class="block w-full h-[1.5px] bg-base-content transition-all duration-500 ease-out group-[.is-active]/burger:opacity-0 group-[.is-active]/burger:scale-x-0"></span>
+            <span class="block w-full h-[1.5px] bg-base-content transition-all duration-500 ease-out origin-center group-[.is-active]/burger:-rotate-45 group-[.is-active]/burger:-translate-y-[6.25px]"></span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </nav>
+</header>
