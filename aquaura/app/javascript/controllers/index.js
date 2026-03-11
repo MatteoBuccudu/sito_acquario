@@ -19,17 +19,11 @@ application.register("cursor", CursorController)
 import DatepickerController from "./datepicker_controller"
 application.register("datepicker", DatepickerController)
 
-import HamburgerController from "./hamburger_controller"
-application.register("hamburger", HamburgerController)
-
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
-import MagneticController from "./magnetic_controller"
-application.register("magnetic", MagneticController)
-
-import NavbarController from "./navbar_controller"
-application.register("navbar", NavbarController)
+import MicroInteractionsController from "./micro_interactions_controller"
+application.register("micro-interactions", MicroInteractionsController)
 
 import PreloaderController from "./preloader_controller"
 application.register("preloader", PreloaderController)
@@ -39,3 +33,6 @@ application.register("scroll-reveal", ScrollRevealController)
 
 import ThemeController from "./theme_controller"
 application.register("theme", ThemeController)
+
+import TypographyController from "./typography_controller"
+application.register("typography", TypographyController)
