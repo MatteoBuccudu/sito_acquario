@@ -1,148 +1,853 @@
-<div class="relative w-full min-h-screen py-24 flex flex-col items-center overflow-hidden bg-base-100">
-  
-  <div class="container mx-auto px-6 max-w-7xl relative z-10 flex flex-col lg:flex-row gap-16">
-    
-    <!-- Left Column: Info, Steps, Accordion -->
-    <div class="w-full lg:w-1/2 space-y-16 opacity-0 translate-y-10 transition-all duration-1000" data-controller="scroll-reveal">
-      
-      <!-- Intestazione -->
-      <div class="space-y-6">
-        <h1 class="text-4xl md:text-5xl font-serif text-base-content tracking-tight">SOS Sergio.</h1>
-        <p class="text-base-content/60 text-lg leading-relaxed">Dai setup iniziali alle emergenze critiche. Qui rassicuriamo il cliente: il tuo ecosistema è in mani esperte.</p>
+
+
+<style>
+  /* ── Animazioni ── */
+  @keyframes fade-up {
+    from { opacity:0; transform:translateY(22px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  @keyframes fade-right {
+    from { opacity:0; transform:translateX(-26px); }
+    to   { opacity:1; transform:translateX(0); }
+  }
+  @keyframes fade-left {
+    from { opacity:0; transform:translateX(26px); }
+    to   { opacity:1; transform:translateX(0); }
+  }
+  .anim { opacity:0; animation-duration:.65s; animation-fill-mode:both;
+          animation-timing-function:cubic-bezier(.22,.68,0,1.2);
+          animation-play-state:paused; }
+  .anim-up    { animation-name:fade-up; }
+  .anim-right { animation-name:fade-right; }
+  .anim-left  { animation-name:fade-left; }
+
+  /* ── Hero clip ── */
+  .hero-clip { clip-path: inset(0 0 0 5% round 24px); }
+
+  /* ── Big stat ── */
+  .big-num {
+    font-size:2.8rem; font-weight:900;
+    letter-spacing:-.04em; line-height:1;
+  }
+
+  /* ── Dark feat card ── */
+  .feat-card {
+    background:#111827;
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:1rem;
+    transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+  .feat-card:hover {
+    transform:translateX(5px);
+    border-color:rgba(14,165,233,.3);
+    box-shadow:-4px 0 20px rgba(14,165,233,.1);
+  }
+
+  /* ── Catalog scroll ── */
+  .cat-track {
+    display:flex; gap:1rem; overflow-x:auto;
+    scroll-behavior:smooth; scrollbar-width:none; padding-bottom:.5rem;
+  }
+  .cat-track::-webkit-scrollbar { display:none; }
+  .cat-card { flex-shrink:0; width:270px; position:relative;
+              border-radius:1rem; overflow:hidden; cursor:pointer; }
+  .cat-card img { width:100%; height:310px; object-fit:cover; display:block;
+                  transition:transform .5s ease; }
+  .cat-card:hover img { transform:scale(1.05); }
+  .cat-overlay {
+    position:absolute; inset:0;
+    background:linear-gradient(to top,rgba(4,8,15,.9) 0%,rgba(4,8,15,.2) 55%,transparent 100%);
+    display:flex; flex-direction:column; justify-content:flex-end; padding:1.1rem;
+  }
+
+
+
+  /* ── Pulse ring ── */
+  @keyframes pulse-ring {
+    0%   { box-shadow:0 0 0 0 oklch(var(--er)/.45); }
+    70%  { box-shadow:0 0 0 12px oklch(var(--er)/0); }
+    100% { box-shadow:0 0 0 0 oklch(var(--er)/0); }
+  }
+  .sos-pulse { animation:pulse-ring 2.5s ease-in-out infinite; }
+
+  /* ── Tilt 3D ── */
+  .tilt { transform-style:preserve-3d; will-change:transform; }
+
+
+
+
+
+  /* ── Diff aspect ── */
+  .diff-wrap { aspect-ratio:16/9; }
+</style>
+
+<div class="bg-base-100 text-base-content min-h-screen overflow-x-hidden">
+
+
+
+
+  <%# ══════════════════════════════════════════════════ %>
+  <%# 2 ── ALERT URGENZA + TABS FILTRO                 %>
+  <%# ══════════════════════════════════════════════════ %>
+  <section class="px-8 md:px-14 xl:px-20 py-10 bg-base-100">
+    <div class="max-w-7xl mx-auto space-y-5">
+
+      <%# ALERT urgenza %>
+      <div role="alert" class="alert alert-warning alert-soft sm:alert-horizontal rounded-2xl anim anim-up"
+           style="animation-delay:.05s;">
+        <span class="text-sm"><strong>Emergenza in corso?</strong> Sergio risponde su WhatsApp entro 10 minuti, 7 giorni su 7, anche di notte.</span>
+        <a href="#" class="btn btn-warning btn-sm rounded-xl text-[.65rem] tracking-widest uppercase font-bold">Scrivi ora</a>
       </div>
 
-      <!-- DaisyUI Steps (Come Lavoriamo) -->
-      <div class="space-y-6 opacity-0 translate-y-10 transition-all duration-1000 delay-200" data-controller="scroll-reveal">
-        <h3 class="text-xs tracking-[0.2em] font-bold text-base-content uppercase opacity-50 border-b border-base-content/10 pb-4">
-          Il Nostro Protocollo
-        </h3>
-        
-        <!-- DaisyUI Steps Vertical -->
-        <ul class="steps steps-vertical w-full">
-          <li class="step step-primary">
-            <div class="text-left">
-              <h4 class="text-base-content font-serif">Audit e Analisi Chimica</h4>
-              <p class="text-base-content/50 text-sm">Fase 1 - Test fotometrici completi e valutazione dello stato dell'ecosistema</p>
-            </div>
-          </li>
-          <li class="step step-primary">
-            <div class="text-left">
-              <h4 class="text-base-content font-serif">Bonifica e Settaggio</h4>
-              <p class="text-base-content/50 text-sm">Fase 2 - Interventi correttivi e preparazione dell'ambiente</p>
-            </div>
-          </li>
-          <li class="step">
-            <div class="text-left">
-              <h4 class="text-base-content/40 font-serif">Mantenimento e Monitoraggio</h4>
-              <p class="text-base-content/30 text-sm">Fase 3 - Cure periodiche e report digitali</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <!-- FAQ con DaisyUI Collapse -->
-      <div class="space-y-4 opacity-0 translate-y-10 transition-all duration-1000 delay-300" data-controller="scroll-reveal">
-        <h3 class="text-xs tracking-[0.2em] font-bold text-base-content uppercase opacity-50 border-b border-base-content/10 pb-4 mb-4">
-          Servizi di Eccellenza
-        </h3>
-        
-        <div class="collapse collapse-arrow border border-base-content/10 bg-base-200 rounded-none">
-          <input type="radio" name="my-accordion-2" checked="checked" /> 
-          <div class="collapse-title text-lg font-serif text-base-content">
-            Check-up Chimico Completo
-          </div>
-          <div class="collapse-content text-base-content/60 font-light text-sm"> 
-            <p>Analizziamo 12 parametri dell'acqua con fotometro professionale. Ti consegniamo un report digitale con le correzioni da apportare per un equilibrio perfetto.</p>
-          </div>
-        </div>
-        
-        <div class="collapse collapse-arrow border border-base-content/10 bg-base-200 rounded-none">
-          <input type="radio" name="my-accordion-2" /> 
-          <div class="collapse-title text-lg font-serif text-base-content">
-            Potatura e Aquascaping
-          </div>
-          <div class="collapse-content text-base-content/60 font-light text-sm"> 
-            <p>Le tue piante hanno preso il sopravvento? Veniamo a potare, riordinare e rinvigorire il tuo layout, mantenendo lo stile originale e la salute delle specie.</p>
-          </div>
-        </div>
-        
-        <div class="collapse collapse-arrow border border-base-content/10 bg-base-200 rounded-none">
-          <input type="radio" name="my-accordion-2" /> 
-          <div class="collapse-title text-lg font-serif text-base-content">
-            Trasloco Acquario
-          </div>
-          <div class="collapse-content text-base-content/60 font-light text-sm"> 
-            <p>Sposti casa? Gestiamo noi il trasporto dei pesci in sicurezza e il riallestimento tecnico della vasca, evitando lo shock osmotico agli abitanti.</p>
-          </div>
-        </div>
+      <%# TABS — filtro categoria %>
+      <div class="tabs tabs-box anim anim-up" style="animation-delay:.1s;" role="tablist">
+        <input type="radio" name="sv-tabs" class="tab text-[.65rem] tracking-widest uppercase font-bold" aria-label="Tutti" checked/>
+        <div class="tab-content pt-2"></div>
+        <input type="radio" name="sv-tabs" class="tab text-[.65rem] tracking-widest uppercase font-bold" aria-label="Diagnostica"/>
+        <div class="tab-content pt-2"></div>
+        <input type="radio" name="sv-tabs" class="tab text-[.65rem] tracking-widest uppercase font-bold" aria-label="Piante"/>
+        <div class="tab-content pt-2"></div>
+        <input type="radio" name="sv-tabs" class="tab text-[.65rem] tracking-widest uppercase font-bold" aria-label="Trasloco"/>
+        <div class="tab-content pt-2"></div>
+        <input type="radio" name="sv-tabs" class="tab text-[.65rem] tracking-widest uppercase font-bold" aria-label="Abbonamento"/>
+        <div class="tab-content pt-2"></div>
       </div>
     </div>
+  </section>
 
-    <!-- Right Column: Glassmorphism Form -->
-    <div class="w-full lg:w-1/2 opacity-0 translate-y-10 transition-all duration-1000 delay-300" data-controller="scroll-reveal">
-      
-      <% if flash[:success] %>
-        <div class="toast toast-top toast-center z-50">
-          <div class="alert alert-success shadow-xl animate-fade-in-down rounded-none border border-base-content/20">
-            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-            <span><%= flash[:success] %></span>
+
+  <%# ══════════════════════════════════════════════════ %>
+  <%# 3 ── GRID SERVIZI (card orizzontali con immagine) %>
+  <%# ══════════════════════════════════════════════════ %>
+  <section id="servizi-grid" class="px-8 md:px-14 xl:px-20 pb-24 bg-base-100">
+    <div class="max-w-7xl mx-auto space-y-6">
+      <%
+        servizi = [
+          {
+            num:"01", colore:"primary",
+            titolo:"Check-up Chimico Completo",
+            sotto:"Il tuo acquario sotto analisi professionale",
+            desc:"Analizziamo 12 parametri con fotometro professionale. Ti consegniamo un report PDF con il piano correttivo personalizzato, consultabile in qualsiasi momento.",
+            img:"https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80",
+            img_alt:"Acquario con pesci colorati analizzato",
+            lista:["12 parametri: NH₃, NO₂, NO₃, PO₄, GH, KH, pH, CO₂, O₂, Fe, Mg, Ca","Fotometro professionale — non striscette","Report PDF con piano correttivo step-by-step","Consulenza post-analisi 48h inclusa"],
+            prezzo:"da € 89", step_col:"step-primary",
+            rating:5, recensioni:48,
+            tag:"Diagnostica",
+          },
+          {
+            num:"02", colore:"success",
+            titolo:"Potatura & Aquascaping",
+            sotto:"Le piante hanno preso il sopravvento?",
+            desc:"Potatura selettiva con forbici curve professionali, riposizionamento di rocce e radici, trattamento antialghe. Restituiamo al layout il suo equilibrio originale.",
+            img:"https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=600&q=80",
+            img_alt:"Acquario planted con piante acquatiche",
+            lista:["Potatura selettiva con forbici curve professionali","Riposizionamento rocce, radici e substrate","Trattamento antialghe post-intervento","Report fotografico prima/dopo incluso"],
+            prezzo:"da € 120", step_col:"step-success",
+            rating:5, recensioni:73,
+            tag:"Piante",
+          },
+          {
+            num:"03", colore:"warning",
+            titolo:"Trasloco Acquario",
+            sotto:"Sposti casa? Pensiamo a tutto noi.",
+            desc:"Dal confezionamento dei pesci con sacchetti O₂ puro al riallestimento nella nuova sede: gestiamo ogni fase per eliminare lo shock osmotico e ridurre lo stress.",
+            img:"https://images.unsplash.com/photo-1524704654690-b56c05c78a00?w=600&q=80",
+            img_alt:"Acquario di grandi dimensioni installato",
+            lista:["Sacchetti professionali con ossigeno puro","Contenitori termici per trasporti lunghi","Riallestimento completo nella nuova sede","Monitoraggio parametri nelle 48h successive"],
+            prezzo:"da € 200", step_col:"step-warning",
+            rating:5, recensioni:31,
+            tag:"Trasloco",
+          },
+          {
+            num:"04", colore:"secondary",
+            titolo:"Contratto Manutenzione Mensile",
+            sotto:"La tranquillità di chi sa che qualcuno pensa alla sua vasca",
+            desc:"Visita mensile fissa con check parametri, pulizia filtro, regolazione impianti. Più reperibilità h24 su WhatsApp per qualsiasi emergenza nel mezzo.",
+            img:"https://images.unsplash.com/photo-1516408388733-2f8364f2e00b?w=600&q=80",
+            img_alt:"Acquario marino con coralli",
+            lista:["Visita mensile fissa con check completo","Pulizia e verifica impianto filtrante","Reperibilità h24 su WhatsApp inclusa","Sconto 20% su prodotti e interventi extra"],
+            prezzo:"da € 60/mese", step_col:"step-secondary",
+            rating:5, recensioni:112,
+            tag:"Abbonamento",
+          },
+        ]
+      %>
+
+      <% servizi.each_with_index do |s, idx| %>
+        <div class="tilt anim anim-up" data-tilt
+             style="animation-delay:<%= 0.05 + idx * 0.08 %>s;">
+          <div class="card sm:card-side bg-base-200 border border-base-300
+                      hover:border-<%= s[:colore] %>/30 hover:shadow-2xl hover:shadow-<%= s[:colore] %>/6
+                      overflow-hidden transition-all duration-400"
+               style="transform-style:preserve-3d;">
+
+            <%# Immagine laterale con INDICATOR %>
+            <figure class="sm:w-72 shrink-0 relative overflow-hidden">
+              <img src="<%= s[:img] %>"
+                   alt="<%= s[:img_alt] %>"
+                   class="w-full h-56 sm:h-full object-cover
+                          hover:scale-[1.04] transition-transform duration-700"/>
+              <%# BADGE numero + tag sopra immagine %>
+              <div class="absolute top-4 left-4 flex flex-col gap-2">
+                <span class="badge badge-neutral bg-base-100/80 backdrop-blur-sm
+                             font-mono text-xs border border-base-300">
+                  <%= s[:num] %>
+                </span>
+                <span class="badge badge-<%= s[:colore] %> badge-sm font-bold
+                             tracking-widest uppercase">
+                  <%= s[:tag] %>
+                </span>
+              </div>
+              <%# Rating overlay in basso %>
+              <div class="absolute bottom-4 left-4">
+              </div>
+            </figure>
+
+            <%# Body %>
+            <div class="card-body p-7 gap-5" style="transform:translateZ(8px);">
+              <div>
+                <h2 class="card-title text-xl font-black tracking-tight leading-snug mb-1">
+                  <%= s[:titolo] %>
+                </h2>
+                <p class="text-base-content/40 text-sm italic"><%= s[:sotto] %></p>
+              </div>
+
+              <div class="hidden md:block">
+                <p class="text-base-content/55 text-sm leading-relaxed"><%= s[:desc] %></p>
+              </div>
+
+              <div class="divider divider-<%= s[:colore] %> my-0 opacity-20"></div>
+
+              <%# STEPS verticali checkout-style %>
+              <ul class="steps steps-vertical text-xs">
+                <% s[:lista].each_with_index do |voce, vi| %>
+                  <li class="step <%= s[:step_col] %>" data-content="<%= vi + 1 %>">
+                    <span class="text-left text-xs text-base-content/65 ml-2"><%= voce %></span>
+                  </li>
+                <% end %>
+              </ul>
+
+              <div class="card-actions items-center justify-between mt-auto pt-2 border-t border-base-200 flex-wrap gap-3">
+                <div>
+                  <p class="text-[.58rem] tracking-widest uppercase text-base-content/25">Tariffa</p>
+                  <p class="text-2xl font-black text-<%= s[:colore] %>"><%= s[:prezzo] %></p>
+                </div>
+                <div class="join">
+                  <button class="btn btn-ghost btn-sm join-item rounded-l-xl border border-base-300
+                                 tooltip tooltip-top" data-tip="Salva nei preferiti">
+                    Salva
+                  </button>
+                  <div class="dropdown dropdown-top dropdown-end">
+                    <div tabindex="0" role="button"
+                         class="btn btn-ghost btn-sm join-item border border-base-300 border-l-0
+                                text-[.62rem] tracking-widest uppercase font-bold">
+                      Opzioni
+                    </div>
+                    <ul tabindex="0" class="dropdown-content menu bg-base-200 border border-base-300
+                                            rounded-2xl shadow-xl w-52 p-2 z-20">
+                      <li><a class="text-xs">Richiedi preventivo</a></li>
+                      <li><a class="text-xs">Prenota visita</a></li>
+                      <li><a class="text-xs">Consulenza WhatsApp</a></li>
+                    </ul>
+                  </div>
+                  <%= link_to root_path(anchor:"contatti"),
+                        class:"btn btn-#{s[:colore]} btn-sm join-item rounded-r-xl px-6
+                                text-[.65rem] tracking-widest uppercase font-bold" do %>
+                    Prenota
+                  <% end %>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       <% end %>
+    </div>
+  </section>
 
-      <!-- Glassmorphism Form con DaisyUI -->
-      <div class="relative bg-base-200/50 backdrop-blur-3xl border border-base-content/5 p-8 md:p-12 shadow-2xl">
-        <div class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
-        
-        <h3 class="text-2xl font-serif text-base-content mb-8 border-b border-base-content/10 pb-4">Richiedi Intervento</h3>
 
-        <%= form_with url: servizi_path, method: :post, class: "space-y-6" do |f| %>
-          <!-- Floating Label Input con DaisyUI -->
-          <div class="form-control w-full">
-            <%= f.label :nome, "Nominativo", class: "label" do %>
-              <span class="label-text-alt text-base-content/60 tracking-widest text-xs uppercase">Nominativo</span>
-            <% end %>
-            <%= f.text_field :nome, required: true, class: "input input-lg input-bordered w-full bg-base-300/50 border-base-content/10 text-base-content focus:outline-none focus:border-primary transition-colors rounded-none", placeholder: "Es: Mario Rossi" %>
-          </div>
+  <%# ══════════════════════════════════════════════════ %>
+  <%# 4 ── "Interveniamo su…" testo + dark feat card   %>
+  <%# ══════════════════════════════════════════════════ %>
+  <section class="py-24 px-8 md:px-14 xl:px-20"
+           style="background:oklch(var(--b2)/.5);">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-          <div class="form-control w-full">
-            <%= f.label :telefono, "Contatto Veloce", class: "label" do %>
-              <span class="label-text-alt text-base-content/60 tracking-widest text-xs uppercase">Contatto Veloce</span>
-            <% end %>
-            <%= f.telephone_field :telefono, required: true, class: "input input-lg input-bordered w-full bg-base-300/50 border-base-content/10 text-base-content focus:outline-none focus:border-primary transition-colors rounded-none", placeholder: "+39 ..." %>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="form-control w-full">
-              <%= f.label :tipo, "Servizio", class: "label" do %>
-                <span class="label-text-alt text-base-content/60 tracking-widest text-xs uppercase">Servizio</span>
-              <% end %>
-              <%= f.select :tipo, ["Check-up Chimico Completo", "Potatura e Aquascaping", "Trasloco Acquario"], { prompt: "Seleziona..." }, class: "select select-lg select-bordered w-full bg-base-300/50 border-base-content/10 text-base-content focus:outline-none focus:border-primary rounded-none" %>
+      <div class="anim anim-right" style="animation-delay:.05s;">
+        <h2 class="text-4xl xl:text-5xl font-black tracking-tighter leading-[1.02] mb-5">
+          Interveniamo<br>
+          su qualsiasi<br>
+          <span class="text-primary">problema</span>
+        </h2>
+        <p class="text-base-content/45 leading-relaxed mb-8 max-w-md">
+          Ogni vasca che ci viene affidata viene gestita con lo stesso metodo rigoroso:
+          dati prima delle opinioni, strumenti professionali prima dei consigli generici.
+        </p>
+        <%# Immagine con DIFF overlay — prima/dopo %>
+        <div class="rounded-2xl overflow-hidden border border-base-300 diff-wrap">
+          <figure class="diff rounded-2xl overflow-hidden w-full h-full">
+            <div class="diff-item-1">
+              <img src="https://images.unsplash.com/photo-1610296669228-602fa827fc1f?w=700&q=80"
+                   alt="Acquario prima" class="object-cover w-full h-full"/>
             </div>
-
-            <div class="form-control w-full">
-              <%= f.label :data_richiesta, "Data Preferita", class: "label" do %>
-                <span class="label-text-alt text-base-content/60 tracking-widest text-xs uppercase">Data Preferita</span>
-              <% end %>
-              <%= f.date_field :data_richiesta, data: { controller: "datepicker" }, class: "input input-lg input-bordered w-full bg-base-300/50 border-base-content/10 text-base-content focus:outline-none focus:border-primary rounded-none", required: true %>
+            <div class="diff-item-2">
+              <img src="https://images.unsplash.com/photo-1551244072-5d12893278bc?w=700&q=80"
+                   alt="Acquario dopo" class="object-cover w-full h-full"/>
             </div>
-          </div>
+            <div class="diff-resizer"></div>
+          </figure>
+        </div>
+        <p class="text-[.65rem] tracking-[.2em] uppercase text-base-content/25 font-semibold mt-2 text-center">
+          <h2 class="text-4xl xl:text-5xl font-black tracking-tighter leading-[1.02] mb-5">
+            Interveniamo<br>
+            su qualsiasi<br>
+            <span class="text-primary">problema</span>
+          </h2>
+        </p>
+      </div>
 
-          <div class="form-control w-full pt-4">
-            <%= f.label :descrizione, "Dettagli Eccezione", class: "label" do %>
-              <span class="label-text-alt text-base-content/60 tracking-widest text-xs uppercase">Dettagli</span>
-            <% end %>
-            <%= f.text_area :descrizione, rows: 4, class: "textarea textarea-lg textarea-bordered w-full bg-base-300/50 border-base-content/10 text-base-content focus:outline-none focus:border-primary resize-none rounded-none", placeholder: "Descrivi gentilmente cosa la preoccupa dell'ecosistema..." %>
-          </div>
-
-          <div class="mt-8 pt-6 border-t border-base-content/5">
-            <!-- DaisyUI Button con loading state -->
-            <%= f.submit "Conferma Prenotazione", class: "btn btn-primary btn-block btn-lg rounded-none uppercase tracking-widest font-semibold" %>
+      <div class="space-y-3 anim anim-left" style="animation-delay:.1s;">
+        <% [
+          { img:"https://images.unsplash.com/photo-1518682818182-fa4a5d3e37cc?w=120&q=80",
+            titolo:"Alta precisione diagnostica",
+            desc:"Non usiamo striscette. Ogni visita include fotometro professionale e confronto con valori storici della vasca.",
+            badge:"Chimica", col:"info" },
+          { img:"https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=120&q=80",
+            titolo:"Piante e aquascaping professionali",
+            desc:"Forbici curve, pinze pro, substrato e layout: restituiamo all'acquario il suo equilibrio estetico e biologico.",
+            badge:"Estetica", col:"success" },
+          { img:"https://images.unsplash.com/photo-1570691079236-4bca6c45d440?w=120&q=80",
+            titolo:"Zero stress per pesci e piante",
+            desc:"Dal trasloco all'emergenza notturna: O₂ puro, contenitori termici e monitoraggio 48h post intervento.",
+            badge:"Logistica", col:"warning" },
+        ].each do |f| %>
+          <div class="feat-card flex items-start gap-4 p-4 cursor-pointer">
+            <div class="w-14 h-14 rounded-xl overflow-hidden shrink-0 border border-white/10">
+              <img src="<%= f[:img] %>" alt="" class="w-full h-full object-cover"/>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 mb-1">
+                <h3 class="text-white font-black text-[.92rem] tracking-tight"><%= f[:titolo] %></h3>
+                <span class="badge badge-<%= f[:col] %> badge-soft badge-xs tracking-widest uppercase font-bold ml-auto">
+                  <%= f[:badge] %>
+                </span>
+              </div>
+              <p class="text-white/38 text-[.8rem] leading-relaxed"><%= f[:desc] %></p>
+            </div>
           </div>
         <% end %>
 
+        <%# STATS component dentro il pannello dark %>
+        <div class="stats bg-base-300/30 border border-base-300/50 rounded-2xl w-full mt-2">
+          <div class="stat py-4 place-items-center">
+            <div class="stat-value text-primary text-2xl">100%</div>
+            <div class="stat-title text-xs">Garanzia risultato</div>
+            <div class="stat-desc text-[.65rem]">o ri-interveniamo gratis</div>
+          </div>
+          <div class="stat py-4 place-items-center">
+            <div class="stat-value text-success text-2xl">7gg</div>
+            <div class="stat-title text-xs">Monitoraggio incluso</div>
+            <div class="stat-desc text-[.65rem]">post ogni intervento</div>
+          </div>
+          <div class="stat py-4 place-items-center">
+            <div class="stat-value text-warning text-2xl">4.9</div>
+            <div class="stat-title text-xs">★ Valutazione media</div>
+            <div class="stat-desc text-[.65rem]">su 400+ interventi</div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
+
+
+  <%# ══════════════════════════════════════════════════ %>
+  <%# 5 ── CATALOGO SCROLL + NAV                        %>
+  <%# ══════════════════════════════════════════════════ %>
+  <section class="py-20 px-8 md:px-14 xl:px-20 bg-base-100">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex items-end justify-between mb-8 flex-wrap gap-4 anim anim-up"
+           style="animation-delay:.05s;">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-black tracking-tighter leading-tight">
+            Galleria degli interventi<br>
+            <span class="text-base-content/40 font-light text-3xl">completati nel 2024</span>
+          </h2>
+        </div>
+        <div class="text-right">
+          <p class="text-[.78rem] font-bold text-base-content/60">Interventi certificati</p>
+          <p class="text-primary text-[.72rem] font-semibold tracking-wide">Nord Italia</p>
+        </div>
+      </div>
+
+      <%
+        gallery = [
+          { tag:"Diagnostica", col:"info",      titolo:"Check-up Discus 600L",           luogo:"Roma",    img:"https://images.unsplash.com/photo-1535591273668-578e31182c4f?w=500&q=80" },
+          { tag:"Piante",      col:"success",   titolo:"Potatura Nature 200L",            luogo:"Milano",  img:"https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=500&q=80" },
+          { tag:"Trasloco",    col:"warning",   titolo:"Trasloco Malawi 400L",            luogo:"Torino",  img:"https://images.unsplash.com/photo-1524704654690-b56c05c78a00?w=500&q=80" },
+          { tag:"Abbonamento", col:"secondary", titolo:"Contratto mensile reef 300L",     luogo:"Genova",  img:"https://images.unsplash.com/photo-1516408388733-2f8364f2e00b?w=500&q=80" },
+          { tag:"Diagnostica", col:"info",      titolo:"Emergenza NH₃ — Nano 60L",        luogo:"Firenze", img:"https://images.unsplash.com/photo-1576330383200-2bf325cfec52?w=500&q=80" },
+        ]
+      %>
+
+      <div id="sv-gallery" class="cat-track anim anim-up cursor-grab active:cursor-grabbing select-none" style="animation-delay:.1s;">
+        <% gallery.each do |g| %>
+          <div class="cat-card">
+            <img src="<%= g[:img] %>" alt="<%= g[:titolo] %>"/>
+            <div class="cat-overlay">
+              <span class="badge badge-<%= g[:col] %> badge-soft badge-xs
+                           tracking-widest uppercase font-bold mb-2"><%= g[:tag] %></span>
+              <p class="text-white font-black text-[.92rem] tracking-tight leading-snug mb-1"><%= g[:titolo] %></p>
+              <p class="text-white/50 text-[.72rem]">📍 <%= g[:luogo] %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="flex items-center justify-between mt-6 anim anim-up" style="animation-delay:.15s;">
+        <%= link_to galleria_path,
+              class:"btn btn-neutral rounded-full px-8 gap-2 text-[.65rem] tracking-widest uppercase font-bold" do %>
+          Vedi tutta la galleria
+        <% end %>
+        <div class="flex gap-2">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <%# ══════════════════════════════════════════════════ %>
+  <%# 6 ── COME FUNZIONA (4 card + STEPS orizzontali)  %>
+  <%# ══════════════════════════════════════════════════ %>
+  <section class="py-24 px-8 md:px-14 xl:px-20"
+           style="background:oklch(var(--b2)/.4);">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-black tracking-tighter text-center mb-4 anim anim-up"
+          style="animation-delay:.05s;">Come prenotare un intervento</h2>
+      <p class="text-base-content/40 text-center mb-12 anim anim-up" style="animation-delay:.1s;">
+        Dal primo messaggio al report finale: ecco esattamente cosa succede.
+      </p>
+
+      <%# STEPS orizzontale DaisyUI %>
+      <ul class="steps steps-horizontal w-full mb-14 anim anim-up" style="animation-delay:.12s;">
+        <li class="step step-primary"><span class="mt-3 text-xs text-base-content/60">Diagnosi gratis</span></li>
+        <li class="step step-primary"><span class="mt-3 text-xs text-base-content/60">Preventivo fisso</span></li>
+        <li class="step step-secondary"><span class="mt-3 text-xs text-base-content/60">Intervento</span></li>
+        <li class="step"><span class="mt-3 text-xs text-base-content/60">Report PDF</span></li>
+        <li class="step"><span class="mt-3 text-xs text-base-content/60">7gg monitoraggio</span></li>
+      </ul>
+
+      <%# 4 card processo %>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <% [
+          { titolo:"Diagnosi gratuita",   col:"primary",   desc:"Scrivi su WhatsApp. Sergio risponde entro 10 minuti con la prima valutazione. Zero costi fino all'intervento." },
+          { titolo:"Preventivo fisso",    col:"success",   desc:"Il prezzo viene concordato prima della visita. Dettaglio voce per voce, nessuna sorpresa in fattura." },
+          { titolo:"Intervento in vasca", col:"secondary", desc:"Sergio arriva con strumenti professionali. Ogni passaggio viene documentato in tempo reale." },
+          { titolo:"Monitoraggio post",   col:"warning",   desc:"7 giorni di contatto diretto post intervento. Se qualcosa non va, si ritorna senza costi aggiuntivi." },
+        ].each_with_index do |m, i| %>
+          <div class="card bg-base-100 border border-base-300 rounded-2xl
+                      hover:border-<%= m[:col] %>/35 hover:shadow-lg hover:shadow-<%= m[:col] %>/6
+                      hover:-translate-y-0.5 transition-all duration-300
+                      anim anim-up" style="animation-delay:<%= 0.05 + i * 0.07 %>s;">
+            <div class="card-body p-6 gap-4">
+              <h3 class="font-black text-base tracking-tight"><%= m[:titolo] %></h3>
+              <p class="text-base-content/45 text-[.82rem] leading-relaxed flex-1"><%= m[:desc] %></p>
+              <div class="flex justify-end">
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+
+  <%# ══════════════════════════════════════════════════ %>
+  <%# 7 ── TRE FASI + COUNTDOWN PROSSIMI SLOT          %>
+  <%# ══════════════════════════════════════════════════ %>
+  <section class="py-24 px-8 md:px-14 xl:px-20 bg-base-100 border-t border-base-200">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-16">
+
+      <%# Steps numbered %>
+      <div>
+        <h2 class="text-3xl font-black tracking-tighter mb-4 anim anim-up" style="animation-delay:.05s;">
+          Tre fasi<br><span class="text-primary">di ogni intervento</span>
+        </h2>
+        <p class="text-base-content/40 mb-14 anim anim-up" style="animation-delay:.1s;">
+          Il protocollo Aquaura, applicato uguale ogni volta.
+        </p>
+
+        <div class="hidden md:grid grid-cols-3 gap-10 relative">
+
+          <% [
+            { n:"01", titolo:"Diagnosi e consultazione", desc:"Valutazione a distanza e definizione precisa del tipo di intervento necessario, senza costi.", link:"Inizia la diagnosi" },
+            { n:"02", titolo:"Intervento in vasca",       desc:"Sergio arriva con strumenti professionali. Ogni passaggio viene documentato fotograficamente.", link:"Vedi i servizi" },
+            { n:"03", titolo:"Report e finitura",         desc:"Chiudiamo con report PDF di parametri, trattamenti e istruzioni per le settimane successive.", link:"Vedi gli interventi" },
+          ].each_with_index do |step, i| %>
+            <div class="relative anim anim-up" style="animation-delay:<%= 0.08 + i * 0.1 %>s;">
+
+              <div class="relative z-10 mb-6">
+                <div class="w-14 h-14 rounded-2xl bg-primary/8 border border-primary/15
+                            flex items-center justify-center text-2xl font-bold text-primary">
+                  <%= step[:n] %>
+                </div>
+              </div>
+              <div class="relative z-10">
+                <h3 class="font-black text-lg tracking-tight leading-snug mb-3"><%= step[:titolo] %></h3>
+                <p class="text-base-content/45 text-[.85rem] leading-relaxed mb-4"><%= step[:desc] %></p>
+                <button class="btn btn-ghost btn-xs p-0 h-auto min-h-0
+                               text-primary font-bold text-[.65rem] tracking-widest uppercase">
+                  <%= step[:link] %>
+                </button>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <%# Mobile stack %>
+        <div class="md:hidden space-y-8">
+          <% [
+            { n:"01", titolo:"Diagnosi e consultazione", desc:"Valutazione a distanza senza costi." },
+            { n:"02", titolo:"Intervento in vasca",       desc:"Strumenti professionali e documentazione fotografica." },
+            { n:"03", titolo:"Report e finitura",         desc:"PDF con parametri, trattamenti e istruzioni." },
+          ].each_with_index do |step, i| %>
+            <div class="flex gap-5 anim anim-up" style="animation-delay:<%= 0.05 + i * 0.08 %>s;">
+              <div class="w-12 h-12 rounded-xl bg-primary/8 border border-primary/15 flex items-center justify-center text-xl shrink-0 font-bold text-primary">
+                <%= step[:n] %>
+              </div>
+              <div>
+                <p class="font-mono text-[.6rem] tracking-widest uppercase text-base-content/25 mb-0.5"><%= step[:n] %></p>
+                <h3 class="font-black text-base tracking-tight mb-1"><%= step[:titolo] %></h3>
+                <p class="text-base-content/45 text-[.82rem] leading-relaxed"><%= step[:desc] %></p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <%# COUNTDOWN prossimi slot disponibili %>
+      <div class="anim anim-left" style="animation-delay:.12s;">
+        <div class="card bg-base-200 border border-primary/20 rounded-3xl">
+          <div class="card-body p-7 gap-6">
+            <div>
+              <span class="badge badge-primary badge-soft badge-sm tracking-widest uppercase font-bold mb-3">
+                Prossimi slot
+              </span>
+              <h3 class="font-black text-lg">Disponibilità questa settimana</h3>
+              <p class="text-base-content/40 text-sm mt-1">I slot si esauriscono rapidamente. Prenota subito.</p>
+            </div>
+
+            <div class="space-y-3">
+              <% [
+                { giorno:"Mercoledì",  data:"19 Mar", zone:"Milano / Monza",  rimasti:2, col:"success" },
+                { giorno:"Giovedì",    data:"20 Mar", zone:"Torino / Novara", rimasti:1, col:"warning" },
+                { giorno:"Venerdì",    data:"21 Mar", zone:"Genova / SV",     rimasti:3, col:"success" },
+                { giorno:"Sabato",     data:"22 Mar", zone:"Tutta la zona",   rimasti:0, col:"error" },
+              ].each do |slot| %>
+                <div class="flex items-center justify-between p-3 rounded-xl
+                            border border-base-300 bg-base-100/60
+                            <%= slot[:rimasti] == 0 ? 'opacity-40' : '' %>">
+                  <div>
+                    <p class="font-bold text-sm"><%= slot[:giorno] %> <span class="text-base-content/40 font-normal text-xs"><%= slot[:data] %></span></p>
+                    <p class="text-[.7rem] text-base-content/40"><%= slot[:zone] %></p>
+                  </div>
+                  <% if slot[:rimasti] == 0 %>
+                    <span class="badge badge-ghost badge-sm text-[.6rem] font-bold tracking-widest uppercase">Esaurito</span>
+                  <% else %>
+                    <span class="badge badge-<%= slot[:col] %> badge-soft badge-sm font-bold">
+                      <%= slot[:rimasti] %> <%= slot[:rimasti] == 1 ? "slot" : "slot" %>
+                    </span>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+
+            <%# Countdown al prossimo slot %>
+            <div class="text-center border-t border-base-300 pt-5">
+              <p class="text-[.6rem] tracking-[.2em] uppercase text-base-content/30 font-semibold mb-2">
+                Prossimo slot disponibile tra
+              </p>
+              <div class="flex items-center justify-center gap-3">
+                <div class="text-center">
+                  <div class="countdown font-black text-primary" style="font-size:2rem;" aria-label="2 giorni">
+                    <span style="--value:2;"></span>
+                  </div>
+                  <p class="text-[.6rem] text-base-content/30 tracking-widest uppercase">giorni</p>
+                </div>
+                <span class="text-2xl font-black text-base-content/20 mb-4">:</span>
+                <div class="text-center">
+                  <div class="countdown font-black text-primary" style="font-size:2rem;" aria-label="14 ore">
+                    <span style="--value:14;"></span>
+                  </div>
+                  <p class="text-[.6rem] text-base-content/30 tracking-widest uppercase">ore</p>
+                </div>
+                <span class="text-2xl font-black text-base-content/20 mb-4">:</span>
+                <div class="text-center">
+                  <div class="countdown font-black text-primary" style="font-size:2rem;" aria-label="33 min">
+                    <span style="--value:33;"></span>
+                  </div>
+                  <p class="text-[.6rem] text-base-content/30 tracking-widest uppercase">min</p>
+                </div>
+              </div>
+              <button class="btn btn-primary w-full rounded-xl mt-5 text-[.65rem] tracking-widest uppercase font-bold">
+                Prenota il prossimo slot
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <%# ══════════════════════════════════════════════════ %>
+  <%# 8 ── CHAT + RECENSIONI CAROUSEL                  %>
+  <%# ══════════════════════════════════════════════════ %>
+  <section class="py-20 px-8 md:px-14 xl:px-20"
+           style="background:oklch(var(--b2)/.4);">
+    <div class="max-w-7xl mx-auto">
+      <div class="divider divider-primary opacity-30 mb-12">
+        <span class="text-[.65rem] tracking-[.3em] uppercase text-base-content/30 font-semibold">
+          Conversazioni reali e testimonianze
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+        <%# CHAT DaisyUI %>
+        <div class="card bg-base-100 border border-base-300 rounded-2xl anim anim-right"
+             style="animation-delay:.05s;">
+          <div class="card-body p-6 gap-3">
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-[.65rem] tracking-[.2em] uppercase text-base-content/30 font-semibold">
+                Emergenza O₂ · ieri sera
+              </p>
+              <span class="badge badge-success badge-soft badge-xs gap-1">
+                <span class="w-1.5 h-1.5 bg-success rounded-full"></span> Risolto
+              </span>
+            </div>
+            <div class="chat chat-start">
+              <div class="chat-header text-[.65rem] opacity-40 mb-0.5">Marco · 23:14</div>
+              <div class="chat-bubble chat-bubble-neutral text-sm">
+                Sergio i miei Discus boccheggiano tutti in superficie
+              </div>
+            </div>
+            <div class="chat chat-end">
+              <div class="chat-header text-[.65rem] opacity-40 mb-0.5">Sergio · 23:22</div>
+              <div class="chat-bubble chat-bubble-primary text-sm">
+                Alza le pompe al 100%, apri il coperchio. È calo O₂ notturno. Misurami il pH adesso
+              </div>
+            </div>
+            <div class="chat chat-start">
+              <div class="chat-bubble chat-bubble-neutral text-sm">pH 7.0, O₂ non ce l'ho…</div>
+            </div>
+            <div class="chat chat-end">
+              <div class="chat-header text-[.65rem] opacity-40 mb-0.5">Sergio · 23:22</div>
+              <div class="chat-bubble chat-bubble-primary text-sm">
+                Ok, metti l'aeratore d'emergenza. Domani mattina tutto ok garantito. Ti chiamo alle 8
+              </div>
+            </div>
+            <div class="chat chat-start">
+              <div class="chat-bubble chat-bubble-success text-sm">
+                Alle 8:15 tutto ok!!! Grazie Sergio sei un mito
+              </div>
+              <div class="chat-footer opacity-40 text-[.65rem] mt-1">Letto</div>
+            </div>
+          </div>
+        </div>
+
+        <%# CAROUSEL recensioni %>
+        <div class="anim anim-left" style="animation-delay:.08s;">
+          <div class="carousel carousel-vertical h-[420px] space-y-4 overflow-y-auto
+                      [scrollbar-width:none] pr-1">
+            <% [
+              { nome:"Marco T.",   vasca:"Discus 400L · Roma",      img:"https://picsum.photos/seed/rv1/60/60", testo:"Sergio ha risolto la crisi in 2 ore. Report PDF incluso con piano correttivo per le settimane successive.", stelle:5 },
+              { nome:"Alessia R.", vasca:"Nature 200L · Milano",    img:"https://picsum.photos/seed/rv2/60/60", testo:"Il contratto mensile è la cosa migliore che potessi fare per la mia vasca. Parametri sempre nei range.", stelle:5 },
+              { nome:"Luca B.",    vasca:"Malawi 300L · Torino",    img:"https://picsum.photos/seed/rv3/60/60", testo:"Il trasloco dell'acquario era la cosa che temevo di più. Nessun pesce perso, parametri stabili dopo 24h.", stelle:5 },
+              { nome:"Sara M.",    vasca:"Reef 150L · Genova",      img:"https://picsum.photos/seed/rv4/60/60", testo:"Potatura e aquascaping impeccabili. Ha restituito alla vasca l'equilibrio che aveva perso in 6 mesi.", stelle:5 },
+            ].each do |r| %>
+              <div class="carousel-item w-full">
+                <div class="card bg-base-100 border border-base-300 w-full
+                            hover:border-primary/20 hover:shadow-md transition-all duration-200">
+                  <div class="card-body p-5 gap-3">
+                    <div class="flex items-center gap-3">
+                      <div class="avatar">
+                        <div class="w-10 rounded-full">
+                          <img src="<%= r[:img] %>" alt="<%= r[:nome] %>"/>
+                        </div>
+                      </div>
+                      <div>
+                        <p class="font-bold text-sm"><%= r[:nome] %></p>
+                        <p class="text-[.65rem] text-base-content/35"><%= r[:vasca] %></p>
+                      </div>
+                      <div class="ml-auto text-[.65rem] font-bold text-warning uppercase tracking-widest">
+                        Rating 5/5
+                      </div>
+                    </div>
+                    <p class="text-[.82rem] text-base-content/60 italic leading-relaxed">
+                      "<%= r[:testo] %>"
+                    </p>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <%# ══════════════════════════════════════════════════ %>
+  <%# 9 ── FAQ ACCORDION                               %>
+  <%# ══════════════════════════════════════════════════ %>
+  <section class="py-20 px-8 md:px-14 xl:px-20 bg-base-100">
+    <div class="max-w-4xl mx-auto">
+      <div class="divider divider-primary opacity-30 mb-10">
+        <span class="text-[.65rem] tracking-[.3em] uppercase text-base-content/30 font-semibold">
+          Domande frequenti
+        </span>
+      </div>
+
+      <div class="space-y-2">
+        <% [
+          { q:"Qual è la zona coperta dagli interventi a domicilio?",
+            a:"Operiamo in tutto il Nord Italia: Piemonte, Lombardia, Liguria, Veneto, Trentino. Per zone più distanti è disponibile la consulenza remota con kit di prelievo spedito a casa." },
+          { q:"Posso avere un preventivo prima di impegnarmi?",
+            a:"Sì, la diagnosi è sempre gratuita e il preventivo viene concordato per iscritto prima di ogni intervento. Nessun costo fino a che non approvi il preventivo." },
+          { q:"Cosa succede se l'intervento non risolve il problema?",
+            a:"Garanzia Aquaura: se i parametri non rientrano nei range promessi entro 7 giorni, Sergio torna gratuitamente. Nessun cavillo, nessun asterisco." },
+          { q:"Il contratto mensile si può disdire in qualsiasi momento?",
+            a:"Sì. Il contratto mensile non ha vincoli: puoi disdire con 30 giorni di preavviso senza penali. Puoi anche sospenderlo in caso di assenza prolungata." },
+          { q:"Portate i prodotti necessari o devo procurarmeli?",
+            a:"Sergio porta sempre i prodotti di prima necessità per l'intervento. I prodotti inclusi sono indicati nel preventivo. Per prodotti extra o sostituzioni, ti avvisiamo con anticipo." },
+        ].each_with_index do |item, i| %>
+          <div class="collapse bg-base-200 border border-base-300
+                      hover:border-primary/20 transition-colors rounded-2xl
+                      anim anim-up" style="animation-delay:<%= 0.03 + i * 0.05 %>s;">
+            <input type="radio" name="faq-sv" <%= i == 0 ? "checked" : "" %>/>
+            <div class="collapse-title font-semibold text-sm"><%= item[:q] %></div>
+            <div class="collapse-content">
+              <p class="text-sm text-base-content/60 leading-relaxed pt-1"><%= item[:a] %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+
+  <%# ══════════════════════════════════════════════════ %>
+  <%# 10 ── TIMELINE storico interventi                %>
+  <%# ══════════════════════════════════════════════════ %>
+  <section class="py-20 px-8 md:px-14 xl:px-20"
+           style="background:oklch(var(--b2)/.4);">
+    <div class="max-w-4xl mx-auto">
+      <div class="divider divider-primary opacity-30 mb-10">
+        <span class="text-[.65rem] tracking-[.3em] uppercase text-base-content/30 font-semibold">
+          Ultimi interventi certificati
+        </span>
+      </div>
+
+      <ul class="timeline timeline-snap-icon timeline-compact timeline-vertical">
+        <% [
+          { data:"15 Mar 2025", col:"primary",   titolo:"Check-up chimico",      luogo:"Milano · 200L Nature",     note:"NH₃ 0.0 · NO₂ 0.0 · pH 7.1 · Ottimale" },
+          { data:"8 Mar 2025",  col:"success",   titolo:"Potatura aquascaping",  luogo:"Torino · 120L Iwagumi",    note:"Layout riportato al progetto originale" },
+          { data:"1 Mar 2025",  col:"warning",   titolo:"Trasloco acquario",     luogo:"Genova → Milano · 400L",   note:"Zero perdite · Parametri ok dopo 24h" },
+          { data:"22 Feb 2025", col:"secondary", titolo:"Visita contratto",      luogo:"Roma · Discus 600L",       note:"Filtro pulito · CO₂ regolata · Ok" },
+          { data:"15 Feb 2025", col:"error",     titolo:"Emergenza NH₃",         luogo:"Firenze · 60L Nano",       note:"Crisi risolta in 3h · Tutti i pesci salvi" },
+        ].each_with_index do |ev, i| %>
+          <li>
+            <% if i < 4 %>
+            <hr class="bg-<%= ev[:col] %>/30"/>
+            <% end %>
+            <div class="timeline-middle">
+              <div class="w-8 h-8 rounded-full bg-<%= ev[:col] %>/10 border border-<%= ev[:col] %>/25
+                          flex items-center justify-center text-[.6rem] font-bold">
+                <%= i + 1 %>
+              </div>
+            </div>
+            <div class="<%= i.even? ? 'timeline-start mb-10 md:text-end' : 'timeline-end mb-10' %>
+                        anim anim-up" style="animation-delay:<%= i * 0.06 %>s;">
+              <time class="font-mono text-[.65rem] text-base-content/30 tracking-widest uppercase"><%= ev[:data] %></time>
+              <div class="font-black text-base-content text-base"><%= ev[:titolo] %></div>
+              <p class="text-[.78rem] text-base-content/50"><%= ev[:luogo] %></p>
+              <span class="badge badge-<%= ev[:col] %> badge-soft badge-xs mt-1 tracking-wide font-semibold"><%= ev[:note] %></span>
+            </div>
+            <% if i < 4 %><hr class="bg-<%= ev[:col] %>/30"/><% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </section>
+
 </div>
 
+<script>
+  // ── 3D Tilt ─────────────────────────────────────────
+  document.querySelectorAll('[data-tilt]').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const rx = ((e.clientY - r.top  - r.height/2) / (r.height/2)) * -7;
+      const ry = ((e.clientX - r.left - r.width /2) / (r.width /2)) *  7;
+      card.style.transform = `perspective(1100px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.015,1.015,1.015)`;
+      card.style.boxShadow = `${-ry*3}px ${rx*3}px 45px rgba(0,0,0,0.16)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = 'transform .5s ease, box-shadow .5s ease';
+      card.style.transform  = 'perspective(1100px) rotateX(0) rotateY(0) scale3d(1,1,1)';
+      card.style.boxShadow  = '';
+      setTimeout(() => { card.style.transition = ''; }, 500);
+    });
+  });
+
+  // ── Drag to scroll per galleria ───────────────────
+  const gallery = document.getElementById('sv-gallery');
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  gallery.addEventListener('mousedown', (e) => {
+    isDown = true;
+    gallery.classList.add('active');
+    startX = e.pageX - gallery.offsetLeft;
+    scrollLeft = gallery.scrollLeft;
+  });
+  gallery.addEventListener('mouseleave', () => {
+    isDown = false;
+    gallery.classList.remove('active');
+  });
+  gallery.addEventListener('mouseup', () => {
+    isDown = true; // Wait, actually false
+    isDown = false;
+    gallery.classList.remove('active');
+  });
+  gallery.addEventListener('mousemove', (e) => {
+    if(!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - gallery.offsetLeft;
+    const walk = (x - startX) * 2; // velocità scroll
+    gallery.scrollLeft = scrollLeft - walk;
+  });
+
+  // ── IntersectionObserver ─────────────────────────────
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.animationPlayState = 'running';
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.anim').forEach(el => io.observe(el));
+
+  // ── Countdown live ───────────────────────────────────
+  function tick() {
+    const now = new Date();
+    const h = 23 - now.getHours();
+    const m = 59 - now.getMinutes();
+    document.querySelectorAll('[aria-label$="ore"] span').forEach(s => { s.style.setProperty('--value', h); s.textContent = h; });
+    document.querySelectorAll('[aria-label$="min"] span').forEach(s => { s.style.setProperty('--value', m); s.textContent = m; });
+  }
+  tick();
+  setInterval(tick, 60000);
+</script>

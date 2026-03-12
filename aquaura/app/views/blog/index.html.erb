@@ -80,42 +80,12 @@
 
   <%# ══════════════════════════════════════════════════ %>
   <%# SEZIONE 1 ── HERO                                 %>
-  <%# Layout: navbar inline · headline · desc · CTA · stats row · foto dx %>
+  <%# Layout: headline · desc · CTA · stats row · foto dx %>
   <%# ══════════════════════════════════════════════════ %>
   <section class="grid grid-cols-1 lg:grid-cols-[1fr_44%] min-h-[90vh] pt-16">
 
     <%# — colonna sinistra ───────────────────────────── %>
     <div class="flex flex-col px-8 md:px-14 xl:px-20 py-12 lg:py-0 justify-center">
-
-      <%# Navbar mini (replica esatta del reference) %>
-      <nav class="flex items-center gap-8 mb-16 anim anim-up" style="animation-delay:.02s;">
-        <%= link_to root_path, class:"flex items-center gap-0.5 select-none" do %>
-          <span class="text-[.72rem] font-black tracking-[.2em] uppercase leading-tight">AQUA<br>URA</span>
-        <% end %>
-        <div class="hidden sm:flex items-center gap-7 text-[.67rem] tracking-widest uppercase
-                    text-base-content/40 font-semibold">
-          <%= link_to "Nostri acquari", galleria_path,   class:"hover:text-base-content/80 transition-colors" %>
-          <%= link_to "Come seguirci",  "#come-seguirci", class:"hover:text-base-content/80 transition-colors" %>
-          <%= link_to "Contatti",       root_path(anchor:"contatti"), class:"hover:text-base-content/80 transition-colors" %>
-        </div>
-        <div class="ml-auto flex items-center gap-3">
-          <%= link_to root_path(anchor:"contatti"),
-                class: "btn btn-sm rounded-full px-5 border border-base-300
-                         text-[.65rem] tracking-widest uppercase font-bold
-                         hover:border-primary/50 transition-all" do %>
-            Contattaci
-          <% end %>
-          <a href="tel:+39020000000"
-             class="btn btn-neutral btn-sm rounded-full px-5 gap-2
-                    text-[.65rem] tracking-widest uppercase font-bold">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M2.25 6.338c0-1.372 1.24-2.338 2.595-2.026l.296.072A48.11 48.11 0 0111.25 5c1.43 0 2.84.135 4.109.384l.296-.072C16.91 4 18.15 4.966 18.15 6.338v.387c0 1.26-.93 2.306-2.183 2.443l-.413.046a48.16 48.16 0 01-9.108 0l-.413-.046C4.68 8.92 3.75 7.874 3.75 6.725V6.34h-1.5v-.002z"/>
-            </svg>
-            +39 02 000 0000
-          </a>
-        </div>
-      </nav>
 
       <%# Headline %>
       <div class="mb-6 anim anim-up" style="animation-delay:.1s;">
@@ -137,9 +107,6 @@
                 class="btn btn-neutral rounded-full px-8 gap-3
                        text-[.65rem] tracking-widest uppercase font-bold">
           Leggi gli articoli
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-          </svg>
         </button>
       </div>
 
@@ -184,9 +151,9 @@
     <%# — colonna destra: immagine clippata ─────────── %>
     <div class="relative hidden lg:block anim anim-right" style="animation-delay:.15s;">
       <div class="hero-img absolute inset-0 overflow-hidden">
-        <img src="https://picsum.photos/seed/aquahero22/900/1000"
-             alt="Acquario Aquaura"
-             class="w-full h-full object-cover"/>
+        <%= image_tag "coral-reef-premium.jpg", 
+             alt: "Acquario Marino Premium", 
+             class: "w-full h-full object-cover" %>
         <%# Overlay gradient a sinistra per blend col bg %>
         <div class="absolute inset-0 bg-gradient-to-r from-base-100/40 via-transparent to-transparent"></div>
       </div>
@@ -212,9 +179,9 @@
           Nessuna teoria non verificata sul campo, nessuna sponsorizzazione nascosta.
         </p>
         <div class="rounded-2xl overflow-hidden border border-base-300">
-          <img src="https://picsum.photos/seed/aquastruct2/700/360"
-               alt="Struttura acquario"
-               class="w-full object-cover hover:scale-[1.03] transition-transform duration-700"/>
+          <img src="https://images.unsplash.com/photo-1514907283155-ea5f4094c70c?q=80&w=2670&auto=format&fit=crop" 
+               alt="Dettaglio barriera corallina" 
+               class="w-full object-cover hover:scale-[1.03] transition-transform duration-700" />
         </div>
       </div>
 
@@ -315,27 +282,9 @@
               class: "btn btn-neutral rounded-full px-8 gap-2
                        text-[.65rem] tracking-widest uppercase font-bold" do %>
           Archivio completo
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-          </svg>
         <% end %>
 
-        <div class="flex gap-2">
-          <button onclick="document.getElementById('cat-track').scrollBy({left:-260,behavior:'smooth'})"
-                  class="btn btn-sm btn-circle bg-base-100 border border-base-300
-                         hover:border-base-content/30 transition-all">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
-            </svg>
-          </button>
-          <button onclick="document.getElementById('cat-track').scrollBy({left:260,behavior:'smooth'})"
-                  class="btn btn-sm btn-circle bg-base-100 border border-base-300
-                         hover:border-base-content/30 transition-all">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-            </svg>
-          </button>
-        </div>
+
       </div>
     </div>
   </section>
@@ -349,7 +298,7 @@
     <div class="max-w-7xl mx-auto">
 
       <h2 class="text-3xl font-black tracking-tighter text-center mb-12 anim anim-up"
-          style="animation-delay:.05s;">
+          style="animation-delay:0.05s;">
         Come seguire il Journal
       </h2>
 
@@ -380,115 +329,11 @@
           <div class="card bg-base-100 border border-base-300 rounded-2xl
                       hover:border-<%= m[:col] %>/35 hover:shadow-lg hover:shadow-<%= m[:col] %>/6
                       hover:-translate-y-0.5 transition-all duration-300
-                      anim anim-up" style="animation-delay:<%= .05 + i * .07 %>s;">
+                      anim anim-up" style="animation-delay:<%= 0.05 + i * 0.07 %>s;">
             <div class="card-body p-6 gap-4">
               <h3 class="font-black text-base tracking-tight"><%= m[:titolo] %></h3>
               <p class="text-base-content/45 text-[.82rem] leading-relaxed flex-1"><%= m[:desc] %></p>
-              <%# Arrow button angolo basso dx come nel ref %>
-              <div class="flex justify-end">
-                <button class="btn btn-sm btn-circle border border-base-300
-                               hover:bg-<%= m[:col] %> hover:border-<%= m[:col] %>
-                               hover:text-<%= m[:col] %>-content transition-all duration-200">
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
-                       stroke-width="2.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </section>
 
-
-  <%# ══════════════════════════════════════════════════ %>
-  <%# SEZIONE 5 ── TRE PASSI (identica struttura ref)  %>
-  <%# Layout: titolo · 3 colonne number + testo        %>
-  <%# ══════════════════════════════════════════════════ %>
-  <section class="py-24 px-8 md:px-14 xl:px-20 bg-base-100 border-t border-base-200">
-    <div class="max-w-7xl mx-auto">
-
-      <h2 class="text-3xl font-black tracking-tighter mb-4 anim anim-up" style="animation-delay:.05s;">
-        Tre passi verso<br>una vasca che funziona
-      </h2>
-      <p class="text-base-content/40 mb-16 anim anim-up" style="animation-delay:.1s;">
-        Il percorso minimo che Sergio consiglia a ogni acquarista che vuole smettere di improvvisare.
-      </p>
-
-      <%# Linea connettore tra step (solo desktop) %>
-      <div class="hidden md:grid grid-cols-3 gap-10 relative">
-        <div class="absolute top-8 left-[calc(33.33%-1rem)] right-[calc(33.33%-1rem)] h-px
-                    bg-gradient-to-r from-primary/25 via-primary/15 to-primary/5 pointer-events-none"></div>
-
-        <% [
-          {
-            n:    "01",
-            ico:  "📚",
-            titolo: "Studia prima di comprare",
-            desc:   "Leggi almeno 10 articoli sul ciclo dell'azoto e sulla chimica dell'acqua prima di acquistare il primo pesce. La conoscenza precede la vasca.",
-            link:   "Inizia dal ciclo azoto →",
-          },
-          {
-            n:    "02",
-            ico:  "🔬",
-            titolo: "Analizza e misura sempre",
-            desc:   "Investi in un fotometro professionale. Senza misurazioni precise ogni intervento è un tentativo cieco. I dati non mentono.",
-            link:   "Guida ai test kit →",
-          },
-          {
-            n:    "03",
-            ico:  "🌿",
-            titolo: "Concludi con le piante vive",
-            desc:   "Inserisci la fauna solo dopo aver stabilizzato le piante. Le piante vive regolano l'ecosistema meglio di qualsiasi filtro meccanico.",
-            link:   "Articoli sulle piante →",
-          },
-        ].each_with_index do |step, i| %>
-          <div class="relative anim anim-up" style="animation-delay:<%= .08 + i * .1 %>s;">
-            <%# Numero watermark grande come nel ref %>
-            <div class="step-num"><%= step[:n] %></div>
-
-            <%# Icona con cerchio come nel ref %>
-            <div class="relative z-10 mb-6">
-              <div class="w-14 h-14 rounded-2xl bg-primary/8 border border-primary/15
-                          flex items-center justify-center text-2xl">
-                <%= step[:ico] %>
-              </div>
-            </div>
-
-            <div class="relative z-10">
-              <h3 class="font-black text-lg tracking-tight leading-snug mb-3">
-                <%= step[:titolo] %>
-              </h3>
-              <p class="text-base-content/45 text-[.85rem] leading-relaxed mb-4">
-                <%= step[:desc] %>
-              </p>
-              <button class="btn btn-ghost btn-xs p-0 h-auto min-h-0
-                             text-primary font-bold text-[.65rem] tracking-widest uppercase">
-                <%= step[:link] %>
-              </button>
-            </div>
-          </div>
-        <% end %>
-
-        <%# Versione mobile (stack) %>
-      </div>
-      <div class="md:hidden space-y-10">
-        <% [
-          { n:"01", ico:"📚", titolo:"Studia prima di comprare", desc:"Leggi almeno 10 articoli sul ciclo dell'azoto prima di comprare il primo pesce." },
-          { n:"02", ico:"🔬", titolo:"Analizza e misura sempre",  desc:"Investi in un fotometro professionale. Senza dati ogni intervento è cieco." },
-          { n:"03", ico:"🌿", titolo:"Concludi con le piante",    desc:"Inserisci la fauna solo dopo aver stabilizzato le piante vive." },
-        ].each_with_index do |step, i| %>
-          <div class="flex gap-5 anim anim-up" style="animation-delay:<%= .05 + i * .08 %>s;">
-            <div class="w-12 h-12 rounded-xl bg-primary/8 border border-primary/15
-                        flex items-center justify-center text-xl shrink-0">
-              <%= step[:ico] %>
-            </div>
-            <div>
-              <p class="font-mono text-[.6rem] tracking-widest uppercase text-base-content/25 mb-0.5"><%= step[:n] %></p>
-              <h3 class="font-black text-base tracking-tight mb-1"><%= step[:titolo] %></h3>
-              <p class="text-base-content/45 text-[.82rem] leading-relaxed"><%= step[:desc] %></p>
             </div>
           </div>
         <% end %>
@@ -503,7 +348,7 @@
   <section class="py-20 px-8 md:px-14 xl:px-20" style="background:#0a0e17;">
     <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 justify-between">
 
-      <div class="anim anim-up" style="animation-delay:.05s;">
+      <div class="anim anim-up" style="animation-delay:0.05s;">
         <p class="text-[.65rem] tracking-[.25em] uppercase text-white/25 font-semibold mb-3">Newsletter</p>
         <h2 class="text-4xl font-black tracking-tighter leading-tight text-white mb-3">
           Non perdere<br>i nuovi articoli
@@ -514,7 +359,7 @@
         </p>
       </div>
 
-      <div class="w-full lg:max-w-sm anim anim-up" style="animation-delay:.1s;">
+      <div class="w-full lg:max-w-sm anim anim-up" style="animation-delay:0.1s;">
         <div class="space-y-3">
           <input type="text" placeholder="Il tuo nome"
                  class="input w-full rounded-xl bg-white/5 border border-white/8 text-white
@@ -529,7 +374,7 @@
             </span>
           </label>
           <button class="btn btn-primary w-full rounded-xl text-[.65rem] tracking-widest uppercase font-bold">
-            Iscriviti al Journal →
+            Iscriviti al Journal
           </button>
         </div>
       </div>

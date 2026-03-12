@@ -118,7 +118,7 @@
         ✦ Ecosistemi Realizzati
       </div>
       <h1 class="text-6xl lg:text-7xl font-black tracking-tighter mb-4 leading-[0.9] fade-up" style="animation-delay:0.15s;">
-        La nostra<br><span class="shimmer-text">Collezione</span>
+        La nostra<br><span class="text-primary">Collezione</span>
       </h1>
       <p class="text-base-content/50 text-xl font-light leading-relaxed max-w-xl mx-auto mb-10 fade-up" style="animation-delay:0.3s;">
         Ogni acquario è un ecosistema vivo. Ogni foto racconta mesi di equilibri,
@@ -195,18 +195,18 @@
   <%# ── MASONRY GALLERY ─────────────────────────────────── %>
   <%
     progetti = [
-      { id:1,  cat:"nature",     titolo:"Foresta di HC Cuba",         luogo:"Milano, Residenziale",  dim:"200L",  img:"https://picsum.photos/seed/aq01/600/800",  h:"tall",   likes:124, badge:"Nature Aquarium", badge_col:"success" },
-      { id:2,  cat:"discus",     titolo:"Discus Paradise",            luogo:"Roma, Studio Privato",  dim:"600L",  img:"https://picsum.photos/seed/aq02/600/450",  h:"medium", likes:89,  badge:"Discus",         badge_col:"error" },
-      { id:3,  cat:"aquascape",  titolo:"Iwagumi Minimalista",        luogo:"Torino, Appartamento",  dim:"120L",  img:"https://picsum.photos/seed/aq03/600/500",  h:"medium", likes:203, badge:"Aquascaping",    badge_col:"primary" },
-      { id:4,  cat:"commercial", titolo:"Reception Tower",            luogo:"Milano, Hotel 5★",      dim:"2000L", img:"https://picsum.photos/seed/aq04/600/900",  h:"tall",   likes:341, badge:"Commerciale",    badge_col:"secondary" },
-      { id:5,  cat:"nano",       titolo:"Nano Shrimp Garden",         luogo:"Firenze, Home Office",  dim:"30L",   img:"https://picsum.photos/seed/aq05/600/400",  h:"short",  likes:67,  badge:"Nano",           badge_col:"accent" },
-      { id:6,  cat:"biotopo",    titolo:"Amazon Blackwater",          luogo:"Bologna, Villa",        dim:"400L",  img:"https://picsum.photos/seed/aq06/600/600",  h:"medium", likes:156, badge:"Biotopo",        badge_col:"warning" },
-      { id:7,  cat:"nature",     titolo:"Vallesneria Gigante",        luogo:"Venezia, Albergo",      dim:"350L",  img:"https://picsum.photos/seed/aq07/600/750",  h:"tall",   likes:98,  badge:"Nature Aquarium",badge_col:"success" },
-      { id:8,  cat:"aquascape",  titolo:"Dragon Stone Landscape",     luogo:"Genova, Ufficio",       dim:"180L",  img:"https://picsum.photos/seed/aq08/600/420",  h:"short",  likes:177, badge:"Aquascaping",    badge_col:"primary" },
-      { id:9,  cat:"commercial", titolo:"Ristorante Oceanico",        luogo:"Napoli, Ristorante",    dim:"800L",  img:"https://picsum.photos/seed/aq09/600/680",  h:"medium", likes:289, badge:"Commerciale",    badge_col:"secondary" },
-      { id:10, cat:"discus",     titolo:"Royal Blue Discus Suite",    luogo:"Palermo, Villa",        dim:"500L",  img:"https://picsum.photos/seed/aq10/600/820",  h:"tall",   likes:212, badge:"Discus",         badge_col:"error" },
-      { id:11, cat:"nano",       titolo:"Cube Microsorum",            luogo:"Padova, Bedroom",       dim:"20L",   img:"https://picsum.photos/seed/aq11/600/400",  h:"short",  likes:44,  badge:"Nano",           badge_col:"accent" },
-      { id:12, cat:"biotopo",    titolo:"Tanganyika Cichlid",         luogo:"Verona, Salotto",       dim:"300L",  img:"https://picsum.photos/seed/aq12/600/520",  h:"medium", likes:133, badge:"Biotopo",        badge_col:"warning" },
+      { id:1,  cat:"nature",     titolo:"Foresta di HC Cuba",         luogo:"Milano, Residenziale",  dim:"200L",  img:"https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=800&q=80",  h:"tall",   likes:124, badge:"Nature Aquarium", badge_col:"success" },
+      { id:2,  cat:"discus",     titolo:"Discus Paradise",            luogo:"Roma, Studio Privato",  dim:"600L",  img:"https://images.unsplash.com/photo-1535591273668-578e31182c4f?w=800&q=80",  h:"medium", likes:89,  badge:"Discus",         badge_col:"error" },
+      { id:3,  cat:"aquascape",  titolo:"Iwagumi Minimalista",        luogo:"Torino, Appartamento",  dim:"120L",  img:"https://images.unsplash.com/photo-1504472478235-9bc48ba4d60f?w=800&q=80",  h:"medium", likes:203, badge:"Aquascaping",    badge_col:"primary" },
+      { id:4,  cat:"commercial", titolo:"Reception Tower",            luogo:"Milano, Hotel 5★",      dim:"2000L", img:"https://images.unsplash.com/photo-1582967788606-a171c1080cb0?w=800&q=80",  h:"tall",   likes:341, badge:"Commerciale",    badge_col:"secondary" },
+      { id:5,  cat:"nano",       titolo:"Nano Shrimp Garden",         luogo:"Firenze, Home Office",  dim:"30L",   img:"https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=800&q=80",  h:"short",  likes:67,  badge:"Nano",           badge_col:"accent" },
+      { id:6,  cat:"biotopo",    titolo:"Amazon Blackwater",          luogo:"Bologna, Villa",        dim:"400L",  img:"https://images.unsplash.com/photo-1524704654690-b56c05c78a00?w=800&q=80",  h:"medium", likes:156, badge:"Biotopo",        badge_col:"warning" },
+      { id:7,  cat:"nature",     titolo:"Vallesneria Gigante",        luogo:"Venezia, Albergo",      dim:"350L",  img:"https://images.unsplash.com/photo-1514907283155-ea5f4094c70c?w=800&q=80",  h:"tall",   likes:98,  badge:"Nature Aquarium",badge_col:"success" },
+      { id:8,  cat:"aquascape",  titolo:"Dragon Stone Landscape",     luogo:"Genova, Ufficio",       dim:"180L",  img:"https://images.unsplash.com/photo-1516408388733-2f8364f2e00b?w=800&q=80",  h:"short",  likes:177, badge:"Aquascaping",    badge_col:"primary" },
+      { id:9,  cat:"commercial", titolo:"Ristorante Oceanico",        luogo:"Napoli, Ristorante",    dim:"800L",  img:"https://images.unsplash.com/photo-1520301255226-bf5f144451c1?w=800&q=80",  h:"medium", likes:289, badge:"Commerciale",    badge_col:"secondary" },
+      { id:10, cat:"discus",     titolo:"Royal Blue Discus Suite",    luogo:"Palermo, Villa",        dim:"500L",  img:"https://images.unsplash.com/photo-1576330383200-2bf325cfec52?w=800&q=80",  h:"tall",   likes:212, badge:"Discus",         badge_col:"error" },
+      { id:11, cat:"nano",       titolo:"Cube Microsorum",            luogo:"Padova, Bedroom",       dim:"20L",   img:"https://images.unsplash.com/photo-1522720833375-9c27ffb02a5e?w=800&q=80",  h:"short",  likes:44,  badge:"Nano",           badge_col:"accent" },
+      { id:12, cat:"biotopo",    titolo:"Tanganyika Cichlid",         luogo:"Verona, Salotto",       dim:"300L",  img:"https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?w=800&q=80",  h:"medium", likes:133, badge:"Biotopo",        badge_col:"warning" },
     ]
   %>
 
@@ -406,18 +406,18 @@
 <script>
   // ── Dati galleria per modal ────────────────────────────
   const progetti = {
-    1:  { titolo:"Foresta di HC Cuba",        luogo:"Milano, Residenziale",  dim:"200L",  img:"https://picsum.photos/seed/aq01/800/600",  badge:"Nature Aquarium", badge_col:"badge-success" },
-    2:  { titolo:"Discus Paradise",           luogo:"Roma, Studio Privato",  dim:"600L",  img:"https://picsum.photos/seed/aq02/800/600",  badge:"Discus",         badge_col:"badge-error" },
-    3:  { titolo:"Iwagumi Minimalista",       luogo:"Torino, Appartamento",  dim:"120L",  img:"https://picsum.photos/seed/aq03/800/600",  badge:"Aquascaping",    badge_col:"badge-primary" },
-    4:  { titolo:"Reception Tower",           luogo:"Milano, Hotel 5★",      dim:"2000L", img:"https://picsum.photos/seed/aq04/800/600",  badge:"Commerciale",    badge_col:"badge-secondary" },
-    5:  { titolo:"Nano Shrimp Garden",        luogo:"Firenze, Home Office",  dim:"30L",   img:"https://picsum.photos/seed/aq05/800/600",  badge:"Nano",           badge_col:"badge-accent" },
-    6:  { titolo:"Amazon Blackwater",         luogo:"Bologna, Villa",        dim:"400L",  img:"https://picsum.photos/seed/aq06/800/600",  badge:"Biotopo",        badge_col:"badge-warning" },
-    7:  { titolo:"Vallesneria Gigante",       luogo:"Venezia, Albergo",      dim:"350L",  img:"https://picsum.photos/seed/aq07/800/600",  badge:"Nature Aquarium",badge_col:"badge-success" },
-    8:  { titolo:"Dragon Stone Landscape",    luogo:"Genova, Ufficio",       dim:"180L",  img:"https://picsum.photos/seed/aq08/800/600",  badge:"Aquascaping",    badge_col:"badge-primary" },
-    9:  { titolo:"Ristorante Oceanico",       luogo:"Napoli, Ristorante",    dim:"800L",  img:"https://picsum.photos/seed/aq09/800/600",  badge:"Commerciale",    badge_col:"badge-secondary" },
-    10: { titolo:"Royal Blue Discus Suite",   luogo:"Palermo, Villa",        dim:"500L",  img:"https://picsum.photos/seed/aq10/800/600",  badge:"Discus",         badge_col:"badge-error" },
-    11: { titolo:"Cube Microsorum",           luogo:"Padova, Bedroom",       dim:"20L",   img:"https://picsum.photos/seed/aq11/800/600",  badge:"Nano",           badge_col:"badge-accent" },
-    12: { titolo:"Tanganyika Cichlid",        luogo:"Verona, Salotto",       dim:"300L",  img:"https://picsum.photos/seed/aq12/800/600",  badge:"Biotopo",        badge_col:"badge-warning" },
+    1:  { titolo:"Foresta di HC Cuba",        luogo:"Milano, Residenziale",  dim:"200L",  img:"https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=800&q=80",  badge:"Nature Aquarium", badge_col:"badge-success" },
+    2:  { titolo:"Discus Paradise",           luogo:"Roma, Studio Privato",  dim:"600L",  img:"https://images.unsplash.com/photo-1535591273668-578e31182c4f?w=800&q=80",  badge:"Discus",         badge_col:"badge-error" },
+    3:  { titolo:"Iwagumi Minimalista",       luogo:"Torino, Appartamento",  dim:"120L",  img:"https://images.unsplash.com/photo-1504472478235-9bc48ba4d60f?w=800&q=80",  badge:"Aquascaping",    badge_col:"badge-primary" },
+    4:  { titolo:"Reception Tower",           luogo:"Milano, Hotel 5★",      dim:"2000L", img:"https://images.unsplash.com/photo-1582967788606-a171c1080cb0?w=800&q=80",  badge:"Commerciale",    badge_col:"badge-secondary" },
+    5:  { titolo:"Nano Shrimp Garden",        luogo:"Firenze, Home Office",  dim:"30L",   img:"https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=800&q=80",  badge:"Nano",           badge_col:"badge-accent" },
+    6:  { titolo:"Amazon Blackwater",         luogo:"Bologna, Villa",        dim:"400L",  img:"https://images.unsplash.com/photo-1524704654690-b56c05c78a00?w=800&q=80",  badge:"Biotopo",        badge_col:"badge-warning" },
+    7:  { titolo:"Vallesneria Gigante",       luogo:"Venezia, Albergo",      dim:"350L",  img:"https://images.unsplash.com/photo-1514907283155-ea5f4094c70c?w=800&q=80",  badge:"Nature Aquarium",badge_col:"badge-success" },
+    8:  { titolo:"Dragon Stone Landscape",    luogo:"Genova, Ufficio",       dim:"180L",  img:"https://images.unsplash.com/photo-1516408388733-2f8364f2e00b?w=800&q=80",  badge:"Aquascaping",    badge_col:"badge-primary" },
+    9:  { titolo:"Ristorante Oceanico",       luogo:"Napoli, Ristorante",    dim:"800L",  img:"https://images.unsplash.com/photo-1520301255226-bf5f144451c1?w=800&q=80",  badge:"Commerciale",    badge_col:"badge-secondary" },
+    10: { titolo:"Royal Blue Discus Suite",   luogo:"Palermo, Villa",        dim:"500L",  img:"https://images.unsplash.com/photo-1576330383200-2bf325cfec52?w=800&q=80",  badge:"Discus",         badge_col:"badge-error" },
+    11: { titolo:"Cube Microsorum",           luogo:"Padova, Bedroom",       dim:"20L",   img:"https://images.unsplash.com/photo-1522720833375-9c27ffb02a5e?w=800&q=80",  badge:"Nano",           badge_col:"badge-accent" },
+    12: { titolo:"Tanganyika Cichlid",        luogo:"Verona, Salotto",       dim:"300L",  img:"https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?w=800&q=80",  badge:"Biotopo",        badge_col:"badge-warning" },
   };
 
   // ── Apri modal ────────────────────────────────────────
