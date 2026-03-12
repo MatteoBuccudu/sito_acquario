@@ -1,24 +1,45 @@
-# README
+# Aquaura
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Questo progetto è un'applicazione Ruby on Rails (v8.1.2) con DaisyUI per lo styling. Segui questi passaggi per configurare l'ambiente di sviluppo su un altro computer.
 
-Things you may want to cover:
+## Requisiti
 
-* Ruby version
+Assicurati di avere installato:
+* **Ruby 3.4.7** (si consiglia l'uso di `rbenv` o `asdf`)
+* **Node.js** e **NPM** (necessari per DaisyUI e Tailwind CSS)
+* **SQLite3**
 
-* System dependencies
+## Configurazione
 
-* Configuration
+1. **Clona il repository:**
+   ```bash
+   git clone <url-del-repo>
+   cd aquaura
+   ```
 
-* Database creation
+2. **Installa le dipendenze Ruby:**
+   ```bash
+   bundle install
+   ```
 
-* Database initialization
+3. **Installa le dipendenze JavaScript:**
+   ```bash
+   npm install
+   ```
 
-* How to run the test suite
+4. **Prepara il database:**
+   ```bash
+   bin/rails db:prepare
+   ```
 
-* Services (job queues, cache servers, search engines, etc.)
+5. **Avvia il server di sviluppo:**
+   ```bash
+   bin/dev
+   ```
+   *Nota: `bin/dev` avvia sia il server Rails che il processo di compilazione CSS/JS in parallelo.*
 
-* Deployment instructions
+## Struttura del progetto
 
-* ...
+* `app/views`: Contiene le pagine del sito (Home, Blog, Shop, Servizi).
+* `app/javascript/controllers`: Controller Stimulus per le interazioni dinamiche.
+* `tailwind.config.js`: Configurazione di Tailwind e DaisyUI.
