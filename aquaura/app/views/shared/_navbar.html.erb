@@ -22,14 +22,14 @@
     right: 0;
     height: 100dvh;
     width: min(88vw, 360px);
-    background: #080c10;
+    background: var(--color-base-100);
     transform: translateX(100%);
     transition: transform 480ms cubic-bezier(0.32, 0.72, 0, 1);
     z-index: 60;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    border-left: 1px solid rgba(255,255,255,0.06);
+    border-left: 1px solid oklch(var(--bc) / 0.06);
   }
 
   /* Backdrop */
@@ -124,20 +124,20 @@
 
   <%# Linea accent sinistra %>
   <div style="position:absolute;left:0;top:12%;bottom:12%;width:1px;
-              background:linear-gradient(to bottom,transparent,color-mix(in srgb, var(--color-primary) 50%, transparent),transparent);"></div>
+              background:linear-gradient(to bottom,transparent,oklch(var(--p) / 0.5),transparent);"></div>
 
   <%# Header %>
   <div class="relative flex items-center justify-between px-7 py-6"
-       style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+       style="border-bottom: 1px solid oklch(var(--p) / 0.06);">
     <%= link_to root_path, onclick: "closeMenu()", class: "flex items-center select-none" do %>
-      <span class="text-[0.75rem] font-black tracking-[0.22em] uppercase text-white">Aqua</span>
+      <span class="text-[0.75rem] font-black tracking-[0.22em] uppercase text-base-content">Aqua</span>
       <span class="text-[0.75rem] font-black tracking-[0.22em] uppercase text-primary">ura</span>
     <% end %>
 
     <button onclick="closeMenu()" aria-label="Chiudi menu"
             class="flex items-center justify-center w-9 h-9 rounded-xl
-                   text-white/40 hover:text-white
-                   hover:bg-white/8 border border-white/8 hover:border-white/16
+                   text-base-content/40 hover:text-base-content
+                   hover:bg-base-content/5 border border-base-content/10 hover:border-base-content/20
                    transition-all duration-200 active:scale-90">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
@@ -147,7 +147,7 @@
 
   <%# Label %>
   <p class="px-8 pt-7 pb-2"
-     style="font-size:0.58rem;letter-spacing:0.28em;text-transform:uppercase;color:rgba(255,255,255,0.25);font-weight:600;">
+     style="font-size:0.58rem;letter-spacing:0.28em;text-transform:uppercase;color:oklch(var(--bc) / 0.25);font-weight:600;">
     Navigazione
   </p>
 
@@ -161,12 +161,12 @@
               "menu-link group relative flex items-center justify-between",
               "px-4 py-[14px] rounded-2xl",
               "active:scale-[0.98]",
-              (nav_active?(item[:path]) ? "text-primary" : "text-white/80 hover:text-white")
+              (nav_active?(item[:path]) ? "text-primary" : "text-base-content/80 hover:text-base-content")
              ].join(" "),
              style: "--i:#{i}; #{nav_active?(item[:path]) ? 'background:color-mix(in srgb, var(--color-primary) 10%, transparent);' : ''}" do %>
 
         <div class="flex items-baseline gap-4">
-          <span class="text-[0.58rem] font-mono w-[1.2rem] shrink-0 transition-colors group-hover:text-primary/60 <%= nav_active?(item[:path]) ? '!text-primary/60' : 'text-white/20' %>">
+          <span class="text-[0.58rem] font-mono w-[1.2rem] shrink-0 transition-colors group-hover:text-primary/60 <%= nav_active?(item[:path]) ? '!text-primary/60' : 'text-base-content/20' %>">
             <%= (i + 1).to_s.rjust(2, "0") %>
           </span>
           <span class="text-[1.5rem] font-bold tracking-tight leading-none">
@@ -192,7 +192,7 @@
 
   <%# Footer CTA %>
   <div class="px-5 pb-8 mt-auto">
-    <div style="height:1px;background:rgba(255,255,255,0.06);margin-bottom:1.25rem;"></div>
+    <div style="height:1px;background:oklch(var(--bc) / 0.06);margin-bottom:1.25rem;"></div>
 
     <%= link_to root_path(anchor: "contatti"),
           onclick: "closeMenu()",
@@ -217,7 +217,7 @@
     <% end %>
 
     <p class="text-center mt-4"
-       style="font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.18);">
+       style="font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;color:oklch(var(--bc) / 0.18);">
       Aquaura © <%= Time.now.year %>
     </p>
   </div>

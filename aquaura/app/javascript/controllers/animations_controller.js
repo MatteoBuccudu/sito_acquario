@@ -1,0 +1,84 @@
+import { Controller } from "@hotwired/stimulus"
+import gsap from "gsap"
+import ScrollTrigger from "gsap/ScrollTrigger"
+
+// Registriamo il plugin ScrollTrigger
+gsap.registerPlugin(ScrollTrigger)
+
+export default class extends Controller {
+  connect() {
+    console.log("Animations controller connected!")
+    this.initAnimations()
+  }
+
+  initAnimations() {
+    // 1. Animazione degli elementi con classe .reveal
+    const reveals = this.element.querySelectorAll(".reveal")
+    
+    reveals.forEach((el) => {
+      // Configuriamo l'animazione di ingresso: fade-up (dal basso verso l'alto)
+      gsap.fromTo(el, 
+        { 
+          opacity: 0, 
+          y: 50 
+        }, 
+        { 
+          opacity: 1, 
+          y: 0, 
+          duration: 1.2, 
+          ease: "expo.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%", // Inizia quando la cima dell'elemento arriva all'85% della viewport
+            toggleActions: "play none none none" // Riproduci solo una volta
+          }
+        }
+      )
+    })
+
+    // 2. Animazione "stagger" per le griglie o liste (es. carte del blog)
+    const staggers = this.element.querySelectorAll(".stagger-reveal")
+    staggers.forEach((container) => {
+      const children = container.children
+      if (children.length > 0) {
+        gsap.fromTo(children,
+          { 
+            opacity: 0, 
+            y: 30 
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.15, // Ritardo tra un elemento e l'altro
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: container,
+              start: "top 80%"
+            }
+          }
+        )
+      }
+    })
+
+    // 3. Animazione per immagini con effetto zoom
+    const zoomReveals = this.element.querySelectorAll(".zoom-reveal")
+    zoomReveals.forEach((el) => {
+      gsap.fromTo(el,
+        { scale: 0.9, opacity: 0 },
+        { 
+          scale: 1, 
+          opacity: 1, 
+          duration: 1.5, 
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 90%"
+          }
+        }
+      )
+    })
+    // 4. Forza il ricalcolo delle posizioni
+    ScrollTrigger.refresh()
+  }
+}

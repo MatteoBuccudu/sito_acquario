@@ -1,95 +1,553 @@
+<%# ══════════════════════════════════════════════════════
+    Journal — Pillole di Saggezza
+    Layout 1:1 dal reference screenshot:
+      1. Hero split (testo + stat row + immagine destra)
+      2. "Scriviamo di…" — testo sx + 3 dark feature card dx
+      3. Catalogo articoli — scroll orizzontale + nav
+      4. Come seguirci — 4 card orizzontali
+      5. Tre passi — numbered col layout
+    Stack: DaisyUI 5 · Tailwind CSS · CSS puro
+══════════════════════════════════════════════════════ %>
 
-<div class="w-full min-h-screen py-24 bg-base-100">
-  <div class="container mx-auto px-6 max-w-5xl">
-    
-    <!-- Breadcrumb con DaisyUI -->
-    <div class="breadcrumbs text-sm mb-12 opacity-0 translate-y-10 transition-all duration-1000" data-controller="scroll-reveal">
-      <ul>
-        <li><%= link_to "Home", root_path, class: "text-base-content/60 hover:text-primary" %></li>
-        <li class="text-primary font-medium">Blog</li>
-      </ul>
-    </div>
-    
-    <!-- Hero Editoriale del Blog -->
-    <div class="mb-20 text-center" data-controller="scroll-reveal">
-      <h3 class="text-xs tracking-[0.2em] font-bold text-primary uppercase mb-4">Pillole di Saggezza</h3>
-      <h1 class="text-5xl md:text-6xl font-serif text-base-content mb-6 tracking-tight">Il Journal di Sergio.</h1>
-      <p class="text-lg text-base-content/60 font-light max-w-2xl mx-auto leading-relaxed">
-        Non siamo venditori di pesci, ma studiosi. Tecniche, scoperte scientifiche e riflessioni sulla vita sotto il pelo dell'acqua.
-      </p>
-    </div>
+<style>
+  /* ─── Animazioni ─────────────────────────────────── */
+  @keyframes fade-up {
+    from { opacity:0; transform:translateY(20px); }
+    to   { opacity:1; transform:translateY(0);    }
+  }
+  @keyframes fade-in-right {
+    from { opacity:0; transform:translateX(28px); }
+    to   { opacity:1; transform:translateX(0);    }
+  }
+  .anim { opacity:0; animation-duration:.65s; animation-fill-mode:both;
+          animation-timing-function:cubic-bezier(.22,.68,0,1.2);
+          animation-play-state:paused; }
+  .anim-up    { animation-name:fade-up; }
+  .anim-right { animation-name:fade-in-right; }
 
-    <!-- Filtri con DaisyUI -->
-    <div class="flex flex-wrap gap-2 mb-12 justify-center" data-controller="scroll-reveal">
-      <button class="badge badge-lg badge-primary text-primary-content p-4">Tutti gli Articoli</button>
-      <button class="badge badge-lg badge-outline p-4 text-base-content/60 hover:text-base-content hover:badge-primary">Acquariologia</button>
-      <button class="badge badge-lg badge-outline p-4 text-base-content/60 hover:text-base-content hover:badge-primary">Chimica</button>
-      <button class="badge badge-lg badge-outline p-4 text-base-content/60 hover:text-base-content hover:badge-primary">Design</button>
-      <button class="badge badge-lg badge-outline p-4 text-base-content/60 hover:text-base-content hover:badge-primary">Manutenzione</button>
-    </div>
+  /* ─── Hero image clip (angolo tagliate come screenshot) ── */
+  .hero-img {
+    clip-path: inset(0 0 0 5% round 20px);
+  }
 
-    <!-- Lista Articoli -->
-    <div class="space-y-16">
-      <% @articles.each_with_index do |article, index| %>
-        <article class="group flex flex-col md:flex-row gap-8 lg:gap-12 items-center opacity-0 translate-y-10 transition-all duration-1000" data-controller="scroll-reveal">
-          
-          <!-- Immagine con proporzioni cinematografiche -->
-          <div class="w-full md:w-1/2 overflow-hidden bg-base-200 aspect-[4/3] relative">
-            <%= link_to blog_path(article[:id]), data: { turbo_frame: "_top" }, class: "block w-full h-full" do %>
-              <div class="absolute inset-0 bg-base-100/10 z-10 group-hover:bg-transparent transition-colors duration-500"></div>
-              <img src="<%= article[:image] %>" alt="<%= article[:title] %>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out filter grayscale-[30%] group-hover:grayscale-0" />
+  /* ─── Stat number grandi ─────────────────────────── */
+  .big-num {
+    font-size: 2.8rem; font-weight:900; letter-spacing:-.04em;
+    line-height:1; color:oklch(var(--bc));
+  }
+
+  /* ─── Dark feature card (come le card dx nel ref) ── */
+  .feat-card {
+    background:#111827;
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:1rem;
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+  .feat-card:hover {
+    transform:translateX(5px);
+    border-color:rgba(14,165,233,.3);
+    box-shadow:-4px 0 20px rgba(14,165,233,.1);
+  }
+
+  /* ─── Catalog card ───────────────────────────────── */
+  .cat-card { flex-shrink:0; width:240px; position:relative;
+              border-radius:1rem; overflow:hidden; cursor:pointer; }
+  .cat-card img { width:100%; height:280px; object-fit:cover; display:block;
+                  transition:transform .5s ease; }
+  .cat-card:hover img { transform:scale(1.05); }
+  .cat-card-overlay {
+    position:absolute; inset:0;
+    background:linear-gradient(to top, rgba(4,8,15,.88) 0%, rgba(4,8,15,.15) 55%, transparent 100%);
+    display:flex; flex-direction:column; justify-content:flex-end; padding:1.1rem;
+  }
+
+  /* ─── Catalog track (no scrollbar) ──────────────── */
+  .cat-track {
+    display:flex; gap:.9rem; overflow-x:auto; scroll-behavior:smooth;
+    scrollbar-width:none; -ms-overflow-style:none; padding-bottom:.5rem;
+  }
+  .cat-track::-webkit-scrollbar { display:none; }
+
+  /* ─── Step number watermark ──────────────────────── */
+  .step-num {
+    font-size:5rem; font-weight:900; letter-spacing:-.06em;
+    line-height:1; color:oklch(var(--bc)/.06); user-select:none;
+    position:absolute; top:-1rem; left:-.5rem;
+  }
+</style>
+
+<div class="bg-base-100 text-base-content min-h-screen overflow-x-hidden">
+
+  <%# ══════════════════════════════════════════════════ %>
+  <%# SEZIONE 1 ── HERO                                 %>
+  <%# Layout: navbar inline · headline · desc · CTA · stats row · foto dx %>
+  <%# ══════════════════════════════════════════════════ %>
+  <section class="grid grid-cols-1 lg:grid-cols-[1fr_44%] min-h-[90vh] pt-16">
+
+    <%# — colonna sinistra ───────────────────────────── %>
+    <div class="flex flex-col px-8 md:px-14 xl:px-20 py-12 lg:py-0 justify-center">
+
+      <%# Navbar mini (replica esatta del reference) %>
+      <nav class="flex items-center gap-8 mb-16 anim anim-up" style="animation-delay:.02s;">
+        <%= link_to root_path, class:"flex items-center gap-0.5 select-none" do %>
+          <span class="text-[.72rem] font-black tracking-[.2em] uppercase leading-tight">AQUA<br>URA</span>
+        <% end %>
+        <div class="hidden sm:flex items-center gap-7 text-[.67rem] tracking-widest uppercase
+                    text-base-content/40 font-semibold">
+          <%= link_to "Nostri acquari", galleria_path,   class:"hover:text-base-content/80 transition-colors" %>
+          <%= link_to "Come seguirci",  "#come-seguirci", class:"hover:text-base-content/80 transition-colors" %>
+          <%= link_to "Contatti",       root_path(anchor:"contatti"), class:"hover:text-base-content/80 transition-colors" %>
+        </div>
+        <div class="ml-auto flex items-center gap-3">
+          <%= link_to root_path(anchor:"contatti"),
+                class: "btn btn-sm rounded-full px-5 border border-base-300
+                         text-[.65rem] tracking-widest uppercase font-bold
+                         hover:border-primary/50 transition-all" do %>
+            Contattaci
+          <% end %>
+          <a href="tel:+39020000000"
+             class="btn btn-neutral btn-sm rounded-full px-5 gap-2
+                    text-[.65rem] tracking-widest uppercase font-bold">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M2.25 6.338c0-1.372 1.24-2.338 2.595-2.026l.296.072A48.11 48.11 0 0111.25 5c1.43 0 2.84.135 4.109.384l.296-.072C16.91 4 18.15 4.966 18.15 6.338v.387c0 1.26-.93 2.306-2.183 2.443l-.413.046a48.16 48.16 0 01-9.108 0l-.413-.046C4.68 8.92 3.75 7.874 3.75 6.725V6.34h-1.5v-.002z"/>
+            </svg>
+            +39 02 000 0000
+          </a>
+        </div>
+      </nav>
+
+      <%# Headline %>
+      <div class="mb-6 anim anim-up" style="animation-delay:.1s;">
+        <h1 class="text-[2.6rem] md:text-5xl xl:text-[3.4rem] font-black tracking-tight leading-[1.04]
+                   text-base-content mb-5">
+          Pillole di saggezza<br>
+          per acquaristi seri<br>
+          <span class="text-primary">dal 2013</span>
+        </h1>
+        <p class="text-base-content/45 text-[1rem] font-normal leading-relaxed max-w-md">
+          Articoli tecnici scritti da Sergio dopo 20 anni di vasca, centinaia di analisi
+          chimiche e oltre 400 acquari progettati da zero.
+        </p>
+      </div>
+
+      <%# CTA button (stile screenshot: scuro, freccia) %>
+      <div class="mb-14 anim anim-up" style="animation-delay:.18s;">
+        <button onclick="document.getElementById('catalogo').scrollIntoView({behavior:'smooth'})"
+                class="btn btn-neutral rounded-full px-8 gap-3
+                       text-[.65rem] tracking-widest uppercase font-bold">
+          Leggi gli articoli
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </button>
+      </div>
+
+      <%# STAT ROW — esatto come screenshot (3 numeri grandi + label) %>
+      <div class="grid grid-cols-3 gap-6 border-t border-base-300 pt-8 anim anim-up"
+           style="animation-delay:.26s;">
+
+        <%# Avatar row sopra i numeri (come nel ref) %>
+        <div class="col-span-3 flex items-center gap-3 mb-5">
+          <div class="avatar-group -space-x-3">
+            <% %w[r1 r2 r3].each do |s| %>
+              <div class="avatar">
+                <div class="w-9 rounded-full border-2 border-base-100">
+                  <img src="https://picsum.photos/seed/<%= s %>/40/40" alt=""/>
+                </div>
+              </div>
             <% end %>
           </div>
+          <div>
+            <p class="text-xs font-bold">2.400+ lettori</p>
+            <p class="text-[.65rem] text-base-content/35">si fidano di Sergio</p>
+          </div>
+        </div>
 
-          <!-- Contenuto Articolo -->
-          <div class="w-full md:w-1/2 flex flex-col justify-center space-y-6">
-            <div class="flex items-center space-x-4 text-xs font-medium uppercase tracking-widest text-base-content/40">
-              <span class="text-primary font-bold"><%= article[:category] %></span>
-              <span>&bull;</span>
-              <span><%= article[:date] %></span>
+        <% [
+          { val:"20",  sym:"~", label:"anni esperienza\nmedia Sergio" },
+          { val:"3",   sym:"+", label:"articoli nuovi\nogni mese" },
+          { val:"180", sym:"+", label:"parametri\nanalizzati" },
+        ].each do |s| %>
+          <div>
+            <div class="big-num flex items-end gap-0.5 mb-1">
+              <%= s[:val] %><span class="text-2xl font-black text-primary/60 leading-none mb-1"><%= s[:sym] %></span>
             </div>
-            
-            <%= link_to blog_path(article[:id]), data: { turbo_frame: "_top" }, class: "block" do %>
-              <h2 class="text-3xl font-serif text-base-content hover:text-primary transition-colors duration-300 leading-tight">
-                <%= article[:title] %>
-              </h2>
-            <% end %>
-            
-            <p class="text-base-content/60 font-light leading-relaxed line-clamp-3">
-              <%= article[:excerpt] %>
+            <p class="text-[.67rem] tracking-wide text-base-content/35 leading-snug whitespace-pre-line">
+              <%= s[:label] %>
             </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
-            <div class="flex items-center justify-between pt-4 border-t border-base-content/10">
-              <%= link_to blog_path(article[:id]), class: "text-xs uppercase tracking-widest text-base-content hover:text-primary transition-colors flex items-center gap-2" do %>
-                <span class="font-bold">Leggi tutto</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-              <% end %>
-              <!-- Social Share -->
-              <div class="flex gap-2">
-                <button class="btn btn-circle btn-ghost btn-xs text-base-content/40 hover:text-primary transition-colors">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>
+    <%# — colonna destra: immagine clippata ─────────── %>
+    <div class="relative hidden lg:block anim anim-right" style="animation-delay:.15s;">
+      <div class="hero-img absolute inset-0 overflow-hidden">
+        <img src="https://picsum.photos/seed/aquahero22/900/1000"
+             alt="Acquario Aquaura"
+             class="w-full h-full object-cover"/>
+        <%# Overlay gradient a sinistra per blend col bg %>
+        <div class="absolute inset-0 bg-gradient-to-r from-base-100/40 via-transparent to-transparent"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <%# ══════════════════════════════════════════════════ %>
+  <%# SEZIONE 2 ── "Scriviamo di acqua…"               %>
+  <%# Layout: testo + immagine sx  |  3 dark card dx   %>
+  <%# ══════════════════════════════════════════════════ %>
+  <section class="py-24 px-8 md:px-14 xl:px-20 bg-base-100">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+      <%# Sinistra — testo + foto struttura %>
+      <div class="anim anim-up" style="animation-delay:.05s;">
+        <h2 class="text-4xl xl:text-5xl font-black tracking-tighter leading-[1.02] mb-5">
+          Scriviamo di acqua<br>
+          con rigore scientifico
+        </h2>
+        <p class="text-base-content/45 leading-relaxed mb-8 max-w-md">
+          Ogni articolo nasce da osservazione diretta, analisi chimica e anni di prove in vasca.
+          Nessuna teoria non verificata sul campo, nessuna sponsorizzazione nascosta.
+        </p>
+        <div class="rounded-2xl overflow-hidden border border-base-300">
+          <img src="https://picsum.photos/seed/aquastruct2/700/360"
+               alt="Struttura acquario"
+               class="w-full object-cover hover:scale-[1.03] transition-transform duration-700"/>
+        </div>
+      </div>
+
+      <%# Destra — 3 dark card esatte come screenshot %>
+      <div class="space-y-3 anim anim-right" style="animation-delay:.1s;">
+        <% [
+          {
+            img: "https://picsum.photos/seed/fc01/80/80",
+            titolo: "Alta resistenza chimica",
+            desc:   "I parametri non sono numeri astratti. Capire pH, GH, KH e azoto ti permette di prevenire crisi prima che si manifestino.",
+            badge: "Fondamentali",
+          },
+          {
+            img: "https://picsum.photos/seed/fc02/80/80",
+            titolo: "Piante e fertilizzazione",
+            desc:   "Le piante vive regolano l'ecosistema meglio di qualsiasi filtro. Impara macro, micro e il ruolo indispensabile del CO₂.",
+            badge: "Botanica",
+          },
+          {
+            img: "https://picsum.photos/seed/fc03/80/80",
+            titolo: "Nessuna usura del progetto",
+            desc:   "Un acquario ben progettato non invecchia. Scegliamo materiali, layout e specie pensando a dieci anni di stabilità.",
+            badge: "Design",
+          },
+        ].each do |f| %>
+          <div class="feat-card flex items-start gap-4 p-4 cursor-pointer">
+            <%# Thumbnail come nel reference (piccola immagine bordata) %>
+            <div class="w-14 h-14 rounded-xl overflow-hidden shrink-0 border border-white/10">
+              <img src="<%= f[:img] %>" alt="" class="w-full h-full object-cover"/>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="text-white font-black text-[.92rem] tracking-tight mb-1">
+                <%= f[:titolo] %>
+              </h3>
+              <p class="text-white/38 text-[.8rem] leading-relaxed"><%= f[:desc] %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+
+  <%# ══════════════════════════════════════════════════ %>
+  <%# SEZIONE 3 ── CATALOGO ARTICOLI                   %>
+  <%# Layout: header (titolo sx + nota dx) · scroll cards · CTA sx + nav frecce dx %>
+  <%# ══════════════════════════════════════════════════ %>
+  <section id="catalogo" class="py-20 px-8 md:px-14 xl:px-20"
+           style="background: oklch(var(--b2)/.5);">
+    <div class="max-w-7xl mx-auto">
+
+      <%# Header sezione — identico al reference %>
+      <div class="flex items-end justify-between mb-8 flex-wrap gap-4 anim anim-up"
+           style="animation-delay:.05s;">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-black tracking-tighter leading-tight">
+            Catalogo degli articoli<br>
+            più letti del Journal
+          </h2>
+        </div>
+        <div class="text-right">
+          <p class="text-[.78rem] font-bold text-base-content/60">Conoscenza acquaristica</p>
+          <p class="text-primary text-[.72rem] font-semibold tracking-wide">sempre aggiornato</p>
+        </div>
+      </div>
+
+      <%# Scroll track %>
+      <%
+        articoli_cat = [
+          { tag:"Biologia",    col:"error",     titolo:"Perché i pesci boccheggiano?",        sub:"da €0 · Lettura libera", img:"https://picsum.photos/seed/ac01/500/400" },
+          { tag:"Aquascaping", col:"success",   titolo:"L'arte della potatura",                sub:"da €0 · 12 min",          img:"https://picsum.photos/seed/ac02/500/400" },
+          { tag:"Nutrizione",  col:"warning",   titolo:"Alimentazione consapevole",            sub:"da €0 · 6 min",           img:"https://picsum.photos/seed/ac03/500/400" },
+          { tag:"Parametri",   col:"info",      titolo:"Il ciclo dell'azoto spiegato bene",    sub:"da €0 · 10 min",          img:"https://picsum.photos/seed/ac04/500/400" },
+          { tag:"Piante",      col:"secondary", titolo:"CO₂ liquida vs gassosa: la verità",   sub:"da €0 · 7 min",           img:"https://picsum.photos/seed/ac05/500/400" },
+        ]
+      %>
+      <div id="cat-track" class="cat-track anim anim-up" style="animation-delay:.1s;">
+        <% articoli_cat.each do |a| %>
+          <div class="cat-card">
+            <img src="<%= a[:img] %>" alt="<%= a[:titolo] %>"/>
+            <div class="cat-card-overlay">
+              <span class="badge badge-<%= a[:col] %> badge-soft badge-xs
+                           tracking-widest uppercase font-bold mb-2">
+                <%= a[:tag] %>
+              </span>
+              <p class="text-white font-black text-[.88rem] tracking-tight leading-snug mb-1">
+                <%= a[:titolo] %>
+              </p>
+              <p class="text-white/40 text-[.72rem]"><%= a[:sub] %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <%# Footer sezione — CTA sx + frecce dx (identico ref) %>
+      <div class="flex items-center justify-between mt-7 anim anim-up" style="animation-delay:.15s;">
+        <%= link_to blog_index_path,
+              class: "btn btn-neutral rounded-full px-8 gap-2
+                       text-[.65rem] tracking-widest uppercase font-bold" do %>
+          Archivio completo
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        <% end %>
+
+        <div class="flex gap-2">
+          <button onclick="document.getElementById('cat-track').scrollBy({left:-260,behavior:'smooth'})"
+                  class="btn btn-sm btn-circle bg-base-100 border border-base-300
+                         hover:border-base-content/30 transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+            </svg>
+          </button>
+          <button onclick="document.getElementById('cat-track').scrollBy({left:260,behavior:'smooth'})"
+                  class="btn btn-sm btn-circle bg-base-100 border border-base-300
+                         hover:border-base-content/30 transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <%# ══════════════════════════════════════════════════ %>
+  <%# SEZIONE 4 ── COME SEGUIRCI (4 card = "Pagamento") %>
+  <%# Layout: titolo centrato · 4 card in riga          %>
+  <%# ══════════════════════════════════════════════════ %>
+  <section id="come-seguirci" class="py-24 px-8 md:px-14 xl:px-20 bg-base-100">
+    <div class="max-w-7xl mx-auto">
+
+      <h2 class="text-3xl font-black tracking-tighter text-center mb-12 anim anim-up"
+          style="animation-delay:.05s;">
+        Come seguire il Journal
+      </h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <% [
+          {
+            titolo: "Newsletter",
+            desc:   "Collaboriamo con i migliori autori del settore. Ricevi ogni nuovo articolo direttamente in inbox, senza spam, con la possibilità di cancellarti in un click.",
+            col:    "primary",
+          },
+          {
+            titolo: "WhatsApp",
+            desc:   "Se hai ricevuto un capitale di conoscenza gratuita dal Journal, puoi usarla per migliorare la tua vasca. Seguici per micro-pillole quotidiane.",
+            col:    "success",
+          },
+          {
+            titolo: "Podcast",
+            desc:   "Lavoriamo con chi vuole approfondire senza leggere. Ogni mese Sergio registra un episodio di 20 minuti su un tema specifico dell'acquariofilia.",
+            col:    "secondary",
+          },
+          {
+            titolo: "Archivio PDF",
+            desc:   "Puoi scaricare tutti gli articoli per categoria in un PDF ottimizzato. Perfetto da consultare offline mentre curi la tua vasca.",
+            col:    "warning",
+          },
+        ].each_with_index do |m, i| %>
+          <%# Card stile screenshot: bordo sottile, arrow btn in basso a destra %>
+          <div class="card bg-base-100 border border-base-300 rounded-2xl
+                      hover:border-<%= m[:col] %>/35 hover:shadow-lg hover:shadow-<%= m[:col] %>/6
+                      hover:-translate-y-0.5 transition-all duration-300
+                      anim anim-up" style="animation-delay:<%= .05 + i * .07 %>s;">
+            <div class="card-body p-6 gap-4">
+              <h3 class="font-black text-base tracking-tight"><%= m[:titolo] %></h3>
+              <p class="text-base-content/45 text-[.82rem] leading-relaxed flex-1"><%= m[:desc] %></p>
+              <%# Arrow button angolo basso dx come nel ref %>
+              <div class="flex justify-end">
+                <button class="btn btn-sm btn-circle border border-base-300
+                               hover:bg-<%= m[:col] %> hover:border-<%= m[:col] %>
+                               hover:text-<%= m[:col] %>-content transition-all duration-200">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                       stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                  </svg>
                 </button>
               </div>
             </div>
           </div>
-
-        </article>
-      <% end %>
-    </div>
-
-    <!-- Pagination con DaisyUI -->
-    <div class="flex justify-center mt-20" data-controller="scroll-reveal">
-      <div class="join">
-        <button class="join-item btn btn-ghost text-base-content/40 transition-colors">«</button>
-        <button class="join-item btn btn-ghost text-base-content/40 transition-colors">1</button>
-        <button class="join-item btn btn-primary text-primary-content">2</button>
-        <button class="join-item btn btn-ghost text-base-content/40 transition-colors">3</button>
-        <button class="join-item btn btn-ghost text-base-content/40 transition-colors">4</button>
-        <button class="join-item btn btn-ghost text-base-content/40 transition-colors">»</button>
+        <% end %>
       </div>
     </div>
+  </section>
 
-  </div>
+
+  <%# ══════════════════════════════════════════════════ %>
+  <%# SEZIONE 5 ── TRE PASSI (identica struttura ref)  %>
+  <%# Layout: titolo · 3 colonne number + testo        %>
+  <%# ══════════════════════════════════════════════════ %>
+  <section class="py-24 px-8 md:px-14 xl:px-20 bg-base-100 border-t border-base-200">
+    <div class="max-w-7xl mx-auto">
+
+      <h2 class="text-3xl font-black tracking-tighter mb-4 anim anim-up" style="animation-delay:.05s;">
+        Tre passi verso<br>una vasca che funziona
+      </h2>
+      <p class="text-base-content/40 mb-16 anim anim-up" style="animation-delay:.1s;">
+        Il percorso minimo che Sergio consiglia a ogni acquarista che vuole smettere di improvvisare.
+      </p>
+
+      <%# Linea connettore tra step (solo desktop) %>
+      <div class="hidden md:grid grid-cols-3 gap-10 relative">
+        <div class="absolute top-8 left-[calc(33.33%-1rem)] right-[calc(33.33%-1rem)] h-px
+                    bg-gradient-to-r from-primary/25 via-primary/15 to-primary/5 pointer-events-none"></div>
+
+        <% [
+          {
+            n:    "01",
+            ico:  "📚",
+            titolo: "Studia prima di comprare",
+            desc:   "Leggi almeno 10 articoli sul ciclo dell'azoto e sulla chimica dell'acqua prima di acquistare il primo pesce. La conoscenza precede la vasca.",
+            link:   "Inizia dal ciclo azoto →",
+          },
+          {
+            n:    "02",
+            ico:  "🔬",
+            titolo: "Analizza e misura sempre",
+            desc:   "Investi in un fotometro professionale. Senza misurazioni precise ogni intervento è un tentativo cieco. I dati non mentono.",
+            link:   "Guida ai test kit →",
+          },
+          {
+            n:    "03",
+            ico:  "🌿",
+            titolo: "Concludi con le piante vive",
+            desc:   "Inserisci la fauna solo dopo aver stabilizzato le piante. Le piante vive regolano l'ecosistema meglio di qualsiasi filtro meccanico.",
+            link:   "Articoli sulle piante →",
+          },
+        ].each_with_index do |step, i| %>
+          <div class="relative anim anim-up" style="animation-delay:<%= .08 + i * .1 %>s;">
+            <%# Numero watermark grande come nel ref %>
+            <div class="step-num"><%= step[:n] %></div>
+
+            <%# Icona con cerchio come nel ref %>
+            <div class="relative z-10 mb-6">
+              <div class="w-14 h-14 rounded-2xl bg-primary/8 border border-primary/15
+                          flex items-center justify-center text-2xl">
+                <%= step[:ico] %>
+              </div>
+            </div>
+
+            <div class="relative z-10">
+              <h3 class="font-black text-lg tracking-tight leading-snug mb-3">
+                <%= step[:titolo] %>
+              </h3>
+              <p class="text-base-content/45 text-[.85rem] leading-relaxed mb-4">
+                <%= step[:desc] %>
+              </p>
+              <button class="btn btn-ghost btn-xs p-0 h-auto min-h-0
+                             text-primary font-bold text-[.65rem] tracking-widest uppercase">
+                <%= step[:link] %>
+              </button>
+            </div>
+          </div>
+        <% end %>
+
+        <%# Versione mobile (stack) %>
+      </div>
+      <div class="md:hidden space-y-10">
+        <% [
+          { n:"01", ico:"📚", titolo:"Studia prima di comprare", desc:"Leggi almeno 10 articoli sul ciclo dell'azoto prima di comprare il primo pesce." },
+          { n:"02", ico:"🔬", titolo:"Analizza e misura sempre",  desc:"Investi in un fotometro professionale. Senza dati ogni intervento è cieco." },
+          { n:"03", ico:"🌿", titolo:"Concludi con le piante",    desc:"Inserisci la fauna solo dopo aver stabilizzato le piante vive." },
+        ].each_with_index do |step, i| %>
+          <div class="flex gap-5 anim anim-up" style="animation-delay:<%= .05 + i * .08 %>s;">
+            <div class="w-12 h-12 rounded-xl bg-primary/8 border border-primary/15
+                        flex items-center justify-center text-xl shrink-0">
+              <%= step[:ico] %>
+            </div>
+            <div>
+              <p class="font-mono text-[.6rem] tracking-widest uppercase text-base-content/25 mb-0.5"><%= step[:n] %></p>
+              <h3 class="font-black text-base tracking-tight mb-1"><%= step[:titolo] %></h3>
+              <p class="text-base-content/45 text-[.82rem] leading-relaxed"><%= step[:desc] %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+
+  <%# ══════════════════════════════════════════════════ %>
+  <%# NEWSLETTER FOOTER — dark band full width          %>
+  <%# ══════════════════════════════════════════════════ %>
+  <section class="py-20 px-8 md:px-14 xl:px-20" style="background:#0a0e17;">
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 justify-between">
+
+      <div class="anim anim-up" style="animation-delay:.05s;">
+        <p class="text-[.65rem] tracking-[.25em] uppercase text-white/25 font-semibold mb-3">Newsletter</p>
+        <h2 class="text-4xl font-black tracking-tighter leading-tight text-white mb-3">
+          Non perdere<br>i nuovi articoli
+        </h2>
+        <p class="text-white/30 text-[.95rem] font-light leading-relaxed max-w-sm">
+          Ogni nuovo articolo del Journal in inbox.
+          Massimo una email a settimana. Cancellati quando vuoi.
+        </p>
+      </div>
+
+      <div class="w-full lg:max-w-sm anim anim-up" style="animation-delay:.1s;">
+        <div class="space-y-3">
+          <input type="text" placeholder="Il tuo nome"
+                 class="input w-full rounded-xl bg-white/5 border border-white/8 text-white
+                        placeholder:text-white/20 focus:border-primary/40 focus:outline-none text-sm"/>
+          <input type="email" placeholder="La tua email"
+                 class="input w-full rounded-xl bg-white/5 border border-white/8 text-white
+                        placeholder:text-white/20 focus:border-primary/40 focus:outline-none text-sm"/>
+          <label class="flex items-start gap-3 cursor-pointer">
+            <input type="checkbox" class="checkbox checkbox-primary checkbox-sm mt-0.5"/>
+            <span class="text-[.72rem] text-white/25 leading-relaxed">
+              Accetto la privacy policy e desidero ricevere la newsletter di Aquaura.
+            </span>
+          </label>
+          <button class="btn btn-primary w-full rounded-xl text-[.65rem] tracking-widest uppercase font-bold">
+            Iscriviti al Journal →
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </div>
 
+<script>
+  // ── IntersectionObserver per tutte le animazioni ───
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.animationPlayState = 'running';
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
 
+  document.querySelectorAll('.anim').forEach(el => io.observe(el));
+</script>
