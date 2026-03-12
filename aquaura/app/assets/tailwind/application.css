@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: light --default, dark --prefersdark;
+  themes:
+    light --default,
+    dark --prefersdark;
+  logs: true;
 }
 @plugin "daisyui/theme" {
   name: "dark";
@@ -73,74 +76,168 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-    --font-sans: "Onest", sans-serif;
-    
-    /* Glassmorphism Design Tokens */
-    --glass-bg-light: rgba(255, 255, 255, 0.45);
-    --glass-bg-dark: rgba(15, 23, 42, 0.65);
-    --glass-border-light: rgba(255, 255, 255, 0.3);
-    --glass-border-dark: rgba(255, 255, 255, 0.1);
-    --glass-blur: 16px;
-    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  --font-sans: "Onest", sans-serif;
 
-    /* Animation Utilities */
-    --animate-pulse-subtle: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    --animate-float: float 6s ease-in-out infinite;
-    --animate-skeleton: skeleton-loading 1.5s infinite linear;
+  /* Glassmorphism Design Tokens */
+  --glass-bg-light: rgba(255, 255, 255, 0.45);
+  --glass-bg-dark: rgba(15, 23, 42, 0.65);
+  --glass-border-light: rgba(255, 255, 255, 0.3);
+  --glass-border-dark: rgba(255, 255, 255, 0.1);
+  --glass-blur: 16px;
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 
-    @keyframes pulse-subtle {
-        0%, 100% { opacity: 1; transform: scale(1); }
-        50% { opacity: 0.85; transform: scale(0.98); }
+  /* Animation Utilities */
+  --animate-pulse-subtle: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-skeleton: skeleton-loading 1.5s infinite linear;
+  --animate-caustics: caustics 8s linear infinite;
+  --animate-bubble-rise: bubble-rise 5s ease-in-out infinite;
+  --animate-blob-morph: blob-morph 12s ease-in-out infinite;
+  --animate-fade-up: fade-up 0.8s ease-out forwards;
+  --animate-preloader-exit: preloader-exit 1s ease-in-out forwards;
+  --animate-rotate-360: rotate-360 10s linear infinite;
+
+  @keyframes pulse-subtle {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
     }
-
-    @keyframes float {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
+    50% {
+      opacity: 0.85;
+      transform: scale(0.98);
     }
+  }
 
-    @keyframes skeleton-loading {
-        0% { background-position: -200% 0; }
-        100% { background-position: 200% 0; }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
     }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes skeleton-loading {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  @keyframes caustics {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 500px 500px;
+    }
+  }
+
+  @keyframes bubble-rise {
+    0% {
+      transform: translateY(100vh) scale(0);
+      opacity: 0;
+    }
+    20% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateY(-20vh) scale(1);
+      opacity: 0;
+    }
+  }
+
+  @keyframes blob-morph {
+    0% {
+      border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
+    }
+    34% {
+      border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%;
+    }
+    67% {
+      border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;
+    }
+    100% {
+      border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
+    }
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes preloader-exit {
+    from {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    to {
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+    }
+  }
+
+  @keyframes rotate-360 {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 }
 
 /* Glassmorphism Core Utilities */
 @layer utilities {
+  .glass-effect {
+    background: var(--glass-bg-light);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border-light);
+    box-shadow: var(--glass-shadow);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, backdrop-filter, background;
+  }
+
+  [data-theme="dark"] .glass-effect {
+    background: var(--glass-bg-dark);
+    border: 1px solid var(--glass-border-dark);
+  }
+
+  /* Fallback for browsers without backdrop-filter support */
+  @supports not (backdrop-filter: blur(16px)) {
     .glass-effect {
-        background: var(--glass-bg-light);
-        backdrop-filter: blur(var(--glass-blur));
-        -webkit-backdrop-filter: blur(var(--glass-blur));
-        border: 1px solid var(--glass-border-light);
-        box-shadow: var(--glass-shadow);
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        will-change: transform, backdrop-filter, background;
+      background: rgba(255, 255, 255, 0.9);
     }
+    [data-theme="dark"] .glass-effect {
+      background: rgba(15, 23, 42, 0.95);
+    }
+  }
 
-    [data-theme='dark'] .glass-effect {
-        background: var(--glass-bg-dark);
-        border: 1px solid var(--glass-border-dark);
-    }
+  .interactive-pulse:active {
+    animation: pulse-subtle 0.3s ease-out;
+  }
 
-    /* Fallback for browsers without backdrop-filter support */
-    @supports not (backdrop-filter: blur(16px)) {
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.9);
-        }
-        [data-theme='dark'] .glass-effect {
-            background: rgba(15, 23, 42, 0.95);
-        }
-    }
-
-    .interactive-pulse:active {
-        animation: pulse-subtle 0.3s ease-out;
-    }
-
-    .skeleton-box {
-        background: linear-gradient(90deg, 
-            rgba(255,255,255,0.05) 25%, 
-            rgba(255,255,255,0.15) 50%, 
-            rgba(255,255,255,0.05) 75%);
-        background-size: 200% 100%;
-        animation: skeleton-loading 1.5s infinite;
-    }
+  .skeleton-box {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.05) 25%,
+      rgba(255, 255, 255, 0.15) 50%,
+      rgba(255, 255, 255, 0.05) 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+  }
 }
