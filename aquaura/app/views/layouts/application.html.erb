@@ -34,17 +34,20 @@
     
 
     <!-- Preloader "Livello Acqua" -->
-    <div data-controller="preloader" class="fixed inset-0 z-[99990] bg-base-100 flex flex-col justify-center items-center animate-preloader-exit gap-8">
+    <div data-controller="preloader" class="fixed inset-0 z-[99990] bg-base-100/80 backdrop-blur-2xl flex flex-col justify-center items-center animate-preloader-exit gap-8">
       <!-- Rotating Water Drop -->
       <div class="relative flex items-center justify-center">
-        <%= image_tag "water-drop.png", class: "w-20 h-20 object-contain animate-rotate-360 relative z-10" %>
+        <%= image_tag "water-drop.png", class: "water-drop-spinner relative z-10" %>
         <!-- Glowing Pulse behind -->
         <div class="absolute inset-0 bg-primary/20 blur-3xl rounded-full scale-150 animate-pulse"></div>
       </div>
       
-      <span class="text-base-content/60 text-[0.8rem] md:text-sm uppercase tracking-[0.5em] font-light mt-8 animate-pulse">
-        IMMERSIONE TOTALE
-      </span>
+      <div class="flex flex-col items-center gap-2">
+        <span class="text-base-content/60 text-[0.7rem] md:text-xs uppercase tracking-[0.5em] font-light animate-pulse">
+          IMMERSIONE TOTALE
+        </span>
+        <div class="w-12 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
+      </div>
     </div>
     <%= render 'shared/navbar' %>
     <%= render 'shared/search_modal' %>

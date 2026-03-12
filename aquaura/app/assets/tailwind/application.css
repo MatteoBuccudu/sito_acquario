@@ -95,7 +95,7 @@
   --animate-blob-morph: blob-morph 12s ease-in-out infinite;
   --animate-fade-up: fade-up 0.8s ease-out forwards;
   --animate-preloader-exit: preloader-exit 1s ease-in-out forwards;
-  --animate-rotate-360: rotate-360 10s linear infinite;
+  --animate-rotate-360: rotate-360 1.5s linear infinite;
 
   @keyframes pulse-subtle {
     0%,
@@ -239,5 +239,10 @@
     );
     background-size: 200% 100%;
     animation: skeleton-loading 1.5s infinite;
+  }
+
+  .water-drop-spinner {
+    @apply animate-rotate-360 w-12 h-12 md:w-16 md:h-16 object-contain;
+    filter: drop-shadow(0 0 8px oklch(var(--p) / 0.3));
   }
 }

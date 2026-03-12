@@ -4,12 +4,12 @@ import { Controller } from "@hotwired/stimulus"
 // anche senza JavaScript. Questo controller rimuove l'elemento dal DOM dopo l'animazione.
 export default class extends Controller {
     connect() {
-        // Rimuoviamo il nodo dopo che l'animazione CSS è completata (2.3s)
+        // Rimuoviamo il nodo dopo che l'animazione CSS è completata
         setTimeout(() => {
             if (this.element) {
                 this.element.remove()
             }
-        }, 2500)
+        }, 2000)
     }
 }
 
