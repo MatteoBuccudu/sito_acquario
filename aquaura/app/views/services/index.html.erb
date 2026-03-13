@@ -86,20 +86,20 @@
 
 
 
-  <%# ══════════════════════════════════════════════════ %>
-  <%# 2 ── ALERT URGENZA + TABS FILTRO                 %>
-  <%# ══════════════════════════════════════════════════ %>
+  <% # ══════════════════════════════════════════════════ %>
+  <% # 2 ── ALERT URGENZA + TABS FILTRO %>
+  <% # ══════════════════════════════════════════════════ %>
   <section class="px-8 md:px-14 xl:px-20 py-10 bg-base-100">
     <div class="max-w-7xl mx-auto space-y-5">
 
-      <%# ALERT urgenza %>
+      <% # ALERT urgenza %>
       <div role="alert" class="alert alert-warning alert-soft sm:alert-horizontal rounded-2xl anim anim-up"
            style="animation-delay:.05s;">
         <span class="text-sm"><strong>Emergenza in corso?</strong> Sergio risponde su WhatsApp entro 10 minuti, 7 giorni su 7, anche di notte.</span>
         <a href="#" class="btn btn-warning btn-sm rounded-xl text-[.65rem] tracking-widest uppercase font-bold">Scrivi ora</a>
       </div>
 
-      <%# TABS — filtro categoria %>
+      <% # TABS — filtro categoria %>
       <div class="tabs tabs-box anim anim-up" style="animation-delay:.1s;" role="tablist">
         <input type="radio" name="sv-tabs" class="tab text-[.65rem] tracking-widest uppercase font-bold" aria-label="Tutti" checked/>
         <div class="tab-content pt-2"></div>
@@ -116,63 +116,61 @@
   </section>
 
 
-  <%# ══════════════════════════════════════════════════ %>
-  <%# 3 ── GRID SERVIZI (card orizzontali con immagine) %>
-  <%# ══════════════════════════════════════════════════ %>
+  <% # ══════════════════════════════════════════════════ %>
+  <% # 3 ── GRID SERVIZI (card orizzontali con immagine) %>
+  <% # ══════════════════════════════════════════════════ %>
   <section id="servizi-grid" class="px-8 md:px-14 xl:px-20 pb-24 bg-base-100">
     <div class="max-w-7xl mx-auto space-y-6">
-      <%
-        servizi = [
-          {
-            num:"01", colore:"primary",
-            titolo:"Check-up Chimico Completo",
-            sotto:"Il tuo acquario sotto analisi professionale",
-            desc:"Analizziamo 12 parametri con fotometro professionale. Ti consegniamo un report PDF con il piano correttivo personalizzato, consultabile in qualsiasi momento.",
-            img:"https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80",
-            img_alt:"Acquario con pesci colorati analizzato",
-            lista:["12 parametri: NH₃, NO₂, NO₃, PO₄, GH, KH, pH, CO₂, O₂, Fe, Mg, Ca","Fotometro professionale — non striscette","Report PDF con piano correttivo step-by-step","Consulenza post-analisi 48h inclusa"],
-            prezzo:"da € 89", step_col:"step-primary",
-            rating:5, recensioni:48,
-            tag:"Diagnostica",
-          },
-          {
-            num:"02", colore:"success",
-            titolo:"Potatura & Aquascaping",
-            sotto:"Le piante hanno preso il sopravvento?",
-            desc:"Potatura selettiva con forbici curve professionali, riposizionamento di rocce e radici, trattamento antialghe. Restituiamo al layout il suo equilibrio originale.",
-            img:"https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=600&q=80",
-            img_alt:"Acquario planted con piante acquatiche",
-            lista:["Potatura selettiva con forbici curve professionali","Riposizionamento rocce, radici e substrate","Trattamento antialghe post-intervento","Report fotografico prima/dopo incluso"],
-            prezzo:"da € 120", step_col:"step-success",
-            rating:5, recensioni:73,
-            tag:"Piante",
-          },
-          {
-            num:"03", colore:"warning",
-            titolo:"Trasloco Acquario",
-            sotto:"Sposti casa? Pensiamo a tutto noi.",
-            desc:"Dal confezionamento dei pesci con sacchetti O₂ puro al riallestimento nella nuova sede: gestiamo ogni fase per eliminare lo shock osmotico e ridurre lo stress.",
-            img:"https://images.unsplash.com/photo-1524704654690-b56c05c78a00?w=600&q=80",
-            img_alt:"Acquario di grandi dimensioni installato",
-            lista:["Sacchetti professionali con ossigeno puro","Contenitori termici per trasporti lunghi","Riallestimento completo nella nuova sede","Monitoraggio parametri nelle 48h successive"],
-            prezzo:"da € 200", step_col:"step-warning",
-            rating:5, recensioni:31,
-            tag:"Trasloco",
-          },
-          {
-            num:"04", colore:"secondary",
-            titolo:"Contratto Manutenzione Mensile",
-            sotto:"La tranquillità di chi sa che qualcuno pensa alla sua vasca",
-            desc:"Visita mensile fissa con check parametri, pulizia filtro, regolazione impianti. Più reperibilità h24 su WhatsApp per qualsiasi emergenza nel mezzo.",
-            img:"https://images.unsplash.com/photo-1516408388733-2f8364f2e00b?w=600&q=80",
-            img_alt:"Acquario marino con coralli",
-            lista:["Visita mensile fissa con check completo","Pulizia e verifica impianto filtrante","Reperibilità h24 su WhatsApp inclusa","Sconto 20% su prodotti e interventi extra"],
-            prezzo:"da € 60/mese", step_col:"step-secondary",
-            rating:5, recensioni:112,
-            tag:"Abbonamento",
-          },
-        ]
-      %>
+      <% servizi = [
+           {
+             num: "01", colore: "primary",
+             titolo: "Check-up Chimico Completo",
+             sotto: "Il tuo acquario sotto analisi professionale",
+             desc: "Analizziamo 12 parametri con fotometro professionale. Ti consegniamo un report PDF con il piano correttivo personalizzato, consultabile in qualsiasi momento.",
+             img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80",
+             img_alt: "Acquario con pesci colorati analizzato",
+             lista: ["12 parametri: NH₃, NO₂, NO₃, PO₄, GH, KH, pH, CO₂, O₂, Fe, Mg, Ca", "Fotometro professionale — non striscette", "Report PDF con piano correttivo step-by-step", "Consulenza post-analisi 48h inclusa"],
+             prezzo: "da € 89", step_col: "step-primary",
+             rating: 5, recensioni: 48,
+             tag: "Diagnostica",
+           },
+           {
+             num: "02", colore: "success",
+             titolo: "Potatura & Aquascaping",
+             sotto: "Le piante hanno preso il sopravvento?",
+             desc: "Potatura selettiva con forbici curve professionali, riposizionamento di rocce e radici, trattamento antialghe. Restituiamo al layout il suo equilibrio originale.",
+             img: "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=600&q=80",
+             img_alt: "Acquario planted con piante acquatiche",
+             lista: ["Potatura selettiva con forbici curve professionali", "Riposizionamento rocce, radici e substrate", "Trattamento antialghe post-intervento", "Report fotografico prima/dopo incluso"],
+             prezzo: "da € 120", step_col: "step-success",
+             rating: 5, recensioni: 73,
+             tag: "Piante",
+           },
+           {
+             num: "03", colore: "warning",
+             titolo: "Trasloco Acquario",
+             sotto: "Sposti casa? Pensiamo a tutto noi.",
+             desc: "Dal confezionamento dei pesci con sacchetti O₂ puro al riallestimento nella nuova sede: gestiamo ogni fase per eliminare lo shock osmotico e ridurre lo stress.",
+             img: "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?w=600&q=80",
+             img_alt: "Acquario di grandi dimensioni installato",
+             lista: ["Sacchetti professionali con ossigeno puro", "Contenitori termici per trasporti lunghi", "Riallestimento completo nella nuova sede", "Monitoraggio parametri nelle 48h successive"],
+             prezzo: "da € 200", step_col: "step-warning",
+             rating: 5, recensioni: 31,
+             tag: "Trasloco",
+           },
+           {
+             num: "04", colore: "secondary",
+             titolo: "Contratto Manutenzione Mensile",
+             sotto: "La tranquillità di chi sa che qualcuno pensa alla sua vasca",
+             desc: "Visita mensile fissa con check parametri, pulizia filtro, regolazione impianti. Più reperibilità h24 su WhatsApp per qualsiasi emergenza nel mezzo.",
+             img: "https://images.unsplash.com/photo-1516408388733-2f8364f2e00b?w=600&q=80",
+             img_alt: "Acquario marino con coralli",
+             lista: ["Visita mensile fissa con check completo", "Pulizia e verifica impianto filtrante", "Reperibilità h24 su WhatsApp inclusa", "Sconto 20% su prodotti e interventi extra"],
+             prezzo: "da € 60/mese", step_col: "step-secondary",
+             rating: 5, recensioni: 112,
+             tag: "Abbonamento",
+           },
+         ] %>
 
       <% servizi.each_with_index do |s, idx| %>
         <div class="tilt anim anim-up" data-tilt
@@ -182,13 +180,13 @@
                       overflow-hidden transition-all duration-400"
                style="transform-style:preserve-3d;">
 
-            <%# Immagine laterale con INDICATOR %>
+            <% # Immagine laterale con INDICATOR %>
             <figure class="sm:w-72 shrink-0 relative overflow-hidden">
               <img src="<%= s[:img] %>"
                    alt="<%= s[:img_alt] %>"
                    class="w-full h-56 sm:h-full object-cover
                           hover:scale-[1.04] transition-transform duration-700"/>
-              <%# BADGE numero + tag sopra immagine %>
+              <% # BADGE numero + tag sopra immagine %>
               <div class="absolute top-4 left-4 flex flex-col gap-2">
                 <span class="badge badge-neutral bg-base-100/80 backdrop-blur-sm
                              font-mono text-xs border border-base-300">
@@ -199,12 +197,12 @@
                   <%= s[:tag] %>
                 </span>
               </div>
-              <%# Rating overlay in basso %>
+              <% # Rating overlay in basso %>
               <div class="absolute bottom-4 left-4">
               </div>
             </figure>
 
-            <%# Body %>
+            <% # Body %>
             <div class="card-body p-7 gap-5" style="transform:translateZ(8px);">
               <div>
                 <h2 class="card-title text-xl font-black tracking-tight leading-snug mb-1">
@@ -219,7 +217,7 @@
 
               <div class="divider divider-<%= s[:colore] %> my-0 opacity-20"></div>
 
-              <%# STEPS verticali checkout-style %>
+              <% # STEPS verticali checkout-style %>
               <ul class="steps steps-vertical text-xs">
                 <% s[:lista].each_with_index do |voce, vi| %>
                   <li class="step <%= s[:step_col] %>" data-content="<%= vi + 1 %>">
@@ -251,9 +249,9 @@
                       <li><a class="text-xs">Consulenza WhatsApp</a></li>
                     </ul>
                   </div>
-                  <%= link_to root_path(anchor:"contatti"),
-                        class:"btn btn-#{s[:colore]} btn-sm join-item rounded-r-xl px-6
-                                text-[.65rem] tracking-widest uppercase font-bold" do %>
+                  <%= link_to contacts_path,
+                              class: "btn btn-#{s[:colore]} btn-sm join-item rounded-r-xl px-6
+                                                      text-[.65rem] tracking-widest uppercase font-bold" do %>
                     Prenota
                   <% end %>
                 </div>
@@ -266,9 +264,9 @@
   </section>
 
 
-  <%# ══════════════════════════════════════════════════ %>
-  <%# 4 ── "Interveniamo su…" testo + dark feat card   %>
-  <%# ══════════════════════════════════════════════════ %>
+  <% # ══════════════════════════════════════════════════ %>
+  <% # 4 ── "Interveniamo su…" testo + dark feat card %>
+  <% # ══════════════════════════════════════════════════ %>
   <section class="py-24 px-8 md:px-14 xl:px-20"
            style="background:oklch(var(--b2)/.5);">
     <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -283,11 +281,11 @@
           Ogni vasca che ci viene affidata viene gestita con lo stesso metodo rigoroso:
           dati prima delle opinioni, strumenti professionali prima dei consigli generici.
         </p>
-        <%# Immagine con DIFF overlay — prima/dopo %>
+        <% # Immagine con DIFF overlay — prima/dopo %>
         <div class="rounded-2xl overflow-hidden border border-base-300 diff-wrap">
           <figure class="diff rounded-2xl overflow-hidden w-full h-full">
             <div class="diff-item-1">
-              <img src="https://images.unsplash.com/photo-1610296669228-602fa827fc1f?w=700&q=80"
+              <img src="https://aquacustomfishtanks.com/wp-content/uploads/2022/06/Large-Fish-Tank-scaled.jpg"
                    alt="Acquario prima" class="object-cover w-full h-full"/>
             </div>
             <div class="diff-item-2">
@@ -308,19 +306,19 @@
 
       <div class="space-y-3 anim anim-left" style="animation-delay:.1s;">
         <% [
-          { img:"https://images.unsplash.com/photo-1518682818182-fa4a5d3e37cc?w=120&q=80",
-            titolo:"Alta precisione diagnostica",
-            desc:"Non usiamo striscette. Ogni visita include fotometro professionale e confronto con valori storici della vasca.",
-            badge:"Chimica", col:"info" },
-          { img:"https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=120&q=80",
-            titolo:"Piante e aquascaping professionali",
-            desc:"Forbici curve, pinze pro, substrato e layout: restituiamo all'acquario il suo equilibrio estetico e biologico.",
-            badge:"Estetica", col:"success" },
-          { img:"https://images.unsplash.com/photo-1570691079236-4bca6c45d440?w=120&q=80",
-            titolo:"Zero stress per pesci e piante",
-            desc:"Dal trasloco all'emergenza notturna: O₂ puro, contenitori termici e monitoraggio 48h post intervento.",
-            badge:"Logistica", col:"warning" },
-        ].each do |f| %>
+             { img: "https://image.made-in-china.com/2f0j00sitcLoRqYkbf/Digital-Light-Meter-PAR-Meter-for-Aquarium-Lighting-LED-Reef-Tank.webp",
+               titolo: "Alta precisione diagnostica",
+               desc: "Non usiamo striscette. Ogni visita include fotometro professionale e confronto con valori storici della vasca.",
+               badge: "Chimica", col: "info" },
+             { img: "https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=120&q=80",
+               titolo: "Piante e aquascaping professionali",
+               desc: "Forbici curve, pinze pro, substrato e layout: restituiamo all'acquario il suo equilibrio estetico e biologico.",
+               badge: "Estetica", col: "success" },
+             { img: "https://images.unsplash.com/photo-1570691079236-4bca6c45d440?w=120&q=80",
+               titolo: "Zero stress per pesci e piante",
+               desc: "Dal trasloco all'emergenza notturna: O₂ puro, contenitori termici e monitoraggio 48h post intervento.",
+               badge: "Logistica", col: "warning" },
+           ].each do |f| %>
           <div class="feat-card flex items-start gap-4 p-4 cursor-pointer">
             <div class="w-14 h-14 rounded-xl overflow-hidden shrink-0 border border-white/10">
               <img src="<%= f[:img] %>" alt="" class="w-full h-full object-cover"/>
@@ -337,7 +335,7 @@
           </div>
         <% end %>
 
-        <%# STATS component dentro il pannello dark %>
+        <% # STATS component dentro il pannello dark %>
         <div class="stats bg-base-300/30 border border-base-300/50 rounded-2xl w-full mt-2">
           <div class="stat py-4 place-items-center">
             <div class="stat-value text-primary text-2xl">100%</div>
@@ -360,9 +358,9 @@
   </section>
 
 
-  <%# ══════════════════════════════════════════════════ %>
-  <%# 5 ── CATALOGO SCROLL + NAV                        %>
-  <%# ══════════════════════════════════════════════════ %>
+  <% # ══════════════════════════════════════════════════ %>
+  <% # 5 ── CATALOGO SCROLL + NAV %>
+  <% # ══════════════════════════════════════════════════ %>
   <section class="py-20 px-8 md:px-14 xl:px-20 bg-base-100">
     <div class="max-w-7xl mx-auto">
       <div class="flex items-end justify-between mb-8 flex-wrap gap-4 anim anim-up"
@@ -379,15 +377,13 @@
         </div>
       </div>
 
-      <%
-        gallery = [
-          { tag:"Diagnostica", col:"info",      titolo:"Check-up Discus 600L",           luogo:"Roma",    img:"https://images.unsplash.com/photo-1535591273668-578e31182c4f?w=500&q=80" },
-          { tag:"Piante",      col:"success",   titolo:"Potatura Nature 200L",            luogo:"Milano",  img:"https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=500&q=80" },
-          { tag:"Trasloco",    col:"warning",   titolo:"Trasloco Malawi 400L",            luogo:"Torino",  img:"https://images.unsplash.com/photo-1524704654690-b56c05c78a00?w=500&q=80" },
-          { tag:"Abbonamento", col:"secondary", titolo:"Contratto mensile reef 300L",     luogo:"Genova",  img:"https://images.unsplash.com/photo-1516408388733-2f8364f2e00b?w=500&q=80" },
-          { tag:"Diagnostica", col:"info",      titolo:"Emergenza NH₃ — Nano 60L",        luogo:"Firenze", img:"https://images.unsplash.com/photo-1576330383200-2bf325cfec52?w=500&q=80" },
-        ]
-      %>
+      <% gallery = [
+           { tag: "Diagnostica", col: "info", titolo: "Check-up Discus 600L", luogo: "Roma", img: "https://images.unsplash.com/photo-1535591273668-578e31182c4f?w=500&q=80" },
+           { tag: "Piante", col: "success", titolo: "Potatura Nature 200L", luogo: "Milano", img: "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=500&q=80" },
+           { tag: "Trasloco", col: "warning", titolo: "Trasloco Malawi 400L", luogo: "Torino", img: "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?w=500&q=80" },
+           { tag: "Abbonamento", col: "secondary", titolo: "Contratto mensile reef 300L", luogo: "Genova", img: "https://images.unsplash.com/photo-1516408388733-2f8364f2e00b?w=500&q=80" },
+           { tag: "Diagnostica", col: "info", titolo: "Emergenza NH₃ — Nano 60L", luogo: "Firenze", img: "https://images.unsplash.com/photo-1576330383200-2bf325cfec52?w=500&q=80" },
+         ] %>
 
       <div id="sv-gallery" class="cat-track anim anim-up cursor-grab active:cursor-grabbing select-none" style="animation-delay:.1s;">
         <% gallery.each do |g| %>
@@ -405,7 +401,7 @@
 
       <div class="flex items-center justify-between mt-6 anim anim-up" style="animation-delay:.15s;">
         <%= link_to galleria_path,
-              class:"btn btn-neutral rounded-full px-8 gap-2 text-[.65rem] tracking-widest uppercase font-bold" do %>
+                    class: "btn btn-neutral rounded-full px-8 gap-2 text-[.65rem] tracking-widest uppercase font-bold" do %>
           Vedi tutta la galleria
         <% end %>
         <div class="flex gap-2">
@@ -415,9 +411,9 @@
   </section>
 
 
-  <%# ══════════════════════════════════════════════════ %>
-  <%# 6 ── COME FUNZIONA (4 card + STEPS orizzontali)  %>
-  <%# ══════════════════════════════════════════════════ %>
+  <% # ══════════════════════════════════════════════════ %>
+  <% # 6 ── COME FUNZIONA (4 card + STEPS orizzontali) %>
+  <% # ══════════════════════════════════════════════════ %>
   <section class="py-24 px-8 md:px-14 xl:px-20"
            style="background:oklch(var(--b2)/.4);">
     <div class="max-w-7xl mx-auto">
@@ -427,7 +423,7 @@
         Dal primo messaggio al report finale: ecco esattamente cosa succede.
       </p>
 
-      <%# STEPS orizzontale DaisyUI %>
+      <% # STEPS orizzontale DaisyUI %>
       <ul class="steps steps-horizontal w-full mb-14 anim anim-up" style="animation-delay:.12s;">
         <li class="step step-primary"><span class="mt-3 text-xs text-base-content/60">Diagnosi gratis</span></li>
         <li class="step step-primary"><span class="mt-3 text-xs text-base-content/60">Preventivo fisso</span></li>
@@ -436,14 +432,14 @@
         <li class="step"><span class="mt-3 text-xs text-base-content/60">7gg monitoraggio</span></li>
       </ul>
 
-      <%# 4 card processo %>
+      <% # 4 card processo %>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <% [
-          { titolo:"Diagnosi gratuita",   col:"primary",   desc:"Scrivi su WhatsApp. Sergio risponde entro 10 minuti con la prima valutazione. Zero costi fino all'intervento." },
-          { titolo:"Preventivo fisso",    col:"success",   desc:"Il prezzo viene concordato prima della visita. Dettaglio voce per voce, nessuna sorpresa in fattura." },
-          { titolo:"Intervento in vasca", col:"secondary", desc:"Sergio arriva con strumenti professionali. Ogni passaggio viene documentato in tempo reale." },
-          { titolo:"Monitoraggio post",   col:"warning",   desc:"7 giorni di contatto diretto post intervento. Se qualcosa non va, si ritorna senza costi aggiuntivi." },
-        ].each_with_index do |m, i| %>
+             { titolo: "Diagnosi gratuita", col: "primary", desc: "Scrivi su WhatsApp. Sergio risponde entro 10 minuti con la prima valutazione. Zero costi fino all'intervento." },
+             { titolo: "Preventivo fisso", col: "success", desc: "Il prezzo viene concordato prima della visita. Dettaglio voce per voce, nessuna sorpresa in fattura." },
+             { titolo: "Intervento in vasca", col: "secondary", desc: "Sergio arriva con strumenti professionali. Ogni passaggio viene documentato in tempo reale." },
+             { titolo: "Monitoraggio post", col: "warning", desc: "7 giorni di contatto diretto post intervento. Se qualcosa non va, si ritorna senza costi aggiuntivi." },
+           ].each_with_index do |m, i| %>
           <div class="card bg-base-100 border border-base-300 rounded-2xl
                       hover:border-<%= m[:col] %>/35 hover:shadow-lg hover:shadow-<%= m[:col] %>/6
                       hover:-translate-y-0.5 transition-all duration-300
@@ -461,13 +457,13 @@
   </section>
 
 
-  <%# ══════════════════════════════════════════════════ %>
-  <%# 7 ── TRE FASI + COUNTDOWN PROSSIMI SLOT          %>
-  <%# ══════════════════════════════════════════════════ %>
+  <% # ══════════════════════════════════════════════════ %>
+  <% # 7 ── TRE FASI + COUNTDOWN PROSSIMI SLOT %>
+  <% # ══════════════════════════════════════════════════ %>
   <section class="py-24 px-8 md:px-14 xl:px-20 bg-base-100 border-t border-base-200">
     <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-16">
 
-      <%# Steps numbered %>
+      <% # Steps numbered %>
       <div>
         <h2 class="text-3xl font-black tracking-tighter mb-4 anim anim-up" style="animation-delay:.05s;">
           Tre fasi<br><span class="text-primary">di ogni intervento</span>
@@ -479,10 +475,10 @@
         <div class="hidden md:grid grid-cols-3 gap-10 relative">
 
           <% [
-            { n:"01", titolo:"Diagnosi e consultazione", desc:"Valutazione a distanza e definizione precisa del tipo di intervento necessario, senza costi.", link:"Inizia la diagnosi" },
-            { n:"02", titolo:"Intervento in vasca",       desc:"Sergio arriva con strumenti professionali. Ogni passaggio viene documentato fotograficamente.", link:"Vedi i servizi" },
-            { n:"03", titolo:"Report e finitura",         desc:"Chiudiamo con report PDF di parametri, trattamenti e istruzioni per le settimane successive.", link:"Vedi gli interventi" },
-          ].each_with_index do |step, i| %>
+               { n: "01", titolo: "Diagnosi e consultazione", desc: "Valutazione a distanza e definizione precisa del tipo di intervento necessario, senza costi.", link: "Inizia la diagnosi" },
+               { n: "02", titolo: "Intervento in vasca", desc: "Sergio arriva con strumenti professionali. Ogni passaggio viene documentato fotograficamente.", link: "Vedi i servizi" },
+               { n: "03", titolo: "Report e finitura", desc: "Chiudiamo con report PDF di parametri, trattamenti e istruzioni per le settimane successive.", link: "Vedi gli interventi" },
+             ].each_with_index do |step, i| %>
             <div class="relative anim anim-up" style="animation-delay:<%= 0.08 + i * 0.1 %>s;">
 
               <div class="relative z-10 mb-6">
@@ -503,13 +499,13 @@
           <% end %>
         </div>
 
-        <%# Mobile stack %>
+        <% # Mobile stack %>
         <div class="md:hidden space-y-8">
           <% [
-            { n:"01", titolo:"Diagnosi e consultazione", desc:"Valutazione a distanza senza costi." },
-            { n:"02", titolo:"Intervento in vasca",       desc:"Strumenti professionali e documentazione fotografica." },
-            { n:"03", titolo:"Report e finitura",         desc:"PDF con parametri, trattamenti e istruzioni." },
-          ].each_with_index do |step, i| %>
+               { n: "01", titolo: "Diagnosi e consultazione", desc: "Valutazione a distanza senza costi." },
+               { n: "02", titolo: "Intervento in vasca", desc: "Strumenti professionali e documentazione fotografica." },
+               { n: "03", titolo: "Report e finitura", desc: "PDF con parametri, trattamenti e istruzioni." },
+             ].each_with_index do |step, i| %>
             <div class="flex gap-5 anim anim-up" style="animation-delay:<%= 0.05 + i * 0.08 %>s;">
               <div class="w-12 h-12 rounded-xl bg-primary/8 border border-primary/15 flex items-center justify-center text-xl shrink-0 font-bold text-primary">
                 <%= step[:n] %>
@@ -524,7 +520,7 @@
         </div>
       </div>
 
-      <%# COUNTDOWN prossimi slot disponibili %>
+      <% # COUNTDOWN prossimi slot disponibili %>
       <div class="anim anim-left" style="animation-delay:.12s;">
         <div class="card bg-base-200 border border-primary/20 rounded-3xl">
           <div class="card-body p-7 gap-6">
@@ -538,14 +534,14 @@
 
             <div class="space-y-3">
               <% [
-                { giorno:"Mercoledì",  data:"19 Mar", zone:"Milano / Monza",  rimasti:2, col:"success" },
-                { giorno:"Giovedì",    data:"20 Mar", zone:"Torino / Novara", rimasti:1, col:"warning" },
-                { giorno:"Venerdì",    data:"21 Mar", zone:"Genova / SV",     rimasti:3, col:"success" },
-                { giorno:"Sabato",     data:"22 Mar", zone:"Tutta la zona",   rimasti:0, col:"error" },
-              ].each do |slot| %>
+                   { giorno: "Mercoledì", data: "19 Mar", zone: "Milano / Monza", rimasti: 2, col: "success" },
+                   { giorno: "Giovedì", data: "20 Mar", zone: "Torino / Novara", rimasti: 1, col: "warning" },
+                   { giorno: "Venerdì", data: "21 Mar", zone: "Genova / SV", rimasti: 3, col: "success" },
+                   { giorno: "Sabato", data: "22 Mar", zone: "Tutta la zona", rimasti: 0, col: "error" },
+                 ].each do |slot| %>
                 <div class="flex items-center justify-between p-3 rounded-xl
                             border border-base-300 bg-base-100/60
-                            <%= slot[:rimasti] == 0 ? 'opacity-40' : '' %>">
+                            <%= slot[:rimasti] == 0 ? "opacity-40" : "" %>">
                   <div>
                     <p class="font-bold text-sm"><%= slot[:giorno] %> <span class="text-base-content/40 font-normal text-xs"><%= slot[:data] %></span></p>
                     <p class="text-[.7rem] text-base-content/40"><%= slot[:zone] %></p>
@@ -561,7 +557,7 @@
               <% end %>
             </div>
 
-            <%# Countdown al prossimo slot %>
+            <% # Countdown al prossimo slot %>
             <div class="text-center border-t border-base-300 pt-5">
               <p class="text-[.6rem] tracking-[.2em] uppercase text-base-content/30 font-semibold mb-2">
                 Prossimo slot disponibile tra
@@ -599,9 +595,9 @@
   </section>
 
 
-  <%# ══════════════════════════════════════════════════ %>
-  <%# 8 ── CHAT + RECENSIONI CAROUSEL                  %>
-  <%# ══════════════════════════════════════════════════ %>
+  <% # ══════════════════════════════════════════════════ %>
+  <% # 8 ── CHAT + RECENSIONI CAROUSEL %>
+  <% # ══════════════════════════════════════════════════ %>
   <section class="py-20 px-8 md:px-14 xl:px-20"
            style="background:oklch(var(--b2)/.4);">
     <div class="max-w-7xl mx-auto">
@@ -613,7 +609,7 @@
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
 
-        <%# CHAT DaisyUI %>
+        <% # CHAT DaisyUI %>
         <div class="card bg-base-100 border border-base-300 rounded-2xl anim anim-right"
              style="animation-delay:.05s;">
           <div class="card-body p-6 gap-3">
@@ -655,16 +651,16 @@
           </div>
         </div>
 
-        <%# CAROUSEL recensioni %>
+        <% # CAROUSEL recensioni %>
         <div class="anim anim-left" style="animation-delay:.08s;">
           <div class="carousel carousel-vertical h-[420px] space-y-4 overflow-y-auto
                       [scrollbar-width:none] pr-1">
             <% [
-              { nome:"Marco T.",   vasca:"Discus 400L · Roma",      img:"https://picsum.photos/seed/rv1/60/60", testo:"Sergio ha risolto la crisi in 2 ore. Report PDF incluso con piano correttivo per le settimane successive.", stelle:5 },
-              { nome:"Alessia R.", vasca:"Nature 200L · Milano",    img:"https://picsum.photos/seed/rv2/60/60", testo:"Il contratto mensile è la cosa migliore che potessi fare per la mia vasca. Parametri sempre nei range.", stelle:5 },
-              { nome:"Luca B.",    vasca:"Malawi 300L · Torino",    img:"https://picsum.photos/seed/rv3/60/60", testo:"Il trasloco dell'acquario era la cosa che temevo di più. Nessun pesce perso, parametri stabili dopo 24h.", stelle:5 },
-              { nome:"Sara M.",    vasca:"Reef 150L · Genova",      img:"https://picsum.photos/seed/rv4/60/60", testo:"Potatura e aquascaping impeccabili. Ha restituito alla vasca l'equilibrio che aveva perso in 6 mesi.", stelle:5 },
-            ].each do |r| %>
+                 { nome: "Marco T.", vasca: "Discus 400L · Roma", img: "https://picsum.photos/seed/rv1/60/60", testo: "Sergio ha risolto la crisi in 2 ore. Report PDF incluso con piano correttivo per le settimane successive.", stelle: 5 },
+                 { nome: "Alessia R.", vasca: "Nature 200L · Milano", img: "https://picsum.photos/seed/rv2/60/60", testo: "Il contratto mensile è la cosa migliore che potessi fare per la mia vasca. Parametri sempre nei range.", stelle: 5 },
+                 { nome: "Luca B.", vasca: "Malawi 300L · Torino", img: "https://picsum.photos/seed/rv3/60/60", testo: "Il trasloco dell'acquario era la cosa che temevo di più. Nessun pesce perso, parametri stabili dopo 24h.", stelle: 5 },
+                 { nome: "Sara M.", vasca: "Reef 150L · Genova", img: "https://picsum.photos/seed/rv4/60/60", testo: "Potatura e aquascaping impeccabili. Ha restituito alla vasca l'equilibrio che aveva perso in 6 mesi.", stelle: 5 },
+               ].each do |r| %>
               <div class="carousel-item w-full">
                 <div class="card bg-base-100 border border-base-300 w-full
                             hover:border-primary/20 hover:shadow-md transition-all duration-200">
@@ -697,9 +693,9 @@
   </section>
 
 
-  <%# ══════════════════════════════════════════════════ %>
-  <%# 9 ── FAQ ACCORDION                               %>
-  <%# ══════════════════════════════════════════════════ %>
+  <% # ══════════════════════════════════════════════════ %>
+  <% # 9 ── FAQ ACCORDION %>
+  <% # ══════════════════════════════════════════════════ %>
   <section class="py-20 px-8 md:px-14 xl:px-20 bg-base-100">
     <div class="max-w-4xl mx-auto">
       <div class="divider divider-primary opacity-30 mb-10">
@@ -710,17 +706,17 @@
 
       <div class="space-y-2">
         <% [
-          { q:"Qual è la zona coperta dagli interventi a domicilio?",
-            a:"Operiamo in tutto il Nord Italia: Piemonte, Lombardia, Liguria, Veneto, Trentino. Per zone più distanti è disponibile la consulenza remota con kit di prelievo spedito a casa." },
-          { q:"Posso avere un preventivo prima di impegnarmi?",
-            a:"Sì, la diagnosi è sempre gratuita e il preventivo viene concordato per iscritto prima di ogni intervento. Nessun costo fino a che non approvi il preventivo." },
-          { q:"Cosa succede se l'intervento non risolve il problema?",
-            a:"Garanzia Aquaura: se i parametri non rientrano nei range promessi entro 7 giorni, Sergio torna gratuitamente. Nessun cavillo, nessun asterisco." },
-          { q:"Il contratto mensile si può disdire in qualsiasi momento?",
-            a:"Sì. Il contratto mensile non ha vincoli: puoi disdire con 30 giorni di preavviso senza penali. Puoi anche sospenderlo in caso di assenza prolungata." },
-          { q:"Portate i prodotti necessari o devo procurarmeli?",
-            a:"Sergio porta sempre i prodotti di prima necessità per l'intervento. I prodotti inclusi sono indicati nel preventivo. Per prodotti extra o sostituzioni, ti avvisiamo con anticipo." },
-        ].each_with_index do |item, i| %>
+             { q: "Qual è la zona coperta dagli interventi a domicilio?",
+               a: "Operiamo in tutto il Nord Italia: Piemonte, Lombardia, Liguria, Veneto, Trentino. Per zone più distanti è disponibile la consulenza remota con kit di prelievo spedito a casa." },
+             { q: "Posso avere un preventivo prima di impegnarmi?",
+               a: "Sì, la diagnosi è sempre gratuita e il preventivo viene concordato per iscritto prima di ogni intervento. Nessun costo fino a che non approvi il preventivo." },
+             { q: "Cosa succede se l'intervento non risolve il problema?",
+               a: "Garanzia Aquaura: se i parametri non rientrano nei range promessi entro 7 giorni, Sergio torna gratuitamente. Nessun cavillo, nessun asterisco." },
+             { q: "Il contratto mensile si può disdire in qualsiasi momento?",
+               a: "Sì. Il contratto mensile non ha vincoli: puoi disdire con 30 giorni di preavviso senza penali. Puoi anche sospenderlo in caso di assenza prolungata." },
+             { q: "Portate i prodotti necessari o devo procurarmeli?",
+               a: "Sergio porta sempre i prodotti di prima necessità per l'intervento. I prodotti inclusi sono indicati nel preventivo. Per prodotti extra o sostituzioni, ti avvisiamo con anticipo." },
+           ].each_with_index do |item, i| %>
           <div class="collapse bg-base-200 border border-base-300
                       hover:border-primary/20 transition-colors rounded-2xl
                       anim anim-up" style="animation-delay:<%= 0.03 + i * 0.05 %>s;">
@@ -736,9 +732,9 @@
   </section>
 
 
-  <%# ══════════════════════════════════════════════════ %>
-  <%# 10 ── TIMELINE storico interventi                %>
-  <%# ══════════════════════════════════════════════════ %>
+  <% # ══════════════════════════════════════════════════ %>
+  <% # 10 ── TIMELINE storico interventi %>
+  <% # ══════════════════════════════════════════════════ %>
   <section class="py-20 px-8 md:px-14 xl:px-20"
            style="background:oklch(var(--b2)/.4);">
     <div class="max-w-4xl mx-auto">
@@ -750,12 +746,12 @@
 
       <ul class="timeline timeline-snap-icon timeline-compact timeline-vertical">
         <% [
-          { data:"15 Mar 2025", col:"primary",   titolo:"Check-up chimico",      luogo:"Milano · 200L Nature",     note:"NH₃ 0.0 · NO₂ 0.0 · pH 7.1 · Ottimale" },
-          { data:"8 Mar 2025",  col:"success",   titolo:"Potatura aquascaping",  luogo:"Torino · 120L Iwagumi",    note:"Layout riportato al progetto originale" },
-          { data:"1 Mar 2025",  col:"warning",   titolo:"Trasloco acquario",     luogo:"Genova → Milano · 400L",   note:"Zero perdite · Parametri ok dopo 24h" },
-          { data:"22 Feb 2025", col:"secondary", titolo:"Visita contratto",      luogo:"Roma · Discus 600L",       note:"Filtro pulito · CO₂ regolata · Ok" },
-          { data:"15 Feb 2025", col:"error",     titolo:"Emergenza NH₃",         luogo:"Firenze · 60L Nano",       note:"Crisi risolta in 3h · Tutti i pesci salvi" },
-        ].each_with_index do |ev, i| %>
+             { data: "15 Mar 2025", col: "primary", titolo: "Check-up chimico", luogo: "Milano · 200L Nature", note: "NH₃ 0.0 · NO₂ 0.0 · pH 7.1 · Ottimale" },
+             { data: "8 Mar 2025", col: "success", titolo: "Potatura aquascaping", luogo: "Torino · 120L Iwagumi", note: "Layout riportato al progetto originale" },
+             { data: "1 Mar 2025", col: "warning", titolo: "Trasloco acquario", luogo: "Genova → Milano · 400L", note: "Zero perdite · Parametri ok dopo 24h" },
+             { data: "22 Feb 2025", col: "secondary", titolo: "Visita contratto", luogo: "Roma · Discus 600L", note: "Filtro pulito · CO₂ regolata · Ok" },
+             { data: "15 Feb 2025", col: "error", titolo: "Emergenza NH₃", luogo: "Firenze · 60L Nano", note: "Crisi risolta in 3h · Tutti i pesci salvi" },
+           ].each_with_index do |ev, i| %>
           <li>
             <% if i < 4 %>
             <hr class="bg-<%= ev[:col] %>/30"/>
@@ -766,7 +762,7 @@
                 <%= i + 1 %>
               </div>
             </div>
-            <div class="<%= i.even? ? 'timeline-start mb-10 md:text-end' : 'timeline-end mb-10' %>
+            <div class="<%= i.even? ? "timeline-start mb-10 md:text-end" : "timeline-end mb-10" %>
                         anim anim-up" style="animation-delay:<%= i * 0.06 %>s;">
               <time class="font-mono text-[.65rem] text-base-content/30 tracking-widest uppercase"><%= ev[:data] %></time>
               <div class="font-black text-base-content text-base"><%= ev[:titolo] %></div>

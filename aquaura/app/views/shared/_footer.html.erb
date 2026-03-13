@@ -63,13 +63,13 @@
       Ecosistemi acquatici su misura, progettati con cura artigianale per ambienti residenziali e commerciali di lusso.
     </p>
 
-    <%= link_to root_path(anchor: "contatti"),
+    <%= link_to contacts_path,
                 class: "group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl
-                        bg-primary hover:bg-primary-focus
-                        text-primary-content font-bold text-[0.85rem] tracking-[0.04em]
-                        shadow-[0_0_30px_color-mix(in_srgb,var(--color-primary)_30%,transparent)]
-                        hover:shadow-[0_0_40px_color-mix(in_srgb,var(--color-primary)_50%,transparent)]
-                        hover:-translate-y-px transition-all duration-200" do %>
+                                bg-primary hover:bg-primary-focus
+                                text-primary-content font-bold text-[0.85rem] tracking-[0.04em]
+                                shadow-[0_0_30px_color-mix(in_srgb,var(--color-primary)_30%,transparent)]
+                                hover:shadow-[0_0_40px_color-mix(in_srgb,var(--color-primary)_50%,transparent)]
+                                hover:-translate-y-px transition-all duration-200" do %>
       Inizia il tuo progetto
       <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
@@ -150,9 +150,9 @@
       <ul class="flex flex-col gap-4">
         <% [
              { label: "Dashboard Clienti", path: dashboard_path },
-             { label: "Area Contatti", path: root_path(anchor: "contatti") },
-             { label: "Preventivo", path: root_path(anchor: "contatti") },
-             { label: "Emergenze", path: root_path(anchor: "contatti") },
+             { label: "Area Contatti", path: contacts_path },
+             { label: "Preventivo", path: contacts_path },
+             { label: "Emergenze", path: contacts_path },
            ].each do |item| %>
           <li>
             <%= link_to item[:label], item[:path],

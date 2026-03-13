@@ -1,0 +1,1025 @@
+<%# ══════════════════════════════════════════════════════════
+    Contatti — Aquaura
+    DaisyUI 5 MAX — tutti i componenti disponibili
+    NO NAVBAR · NO FOOTER
+    Componenti: hero · badge · stats · alert · card · avatar
+    chat · tabs · input · textarea · checkbox · radio · select
+    fieldset · file-input · join · btn · divider · collapse
+    countdown · tooltip · dropdown · indicator · filter · fab
+    hover-3d · steps · progress · rating · timeline · breadcrumbs
+    mask · dock · modal · swap · range · toggle
+══════════════════════════════════════════════════════════ %>
+
+<style>
+  /* ── Animazioni ── */
+  @keyframes fade-up {
+    from { opacity:0; transform:translateY(22px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  @keyframes fade-right {
+    from { opacity:0; transform:translateX(-26px); }
+    to   { opacity:1; transform:translateX(0); }
+  }
+  @keyframes fade-left {
+    from { opacity:0; transform:translateX(26px); }
+    to   { opacity:1; transform:translateX(0); }
+  }
+  .anim { opacity:0; animation-duration:.65s; animation-fill-mode:both;
+          animation-timing-function:cubic-bezier(.22,.68,0,1.2);
+          animation-play-state:paused; }
+  .anim-up    { animation-name:fade-up; }
+  .anim-right { animation-name:fade-right; }
+  .anim-left  { animation-name:fade-left; }
+
+  /* ── Pulse online ── */
+  @keyframes pulse-ring {
+    0%   { box-shadow:0 0 0 0 oklch(var(--su)/.5); }
+    70%  { box-shadow:0 0 0 10px oklch(var(--su)/0); }
+    100% { box-shadow:0 0 0 0 oklch(var(--su)/0); }
+  }
+  .pulse-online { animation:pulse-ring 2s ease-in-out infinite; }
+
+  /* ── Shimmer ── */
+  @keyframes shimmer {
+    0%   { background-position:-200% center; }
+    100% { background-position: 200% center; }
+  }
+  .shimmer {
+    background: linear-gradient(90deg, oklch(var(--p)) 0%, oklch(var(--s)) 40%, oklch(var(--a)) 70%, oklch(var(--p)) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text; animation: shimmer 5s linear infinite;
+  }
+
+  /* ── Glow ── */
+  @keyframes glow-pulse {
+    0%,100% { box-shadow:0 0 20px -5px oklch(var(--p)/.3); }
+    50%     { box-shadow:0 0 40px 0px oklch(var(--p)/.6); }
+  }
+  .glow-pulse { animation:glow-pulse 3s ease-in-out infinite; }
+
+  /* ── Map placeholder ── */
+  .map-bg {
+    background: linear-gradient(135deg, oklch(var(--b2)) 0%, oklch(var(--b3)) 100%);
+    position:relative; overflow:hidden;
+  }
+  .map-bg::before {
+    content:''; position:absolute; inset:0;
+    background-image:
+      linear-gradient(oklch(var(--bc)/.04) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(var(--bc)/.04) 1px, transparent 1px);
+    background-size:40px 40px;
+  }
+
+  /* ── Form focus ring custom ── */
+  .input:focus, .textarea:focus, .select:focus {
+    outline: none;
+    border-color: oklch(var(--p)/.6);
+    box-shadow: 0 0 0 3px oklch(var(--p)/.12);
+  }
+</style>
+
+<%# ════════════════════════════════════════════════════════ %>
+<%# DRAWER WRAPPER (sidebar contatti rapidi su mobile)      %>
+<%# ════════════════════════════════════════════════════════ %>
+<div class="drawer">
+  <input id="contacts-drawer" type="checkbox" class="drawer-toggle"/>
+
+  <%# ── Contenuto principale ── %>
+  <div class="drawer-content">
+
+    <%# ════════════════════════════════════════════════════ %>
+    <%# 1 ── HERO con breadcrumbs + badge + stats           %>
+    <%# ════════════════════════════════════════════════════ %>
+    <section class="hero min-h-[50vh] relative overflow-hidden"
+             style="background:linear-gradient(135deg, oklch(var(--b1)) 0%, oklch(var(--b2)) 100%);">
+      <div class="absolute inset-0 pointer-events-none"
+           style="background-image:radial-gradient(circle at 70% 40%, oklch(var(--p)/.06) 0%, transparent 60%),
+                                    radial-gradient(circle at 20% 80%, oklch(var(--s)/.04) 0%, transparent 50%);"></div>
+
+      <div class="hero-content flex-col text-center py-20 relative z-10 w-full max-w-3xl mx-auto">
+
+        <%# BREADCRUMBS %>
+        <div class="breadcrumbs text-xs text-base-content/30 mb-4 anim anim-up" style="animation-delay:.02s;">
+          <ul>
+            <li><%= link_to "Aquaura", root_path %></li>
+            <li>Contatti</li>
+          </ul>
+        </div>
+
+        <%# INDICATOR + BADGE %>
+        <div class="anim anim-up mb-4" style="animation-delay:.08s;">
+          <div class="indicator">
+            <span class="indicator-item indicator-start badge badge-success badge-xs animate-bounce"></span>
+            <div class="badge badge-primary badge-outline badge-lg tracking-widest uppercase font-bold">
+              Sergio è online ora
+            </div>
+          </div>
+        </div>
+
+        <h1 class="text-5xl lg:text-6xl font-black tracking-tighter leading-[1.0] mb-4 anim anim-up"
+            style="animation-delay:.12s;">
+          Parliamo della<br>
+          <span class="shimmer">tua vasca</span>
+        </h1>
+
+        <p class="text-base-content/45 text-lg font-light leading-relaxed max-w-lg mb-10 anim anim-up"
+           style="animation-delay:.18s;">
+          Che si tratti di un'emergenza, di un progetto nuovo o di una semplice curiosità:
+          Sergio risponde sempre, in meno di 10 minuti.
+        </p>
+
+        <%# STATS ── risposta garantita %>
+        <div class="stats stats-horizontal bg-base-100/70 backdrop-blur-sm
+                    border border-base-300 rounded-3xl shadow anim anim-up"
+             style="animation-delay:.24s;">
+          <div class="stat place-items-center px-6 py-4">
+            <div class="stat-value text-primary text-2xl">10'</div>
+            <div class="stat-desc text-xs tracking-widest uppercase">Risposta max</div>
+          </div>
+          <div class="stat place-items-center px-6 py-4">
+            <div class="stat-value text-success text-2xl">7/7</div>
+            <div class="stat-desc text-xs tracking-widest uppercase">Giorni attivi</div>
+          </div>
+          <div class="stat place-items-center px-6 py-4">
+            <div class="stat-value text-warning text-2xl">4.9</div>
+            <div class="stat-desc text-xs tracking-widest uppercase">★ Soddisfazione</div>
+          </div>
+          <div class="stat place-items-center px-6 py-4">
+            <div class="stat-value text-secondary text-2xl">400+</div>
+            <div class="stat-desc text-xs tracking-widest uppercase">Clienti serviti</div>
+          </div>
+        </div>
+
+        <%# JOIN CTA ─ scroll to form %>
+        <div class="join mt-8 anim anim-up" style="animation-delay:.3s;">
+          <button onclick="document.getElementById('form-section').scrollIntoView({behavior:'smooth'})"
+                  class="btn btn-primary join-item rounded-l-full px-8 gap-2
+                         text-[.65rem] tracking-widest uppercase font-bold">
+            Scrivi a Sergio
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <label for="contacts-drawer"
+                 class="btn btn-ghost join-item rounded-r-full px-6 border border-base-300
+                        text-[.65rem] tracking-widest uppercase font-bold lg:hidden">
+            ☰ Canali rapidi
+          </label>
+        </div>
+      </div>
+    </section>
+
+
+    <%# ════════════════════════════════════════════════════ %>
+    <%# 2 ── ALERT INFO + canali rapidi (card row)          %>
+    <%# ════════════════════════════════════════════════════ %>
+    <section class="px-6 md:px-14 xl:px-20 py-10 bg-base-100">
+      <div class="max-w-7xl mx-auto space-y-5">
+
+        <%# ALERT ── risposta garantita %>
+        <div role="alert" class="alert alert-success alert-soft sm:alert-horizontal rounded-2xl anim anim-up"
+             style="animation-delay:.02s;">
+          <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span class="text-sm">
+            <strong>Risposta garantita entro 10 minuti</strong> su tutti i canali, dalle 8:00 alle 22:00 — anche nei weekend.
+          </span>
+          <a href="tel:+390200000000" class="btn btn-success btn-sm rounded-xl text-[.65rem] tracking-widest uppercase font-bold">
+            Chiama ora
+          </a>
+        </div>
+
+        <%# CANALI RAPIDI — 4 card con hover-3d %>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 anim anim-up"
+             style="animation-delay:.08s;">
+          <% [
+            { ico:"💬", titolo:"WhatsApp",  sub:"Risposta in 10 min",   col:"success",   href:"#", badge:"Preferito",   badge_col:"success" },
+            { ico:"📧", titolo:"Email",     sub:"sergio@aquaura.it",     col:"primary",   href:"#", badge:nil,           badge_col:nil },
+            { ico:"📞", titolo:"Telefono",  sub:"+39 02 000 0000",       col:"secondary", href:"#", badge:"h24",         badge_col:"secondary" },
+            { ico:"📅", titolo:"Appuntamento", sub:"Prenota una visita", col:"warning",   href:"#", badge:"Nuovo",       badge_col:"warning" },
+          ].each do |c| %>
+            <div class="hover-3d">
+              <a href="<%= c[:href] %>"
+                 class="card bg-base-200 border border-base-300
+                        hover:border-<%= c[:col] %>/40 hover:shadow-xl hover:shadow-<%= c[:col] %>/8
+                        transition-all duration-300 block">
+                <div class="card-body p-5 items-center text-center gap-3">
+                  <% if c[:badge] %>
+                    <div class="absolute top-3 right-3">
+                      <span class="badge badge-<%= c[:badge_col] %> badge-soft badge-xs tracking-widest uppercase font-bold">
+                        <%= c[:badge] %>
+                      </span>
+                    </div>
+                  <% end %>
+                  <span class="text-4xl"><%= c[:ico] %></span>
+                  <div>
+                    <h3 class="font-black text-base tracking-tight"><%= c[:titolo] %></h3>
+                    <p class="text-base-content/40 text-xs mt-0.5"><%= c[:sub] %></p>
+                  </div>
+                  <div class="w-8 h-8 rounded-full bg-<%= c[:col] %>/10 border border-<%= c[:col] %>/20
+                              flex items-center justify-center">
+                    <svg class="w-3.5 h-3.5 text-<%= c[:col] %>" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                    </svg>
+                  </div>
+                </div>
+              </a>
+              <div></div><div></div><div></div><div></div>
+              <div></div><div></div><div></div><div></div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </section>
+
+
+    <%# ════════════════════════════════════════════════════ %>
+    <%# 3 ── FORM CONTATTO (con tutti i field DaisyUI)      %>
+    <%# ════════════════════════════════════════════════════ %>
+    <section id="form-section" class="py-20 px-6 md:px-14 xl:px-20"
+             style="background:oklch(var(--b2)/.5);">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-12">
+
+        <%# FORM ── lato sinistro %>
+        <div class="anim anim-right" style="animation-delay:.04s;">
+          <div class="divider divider-start divider-primary mb-8 opacity-60">
+            <span class="text-[.65rem] tracking-[.3em] uppercase text-base-content/40 font-semibold">
+              Modulo di contatto
+            </span>
+          </div>
+
+          <%# TABS — tipo richiesta %>
+          <div class="tabs tabs-box mb-8" role="tablist">
+            <input type="radio" name="req-tabs" class="tab text-[.65rem] tracking-widest uppercase font-bold" aria-label="💬 Consulenza" checked/>
+            <div class="tab-content"></div>
+            <input type="radio" name="req-tabs" class="tab text-[.65rem] tracking-widest uppercase font-bold" aria-label="🛠️ Intervento"/>
+            <div class="tab-content"></div>
+            <input type="radio" name="req-tabs" class="tab text-[.65rem] tracking-widest uppercase font-bold" aria-label="📦 Ordine"/>
+            <div class="tab-content"></div>
+            <input type="radio" name="req-tabs" class="tab text-[.65rem] tracking-widest uppercase font-bold" aria-label="📰 Altro"/>
+            <div class="tab-content"></div>
+          </div>
+
+          <%# FORM FIELDS %>
+          <%= form_with url: root_path, method: :post, local: true, class:"space-y-5" do |f| %>
+
+            <%# FIELDSET: Dati personali %>
+            <fieldset class="fieldset bg-base-100 border border-base-300 rounded-2xl p-5 gap-4">
+              <legend class="fieldset-legend text-xs tracking-widest uppercase font-bold text-base-content/50">
+                Dati personali
+              </legend>
+
+              <%# JOIN ── nome + cognome %>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="label text-xs font-semibold text-base-content/50 tracking-widest uppercase mb-1">
+                    Nome
+                  </label>
+                  <input type="text" placeholder="Mario"
+                         class="input input-bordered w-full rounded-xl text-sm
+                                focus:input-primary transition-all"/>
+                </div>
+                <div>
+                  <label class="label text-xs font-semibold text-base-content/50 tracking-widest uppercase mb-1">
+                    Cognome
+                  </label>
+                  <input type="text" placeholder="Rossi"
+                         class="input input-bordered w-full rounded-xl text-sm
+                                focus:input-primary transition-all"/>
+                </div>
+              </div>
+
+              <%# JOIN ── email + tel %>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="label text-xs font-semibold text-base-content/50 tracking-widest uppercase mb-1">
+                    Email
+                  </label>
+                  <div class="join w-full">
+                    <span class="join-item btn btn-sm btn-ghost border border-base-300 text-base-content/40">
+                      @
+                    </span>
+                    <input type="email" placeholder="mario@email.com"
+                           class="input input-bordered join-item flex-1 text-sm
+                                  focus:input-primary transition-all"/>
+                  </div>
+                </div>
+                <div>
+                  <label class="label text-xs font-semibold text-base-content/50 tracking-widest uppercase mb-1">
+                    Telefono
+                  </label>
+                  <div class="join w-full">
+                    <span class="join-item btn btn-sm btn-ghost border border-base-300 text-xs text-base-content/40 px-3">
+                      🇮🇹 +39
+                    </span>
+                    <input type="tel" placeholder="333 000 0000"
+                           class="input input-bordered join-item flex-1 text-sm
+                                  focus:input-primary transition-all"/>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+
+            <%# FIELDSET: La tua vasca %>
+            <fieldset class="fieldset bg-base-100 border border-base-300 rounded-2xl p-5 gap-4">
+              <legend class="fieldset-legend text-xs tracking-widest uppercase font-bold text-base-content/50">
+                La tua vasca
+              </legend>
+
+              <%# SELECT — tipo vasca %>
+              <div>
+                <label class="label text-xs font-semibold text-base-content/50 tracking-widest uppercase mb-1">
+                  Tipo di acquario
+                </label>
+                <select class="select select-bordered w-full rounded-xl text-sm focus:select-primary">
+                  <option disabled selected>Seleziona il tipo…</option>
+                  <option>🌿 Planted / Nature Aquarium</option>
+                  <option>🐟 Biotopo africano (Malawi / Tanganyika)</option>
+                  <option>🐠 Discus / Amazon</option>
+                  <option>🐡 Acquario marino / Reef</option>
+                  <option>🦐 Nano / Gamberetti</option>
+                  <option>🏢 Acquario commerciale</option>
+                  <option>❓ Non ancora deciso</option>
+                </select>
+              </div>
+
+              <%# RANGE — volume vasca %>
+              <div>
+                <label class="label text-xs font-semibold text-base-content/50 tracking-widest uppercase mb-1">
+                  Volume vasca
+                  <span id="vol-label" class="text-primary font-black ml-2">100L</span>
+                </label>
+                <input type="range" min="10" max="2000" value="100" step="10"
+                       class="range range-primary range-sm"
+                       oninput="document.getElementById('vol-label').textContent=this.value+'L'"/>
+                <div class="flex justify-between text-[.6rem] text-base-content/25 mt-1">
+                  <span>10L Nano</span><span>500L</span><span>2000L</span>
+                </div>
+              </div>
+
+              <%# RADIO — stato vasca %>
+              <div>
+                <label class="label text-xs font-semibold text-base-content/50 tracking-widest uppercase mb-2">
+                  Stato attuale
+                </label>
+                <div class="flex flex-wrap gap-3">
+                  <% [
+                    { val:"nuova",     lbl:"🆕 Vasca nuova",      col:"primary" },
+                    { val:"esistente", lbl:"♻️ Vasca esistente",  col:"success" },
+                    { val:"problema",  lbl:"⚠️ Ho un problema",   col:"warning" },
+                    { val:"emergenza", lbl:"🆘 Emergenza",         col:"error" },
+                  ].each_with_index do |r, i| %>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="stato-vasca" value="<%= r[:val] %>"
+                             class="radio radio-<%= r[:col] %> radio-sm" <%= i == 0 ? "checked" : "" %>/>
+                      <span class="text-sm text-base-content/70"><%= r[:lbl] %></span>
+                    </label>
+                  <% end %>
+                </div>
+              </div>
+            </fieldset>
+
+            <%# FIELDSET: Messaggio %>
+            <fieldset class="fieldset bg-base-100 border border-base-300 rounded-2xl p-5 gap-4">
+              <legend class="fieldset-legend text-xs tracking-widest uppercase font-bold text-base-content/50">
+                Il tuo messaggio
+              </legend>
+
+              <textarea class="textarea textarea-bordered w-full rounded-xl text-sm
+                               focus:textarea-primary transition-all min-h-[120px] resize-none"
+                        placeholder="Descrivi la tua situazione: tipo di vasca, problema riscontrato, cosa vorresti ottenere…"></textarea>
+              <p class="label text-[.65rem] text-base-content/30">
+                Più dettagli fornisci, più precisa sarà la risposta di Sergio.
+              </p>
+
+              <%# FILE INPUT — allega foto %>
+              <div>
+                <label class="label text-xs font-semibold text-base-content/50 tracking-widest uppercase mb-1">
+                  Allega foto vasca (opzionale)
+                </label>
+                <input type="file" accept="image/*" multiple
+                       class="file-input file-input-primary file-input-bordered w-full rounded-xl text-sm"/>
+                <p class="label text-[.65rem] text-base-content/30">
+                  JPG, PNG, max 10MB ciascuna. Aiuta la diagnosi.
+                </p>
+              </div>
+            </fieldset>
+
+            <%# FIELDSET: Preferenze di contatto %>
+            <fieldset class="fieldset bg-base-100 border border-base-300 rounded-2xl p-5 gap-4">
+              <legend class="fieldset-legend text-xs tracking-widest uppercase font-bold text-base-content/50">
+                Preferenze
+              </legend>
+
+              <%# TOGGLE — preferenza canale %>
+              <div class="space-y-3">
+                <label class="flex items-center justify-between cursor-pointer">
+                  <span class="text-sm text-base-content/70">Preferisco essere ricontattato via WhatsApp</span>
+                  <input type="checkbox" class="toggle toggle-primary toggle-sm" checked/>
+                </label>
+                <label class="flex items-center justify-between cursor-pointer">
+                  <span class="text-sm text-base-content/70">Disponibile per una chiamata</span>
+                  <input type="checkbox" class="toggle toggle-success toggle-sm"/>
+                </label>
+                <label class="flex items-center justify-between cursor-pointer">
+                  <span class="text-sm text-base-content/70">Iscrivimi alla newsletter del Journal</span>
+                  <input type="checkbox" class="toggle toggle-secondary toggle-sm"/>
+                </label>
+              </div>
+
+              <%# CHECKBOX — consenso %>
+              <div class="divider my-1 opacity-30"></div>
+              <label class="flex items-start gap-3 cursor-pointer">
+                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm mt-0.5" required/>
+                <span class="text-xs text-base-content/50 leading-relaxed">
+                  Ho letto e accetto la
+                  <a href="#" class="link link-primary">Privacy Policy</a>
+                  di Aquaura. I dati saranno trattati esclusivamente per rispondere alla tua richiesta.
+                </span>
+              </label>
+            </fieldset>
+
+            <%# SUBMIT — join con dropdown urgenza %>
+            <div class="flex items-center gap-3 pt-2">
+              <div class="join flex-1">
+                <button type="submit"
+                        class="btn btn-primary join-item rounded-l-2xl flex-1
+                               text-[.65rem] tracking-widest uppercase font-bold">
+                  Invia messaggio →
+                </button>
+                <details class="dropdown dropdown-top dropdown-end">
+                  <summary class="btn btn-primary join-item rounded-r-2xl border-l border-primary-content/20
+                                  text-[.65rem] tracking-widest uppercase">▾</summary>
+                  <ul class="dropdown-content menu bg-base-200 border border-base-300
+                              rounded-2xl shadow-xl w-52 p-2 z-20 mb-2">
+                    <li><a class="text-xs">⚡ Urgente (priorità alta)</a></li>
+                    <li><a class="text-xs">💬 Solo WhatsApp</a></li>
+                    <li><a class="text-xs">📞 Richiesta chiamata</a></li>
+                  </ul>
+                </details>
+              </div>
+              <button type="reset"
+                      class="btn btn-ghost rounded-2xl border border-base-300
+                             text-[.65rem] tracking-widest uppercase font-bold">
+                Reset
+              </button>
+            </div>
+          <% end %>
+        </div>
+
+        <%# SIDEBAR DESTRA — info Sergio + chat + countdown %>
+        <div class="space-y-5 anim anim-left" style="animation-delay:.06s;">
+
+          <%# CARD — Sergio con avatar online %>
+          <div class="card bg-base-100 border border-base-300 rounded-2xl glow-pulse">
+            <div class="card-body p-6 gap-4">
+              <div class="flex items-center gap-4">
+                <div class="avatar avatar-online">
+                  <div class="w-16 rounded-full border-2 border-primary/30">
+                    <img src="https://picsum.photos/seed/sergio-contact/80/80" alt="Sergio"/>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <h3 class="font-black text-lg">Sergio</h3>
+                    <span class="badge badge-success badge-soft badge-xs gap-1">
+                      <span class="w-1.5 h-1.5 bg-success rounded-full pulse-online inline-block"></span>
+                      Online
+                    </span>
+                  </div>
+                  <p class="text-base-content/40 text-xs">Acquarista & Fondatore Aquaura</p>
+                  <%# RATING — stelle Sergio %>
+                  <div class="rating rating-xs mt-1">
+                    <% 5.times { %><input type="radio" class="mask mask-star-2 bg-warning" checked disabled/><% } %>
+                  </div>
+                </div>
+              </div>
+
+              <%# PROGRESS — tempo risposta %>
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="text-base-content/40">Tempo risposta medio</span>
+                  <span class="font-bold text-success">7 minuti</span>
+                </div>
+                <progress class="progress progress-success h-1.5" value="93" max="100"></progress>
+                <div class="flex justify-between text-[.6rem] text-base-content/25 mt-0.5">
+                  <span>0 min</span><span>10 min massimo</span>
+                </div>
+              </div>
+
+              <%# CHAT preview %>
+              <div class="bg-base-200 rounded-xl p-3 space-y-2">
+                <p class="text-[.6rem] tracking-[.2em] uppercase text-base-content/25 font-semibold mb-2">
+                  Conversazione tipica
+                </p>
+                <div class="chat chat-start">
+                  <div class="chat-image avatar">
+                    <div class="w-6 rounded-full bg-base-300 flex items-center justify-center text-xs">👤</div>
+                  </div>
+                  <div class="chat-bubble chat-bubble-neutral text-xs py-2 px-3">
+                    pH è sceso a 6.2, pesci agitati 😰
+                  </div>
+                </div>
+                <div class="chat chat-end">
+                  <div class="chat-image avatar">
+                    <div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-xs font-black text-primary-content">S</div>
+                  </div>
+                  <div class="chat-bubble chat-bubble-primary text-xs py-2 px-3">
+                    Aggiungi NaHCO₃ 1g/100L adesso ✅
+                  </div>
+                </div>
+              </div>
+
+              <a href="#" class="btn btn-success btn-sm w-full rounded-xl gap-2
+                                 text-[.65rem] tracking-widest uppercase font-bold">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
+                </svg>
+                Apri WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <%# COUNTDOWN — prossima disponibilità %>
+          <div class="card bg-base-200 border border-base-300 rounded-2xl">
+            <div class="card-body p-5 gap-3">
+              <div class="flex items-center justify-between">
+                <h4 class="font-black text-sm">Prossimo slot visita</h4>
+                <span class="badge badge-warning badge-soft badge-xs tracking-widest uppercase font-bold">
+                  2 posti rimasti
+                </span>
+              </div>
+              <div class="flex items-center justify-center gap-4 py-2">
+                <% [
+                  { id:"cd-days", val:2,  label:"giorni" },
+                  { id:"cd-hrs",  val:14, label:"ore" },
+                  { id:"cd-min",  val:33, label:"min" },
+                ].each do |cd| %>
+                  <div class="text-center">
+                    <div class="countdown font-black text-primary" style="font-size:2.2rem;" aria-live="polite" aria-label="<%= cd[:val] %> <%= cd[:label] %>">
+                      <span id="<%= cd[:id] %>" style="--value:<%= cd[:val] %>;"></span>
+                    </div>
+                    <p class="text-[.6rem] text-base-content/30 tracking-widest uppercase"><%= cd[:label] %></p>
+                  </div>
+                  <% unless cd == [{ id:"cd-days", val:2, label:"giorni" }, { id:"cd-hrs", val:14, label:"ore" }, { id:"cd-min", val:33, label:"min" }].last %>
+                    <span class="text-xl font-black text-base-content/15 mb-4">:</span>
+                  <% end %>
+                <% end %>
+              </div>
+              <button onclick="document.getElementById('prenota-modal').showModal()"
+                      class="btn btn-primary btn-sm w-full rounded-xl text-[.65rem] tracking-widest uppercase font-bold">
+                Prenota visita →
+              </button>
+            </div>
+          </div>
+
+          <%# CARD — orari e sede %>
+          <div class="card bg-base-100 border border-base-300 rounded-2xl">
+            <div class="card-body p-5 gap-3">
+              <h4 class="font-black text-sm">📍 Dove siamo</h4>
+              <%# Map placeholder con griglia %>
+              <div class="map-bg rounded-xl h-32 flex items-center justify-center border border-base-300">
+                <div class="text-center z-10 relative">
+                  <div class="indicator mb-1">
+                    <span class="indicator-item badge badge-primary badge-xs animate-bounce"></span>
+                    <div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-primary-content text-xs">📍</div>
+                  </div>
+                  <p class="text-xs font-bold text-base-content/60">Milano, Navigli</p>
+                </div>
+              </div>
+              <div class="divider my-0 opacity-20"></div>
+              <% [
+                { ico:"🕐", label:"Lun–Ven", val:"9:00–18:00" },
+                { ico:"🕐", label:"Sab",     val:"10:00–16:00" },
+                { ico:"💬", label:"WhatsApp", val:"8:00–22:00 tutti i giorni" },
+              ].each do |o| %>
+                <div class="flex justify-between text-xs">
+                  <span class="text-base-content/40"><%= o[:ico] %> <%= o[:label] %></span>
+                  <span class="font-semibold text-base-content/70"><%= o[:val] %></span>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <%# STEPS — cosa aspettarsi dopo il contatto %>
+          <div class="card bg-base-100 border border-base-300 rounded-2xl">
+            <div class="card-body p-5 gap-3">
+              <h4 class="font-black text-sm">Cosa succede dopo</h4>
+              <ul class="steps steps-vertical text-xs">
+                <li class="step step-primary" data-content="1">
+                  <span class="ml-2 text-xs text-base-content/65 text-left">Ricevi risposta entro 10 min</span>
+                </li>
+                <li class="step step-primary" data-content="2">
+                  <span class="ml-2 text-xs text-base-content/65 text-left">Prima diagnosi gratuita</span>
+                </li>
+                <li class="step step-secondary" data-content="3">
+                  <span class="ml-2 text-xs text-base-content/65 text-left">Preventivo fisso scritto</span>
+                </li>
+                <li class="step" data-content="4">
+                  <span class="ml-2 text-xs text-base-content/65 text-left">Intervento o consulenza</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <%# ════════════════════════════════════════════════════ %>
+    <%# 4 ── FILTER categorie + CAROUSEL team             %>
+    <%# ════════════════════════════════════════════════════ %>
+    <section class="py-20 px-6 md:px-14 xl:px-20 bg-base-100">
+      <div class="max-w-7xl mx-auto">
+        <div class="divider divider-primary opacity-30 mb-10">
+          <span class="text-[.65rem] tracking-[.3em] uppercase text-base-content/30 font-semibold">
+            Il team Aquaura
+          </span>
+        </div>
+
+        <%# FILTER — per specializzazione %>
+        <form class="filter mb-8 flex-wrap gap-2" style="display:flex; align-items:center;">
+          <input class="btn btn-square btn-sm btn-ghost border border-base-300 rounded-xl" type="reset" value="×"/>
+          <input class="btn btn-sm rounded-full text-[.65rem] tracking-widest uppercase font-bold" type="radio" name="team-filter" aria-label="Tutti"/>
+          <input class="btn btn-sm rounded-full text-[.65rem] tracking-widest uppercase font-bold" type="radio" name="team-filter" aria-label="Diagnostica"/>
+          <input class="btn btn-sm rounded-full text-[.65rem] tracking-widest uppercase font-bold" type="radio" name="team-filter" aria-label="Aquascaping"/>
+          <input class="btn btn-sm rounded-full text-[.65rem] tracking-widest uppercase font-bold" type="radio" name="team-filter" aria-label="Marino"/>
+        </form>
+
+        <%# CAROUSEL — team card %>
+        <div class="carousel carousel-center gap-5 py-4 px-1">
+          <% [
+            { nome:"Sergio R.",   ruolo:"Fondatore & Diagnostica",   spec:"Chimica acqua, parametri, emergenze", mask:"mask-squircle", img:"https://picsum.photos/seed/tm1/200/200", online:true,  badge:"Diagnostica", col:"primary" },
+            { nome:"Laura M.",    ruolo:"Aquascaper Senior",          spec:"Nature Aquarium, layout, piante",     mask:"mask-hexagon",  img:"https://picsum.photos/seed/tm2/200/200", online:true,  badge:"Aquascaping", col:"success" },
+            { nome:"Andrea P.",   ruolo:"Specialista Marino",         spec:"Reef, coralli, sistemi RODI",         mask:"mask-triangle", img:"https://picsum.photos/seed/tm3/200/200", online:false, badge:"Marino",      col:"info" },
+            { nome:"Chiara V.",   ruolo:"Customer Success",           spec:"Onboarding, newsletter, assistenza",  mask:"mask-squircle", img:"https://picsum.photos/seed/tm4/200/200", online:true,  badge:"Support",     col:"secondary" },
+          ].each do |m| %>
+            <div class="carousel-item">
+              <div class="card bg-base-200 border border-base-300 w-64
+                          hover:border-primary/20 hover:-translate-y-1 hover:shadow-md
+                          transition-all duration-200">
+                <div class="card-body p-5 items-center text-center gap-3">
+                  <%# AVATAR con MASK + online indicator %>
+                  <div class="<%= m[:online] ? 'avatar avatar-online' : 'avatar avatar-offline' %>">
+                    <div class="w-16 <%= m[:mask] %>">
+                      <img src="<%= m[:img] %>" alt="<%= m[:nome] %>"/>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 class="font-black text-base"><%= m[:nome] %></h3>
+                    <p class="text-base-content/40 text-xs"><%= m[:ruolo] %></p>
+                  </div>
+                  <span class="badge badge-<%= m[:col] %> badge-soft badge-xs tracking-widest uppercase font-bold">
+                    <%= m[:badge] %>
+                  </span>
+                  <p class="text-base-content/45 text-xs leading-relaxed"><%= m[:spec] %></p>
+                  <button class="btn btn-ghost btn-xs border border-base-300 rounded-xl w-full
+                                 text-[.6rem] tracking-widest uppercase hover:text-primary hover:border-primary/30">
+                    Contatta
+                  </button>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </section>
+
+
+    <%# ════════════════════════════════════════════════════ %>
+    <%# 5 ── TIMELINE + ACCORDION FAQ                      %>
+    <%# ════════════════════════════════════════════════════ %>
+    <section class="py-20 px-6 md:px-14 xl:px-20"
+             style="background:oklch(var(--b2)/.4);">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
+
+        <%# TIMELINE — storico risposte rapide %>
+        <div class="anim anim-right" style="animation-delay:.04s;">
+          <div class="divider divider-start divider-primary mb-8 opacity-60">
+            <span class="text-[.65rem] tracking-[.3em] uppercase text-base-content/30 font-semibold">
+              Ultime richieste gestite
+            </span>
+          </div>
+          <ul class="timeline timeline-snap-icon timeline-compact timeline-vertical">
+            <% [
+              { data:"Oggi 11:32",   col:"success",   ico:"✅", titolo:"Emergenza NO₂",          note:"Risposta in 4 min · Problema risolto" },
+              { data:"Oggi 09:15",   col:"primary",   ico:"💬", titolo:"Consulenza planted tank", note:"Preventivo inviato" },
+              { data:"Ieri 18:40",   col:"warning",   ico:"⚠️", titolo:"Allarme pH basso",        note:"Guidato telefonicamente" },
+              { data:"Ieri 14:22",   col:"secondary", ico:"📅", titolo:"Prenotazione visita",      note:"Appuntamento confermato per venerdì" },
+              { data:"2 giorni fa",  col:"info",      ico:"📦", titolo:"Ordine kit acqua",          note:"Spedito in 24h" },
+            ].each_with_index do |ev, i| %>
+              <li>
+                <% if i > 0 %><hr class="bg-<%= ev[:col] %>/20"/><% end %>
+                <div class="timeline-middle">
+                  <div class="w-7 h-7 rounded-full bg-<%= ev[:col] %>/10 border border-<%= ev[:col] %>/25
+                              flex items-center justify-center text-xs">
+                    <%= ev[:ico] %>
+                  </div>
+                </div>
+                <div class="timeline-end mb-6 anim anim-up" style="animation-delay:<%= i * 0.05 %>s;">
+                  <time class="font-mono text-[.6rem] text-base-content/25 tracking-widest uppercase"><%= ev[:data] %></time>
+                  <div class="font-black text-sm text-base-content"><%= ev[:titolo] %></div>
+                  <span class="badge badge-<%= ev[:col] %> badge-soft badge-xs mt-1 tracking-wide"><%= ev[:note] %></span>
+                </div>
+                <% if i < 4 %><hr class="bg-<%= ev[:col] %>/20"/><% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+
+        <%# ACCORDION FAQ — domande sui contatti %>
+        <div class="anim anim-left" style="animation-delay:.06s;">
+          <div class="divider divider-start divider-primary mb-8 opacity-60">
+            <span class="text-[.65rem] tracking-[.3em] uppercase text-base-content/30 font-semibold">
+              Domande frequenti
+            </span>
+          </div>
+          <div class="space-y-2">
+            <% [
+              { q:"Come faccio a contattare Sergio in caso di emergenza?",
+                a:"Per le emergenze la via più rapida è WhatsApp: risposta garantita entro 10 minuti. Per le urgenze notturne (dalle 22:00 alle 8:00) lascia un messaggio e verrai ricontattato alla riapertura." },
+              { q:"La diagnosi iniziale è davvero gratuita?",
+                a:"Sì, sempre. La prima valutazione — via WhatsApp, telefono o messaggio — è completamente gratuita. Il preventivo scritto viene inviato prima di qualsiasi intervento." },
+              { q:"Posso prenotare una visita a domicilio direttamente dal sito?",
+                a:"Puoi inviare una richiesta tramite il modulo qui sopra oppure scrivere direttamente su WhatsApp. Sergio conferma la disponibilità entro poche ore." },
+              { q:"Operate in tutta Italia?",
+                a:"Gli interventi a domicilio coprono il Nord Italia (Lombardia, Piemonte, Liguria, Veneto, Trentino). Per il resto d'Italia è disponibile la consulenza remota con kit di prelievo spedito a casa." },
+              { q:"Quanto tempo impiega Sergio a rispondere?",
+                a:"Il tempo medio di risposta è 7 minuti. Il massimo garantito è 10 minuti durante l'orario attivo (8:00–22:00). Fuori orario, risponde entro la mattina seguente." },
+            ].each_with_index do |item, i| %>
+              <div class="collapse collapse-arrow bg-base-100 border border-base-300
+                          hover:border-primary/20 transition-colors rounded-2xl">
+                <input type="radio" name="faq-contatti" <%= i == 0 ? "checked" : "" %>/>
+                <div class="collapse-title font-semibold text-sm"><%= item[:q] %></div>
+                <div class="collapse-content">
+                  <p class="text-sm text-base-content/55 leading-relaxed pt-1"><%= item[:a] %></p>
+                </div>
+              </div>
+            <% end %>
+          </div>
+
+          <%# ALERT — nota finale %>
+          <div role="alert" class="alert alert-info alert-soft rounded-2xl mt-6">
+            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <div>
+              <p class="font-bold text-sm">Non esitare a scrivere</p>
+              <p class="text-xs opacity-70">Anche solo per una curiosità. Sergio risponde sempre con piacere.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <%# ════════════════════════════════════════════════════ %>
+    <%# 6 ── SOCIAL PROOF — avatar-group + carousel rec   %>
+    <%# ════════════════════════════════════════════════════ %>
+    <section class="py-16 px-6 md:px-14 xl:px-20 bg-base-100">
+      <div class="max-w-7xl mx-auto">
+        <div class="divider divider-primary opacity-30 mb-10">
+          <span class="text-[.65rem] tracking-[.3em] uppercase text-base-content/30 font-semibold">
+            Cosa dicono di noi
+          </span>
+        </div>
+
+        <%# AVATAR GROUP + contatore %>
+        <div class="flex items-center gap-4 mb-8 justify-center anim anim-up" style="animation-delay:.04s;">
+          <div class="avatar-group -space-x-4">
+            <% %w[rc1 rc2 rc3 rc4 rc5 rc6].each do |s| %>
+              <div class="avatar">
+                <div class="w-10 rounded-full border-2 border-base-100">
+                  <img src="https://picsum.photos/seed/<%= s %>/40/40" alt=""/>
+                </div>
+              </div>
+            <% end %>
+            <div class="avatar avatar-placeholder">
+              <div class="w-10 rounded-full bg-primary/10 border-2 border-base-100 border-primary/20">
+                <span class="text-xs font-black text-primary">+394</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="flex gap-0.5 mb-1">
+              <% 5.times { %><svg class="w-3.5 h-3.5 text-warning fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><% } %>
+            </div>
+            <p class="text-sm font-bold text-base-content">400+ clienti soddisfatti</p>
+            <p class="text-xs text-base-content/35">Media 4.9/5 su tutti i canali</p>
+          </div>
+        </div>
+
+        <%# CAROUSEL — recensioni %>
+        <div class="carousel carousel-center gap-5 py-2 px-1 anim anim-up" style="animation-delay:.08s;">
+          <% [
+            { nome:"Marco T.",   vasca:"Discus 400L",   img:"https://picsum.photos/seed/rr1/60/60", testo:"Risposta in 3 minuti, problema risolto in 2 ore. Sergio è un punto di riferimento unico.", stelle:5 },
+            { nome:"Alessia R.", vasca:"Nature 200L",   img:"https://picsum.photos/seed/rr2/60/60", testo:"Ho contattato Aquaura in preda al panico per una crisi di azoto. Calma, metodo, soluzione.", stelle:5 },
+            { nome:"Luca B.",    vasca:"Malawi 300L",   img:"https://picsum.photos/seed/rr3/60/60", testo:"Il modulo di contatto è chiarissimo. In 10 minuti avevo già un preventivo dettagliato.", stelle:5 },
+            { nome:"Sara M.",    vasca:"Reef 150L",     img:"https://picsum.photos/seed/rr4/60/60", testo:"Disponibile anche la domenica sera. Non me l'aspettavo davvero. Servizio eccezionale.", stelle:5 },
+          ].each do |r| %>
+            <div class="carousel-item">
+              <div class="card bg-base-200 border border-base-300 w-80
+                          hover:border-primary/20 hover:-translate-y-0.5 hover:shadow-md
+                          transition-all duration-200">
+                <div class="card-body p-5 gap-3">
+                  <div class="flex items-center gap-3">
+                    <div class="avatar"><div class="w-10 rounded-full"><img src="<%= r[:img] %>" alt="<%= r[:nome] %>"/></div></div>
+                    <div>
+                      <p class="font-bold text-sm"><%= r[:nome] %></p>
+                      <p class="text-[.65rem] text-base-content/35"><%= r[:vasca] %></p>
+                    </div>
+                    <div class="ml-auto rating rating-xs">
+                      <% r[:stelle].times { %><input type="radio" class="mask mask-star-2 bg-warning" checked disabled/><% } %>
+                    </div>
+                  </div>
+                  <p class="text-sm text-base-content/60 italic leading-relaxed">"<%= r[:testo] %>"</p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </section>
+
+  </div><%# fine drawer-content %>
+
+  <%# ── DRAWER SIDE — canali rapidi su mobile ── %>
+  <div class="drawer-side z-50">
+    <label for="contacts-drawer" aria-label="chiudi menu" class="drawer-overlay"></label>
+    <div class="menu bg-base-200 border-r border-base-300 min-h-full w-72 p-6 gap-4">
+      <div class="flex items-center justify-between mb-4">
+        <span class="font-black text-base tracking-tight">Contatti rapidi</span>
+        <label for="contacts-drawer" class="btn btn-ghost btn-sm btn-circle border border-base-300">✕</label>
+      </div>
+      <% [
+        { ico:"💬", label:"WhatsApp",   sub:"Risposta in 10 min",   col:"success",   href:"#" },
+        { ico:"📞", label:"Telefono",   sub:"+39 02 000 0000",       col:"primary",   href:"tel:+390200000000" },
+        { ico:"📧", label:"Email",      sub:"sergio@aquaura.it",     col:"secondary", href:"mailto:sergio@aquaura.it" },
+        { ico:"📅", label:"Prenota",    sub:"Visita a domicilio",    col:"warning",   href:"#" },
+      ].each do |c| %>
+        <a href="<%= c[:href] %>"
+           class="flex items-center gap-3 p-3 rounded-xl border border-base-300
+                  hover:border-<%= c[:col] %>/30 hover:bg-base-300/30 transition-all">
+          <span class="text-2xl"><%= c[:ico] %></span>
+          <div>
+            <p class="font-bold text-sm"><%= c[:label] %></p>
+            <p class="text-[.7rem] text-base-content/40"><%= c[:sub] %></p>
+          </div>
+        </a>
+      <% end %>
+      <div class="divider opacity-20"></div>
+      <div class="card bg-base-300/50 border border-base-300 rounded-xl">
+        <div class="card-body p-4 gap-1">
+          <p class="text-xs font-bold">Orari attivi</p>
+          <p class="text-[.72rem] text-base-content/45">Lun–Ven 9:00–18:00</p>
+          <p class="text-[.72rem] text-base-content/45">WhatsApp 8:00–22:00</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><%# fine drawer %>
+
+
+<%# ════════════════════════════════════════════════════════ %>
+<%# FAB — floating action button (DaisyUI 5 nuovo)          %>
+<%# ════════════════════════════════════════════════════════ %>
+<div class="fab fab-flower fixed bottom-6 right-6 z-50">
+  <div tabindex="0" role="button"
+       class="btn btn-lg btn-circle btn-primary shadow-xl">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/>
+    </svg>
+  </div>
+  <button class="fab-main-action btn btn-circle btn-lg btn-success">
+    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
+    </svg>
+  </button>
+  <div class="tooltip tooltip-left" data-tip="Chiama">
+    <button class="btn btn-lg btn-circle btn-secondary">📞</button>
+  </div>
+  <div class="tooltip tooltip-left" data-tip="Email">
+    <button class="btn btn-lg btn-circle btn-info">📧</button>
+  </div>
+  <div class="tooltip tooltip-left" data-tip="Form contatto">
+    <button onclick="document.getElementById('form-section').scrollIntoView({behavior:'smooth'})"
+            class="btn btn-lg btn-circle btn-primary">✉️</button>
+  </div>
+</div>
+
+
+<%# ════════════════════════════════════════════════════════ %>
+<%# MODAL — prenota visita                                   %>
+<%# ════════════════════════════════════════════════════════ %>
+<dialog id="prenota-modal" class="modal">
+  <div class="modal-box bg-base-200 border border-base-300 rounded-3xl max-w-md">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-4 top-4 border border-base-300">✕</button>
+    </form>
+
+    <h3 class="font-black text-xl tracking-tight mb-1">Prenota una visita</h3>
+    <p class="text-base-content/40 text-sm mb-6">Scegli data, orario e tipo di intervento.</p>
+
+    <div class="space-y-4">
+      <fieldset class="fieldset gap-2">
+        <legend class="fieldset-legend text-xs tracking-widest uppercase font-bold text-base-content/40">
+          Tipo di visita
+        </legend>
+        <select class="select select-bordered w-full rounded-xl text-sm">
+          <option>🔬 Check-up chimico completo</option>
+          <option>✂️ Potatura e aquascaping</option>
+          <option>🚚 Trasloco acquario</option>
+          <option>📋 Consulenza progettuale</option>
+        </select>
+      </fieldset>
+
+      <div class="grid grid-cols-2 gap-3">
+        <fieldset class="fieldset gap-1">
+          <legend class="fieldset-legend text-xs tracking-widest uppercase font-bold text-base-content/40">Data</legend>
+          <input type="date" class="input input-bordered w-full rounded-xl text-sm"/>
+        </fieldset>
+        <fieldset class="fieldset gap-1">
+          <legend class="fieldset-legend text-xs tracking-widest uppercase font-bold text-base-content/40">Fascia oraria</legend>
+          <select class="select select-bordered w-full rounded-xl text-sm">
+            <option>9:00–12:00</option>
+            <option>12:00–15:00</option>
+            <option>15:00–18:00</option>
+          </select>
+        </fieldset>
+      </div>
+
+      <fieldset class="fieldset gap-1">
+        <legend class="fieldset-legend text-xs tracking-widest uppercase font-bold text-base-content/40">Note aggiuntive</legend>
+        <textarea class="textarea textarea-bordered w-full rounded-xl text-sm resize-none min-h-[80px]"
+                  placeholder="Indirizzo, volume vasca, situazione…"></textarea>
+      </fieldset>
+
+      <%# ALERT info nel modal %>
+      <div role="alert" class="alert alert-info alert-soft rounded-xl py-2">
+        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <span class="text-xs">Sergio confermerà la disponibilità entro 1 ora.</span>
+      </div>
+
+      <div class="modal-action mt-2">
+        <form method="dialog" class="flex gap-3 w-full">
+          <button class="btn btn-primary flex-1 rounded-xl text-[.65rem] tracking-widest uppercase font-bold">
+            Conferma prenotazione →
+          </button>
+          <button class="btn btn-ghost rounded-xl border border-base-300 text-[.65rem] tracking-widest uppercase">
+            Annulla
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <form method="dialog" class="modal-backdrop"><button>close</button></form>
+</dialog>
+
+
+<script>
+  // ── IntersectionObserver ─────────────────────────────────
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.animationPlayState = 'running';
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.anim').forEach(el => io.observe(el));
+
+  // ── Countdown live ───────────────────────────────────────
+  function tickCountdown() {
+    const now = new Date();
+    const h = 23 - now.getHours();
+    const m = 59 - now.getMinutes();
+    const hEl = document.getElementById('cd-hrs');
+    const mEl = document.getElementById('cd-min');
+    if (hEl) { hEl.style.setProperty('--value', h); hEl.textContent = h; }
+    if (mEl) { mEl.style.setProperty('--value', m); mEl.textContent = m; }
+  }
+  tickCountdown();
+  setInterval(tickCountdown, 60000);
+
+  // ── Form submit feedback ─────────────────────────────────
+  document.querySelector('form')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('[type="submit"]');
+    if (!btn) return;
+    const orig = btn.innerHTML;
+    btn.innerHTML = '✓ Inviato! Sergio risponderà entro 10 minuti';
+    btn.classList.add('btn-success');
+    btn.classList.remove('btn-primary');
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.innerHTML = orig;
+      btn.classList.remove('btn-success');
+      btn.classList.add('btn-primary');
+      btn.disabled = false;
+    }, 5000);
+  });
+</script>
