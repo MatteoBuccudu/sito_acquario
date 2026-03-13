@@ -130,8 +130,8 @@
         </p>
 
         <%# STATS ── risposta garantita %>
-        <div class="stats stats-horizontal bg-base-100/70 backdrop-blur-sm
-                    border border-base-300 rounded-3xl shadow anim anim-up"
+        <div class="stats stats-vertical sm:stats-horizontal bg-base-100/70 backdrop-blur-sm
+                    border border-base-300 rounded-3xl shadow anim anim-up w-full sm:w-auto"
              style="animation-delay:.24s;">
           <div class="stat place-items-center px-6 py-4">
             <div class="stat-value text-primary text-2xl">10'</div>
@@ -476,9 +476,9 @@
           <div class="card bg-base-100 border border-base-300 rounded-2xl glow-pulse">
             <div class="card-body p-6 gap-4">
               <div class="flex items-center gap-4">
-                <div class="avatar avatar-online">
-                  <div class="w-16 rounded-full border-2 border-primary/30">
-                    <img src="https://picsum.photos/seed/sergio-contact/80/80" alt="Sergio"/>
+                <div class="avatar avatar-online placeholder">
+                  <div class="bg-primary text-primary-content w-16 rounded-full flex items-center justify-center font-black text-2xl">
+                    S
                   </div>
                 </div>
                 <div>
@@ -661,12 +661,6 @@
                           hover:border-primary/20 hover:-translate-y-1 hover:shadow-md
                           transition-all duration-200">
                 <div class="card-body p-5 items-center text-center gap-3">
-                  <%# AVATAR con MASK + online indicator %>
-                  <div class="<%= m[:online] ? 'avatar avatar-online' : 'avatar avatar-offline' %>">
-                    <div class="w-16 <%= m[:mask] %>">
-                      <img src="<%= m[:img] %>" alt="<%= m[:nome] %>"/>
-                    </div>
-                  </div>
                   <div>
                     <h3 class="font-black text-base"><%= m[:nome] %></h3>
                     <p class="text-base-content/40 text-xs"><%= m[:ruolo] %></p>
@@ -789,10 +783,10 @@
         <%# AVATAR GROUP + contatore %>
         <div class="flex items-center gap-4 mb-8 justify-center anim anim-up" style="animation-delay:.04s;">
           <div class="avatar-group -space-x-4">
-            <% %w[rc1 rc2 rc3 rc4 rc5 rc6].each do |s| %>
-              <div class="avatar">
-                <div class="w-10 rounded-full border-2 border-base-100">
-                  <img src="https://picsum.photos/seed/<%= s %>/40/40" alt=""/>
+            <% %w[A B C D E F].each do |s| %>
+              <div class="avatar placeholder">
+                <div class="w-10 rounded-full border-2 border-base-100 bg-base-300 text-base-content/40 flex items-center justify-center text-[10px] font-bold">
+                  <%= s %>
                 </div>
               </div>
             <% end %>
@@ -820,12 +814,16 @@
             { nome:"Sara M.",    vasca:"Reef 150L",     img:"https://picsum.photos/seed/rr4/60/60", testo:"Disponibile anche la domenica sera. Non me l'aspettavo davvero. Servizio eccezionale.", stelle:5 },
           ].each do |r| %>
             <div class="carousel-item">
-              <div class="card bg-base-200 border border-base-300 w-80
+              <div class="card bg-base-200 border border-base-300 w-72
                           hover:border-primary/20 hover:-translate-y-0.5 hover:shadow-md
                           transition-all duration-200">
                 <div class="card-body p-5 gap-3">
                   <div class="flex items-center gap-3">
-                    <div class="avatar"><div class="w-10 rounded-full"><img src="<%= r[:img] %>" alt="<%= r[:nome] %>"/></div></div>
+                    <div class="avatar placeholder">
+                      <div class="bg-base-300 text-base-content/40 w-10 rounded-full flex items-center justify-center text-xs font-bold">
+                        <%= r[:nome][0] %>
+                      </div>
+                    </div>
                     <div>
                       <p class="font-bold text-sm"><%= r[:nome] %></p>
                       <p class="text-[.65rem] text-base-content/35"><%= r[:vasca] %></p>
